@@ -10,12 +10,6 @@ import lig.steamer.of4osm.folkso.tag.typology.IOSMStringIntervalPropertyTag;
 public class OSMStringIntervalPropertyTag extends OSMTag implements IOSMStringIntervalPropertyTag {
 
     /**
-     * Default constructor
-     */
-    public OSMStringIntervalPropertyTag() {
-    }
-
-    /**
      * 
      */
     public IOSMTagSimpleKey key;
@@ -25,20 +19,52 @@ public class OSMStringIntervalPropertyTag extends OSMTag implements IOSMStringIn
      */
     public IOSMTagStringIntervalValue value;
 
-    /**
-     * @return
-     */
+    public OSMStringIntervalPropertyTag(IOSMTagSimpleKey key, IOSMTagStringIntervalValue value) {
+        this.key = key;
+        this.value = value;
+    }
+
     public IOSMTagSimpleKey getKey() {
-        // TODO implement here
-        return null;
+        return key;
     }
 
-    /**
-     * @return
-     */
     public IOSMTagStringIntervalValue getValue() {
-        // TODO implement here
-        return null;
+        return value;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + (this.key != null ? this.key.hashCode() : 0);
+        hash = 97 * hash + (this.value != null ? this.value.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OSMStringIntervalPropertyTag other = (OSMStringIntervalPropertyTag) obj;
+        if (this.key != other.key && (this.key == null || !this.key.equals(other.key))) {
+            return false;
+        }
+        if (this.value != other.value && (this.value == null || !this.value.equals(other.value))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "OSMStringIntervalPropertyTag{" + "key=" + key + ", value=" + value + '}';
+    }
+
+ 
 }

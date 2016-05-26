@@ -9,11 +9,6 @@ import lig.steamer.of4osm.folkso.tag.typology.IOSMMultipleValuePropertyTag;
  */
 public class OSMMultipleValuePropertyTag extends OSMTag implements IOSMMultipleValuePropertyTag {
 
-    /**
-     * Default constructor
-     */
-    public OSMMultipleValuePropertyTag() {
-    }
 
     /**
      * 
@@ -25,20 +20,52 @@ public class OSMMultipleValuePropertyTag extends OSMTag implements IOSMMultipleV
      */
     public IOSMTagMultipleValue value;
 
-    /**
-     * @return
-     */
+    public OSMMultipleValuePropertyTag(IOSMTagSimpleKey key, IOSMTagMultipleValue value) {
+        this.key = key;
+        this.value = value;
+    }
+
     public IOSMTagSimpleKey getKey() {
-        // TODO implement here
-        return null;
+        return key;
     }
 
-    /**
-     * @return
-     */
     public IOSMTagMultipleValue getValue() {
-        // TODO implement here
-        return null;
+        return value;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + (this.key != null ? this.key.hashCode() : 0);
+        hash = 53 * hash + (this.value != null ? this.value.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OSMMultipleValuePropertyTag other = (OSMMultipleValuePropertyTag) obj;
+        if (this.key != other.key && (this.key == null || !this.key.equals(other.key))) {
+            return false;
+        }
+        if (this.value != other.value && (this.value == null || !this.value.equals(other.value))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "OSMMultipleValuePropertyTag{" + "key=" + key + ", value=" + value + '}';
+    }
+
+ 
 }

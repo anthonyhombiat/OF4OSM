@@ -10,12 +10,6 @@ import lig.steamer.of4osm.folkso.tag.typology.IOSMComplexKeyBooleanPropertyTag;
 public class OSMComplexKeyBooleanPropertyTag extends OSMTag implements IOSMComplexKeyBooleanPropertyTag {
 
     /**
-     * Default constructor
-     */
-    public OSMComplexKeyBooleanPropertyTag() {
-    }
-
-    /**
      * 
      */
     public IOSMTagComplexKey key;
@@ -25,20 +19,51 @@ public class OSMComplexKeyBooleanPropertyTag extends OSMTag implements IOSMCompl
      */
     public IOSMTagBooleanSimpleValue value;
 
-    /**
-     * @return
-     */
-    public IOSMTagComplexKey getKey() {
-        // TODO implement here
-        return null;
+    public OSMComplexKeyBooleanPropertyTag(IOSMTagComplexKey key, IOSMTagBooleanSimpleValue value) {
+        this.key = key;
+        this.value = value;
     }
 
-    /**
-     * @return
-     */
+    public IOSMTagComplexKey getKey() {
+        return key;
+    }
+
     public IOSMTagBooleanSimpleValue getValue() {
-        // TODO implement here
-        return null;
+        return value;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + (this.key != null ? this.key.hashCode() : 0);
+        hash = 37 * hash + (this.value != null ? this.value.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OSMComplexKeyBooleanPropertyTag other = (OSMComplexKeyBooleanPropertyTag) obj;
+        if (this.key != other.key && (this.key == null || !this.key.equals(other.key))) {
+            return false;
+        }
+        if (this.value != other.value && (this.value == null || !this.value.equals(other.value))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "OSMComplexKeyBooleanPropertyTag{" + "key=" + key + ", value=" + value + '}';
     }
 
 }

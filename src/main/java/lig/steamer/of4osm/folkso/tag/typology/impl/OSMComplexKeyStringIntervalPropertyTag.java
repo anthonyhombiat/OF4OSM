@@ -10,12 +10,6 @@ import lig.steamer.of4osm.folkso.tag.typology.IOSMComplexKeyStringIntervalProper
 public class OSMComplexKeyStringIntervalPropertyTag extends OSMTag implements IOSMComplexKeyStringIntervalPropertyTag {
 
     /**
-     * Default constructor
-     */
-    public OSMComplexKeyStringIntervalPropertyTag() {
-    }
-
-    /**
      * 
      */
     public IOSMTagComplexKey key;
@@ -25,20 +19,51 @@ public class OSMComplexKeyStringIntervalPropertyTag extends OSMTag implements IO
      */
     public IOSMTagStringIntervalValue value;
 
-    /**
-     * @return
-     */
-    public IOSMTagComplexKey getKey() {
-        // TODO implement here
-        return null;
+    public OSMComplexKeyStringIntervalPropertyTag(IOSMTagComplexKey key, IOSMTagStringIntervalValue value) {
+        this.key = key;
+        this.value = value;
     }
 
-    /**
-     * @return
-     */
+    public IOSMTagComplexKey getKey() {
+        return key;
+    }
+
     public IOSMTagStringIntervalValue getValue() {
-        // TODO implement here
-        return null;
+        return value;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + (this.key != null ? this.key.hashCode() : 0);
+        hash = 89 * hash + (this.value != null ? this.value.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OSMComplexKeyStringIntervalPropertyTag other = (OSMComplexKeyStringIntervalPropertyTag) obj;
+        if (this.key != other.key && (this.key == null || !this.key.equals(other.key))) {
+            return false;
+        }
+        if (this.value != other.value && (this.value == null || !this.value.equals(other.value))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "OSMComplexKeyStringIntervalPropertyTag{" + "key=" + key + ", value=" + value + '}';
     }
 
 }
