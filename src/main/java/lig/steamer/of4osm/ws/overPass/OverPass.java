@@ -21,7 +21,7 @@ public class OverPass {
     private final String key;
     private final String value;
     private final HeadResult headResult;
-    private String wikiURL;
+    private final String wikiURL;
 
     public OverPass(String bBox, String typeElement, String key, String value) throws MalformedURLException, IOException {
         this.bBox = bBox;

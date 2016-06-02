@@ -78,7 +78,7 @@ public class OverPassApp {
         String bBoxParis = "(48.658291,2.08679,49.04694,2.63791)";
 
         TagInfo tagInfo = new TagInfo();
-        TagsPopularHead tagsPopularHead = tagInfo.tagsPopular();
+        TagsPopularHead tagsPopularHead = tagInfo.tagsPopular(1,10);
         List<TagsPopularData> dataPopularTags = tagsPopularHead.getData();
         for (TagsPopularData popularTags : dataPopularTags) {
             if (popularTags.isIn_wiki()) {
