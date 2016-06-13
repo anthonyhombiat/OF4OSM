@@ -22,7 +22,7 @@ public class Element {
     
     private String lon;
    
-    private Map tags;
+    private Map<String, String> tags;
      
     private List<String> nodes;
     
@@ -72,12 +72,14 @@ public class Element {
         this.lon = lon;
     }
 
-    public Map getTags() {
+    public Map<String, String> getTags() {
         return tags;
     }
 
-    public void setTags(Map tags) {
+    public void setTags(Map<String, String> tags) {
         this.tags = tags;
     }
+
+  
   
 }

@@ -12,7 +12,7 @@ package lig.steamer.of4osm.ws.tagInfo;
 public class HeadResultTagInfo {
 
     //URL of the request
-    private String url;
+    protected String url;
 
     //Date request
     private String data_until;
@@ -25,8 +25,6 @@ public class HeadResultTagInfo {
 
     //Total number of results.
     private int total;
-
-    
 
     public String getUrl() {
         return url;
@@ -48,8 +46,6 @@ public class HeadResultTagInfo {
         return total;
     }
 
-
-
     public void setUrl(String url) {
         this.url = url;
     }
@@ -69,6 +65,5 @@ public class HeadResultTagInfo {
     public void setTotal(int total) {
         this.total = total;
     }
-
 
 }

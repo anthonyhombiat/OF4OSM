@@ -60,7 +60,7 @@ public class OSMSimpleCategoryTag extends OSMTag implements IOSMSimpleCategoryTa
 
     @Override
     public String toString() {
-        return "{" + "key=" + key + ", value=" + value + '}';
+        return  key + ";" + value ;
     }
 
 }

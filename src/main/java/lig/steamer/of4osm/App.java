@@ -5,11 +5,9 @@ import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagBooleanValue;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagDateValue;
@@ -31,9 +29,11 @@ import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleDatePropertyTag
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleNumericPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleStringPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMTag;
+import lig.steamer.of4osm.ws.osmapi.Tag;
 import lig.steamer.of4osm.ws.overPass.Element;
 import lig.steamer.of4osm.ws.overPass.OverPass;
 import lig.steamer.of4osm.ws.tagInfo.TagInfo;
+import lig.steamer.of4osm.ws.tagInfo.TagsPopular;
 import lig.steamer.of4osm.ws.tagInfo.TagsPopularData;
 import lig.steamer.of4osm.ws.tagInfo.TagsPopularHead;
 
@@ -43,155 +43,93 @@ import lig.steamer.of4osm.ws.tagInfo.TagsPopularHead;
  */
 public class App {
 
-      public static void main(String[] args) throws MalformedURLException, IOException {
+    public static void main(String[] args) throws MalformedURLException, IOException {
 
-        //Category 
-        Set simpleCategoryTag = new HashSet(); // OSMSimpleCategoryTag
-        Set multipleValueCategoryTag = new HashSet(); //OSMMultipleValueCategoryTag
-
-        //Property
-        Set multipleValuePropertyTag = new HashSet();    //OSMMultipleValuePropertyTag
-
-        Set simpleBooleanPropertyTag = new HashSet();    //OSMSimpleBooleanPropertyTag
-        Set complexKeyBooleanPropertyTag = new HashSet();    //OSMComplexKeyBooleanPropertyTag
-
-        Set simpleStringPropertyTag = new HashSet();    //OSMSimpleStringPropertyTag
-        Set complexKeyStringPropertyTag = new HashSet();    //OSMComplexKeyStringPropertyTag
-
-        Set simpleNumericPropertyTag = new HashSet();    //OSMSimpleNumericPropertyTag
-        Set complexKeyNumericPropertyTag = new HashSet();    //OSMComplexKeyNumericPropertyTag
-
-        Set simpleDatePropertyTag = new HashSet();   //OSMSimpleDatePropertyTag
-        Set complexKeyDatePropertyTag = new HashSet();   //OSMComplexKeyDatePropertyTag
+        StatTypeTags statTypeTags = new StatTypeTags();
 
         String bBoxGrenoble = "(45.154005,5.678004,45.214326,5.753081)";
         String bBoxGrenobleCentre = "(45.1873363,5.7180328,45.188529,5.724524)";
         String bBoxParis = "(48.658291,2.08679,49.04694,2.63791)";
 
-        TagInfo tagInfo = new TagInfo();
-        TagsPopularHead tagsPopularHead = tagInfo.tagsPopular(1,100);
-        List<TagsPopularData> dataPopularTags = tagsPopularHead.getData();
+        TagsPopular tagsPopular = new TagsPopular();
+        List<TagsPopularData> dataPopularTags = tagsPopular.getTagsPopularHead().getData();
         for (TagsPopularData popularTags : dataPopularTags) {
-            if (popularTags.isIn_wiki()) {
-                OverPass overPasse = new OverPass(bBoxGrenobleCentre, "node", popularTags.getKey(), popularTags.getValue());
 
-                //System.out.println(overPasse.getHeadResult().toString());
-                //parcourir la liste d'element 
-                List<Element> elements = overPasse.getHeadResult().getElements();
-                for (int i = 0; i < elements.size(); i++) {
+            OSMTagKey key = stringToKey(popularTags.getKey(), "");
+            OSMTagValue value = stringToValue(popularTags.getValue());
+            OSMTag type = typeTags(key, value);
+            statTypeTags.addType(type,popularTags.getCount_all());
+        }
 
-                    //parcourir la map tags  
-                    Map tags = elements.get(i).getTags();
-                    Iterator j = tags.keySet().iterator();
+//        OverPass overPasse = new OverPass(bBoxGrenoble, "node", "amenity", "pharmacy");
+//        Map<Tag, Integer> tags = overPasse.getTags();
+//        for (Map.Entry<Tag, Integer> entry : tags.entrySet()) {
+//            OSMTagKey key = stringToKey(entry.getKey().getK(), "");
+//            OSMTagValue value = stringToValue(entry.getKey().getV());
+//            OSMTag type = typeTags(key, value);
+//            statTypeTags.addType(type);
+//        }
 
-                    while (j.hasNext()) {
-                        //traitement de type de tags
-                        String clef = (String) j.next();
-                        String valeur = (String) tags.get(clef);
+        statTypeTags.afficher();
+        statTypeTags.writeToFile();
 
-                        OSMTagKey key = stringToKey(clef, overPasse.getWikiURL());
-                        OSMTagValue value = stringToValue(valeur);
+    }
 
-                        OSMTag type;
-                        if (OSMTagSimpleKey.class.isInstance(key)) {
-
-                            if (OSMTagMultipleValue.class.isInstance(value)) {
-                                //attention faut voir est-ce que Category ou Property 
-                                if (isProperty(clef)) {
-
-                                    type = new OSMMultipleValuePropertyTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
-                                    multipleValuePropertyTag.add(type);
-                                } else {
-                                    type = new OSMMultipleValueCategoryTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
-                                    multipleValueCategoryTag.add(type);
-
-                                }
-                            }
-                            if (OSMTagBooleanValue.class.isInstance(value)) {
-                                type = new OSMSimpleBooleanPropertyTag((OSMTagSimpleKey) key, (OSMTagBooleanValue) value);
-                                simpleBooleanPropertyTag.add(type);
-                            }
-
-                            if (OSMTagStringValue.class.isInstance(value)) {
-                                //attention Category or Property traiter apres inchAllah
-                                if (isProperty(clef)) {
-                                    type = new OSMSimpleStringPropertyTag((OSMTagSimpleKey) key, (OSMTagStringValue) value);
-                                    simpleStringPropertyTag.add(type);
-                                } else {
-
-                                    type = new OSMSimpleCategoryTag((OSMTagSimpleKey) key, (OSMTagStringValue) value);
-                                    simpleCategoryTag.add(type);
-                                }
-                            }
-
-                            if (OSMTagNumericValue.class.isInstance(value)) {
-                                type = new OSMSimpleNumericPropertyTag((OSMTagSimpleKey) key, (OSMTagNumericValue) value);
-                                simpleNumericPropertyTag.add(type);
-                            }
-
-                            if (OSMTagDateValue.class.isInstance(value)) {
-                                type = new OSMSimpleDatePropertyTag((OSMTagSimpleKey) key, (OSMTagDateValue) value);
-                                simpleDatePropertyTag.add(type);
-                            }
-
-                        }
-                        if (OSMTagComplexKey.class.isInstance(key)) {
-
-                            if (OSMTagBooleanValue.class.isInstance(value)) {
-                                type = new OSMComplexKeyBooleanPropertyTag((OSMTagComplexKey) key, (OSMTagBooleanValue) value);
-                                complexKeyBooleanPropertyTag.add(type);
-                            }
-
-                            if (OSMTagStringValue.class.isInstance(value)) {
-                                type = new OSMComplexKeyStringPropertyTag((OSMTagComplexKey) key, (OSMTagStringValue) value);
-                                complexKeyStringPropertyTag.add(type);
-                            }
-                            if (OSMTagNumericValue.class.isInstance(value)) {
-                                type = new OSMComplexKeyNumericPropertyTag((OSMTagComplexKey) key, (OSMTagNumericValue) value);
-                                complexKeyNumericPropertyTag.add(type);
-                            }
-
-                            if (OSMTagDateValue.class.isInstance(value)) {
-                                type = new OSMComplexKeyDatePropertyTag((OSMTagComplexKey) key, (OSMTagDateValue) value);
-                                complexKeyDatePropertyTag.add(type);
-                            }
-
-                        }
-                    }
+    public static OSMTag typeTags(OSMTagKey key, OSMTagValue value) {
+        OSMTag type = null;
+        if (OSMTagSimpleKey.class.isInstance(key)) {
+            if (OSMTagMultipleValue.class.isInstance(value)) {
+                //attention faut voir est-ce que Category ou Property 
+                if (isProperty(key.getValue())) {
+                    type = new OSMMultipleValuePropertyTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
+                } else {
+                    type = new OSMMultipleValueCategoryTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
                 }
+            }
+            if (OSMTagBooleanValue.class.isInstance(value)) {
+                type = new OSMSimpleBooleanPropertyTag((OSMTagSimpleKey) key, (OSMTagBooleanValue) value);
+            }
+            if (OSMTagStringValue.class.isInstance(value)) {
+                //attention Category or Property traiter apres inchAllah
 
+                if (isProperty(key.getValue())) {
+                    type = new OSMSimpleStringPropertyTag((OSMTagSimpleKey) key, (OSMTagStringValue) value);
+                } else {
+                    type = new OSMSimpleCategoryTag((OSMTagSimpleKey) key, (OSMTagStringValue) value);
+                }
+            }
+            if (OSMTagNumericValue.class.isInstance(value)) {
+                type = new OSMSimpleNumericPropertyTag((OSMTagSimpleKey) key, (OSMTagNumericValue) value);
+            }
+            if (OSMTagDateValue.class.isInstance(value)) {
+                type = new OSMSimpleDatePropertyTag((OSMTagSimpleKey) key, (OSMTagDateValue) value);
             }
         }
-        System.out.println("\u001B[32m" + "multipleValueCategoryTag\t" + "\u001B[34m" + "size=" + multipleValueCategoryTag.size() + "\n" + multipleValueCategoryTag);
+        if (OSMTagComplexKey.class.isInstance(key)) {
+            if (OSMTagBooleanValue.class.isInstance(value)) {
+                type = new OSMComplexKeyBooleanPropertyTag((OSMTagComplexKey) key, (OSMTagBooleanValue) value);
+            }
+            if (OSMTagStringValue.class.isInstance(value)) {
+                type = new OSMComplexKeyStringPropertyTag((OSMTagComplexKey) key, (OSMTagStringValue) value);
+            }
+            if (OSMTagNumericValue.class.isInstance(value)) {
+                type = new OSMComplexKeyNumericPropertyTag((OSMTagComplexKey) key, (OSMTagNumericValue) value);
+            }
+            if (OSMTagDateValue.class.isInstance(value)) {
+                type = new OSMComplexKeyDatePropertyTag((OSMTagComplexKey) key, (OSMTagDateValue) value);
+            }
 
-        System.out.println("\u001B[32m" + "simpleCategoryTag\t" + "\u001B[34m" + "size=" + simpleCategoryTag.size() + "\n" + simpleCategoryTag);
-        System.out.println("\u001B[35m"+"Simple Key:");
-        System.out.println("\u001B[32m" + "multipleValuePropertyTag\t" + "\u001B[34m" + "size=" + multipleValuePropertyTag.size() + "\n" + multipleValuePropertyTag);
-
-        System.out.println("\u001B[32m" + "simpleBooleanPropertyTag\t" + "\u001B[34m" + "size=" + simpleBooleanPropertyTag.size() + "\n" + simpleBooleanPropertyTag);
-
-        System.out.println("\u001B[32m" + "simpleStringPropertyTag\t" + "\u001B[34m" + "size=" + simpleStringPropertyTag.size() + "\n" + simpleStringPropertyTag);
-        System.out.println("\u001B[32m" + "simpleNumericPropertyTag\t" + "\u001B[34m" + "size=" + simpleNumericPropertyTag.size() + "\n" + simpleNumericPropertyTag);
-
-        System.out.println("\u001B[32m" + "simpleDatePropertyTag\t" + "\u001B[34m" + "size=" + simpleDatePropertyTag.size() + "\n" + simpleDatePropertyTag);
-
-        System.out.println("\u001B[35m"+"Complex Key:");
-        System.out.println("\u001B[32m" + "complexKeyBooleanPropertyTag\t" + "\u001B[34m" + "size=" + complexKeyBooleanPropertyTag.size() + "\n" + complexKeyBooleanPropertyTag);
-
-        System.out.println("\u001B[32m" + "complexKeyStringPropertyTag\t" + "\u001B[34m" + "size=" + complexKeyStringPropertyTag.size() + "\n" + complexKeyStringPropertyTag);
-        System.out.println("\u001B[32m" + "complexKeyNumericPropertyTag\t" + "\u001B[34m" + "size=" + complexKeyNumericPropertyTag.size() + "\n" + complexKeyNumericPropertyTag);
-
-        System.out.println("\u001B[32m" + "complexKeyDatePropertyTag\t" + "\u001B[34m" + "size=" + complexKeyDatePropertyTag.size() + "\n" + complexKeyDatePropertyTag);
-
+        }
+        return type;
     }
 
     public static boolean isProperty(String clef) {
 
         //from additional properties
-        String[] categorys = {"addr",
+        String[] property = {"addr",
             "attribution", "comment", "description", "email", "fax", "fixme", "image", "note", "phone",
             "source", "source_ref", "url", "todo", "website", "wikipedia",
-            "int_name", "loc_name", "nat_name", "official_name", "old_name", "reg_name", "short_name",
+            "name", "int_name", "loc_name", "nat_name", "official_name", "old_name", "reg_name", "short_name",
             "sorting_name", "alt_name",
             "area", "bridge", "charge", "covered", "crossing", "cutting", "disused", "drive_through", "drive_in",
             "electrified", "ele", "embankment", "end_date", "est_width", "fire_object", "fire_operator", "fire_rank",
@@ -206,12 +144,10 @@ public class App {
             "maxstay", "maxweight", "maxwidth", "minspeed", "noexit", "oneway", "Relation", "toll", "traffic_sign"};
 
         int i = 0;
-        while (i < categorys.length && !categorys[i].equals(clef)) {
-            for (String category : categorys) {
-                i++;
-            }
+        while (i < property.length && !property[i].equals(clef)) {
+            i++;
         }
-        return i != (categorys.length);
+        return i != (property.length);
     }
 
     public static OSMTagKey stringToKey(String clef, String wikiURL) {
@@ -229,7 +165,7 @@ public class App {
 
         OSMTagValue value;
         //BolleanValue??
-        if (valeur.equals("yes") || valeur.equals("non")) {
+        if (valeur.equals("yes") || valeur.equals("no") || valeur.equals("oui") || valeur.equals("non")) {
             value = new OSMTagBooleanValue(valeur);
 
         } else //DateValue ?? 
@@ -289,4 +225,5 @@ public class App {
 
         return true;
     }
+
 }

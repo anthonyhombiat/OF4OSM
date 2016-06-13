@@ -19,7 +19,7 @@ public class OSMTagNumericValue extends OSMTagValue implements IOSMTagNumericVal
 
     @Override
     public String toString() {
-        return "{"  + value + '}';
+        return ""  + value ;
     }
 
     @Override

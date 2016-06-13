@@ -66,7 +66,7 @@ public class OSMSimpleNumericPropertyTag extends OSMTag implements IOSMSimpleNum
 
     @Override
     public String toString() {
-        return "{" + "key=" + key + ", value=" + value + '}';
+        return  key + ";" + value ;
     }
 
 }

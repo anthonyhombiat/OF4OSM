@@ -64,7 +64,7 @@ public class OSMSimpleBooleanPropertyTag extends OSMTag implements IOSMSimpleBoo
 
     @Override
     public String toString() {
-        return "{" + "key=" + key + ", value=" + value + '}';
+        return  key + ";" + value ;
     }
 
     

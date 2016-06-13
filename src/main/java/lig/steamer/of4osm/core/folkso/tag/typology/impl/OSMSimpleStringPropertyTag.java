@@ -64,7 +64,7 @@ public class OSMSimpleStringPropertyTag extends OSMTag implements IOSMSimpleStri
 
     @Override
     public String toString() {
-        return "{" + "key=" + key + ", value=" + value + '}';
+        return  key + ";" + value ;
     }
 
 

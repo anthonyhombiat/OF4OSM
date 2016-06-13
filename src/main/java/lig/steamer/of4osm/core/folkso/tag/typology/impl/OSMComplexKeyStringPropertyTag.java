@@ -63,7 +63,7 @@ public class OSMComplexKeyStringPropertyTag extends OSMTag implements IOSMComple
 
     @Override
     public String toString() {
-        return "{" + "key=" + key + ", value=" + value + '}';
+        return key + ";" + value ;
     }
 
 }

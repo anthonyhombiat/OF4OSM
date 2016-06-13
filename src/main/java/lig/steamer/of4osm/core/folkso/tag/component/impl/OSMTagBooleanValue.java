@@ -12,7 +12,7 @@ public class OSMTagBooleanValue extends OSMTagValue implements IOSMTagBooleanVal
      */
     public Boolean value;
 
-    public OSMTagBooleanValue(String value) {
+    public OSMTagBooleanValue(String value) {    
         this.value = value.equals("yes")||value.equals("oui")||value.equals("true") ;
     }
 
@@ -22,7 +22,7 @@ public class OSMTagBooleanValue extends OSMTagValue implements IOSMTagBooleanVal
 
     @Override
     public String toString() {
-        return "{" + value + '}';
+        return "" + value ;
     }
 
     @Override

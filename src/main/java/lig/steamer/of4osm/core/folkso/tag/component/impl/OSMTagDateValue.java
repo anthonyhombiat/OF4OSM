@@ -25,7 +25,7 @@ public  class OSMTagDateValue extends OSMTagValue implements IOSMTagDateValue {
 
     @Override
     public String toString() {
-        return "OSMTagDateSimpleValue{" + "value=" + value + '}';
+        return "" + value ;
     }
 
     @Override

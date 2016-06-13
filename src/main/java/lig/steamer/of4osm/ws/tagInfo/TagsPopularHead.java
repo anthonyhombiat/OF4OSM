@@ -11,11 +11,11 @@ import java.util.List;
  *
  * @author amehiris
  */
-public class TagsPopularHead extends HeadResultTagInfo{
-    
+public class TagsPopularHead extends HeadResultTagInfo {
+
     //
     private List<TagsPopularData> data;
-
+    
     public List<TagsPopularData> getData() {
         return data;
     }
@@ -23,10 +23,9 @@ public class TagsPopularHead extends HeadResultTagInfo{
     public void setData(List<TagsPopularData> data) {
         this.data = data;
     }
-    
+
     @Override
-    public String toString()
-    {
-        return "{\"url\" : \""+super.getUrl()+"\",\n \"data_until\" :\" "+super.getData_until()+"\", \"page\" : "+super.getPage()+", \"rp\" : "+super.getRp()+",\"total\": "+super.getTotal()+",\n \"data\" : \n"+data+"}\n";
+    public String toString() {
+        return "{\"url\" : \"" + super.getUrl() + "\",\n \"data_until\" :\" " + super.getData_until() + "\", \"page\" : " + super.getPage() + ", \"rp\" : " + super.getRp() + ",\"total\": " + super.getTotal() + ",\n \"data\" : \n" + data + "}\n";
     }
 }

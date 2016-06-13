@@ -10,7 +10,7 @@ package lig.steamer.of4osm.ws.tagInfo;
  *
  * @author amehiris
  */
-public class TagsPopularData {
+public class TagsPopularData{
 
     //Key
     private String key;

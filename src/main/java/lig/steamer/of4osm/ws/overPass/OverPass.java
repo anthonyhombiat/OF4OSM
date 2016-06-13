@@ -9,6 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import lig.steamer.of4osm.ws.osmapi.Tag;
 
 /**
  *
@@ -39,13 +43,37 @@ public class OverPass {
         str.append("]");
         str.append(bBox);
         str.append(";);out;");
-        
-        this.wikiURL = str.toString();  
+
+        this.wikiURL = str.toString();
         URL url = new URL(this.wikiURL);
         ObjectMapper objectMapper = new ObjectMapper();
 
         this.headResult = objectMapper.readValue(url, HeadResult.class);
 
+    }
+
+    public Map<Tag, Integer> getTags() {
+
+        Map<Tag, Integer> tags = new HashMap();
+
+        List<Element> elements = this.headResult.getElements();
+        for (Element element : elements) {
+
+            Map<String, String> mapTags = element.getTags();
+            
+            for (Map.Entry<String, String> entry : mapTags.entrySet()) {
+                Tag overPassTag = new Tag( entry.getKey(),entry.getValue());
+
+                if (tags.get(overPassTag) == null) {
+                    tags.put(overPassTag, 1);
+                } else {
+                    int nbOccur = tags.get(overPassTag);
+                    tags.put(overPassTag, 1 + nbOccur);
+                }
+            }
+        }
+
+        return tags;
     }
 
     public String getbBox() {

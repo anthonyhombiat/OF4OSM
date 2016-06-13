@@ -19,7 +19,7 @@ public class OSMTagMultipleValue extends OSMTagValue implements IOSMTagMultipleV
 
     @Override
     public String toString() {
-        return "{" + values + '}';
+        return "" + values ;
     }
 
     @Override

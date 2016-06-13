@@ -64,7 +64,7 @@ public class OSMSimpleDatePropertyTag extends OSMTag implements IOSMSimpleDatePr
 
     @Override
     public String toString() {
-        return "{" + "key=" + key + ", value=" + value + '}';
+        return key + ";" + value;
     }
 
     

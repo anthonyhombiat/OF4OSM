@@ -63,7 +63,7 @@ public class OSMComplexKeyDatePropertyTag extends OSMTag implements IOSMComplexK
 
     @Override
     public String toString() {
-        return "{" + "key=" + key + ", value=" + value + '}';
+        return  key + ";" + value ;
     }
 
     
