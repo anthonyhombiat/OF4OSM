@@ -16,7 +16,7 @@ import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyBooleanProp
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyDatePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyNumericPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyStringPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMMultipleValueCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMMultipleValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleBooleanPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleCategoryTag;
@@ -33,7 +33,7 @@ public class StatTypeTags {
     //Category 
 
     private Map<OSMSimpleCategoryTag, Integer> simpleCategoryTag; // OSMSimpleCategoryTag
-    private Map<OSMMultipleValueCategoryTag, Integer> multipleValueCategoryTag; //OSMMultipleValueCategoryTag
+    private Map<OSMMultipleCategoryTag, Integer> multipleValueCategoryTag; //OSMMultipleValueCategoryTag
 
     //Property
     private Map<OSMMultipleValuePropertyTag, Integer> multipleValuePropertyTag;    //OSMMultipleValuePropertyTag
@@ -100,8 +100,8 @@ public class StatTypeTags {
         if (OSMComplexKeyStringPropertyTag.class.isInstance(type)) {
             this.complexKeyStringPropertyTag.put((OSMComplexKeyStringPropertyTag) type, nbInstance);
         }
-        if (OSMMultipleValueCategoryTag.class.isInstance(type)) {
-            this.multipleValueCategoryTag.put((OSMMultipleValueCategoryTag) type, nbInstance);
+        if (OSMMultipleCategoryTag.class.isInstance(type)) {
+            this.multipleValueCategoryTag.put((OSMMultipleCategoryTag) type, nbInstance);
         }
         if (OSMMultipleValuePropertyTag.class.isInstance(type)) {
             this.multipleValuePropertyTag.put((OSMMultipleValuePropertyTag) type, nbInstance);
@@ -129,7 +129,7 @@ public class StatTypeTags {
         try {
             //multipleValueCategoryTag
             String content = multipleValueCategoryTag.size() + ";multipleValueCategoryTag\n";
-            for (OSMMultipleValueCategoryTag key : multipleValueCategoryTag.keySet()) {
+            for (OSMMultipleCategoryTag key : multipleValueCategoryTag.keySet()) {
                 content += "\n;;" + multipleValueCategoryTag.get(key) + ";" + key;
             }
             //simpleCategoryTag
@@ -186,7 +186,7 @@ public class StatTypeTags {
                 content += "\n;;" + complexKeyDatePropertyTag.get(key) + ";" + key;
             }
 
-            content.getBytes(StandardCharsets.UTF_8);
+           // content.getBytes(StandardCharsets.UTF_8);
             File file = new File("C:\\Users\\amehiris\\Documents\\filename1.csv");
 
             // if file doesnt exists, then create it
@@ -211,7 +211,7 @@ public class StatTypeTags {
         return simpleCategoryTag;
     }
 
-    public Map<OSMMultipleValueCategoryTag, Integer> getMultipleValueCategoryTag() {
+    public Map<OSMMultipleCategoryTag, Integer> getMultipleValueCategoryTag() {
         return multipleValueCategoryTag;
     }
 

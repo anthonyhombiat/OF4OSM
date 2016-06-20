@@ -6,7 +6,7 @@ import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagSimpleKey;
 /**
  * 
  */
-public interface IOSMMultipleValueCategoryTag extends IOSMCategoryTag {
+public interface IOSMMultipleCategoryTag extends IOSMCategoryTag {
 
     /**
      * @return

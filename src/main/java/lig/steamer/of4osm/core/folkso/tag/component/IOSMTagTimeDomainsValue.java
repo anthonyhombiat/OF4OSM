@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.ws.osmapi;
+package lig.steamer.of4osm.core.folkso.tag.component;
 
 /**
  *
  * @author amehiris
  */
-public class Osmapi {
+public interface IOSMTagTimeDomainsValue extends IOSMTagValue{
+    
 }

@@ -2,12 +2,12 @@ package lig.steamer.of4osm.core.folkso.tag.typology.impl;
 
 import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagMultipleValue;
 import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagSimpleKey;
-import lig.steamer.of4osm.core.folkso.tag.typology.IOSMMultipleValueCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.typology.IOSMMultipleCategoryTag;
 
 /**
  * 
  */
-public class OSMMultipleValueCategoryTag extends OSMTag implements IOSMMultipleValueCategoryTag {
+public class OSMMultipleCategoryTag extends OSMTag implements IOSMMultipleCategoryTag {
 
 
     public IOSMTagSimpleKey key;
@@ -17,7 +17,7 @@ public class OSMMultipleValueCategoryTag extends OSMTag implements IOSMMultipleV
      */
     public IOSMTagMultipleValue value;
 
-    public OSMMultipleValueCategoryTag(IOSMTagSimpleKey key, IOSMTagMultipleValue value) {
+    public OSMMultipleCategoryTag(IOSMTagSimpleKey key, IOSMTagMultipleValue value) {
         this.key = key;
         this.value = value;
     }
@@ -49,7 +49,7 @@ public class OSMMultipleValueCategoryTag extends OSMTag implements IOSMMultipleV
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final OSMMultipleValueCategoryTag other = (OSMMultipleValueCategoryTag) obj;
+        final OSMMultipleCategoryTag other = (OSMMultipleCategoryTag) obj;
         if (this.key != other.key && (this.key == null || !this.key.equals(other.key))) {
             return false;
         }

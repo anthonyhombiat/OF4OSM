@@ -14,18 +14,18 @@ import java.net.URL;
  *
  * @author amehiris
  */
-public class TagsPopular {
+public class TagsPopularWsClient {
 
     private TagsPopularHead tagsPopularHead;
 
-    public TagsPopular() throws MalformedURLException, IOException {
+    public TagsPopularWsClient() throws MalformedURLException, IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         URL url = new URL("https://taginfo.openstreetmap.org/api/4/tags/popular?");
         this.tagsPopularHead = objectMapper.readValue(url, TagsPopularHead.class);
 
     }
 
-    public TagsPopular(int page, int rp) throws MalformedURLException, IOException {
+    public TagsPopularWsClient(int page, int rp) throws MalformedURLException, IOException {
         StringBuilder str = new StringBuilder();
         str.append("https://taginfo.openstreetmap.org/api/4/tags/popular?");
         str.append("page=");

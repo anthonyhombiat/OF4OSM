@@ -1,13 +1,16 @@
 package lig.steamer.of4osm.core.folkso.tag.component.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 
 import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagDateValue;
 
 /**
  *
  */
-public  class OSMTagDateValue extends OSMTagValue implements IOSMTagDateValue {
+public class OSMTagDateValue extends OSMTagValue implements IOSMTagDateValue {
 
     /**
      *
@@ -15,8 +18,32 @@ public  class OSMTagDateValue extends OSMTagValue implements IOSMTagDateValue {
     public Date value;
 
     public OSMTagDateValue(String value) {
-         
-        this.value = stringToDate(value);
+
+        Date date = null;
+        if (value == null) {
+
+            date = null;
+        } else {
+
+            String[] dateFormats = {"yyyy-MM-dd'T'HH:mm:ss", "yyyy/MM/dd", "dd MMM yyyy", "yyyy-MM", "dd-MMM"};
+            int i = 0;
+            while (date == null && i < dateFormats.length) {
+                try {
+                    String dateFromat = dateFormats[i];
+                    SimpleDateFormat sdf = new SimpleDateFormat(dateFromat);
+                    sdf.setLenient(false);
+                    //if not valid, it will throw ParseException
+                    date = sdf.parse(value);
+
+                } catch (ParseException e) {
+                    date = null;
+                }
+                i++;
+            }
+        }
+        this.value = date;
+        this.labels = new HashSet<String>();
+        this.labels.add(value);
     }
 
     public Date getValue() {
@@ -25,7 +52,7 @@ public  class OSMTagDateValue extends OSMTagValue implements IOSMTagDateValue {
 
     @Override
     public String toString() {
-        return "" + value ;
+        return labels + ";" + value;
     }
 
     @Override

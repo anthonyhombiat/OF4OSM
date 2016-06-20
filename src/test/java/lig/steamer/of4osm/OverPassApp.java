@@ -32,7 +32,7 @@ import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyBooleanProp
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyDatePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyNumericPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyStringPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMMultipleValueCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMMultipleValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleBooleanPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleCategoryTag;
@@ -111,7 +111,7 @@ public class OverPassApp {
                                     type = new OSMMultipleValuePropertyTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
                                     multipleValuePropertyTag.add(type);
                                 } else {
-                                    type = new OSMMultipleValueCategoryTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
+                                    type = new OSMMultipleCategoryTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
                                     multipleValueCategoryTag.add(type);
 
                                 }

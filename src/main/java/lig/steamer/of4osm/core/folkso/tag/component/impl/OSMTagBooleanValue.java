@@ -1,5 +1,6 @@
 package lig.steamer.of4osm.core.folkso.tag.component.impl;
 
+import java.util.HashSet;
 import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagBooleanValue;
 
 /**
@@ -14,6 +15,8 @@ public class OSMTagBooleanValue extends OSMTagValue implements IOSMTagBooleanVal
 
     public OSMTagBooleanValue(String value) {    
         this.value = value.equals("yes")||value.equals("oui")||value.equals("true") ;
+        this.labels=new HashSet<String>();
+        this.labels.add(value);
     }
 
     public Boolean getValue() {
@@ -22,7 +25,7 @@ public class OSMTagBooleanValue extends OSMTagValue implements IOSMTagBooleanVal
 
     @Override
     public String toString() {
-        return "" + value ;
+        return labels+";" + value ;
     }
 
     @Override
