@@ -7,8 +7,6 @@ import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagKey;
  */
 public abstract class OSMTagKey implements IOSMTagKey {
 
-
-
     /**
      * 
      */

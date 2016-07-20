@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm;
+package lig.steamer.of4osm.util;
 
 /**
  *
@@ -23,8 +23,18 @@ public enum Property {
             iata, icao, int_ref, lcn_ref, loc_ref, nat_ref, ncn_ref, old_ref, rcn_ref, ref, reg_ref,
             access, agricultural, atv, bdouble, bicycle, boat, emergency, foot, forestry, goods,
             hazmat, hgv, horse, inline_skates, lhv, mofa, moped, motorboat, motorcar, motorcycle, motor_vehicle,
-            psv, roadtrain,ski, tank, vehicle
-            ,4wd_only , charge , maxheight , maxlength , maxspeed ,
-            maxstay, maxweight, maxwidth, minspeed, noexit, oneway, Relation, toll, traffic_sign
+            psv, roadtrain,ski, tank, vehicle,
+            maxheight , maxlength , maxspeed ,
+            maxstay, maxweight, maxwidth, minspeed, noexit, oneway, Relation, toll, traffic_sign,
+           fourwd_only  ;
 
+    @Override
+    public String toString() {
+        if (this == fourwd_only)
+            return "4wd_only";
+        return super.toString(); 
+    }
+           
+           
+                        
 }

@@ -11,10 +11,20 @@ import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagLocalizedKey;
  *
  * @author amehiris
  */
-public class OSMTagLocalizedKey extends OSMTagKey implements IOSMTagLocalizedKey{
-    
+public class OSMTagLocalizedKey extends OSMTagKey implements IOSMTagLocalizedKey {
+
+    public String locale;
+
     public OSMTagLocalizedKey(String value, String wikiURL) {
         super(value, wikiURL);
+        String[] values = value.split(":");
+        this.value = values[0];
+        this.locale = values[1];
+
     }
-    
+
+    public String getLocale() {
+        return locale;
+    }
+
 }

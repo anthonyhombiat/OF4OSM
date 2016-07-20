@@ -8,13 +8,17 @@ package lig.steamer.of4osm.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import lig.steamer.of4osm.core.folkso.tag.component.impl.LanguesCode;
+import lig.steamer.of4osm.core.folkso.tag.component.impl.LifecycleState;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagBooleanValue;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagDateValue;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagKey;
+import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagLocalizedKey;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagMultipleValue;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagNumericValue;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagSimpleKey;
+import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagStatefulKey;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagValue;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyBooleanPropertyTag;
@@ -29,13 +33,14 @@ import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleDatePropertyTag
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleNumericPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleStringPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMTag;
+import lig.steamer.of4osm.util.openinghours.OpeningHour;
 
 /**
  *
  * @author amehiris
  */
 public class ParserOF4OSM {
-    
+
     public static OSMTag typeTags(OSMTagKey key, OSMTagValue value) {
         OSMTag type = null;
         if (OSMTagSimpleKey.class.isInstance(key)) {
@@ -116,6 +121,10 @@ public class ParserOF4OSM {
         String[] clefs = clef.split(":");
         if (clefs.length == 1) {
             key = new OSMTagSimpleKey(clef, wikiURL);
+        } else if ((clefs.length == 2) && (containslangueCode(clefs[1]))) {
+            key = new OSMTagLocalizedKey(clef, wikiURL);
+        } else if ((clefs.length == 2) && (containsLifecycleState(clefs[1]))) {
+            key = new OSMTagStatefulKey(clef, wikiURL);
         } else {
             key = new OSMTagComplexKey(clef, wikiURL);
         }
@@ -130,8 +139,7 @@ public class ParserOF4OSM {
             value = new OSMTagBooleanValue(valeur);
 
         } else //DateValue ?? 
-        {
-            if (isDate(valeur)) {
+         if (isDate(valeur)) {
                 value = new OSMTagDateValue(valeur);
 
             } else {
@@ -151,7 +159,6 @@ public class ParserOF4OSM {
                     value = new OSMTagMultipleValue(valeur);
                 }
             }
-        }
         return value;
     }
 
@@ -187,4 +194,42 @@ public class ParserOF4OSM {
         return true;
     }
 
+    public static boolean containslangueCode(String langueCode) {
+
+        for (LanguesCode c : LanguesCode.values()) {
+            if (c.name().equals(langueCode)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean containsLifecycleState(String lifecycleState) {
+
+        for (LifecycleState c : LifecycleState.values()) {
+            if (c.name().equals(lifecycleState)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean containsProperty(String property) {
+
+        for (Property c : Property.values()) {
+            if (c.toString().equals(property)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean parseOpeningHours(String s) throws Exception {
+        return OpeningHour.isOpeningHours(s);
+    }
+
+   
 }

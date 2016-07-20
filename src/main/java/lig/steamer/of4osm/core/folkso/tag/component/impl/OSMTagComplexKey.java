@@ -4,41 +4,24 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagComplexKey;
-import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagSimpleKey;
 
 /**
  *
  */
 public class OSMTagComplexKey extends OSMTagKey implements IOSMTagComplexKey {
 
-    /**
-     *
-     */
-    public OSMTagSimpleKey firstValue;
+    public Set<String> prefixes;
 
-    /**
-     *
-     */
-    public Set<String> values;
-
-    
     public OSMTagComplexKey(String value, String wikiURL) {
         super(value, wikiURL);
         String[] values = value.split(":");
-        this.firstValue = new OSMTagSimpleKey(values[0], wikiURL);
-        this.values = new HashSet();
-        this.values.addAll(Arrays.asList(values));
+        this.value = values[0];
+        this.prefixes = new HashSet();
+        this.prefixes.addAll(Arrays.asList(values));
     }
 
-    public Set<String> getValues() {
-        return values;
+    public Set<String> getPrefixes() {
+        return prefixes;
     }
-
-    public IOSMTagSimpleKey getKey() {
-        return firstValue;
-    }
-
-  
-
 
 }

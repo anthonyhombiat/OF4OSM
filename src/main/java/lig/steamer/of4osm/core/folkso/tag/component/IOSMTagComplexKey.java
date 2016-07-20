@@ -6,16 +6,9 @@ import java.util.Set;
  * 
  */
 public interface IOSMTagComplexKey extends IOSMTagKey {
-
-
     /**
      * @return
      */
-    public IOSMTagSimpleKey getKey();
-
-    /**
-     * @return
-     */
-    public Set<String> getValues();
+    public Set<String> getPrefixes();
 
 }

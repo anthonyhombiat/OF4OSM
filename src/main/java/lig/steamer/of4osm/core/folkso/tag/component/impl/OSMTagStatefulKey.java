@@ -11,10 +11,19 @@ import lig.steamer.of4osm.core.folkso.tag.component.IOSMTagStatefulKey;
  *
  * @author amehiris
  */
-public class OSMTagStatefulKey extends OSMTagKey implements IOSMTagStatefulKey{
-    
+public class OSMTagStatefulKey extends OSMTagKey implements IOSMTagStatefulKey {
+
+    private String state;
+
     public OSMTagStatefulKey(String value, String wikiURL) {
         super(value, wikiURL);
+        String[] values = value.split(":");
+        this.value = values[0];
+        this.state = values[1];
     }
-    
+
+    public String getState() {
+        return state;
+    }
+
 }

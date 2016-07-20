@@ -1,5 +1,6 @@
 package lig.steamer.of4osm;
 
+import lig.steamer.of4osm.util.StatTypeTags;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;

@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm;
+package lig.steamer.of4osm.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyBooleanPropertyTag;

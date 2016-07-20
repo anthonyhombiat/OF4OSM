@@ -12,7 +12,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import lig.steamer.of4osm.StatTypeTags;
+import lig.steamer.of4osm.util.StatTypeTags;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagValue;
 import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMTag;
