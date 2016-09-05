@@ -16,7 +16,7 @@ public class OSMTagComplexKey extends OSMTagKey implements IOSMTagComplexKey {
         super(value, wikiURL);
         String[] values = value.split(":");
         this.value = values[0];
-        this.prefixes = new HashSet();
+        this.prefixes = new HashSet<String>();
         this.prefixes.addAll(Arrays.asList(values));
     }
 

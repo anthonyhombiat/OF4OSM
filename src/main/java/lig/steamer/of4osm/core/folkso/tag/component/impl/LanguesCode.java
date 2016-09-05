@@ -5,8 +5,6 @@
  */
 package lig.steamer.of4osm.core.folkso.tag.component.impl;
 
-import java.util.logging.Logger;
-
 /**
  * ISO 3166-2
  * Codes pour la représentation des noms des pays 
