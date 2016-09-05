@@ -1,9 +1,12 @@
 package lig.steamer.of4osm.ws.osmwiki;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class OSMWikiResponseParseText {
 
 	private String all;
 
+	@JsonProperty("*")
 	public String getAll() {
 		return all;
 	}

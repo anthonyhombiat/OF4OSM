@@ -2,39 +2,70 @@ package lig.steamer.of4osm.ws.osmwiki;
 
 import java.util.List;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 
 public class OSMWikiClientTest {
 
 	public static void main(String[] args) {
 		
-		final String PROPERTY_TAGS = "Additional properties";
+		final String CATEGORY_TAGS_ID = "Primary_features";
 		
-		OSMWikiRequest sectionsReq = new OSMWikiRequest("parse", "Map_Features", "sections", "json");
+		OSMWikiRequest sectionsReq = new OSMWikiRequest("parse", "Map_Features", "text", "json");
 		OSMWikiClient client = new OSMWikiClient();
 		
-		System.out.println("SENDING REQUEST...");
+		System.out.println("SENDING REQUEST TO...");
 		
-		OSMWikiResponse sectionsResponse = client.send(sectionsReq);
+		OSMWikiResponse response = client.send(sectionsReq);
 		
 		System.out.println("RESPONSE RECIEVED.");
 		
-		List<OSMWikiResponseParseSection> sections = sectionsResponse.getParse().getSections();
-		for(OSMWikiResponseParseSection section : sections){
+		OSMWikiResponseParseText text = response.getParse().getText();
+		
+		Document htmlDoc = Jsoup.parse(text.getAll());
+		
+		String key = "";
+		String highLevelConcept = "";
+		String value = "";
+		
+		Element primaryFeaturesHeader = htmlDoc.getElementById(CATEGORY_TAGS_ID).parent();
+		List<Element> siblings = primaryFeaturesHeader.siblingElements();
+		
+		for(Element el : siblings){
 			
-			if(section.getLine().equals(PROPERTY_TAGS)){
-				return;
+			if(el.tagName().equals("h2")) break;
+			
+			if(el.tagName().equals("h3")){
+			
+				key = el.text();
+				System.out.println(key);
+				
 			}
 			
-			if(section.getToclevel() > 1){
+			if(el.hasClass("wikitable")){
 				
-				for(int i=2;i<section.getToclevel();i++){
-					System.out.print("\t");
+				List<Element> rows = el.select("tr");
+				for(Element row : rows){
+					
+					Element firstCol = row.children().first();
+						
+					// is highLevelConcept row
+					Element header = firstCol.select("h4 span.mw-headline").first();
+					if(header != null){
+						highLevelConcept = header.text();
+						System.out.println("\t" + highLevelConcept);
+					} else {
+						
+						Element valueCol = row.select("td a[title^='Tag:']").first();
+						if(valueCol != null){
+							value = valueCol.text();
+							System.out.println("\t\t" + value);
+						}
+					}
 				}
-				
-				System.out.println(section.getLine());
 			}
-			
 		}
 	}
-
 }
