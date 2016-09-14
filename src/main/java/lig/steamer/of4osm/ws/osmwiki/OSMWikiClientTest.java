@@ -1,6 +1,9 @@
 package lig.steamer.of4osm.ws.osmwiki;
 
 import java.util.List;
+import lig.steamer.of4osm.core.onto.meta.IConcept;
+import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
+import lig.steamer.of4osm.core.onto.meta.impl.HighLevelConcept;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

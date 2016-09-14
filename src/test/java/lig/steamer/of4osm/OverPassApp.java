@@ -15,36 +15,32 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagBooleanValue;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagComplexKey;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagKey;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagMultipleValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
 
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagDateValue;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagKey;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagMultipleValue;
-
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagNumericValue;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagSimpleKey;
-
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagStringValue;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagValue;
-
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyBooleanPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyDatePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyNumericPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMComplexKeyStringPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMMultipleCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMMultipleValuePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleBooleanPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleDatePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleNumericPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMSimpleStringPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.typology.impl.OSMTag;
-import lig.steamer.of4osm.ws.overPass.Element;
-import lig.steamer.of4osm.ws.overPass.OverPass;
-import lig.steamer.of4osm.ws.tagInfo.TagInfo;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyBooleanPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyDatePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyNumericPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyStringPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMMultipleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMMultipleValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleBooleanPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleDatePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleNumericPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleStringPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMTag;
+import lig.steamer.of4osm.ws.overPass.OverPassElement;
+import lig.steamer.of4osm.ws.tagInfo.TagInfoClient;
 import lig.steamer.of4osm.ws.tagInfo.TagsPopularData;
-import lig.steamer.of4osm.ws.tagInfo.TagsPopularHead;
+import lig.steamer.of4osm.ws.tagInfo.TagsPopularResponse;
 
 /**
  *
@@ -77,8 +73,8 @@ public class OverPassApp {
         String bBoxGrenobleCentre = "(45.1873363,5.7180328,45.188529,5.724524)";
         String bBoxParis = "(48.658291,2.08679,49.04694,2.63791)";
 
-        TagInfo tagInfo = new TagInfo();
-        TagsPopularHead tagsPopularHead = tagInfo.tagsPopular(1,10);
+        TagInfoClient tagInfo = new TagInfoClient();
+        TagsPopularResponse tagsPopularHead = tagInfo.tagsPopular(1,10);
         List<TagsPopularData> dataPopularTags = tagsPopularHead.getData();
         for (TagsPopularData popularTags : dataPopularTags) {
             if (popularTags.isIn_wiki()) {
@@ -86,7 +82,7 @@ public class OverPassApp {
 
                 //System.out.println(overPasse.getHeadResult().toString());
                 //parcourir la liste d'element 
-                List<Element> elements = overPasse.getHeadResult().getElements();
+                List<OverPassElement> elements = overPasse.getHeadResult().getElements();
                 for (int i = 0; i < elements.size(); i++) {
 
                     //parcourir la map tags  

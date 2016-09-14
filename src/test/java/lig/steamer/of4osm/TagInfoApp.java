@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
-import lig.steamer.of4osm.ws.tagInfo.KeyCombinationsHead;
-import lig.steamer.of4osm.ws.tagInfo.KeySimilarHead;
-import lig.steamer.of4osm.ws.tagInfo.KeyStatsHead;
-import lig.steamer.of4osm.ws.tagInfo.KeyValuesHead;
-import lig.steamer.of4osm.ws.tagInfo.TagStatsHead;
-import lig.steamer.of4osm.ws.tagInfo.TagsPopularHead;
+import lig.steamer.of4osm.ws.tagInfo.KeyCombinationsResponse;
+import lig.steamer.of4osm.ws.tagInfo.KeySimilarResponse;
+import lig.steamer.of4osm.ws.tagInfo.KeyStatsResponse;
+import lig.steamer.of4osm.ws.tagInfo.KeyValuesResponse;
+import lig.steamer.of4osm.ws.tagInfo.TagStatsResponse;
+import lig.steamer.of4osm.ws.tagInfo.TagsPopularResponse;
 
 /**
  *
@@ -69,8 +69,8 @@ public class TagInfoApp {
 
                 URL url = new URL(str.toString());
 
-                KeyCombinationsHead resultat = new KeyCombinationsHead();
-                resultat = objectMapper.readValue(url, KeyCombinationsHead.class);
+                KeyCombinationsResponse resultat = new KeyCombinationsResponse();
+                resultat = objectMapper.readValue(url, KeyCombinationsResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -92,8 +92,8 @@ public class TagInfoApp {
                 str.append(rp);
                 URL url = new URL(str.toString());
 
-                KeySimilarHead resultat = new KeySimilarHead();
-                resultat = objectMapper.readValue(url, KeySimilarHead.class);
+                KeySimilarResponse resultat = new KeySimilarResponse();
+                resultat = objectMapper.readValue(url, KeySimilarResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -106,8 +106,8 @@ public class TagInfoApp {
                 str.append(Key);
 
                 URL url = new URL(str.toString());
-                KeyStatsHead resultat = new KeyStatsHead();
-                resultat = objectMapper.readValue(url, KeyStatsHead.class);
+                KeyStatsResponse resultat = new KeyStatsResponse();
+                resultat = objectMapper.readValue(url, KeyStatsResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -128,8 +128,8 @@ public class TagInfoApp {
                 str.append("&rp=");
                 str.append(rp);
                 URL url = new URL(str.toString());
-                KeyValuesHead resultat = new KeyValuesHead();
-                resultat = objectMapper.readValue(url, KeyValuesHead.class);
+                KeyValuesResponse resultat = new KeyValuesResponse();
+                resultat = objectMapper.readValue(url, KeyValuesResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -145,8 +145,8 @@ public class TagInfoApp {
                 str.append(value);
 
                 URL url = new URL(str.toString());
-                TagStatsHead resultat = new TagStatsHead();
-                resultat = objectMapper.readValue(url, TagStatsHead.class);
+                TagStatsResponse resultat = new TagStatsResponse();
+                resultat = objectMapper.readValue(url, TagStatsResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -164,8 +164,8 @@ public class TagInfoApp {
                 
                 System.out.println(str);
                 URL url = new URL(str.toString());
-                TagsPopularHead resultat = new TagsPopularHead();
-                resultat = objectMapper.readValue(url, TagsPopularHead.class);
+                TagsPopularResponse resultat = new TagsPopularResponse();
+                resultat = objectMapper.readValue(url, TagsPopularResponse.class);
                 System.out.println(resultat.toString());
             }
             break;

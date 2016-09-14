@@ -1,6 +1,6 @@
 package lig.steamer.of4osm.core.onto.meta;
 
-import lig.steamer.of4osm.core.folkso.tag.typology.IOSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 
 /**
  * 

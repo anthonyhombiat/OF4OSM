@@ -1,11 +1,12 @@
 package lig.steamer.of4osm.core.onto.meta.impl;
 
+import java.util.Map;
 import java.util.Set;
 
 import lig.steamer.of4osm.core.onto.meta.IConcept;
 
 /**
- * 
+ *
  */
 public abstract class Concept implements IConcept {
 
@@ -15,23 +16,18 @@ public abstract class Concept implements IConcept {
     public Concept() {
     }
 
-    /**
-     * 
-     */
-    public Set<String> labels;
+    public Map<String, String> labels;
 
-
-    /**
-     * @return
-     */
-    public abstract Set<? extends IConcept> getParents();
-
-    /**
-     * @return
-     */
-    public Set<String> getLabels() {
-        // TODO implement here
-        return null;
+    @Override
+    public Map<String, String> getLabels() {
+        return labels;
     }
+
+    public void addLabel(String lang, String label) {
+        labels.put(lang, label);
+    }
+
+    @Override
+    public abstract Set<? extends IConcept> getParents();
 
 }

@@ -2,7 +2,7 @@ package lig.steamer.of4osm.core.onto.meta.impl;
 
 import java.util.Set;
 
-import lig.steamer.of4osm.core.folkso.tag.typology.IOSMBooleanSimpleValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMBooleanSimpleValuePropertyTag;
 import lig.steamer.of4osm.core.onto.meta.IOSMBooleanPropertyTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 

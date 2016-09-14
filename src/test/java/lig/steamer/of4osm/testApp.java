@@ -1,19 +1,17 @@
 package lig.steamer.of4osm;
 
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagKey;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagMultipleValue;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagBooleanValue;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagValue;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagStringValue;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagDateValue;
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagNumericValue;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagKey;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagMultipleValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
 
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagSimpleKey;
-
-import lig.steamer.of4osm.core.folkso.tag.component.impl.OSMTagComplexKey;
-
-import lig.steamer.of4osm.ws.overPass.HeadResult;
-import lig.steamer.of4osm.ws.overPass.Element;
+import lig.steamer.of4osm.ws.overPass.OverPassResponse;
+import lig.steamer.of4osm.ws.overPass.OverPassElement;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -42,8 +40,8 @@ public class testApp {
 
         //interogé le serveur OverPass et récupérer les objet java corespendant 
         ObjectMapper objectMapper = new ObjectMapper();
-        HeadResult resultat = new HeadResult();
-        resultat = objectMapper.readValue(url, HeadResult.class);
+        OverPassResponse resultat = new OverPassResponse();
+        resultat = objectMapper.readValue(url, OverPassResponse.class);
         System.out.println(resultat.toString());
 
         //Key
@@ -59,7 +57,7 @@ public class testApp {
         Set multipleValue = new HashSet();
 
         //parcourir la liste d'element 
-        List<Element> elements = resultat.getElements();
+        List<OverPassElement> elements = resultat.getElements();
         for (int i = 0; i < elements.size(); i++) {
 
             //parcourir la map tags  

@@ -9,7 +9,7 @@ package lig.steamer.of4osm.ws.tagInfo;
  *
  * @author amehiris
  */
-public class HeadResultTagInfo {
+public abstract class HeadResultTagInfo {
 
     //URL of the request
     protected String url;

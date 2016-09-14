@@ -1,5 +1,6 @@
 package lig.steamer.of4osm.core.onto.meta;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -11,7 +12,7 @@ public interface IConcept {
     /**
      * @return
      */
-    public Set<String> getLabels();
+    public Map<String,String> getLabels();
 
     /**
      * @return

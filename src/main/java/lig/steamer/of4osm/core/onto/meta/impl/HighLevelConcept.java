@@ -29,7 +29,7 @@ public class HighLevelConcept extends Concept implements IHighLevelConcept {
      * @return
      */
     public Set<? extends IHighLevelConcept> getParents() {
-        // TODO implement here
+      
         return null;
     }
 
