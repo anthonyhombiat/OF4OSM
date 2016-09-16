@@ -1,9 +1,6 @@
 package lig.steamer.of4osm.ws.osmwiki;
 
 import java.util.List;
-import lig.steamer.of4osm.core.onto.meta.IConcept;
-import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
-import lig.steamer.of4osm.core.onto.meta.impl.HighLevelConcept;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,6 +30,10 @@ public class OSMWikiClientTest {
 		String highLevelConcept = "";
 		String value = "";
 		
+		int nbKeys = 0;
+		int nbHighLevelConcepts = 0;
+		int nbValues = 0;
+		
 		Element primaryFeaturesHeader = htmlDoc.getElementById(CATEGORY_TAGS_ID).parent();
 		List<Element> siblings = primaryFeaturesHeader.siblingElements();
 		
@@ -44,6 +45,7 @@ public class OSMWikiClientTest {
 			
 				key = el.text();
 				System.out.println(key);
+				nbKeys++;
 				
 			}
 			
@@ -59,16 +61,21 @@ public class OSMWikiClientTest {
 					if(header != null){
 						highLevelConcept = header.text();
 						System.out.println("\t" + highLevelConcept);
-					} else {
+						nbHighLevelConcepts++;					} else {
 						
 						Element valueCol = row.select("td a[title^='Tag:']").first();
 						if(valueCol != null){
 							value = valueCol.text();
 							System.out.println("\t\t" + value);
+							nbValues++;
 						}
 					}
 				}
 			}
 		}
+		
+		System.out.println("Nb of IHighLevelConcept instances: " + nbHighLevelConcepts);
+		System.out.println("Nb of IOSMCategoryTagKeyConcept instances: " + nbKeys);
+		System.out.println("Nb of IOSMCategoryTagConcept instances: " + nbValues);
 	}
 }
