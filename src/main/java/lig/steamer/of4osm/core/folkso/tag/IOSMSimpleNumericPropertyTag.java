@@ -4,18 +4,14 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagNumericValue;
 
 /**
- * 
+ *
  */
 public interface IOSMSimpleNumericPropertyTag extends IOSMNumericPropertyTag {
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMTagSimpleKey getKey();
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMTagNumericValue getValue();
 
 }

@@ -5,32 +5,25 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleNumericPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagNumericValue;
 
 /**
- * 
+ *
  */
 public class OSMSimpleNumericPropertyTag extends OSMTag implements IOSMSimpleNumericPropertyTag {
 
+    private IOSMTagSimpleKey key;
 
-    /**
-     * 
-     */
-    public IOSMTagSimpleKey key;
-
-    /**
-     * 
-     */
-    public IOSMTagNumericValue value;
+    private IOSMTagNumericValue value;
 
     public OSMSimpleNumericPropertyTag(IOSMTagSimpleKey key, IOSMTagNumericValue value) {
         this.key = key;
         this.value = value;
     }
 
- 
-
+    @Override
     public IOSMTagSimpleKey getKey() {
         return key;
     }
 
+    @Override
     public IOSMTagNumericValue getValue() {
         return value;
     }
@@ -66,7 +59,7 @@ public class OSMSimpleNumericPropertyTag extends OSMTag implements IOSMSimpleNum
 
     @Override
     public String toString() {
-        return  key + ";" + value ;
+        return key + ";" + value;
     }
 
 }

@@ -9,26 +9,21 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagBooleanValue;
  */
 public class OSMSimpleBooleanPropertyTag extends OSMTag implements IOSMSimpleBooleanPropertyTag {
 
+    private IOSMTagSimpleKey key;
 
-    /**
-     * 
-     */
-    public IOSMTagSimpleKey key;
-
-    /**
-     * 
-     */
-    public IOSMTagBooleanValue value;
+    private IOSMTagBooleanValue value;
 
     public OSMSimpleBooleanPropertyTag(IOSMTagSimpleKey key, IOSMTagBooleanValue value) {
         this.key = key;
         this.value = value;
     }
 
+    @Override
     public IOSMTagSimpleKey getKey() {
         return key;
     }
 
+    @Override
     public IOSMTagBooleanValue getValue() {
         return value;
     }

@@ -4,18 +4,14 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
 
 /**
- * 
+ *
  */
 public interface IOSMSimpleDatePropertyTag extends IOSMDatePropertyTag {
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMTagSimpleKey getKey();
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMTagDateValue getValue();
 
 }

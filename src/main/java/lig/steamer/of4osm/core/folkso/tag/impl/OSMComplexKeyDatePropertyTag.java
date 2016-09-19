@@ -5,29 +5,25 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyDatePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
 
 /**
- * 
+ *
  */
 public class OSMComplexKeyDatePropertyTag extends OSMTag implements IOSMComplexKeyDatePropertyTag {
 
-    /**
-     * 
-     */
-    public IOSMTagComplexKey key;
+    private IOSMTagComplexKey key;
 
-    /**
-     * 
-     */
-    public IOSMTagDateValue value;
+    private IOSMTagDateValue value;
 
     public OSMComplexKeyDatePropertyTag(IOSMTagComplexKey key, IOSMTagDateValue value) {
         this.key = key;
         this.value = value;
     }
 
+    @Override
     public IOSMTagComplexKey getKey() {
         return key;
     }
 
+    @Override
     public IOSMTagDateValue getValue() {
         return value;
     }
@@ -63,8 +59,7 @@ public class OSMComplexKeyDatePropertyTag extends OSMTag implements IOSMComplexK
 
     @Override
     public String toString() {
-        return  key + ";" + value ;
+        return key + ";" + value;
     }
 
-    
 }

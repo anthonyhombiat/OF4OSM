@@ -3,23 +3,24 @@ package lig.steamer.of4osm.core.folkso.tag.value.impl;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagNumericValue;
 
 /**
- * 
+ *
  */
 public class OSMTagNumericValue extends OSMTagValue implements IOSMTagNumericValue {
 
-
-    /**
-     * 
-     */
-    public Double value;
+    private Double value;
 
     public OSMTagNumericValue(Double value) {
         this.value = value;
     }
 
     @Override
+    public Double getValue() {
+        return value;
+    }
+
+    @Override
     public String toString() {
-        return ""  + value ;
+        return "" + value;
     }
 
     @Override
@@ -45,14 +46,6 @@ public class OSMTagNumericValue extends OSMTagValue implements IOSMTagNumericVal
             return false;
         }
         return true;
-    }
-
-    /**
-     * @return
-     */
-    public Double getValue() {
-        // TODO implement here
-        return null;
     }
 
 }

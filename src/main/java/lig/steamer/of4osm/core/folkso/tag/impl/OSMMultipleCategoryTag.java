@@ -5,27 +5,25 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 
 /**
- * 
+ *
  */
 public class OSMMultipleCategoryTag extends OSMTag implements IOSMMultipleCategoryTag {
 
+    private IOSMTagSimpleKey key;
 
-    public IOSMTagSimpleKey key;
-
-    /**
-     * 
-     */
-    public IOSMTagMultipleValue value;
+    private IOSMTagMultipleValue value;
 
     public OSMMultipleCategoryTag(IOSMTagSimpleKey key, IOSMTagMultipleValue value) {
         this.key = key;
         this.value = value;
     }
 
+    @Override
     public IOSMTagSimpleKey getKey() {
         return key;
     }
 
+    @Override
     public IOSMTagMultipleValue getValue() {
         return value;
     }
@@ -61,8 +59,7 @@ public class OSMMultipleCategoryTag extends OSMTag implements IOSMMultipleCatego
 
     @Override
     public String toString() {
-        return  key + ";" + value + ':';
+        return key + ";" + value + ':';
     }
-
 
 }

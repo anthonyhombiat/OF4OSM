@@ -5,9 +5,13 @@
  */
 package lig.steamer.of4osm.ws.osmapi;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolkso;
+import lig.steamer.of4osm.core.onto.impl.OF4OSMOntology;
 import lig.steamer.of4osm.util.OF4OSMFolkso2CSV;
+import lig.steamer.of4osm.util.OF4OSMFolkso2OntoParser;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -16,21 +20,24 @@ import lig.steamer.of4osm.util.OF4OSMFolkso2CSV;
 public class OSMAPIClientTest {
 
     public static void main(String[] args) throws MalformedURLException, Exception {
-
+        
         OSMAPIRequest req = new OSMAPIRequest("5.712204", "45.178649", "5.727654", "45.189538");
-        
+
         OSMAPIClient client = new OSMAPIClient();
-        
+
         OSMAPIResponse resp = client.send(req);
-        
-        OSMAPI2OF4OSMFolksoParser parser = new OSMAPI2OF4OSMFolksoParser();
-        
-        OF4OSMFolkso folkso = parser.parse(resp);
-        
+
+        OF4OSMFolkso folkso = OSMAPI2OF4OSMFolksoParser.parse(resp);
+
         System.out.println(folkso);
-        
-        OF4OSMFolkso2CSV csv = new OF4OSMFolkso2CSV();       
-        csv.write(csv.parse(folkso),"C:\\Users\\amehiris\\Documents\\test1.csv");
+
+        FileUtils.writeStringToFile(new File("C:\\Users\\amehiris\\Documents\\test1.csv"), OF4OSMFolkso2CSV.parse(folkso));
+
+        OF4OSMFolkso2OntoParser ontoParser = new OF4OSMFolkso2OntoParser();
+
+        OF4OSMOntology onto = ontoParser.parse(folkso);
+
+        onto.afficher();
 
     }
 }

@@ -5,10 +5,12 @@
  */
 package lig.steamer.of4osm.ws.overPass;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolkso;
 import lig.steamer.of4osm.util.OF4OSMFolkso2CSV;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -27,16 +29,15 @@ public class OverPassClientTest {
 
         OverPassResponse resp = client.send(req);
 
-        OverPass2OF4OSMFolksoParser parser = new OverPass2OF4OSMFolksoParser();
+        OverPass2OF4OSMFolksoParser folksoParser = new OverPass2OF4OSMFolksoParser();
 
-        OF4OSMFolkso folkso = parser.parse(resp);
+        OF4OSMFolkso folkso = folksoParser.parse(resp);
 
         System.out.println(folkso);
         
         OF4OSMFolkso2CSV csv = new OF4OSMFolkso2CSV();
-        
-        csv.write(csv.parse(folkso),"C:\\Users\\amehiris\\Documents\\test1.csv");
-        
+                
+        FileUtils.writeStringToFile(new File("C:\\Users\\amehiris\\Documents\\test1.csv"), csv.parse(folkso));
         
     }
 

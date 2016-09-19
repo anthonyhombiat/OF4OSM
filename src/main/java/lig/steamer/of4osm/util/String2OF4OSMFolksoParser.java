@@ -9,6 +9,21 @@ import lig.steamer.of4osm.core.folkso.tag.key.impl.PropertyTagKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyBooleanPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyDatePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyNumericPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyStringPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMLocalizedKeyStringValueTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMMultipleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMMultipleValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleBooleanPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleDatePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleNumericPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleStringPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMStatefulCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMTimeDomainsValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.LanguesCode;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.LifecycleState;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
@@ -23,21 +38,18 @@ import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagStatefulKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagTimeDomainsValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyBooleanPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyDatePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyNumericPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyStringPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMLocalizedKeyStringValueTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMMultipleCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMMultipleValuePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleBooleanPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleDatePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleNumericPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleStringPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMStatefulCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMTimeDomainsValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagComplexKey;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagLocalizedKey;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagStatefulKey;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagBooleanValue;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagMultipleValue;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagNumericValue;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagTimeDomainsValue;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
 import lig.steamer.of4osm.util.openinghours.OpeningHour;
 
 /**
@@ -46,62 +58,62 @@ import lig.steamer.of4osm.util.openinghours.OpeningHour;
  */
 public class String2OF4OSMFolksoParser {
 
-    public static OSMTag typeTags(OSMTagKey key, OSMTagValue value) {
-        OSMTag type = null;
-        if (OSMTagSimpleKey.class.isInstance(key)) {
-            if (OSMTagMultipleValue.class.isInstance(value)) {
+    public static IOSMTag typeTags(IOSMTagKey key, IOSMTagValue value) {
+        IOSMTag type = null;
+        if (IOSMTagSimpleKey.class.isInstance(key)) {
+            if (IOSMTagMultipleValue.class.isInstance(value)) {
                 //attention faut voir est-ce que Category ou PropertyTagKey 
                 if (isProperty(key.getValue())) {
-                    type = new OSMMultipleValuePropertyTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
+                    type = new OSMMultipleValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagMultipleValue) value);
                 } else {
-                    type = new OSMMultipleCategoryTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
+                    type = new OSMMultipleCategoryTag((IOSMTagSimpleKey) key, (IOSMTagMultipleValue) value);
                 }
             }
-            if (OSMTagBooleanValue.class.isInstance(value)) {
-                type = new OSMSimpleBooleanPropertyTag((OSMTagSimpleKey) key, (OSMTagBooleanValue) value);
+            if (IOSMTagBooleanValue.class.isInstance(value)) {
+                type = new OSMSimpleBooleanPropertyTag((IOSMTagSimpleKey) key, (IOSMTagBooleanValue) value);
             }
-            if (OSMTagStringValue.class.isInstance(value)) {
+            if (IOSMTagStringValue.class.isInstance(value)) {
                 //attention Category or PropertyTagKey traiter apres inchAllah
 
                 if (isProperty(key.getValue())) {
-                    type = new OSMSimpleStringPropertyTag((OSMTagSimpleKey) key, (OSMTagStringValue) value);
+                    type = new OSMSimpleStringPropertyTag((IOSMTagSimpleKey) key, (IOSMTagStringValue) value);
                 } else {
-                    type = new OSMSimpleCategoryTag((OSMTagSimpleKey) key, (OSMTagStringValue) value);
+                    type = new OSMSimpleCategoryTag((IOSMTagSimpleKey) key, (IOSMTagStringValue) value);
                 }
             }
-            if (OSMTagNumericValue.class.isInstance(value)) {
-                type = new OSMSimpleNumericPropertyTag((OSMTagSimpleKey) key, (OSMTagNumericValue) value);
+            if (IOSMTagNumericValue.class.isInstance(value)) {
+                type = new OSMSimpleNumericPropertyTag((IOSMTagSimpleKey) key, (IOSMTagNumericValue) value);
             }
-            if (OSMTagDateValue.class.isInstance(value)) {
-                type = new OSMSimpleDatePropertyTag((OSMTagSimpleKey) key, (OSMTagDateValue) value);
+            if (IOSMTagDateValue.class.isInstance(value)) {
+                type = new OSMSimpleDatePropertyTag((IOSMTagSimpleKey) key, (IOSMTagDateValue) value);
             }
-            if (OSMTagTimeDomainsValue.class.isInstance(value)){
-                type = new OSMTimeDomainsValuePropertyTag((OSMTagSimpleKey)key,(OSMTagTimeDomainsValue)value);
+            if (IOSMTagTimeDomainsValue.class.isInstance(value)){
+                type = new OSMTimeDomainsValuePropertyTag((IOSMTagSimpleKey)key,(IOSMTagTimeDomainsValue)value);
             }
         }
-        if (OSMTagComplexKey.class.isInstance(key)) {
-            if (OSMTagBooleanValue.class.isInstance(value)) {
-                type = new OSMComplexKeyBooleanPropertyTag((OSMTagComplexKey) key, (OSMTagBooleanValue) value);
+        if (IOSMTagComplexKey.class.isInstance(key)) {
+            if (IOSMTagBooleanValue.class.isInstance(value)) {
+                type = new OSMComplexKeyBooleanPropertyTag((IOSMTagComplexKey) key, (IOSMTagBooleanValue) value);
             }
-            if (OSMTagStringValue.class.isInstance(value)) {
-                type = new OSMComplexKeyStringPropertyTag((OSMTagComplexKey) key, (OSMTagStringValue) value);
+            if (IOSMTagStringValue.class.isInstance(value)) {
+                type = new OSMComplexKeyStringPropertyTag((IOSMTagComplexKey) key, (IOSMTagStringValue) value);
             }
-            if (OSMTagNumericValue.class.isInstance(value)) {
-                type = new OSMComplexKeyNumericPropertyTag((OSMTagComplexKey) key, (OSMTagNumericValue) value);
+            if (IOSMTagNumericValue.class.isInstance(value)) {
+                type = new OSMComplexKeyNumericPropertyTag((IOSMTagComplexKey) key, (IOSMTagNumericValue) value);
             }
-            if (OSMTagDateValue.class.isInstance(value)) {
-                type = new OSMComplexKeyDatePropertyTag((OSMTagComplexKey) key, (OSMTagDateValue) value);
+            if (IOSMTagDateValue.class.isInstance(value)) {
+                type = new OSMComplexKeyDatePropertyTag((IOSMTagComplexKey) key, (IOSMTagDateValue) value);
             }
 
         }
-        if(OSMTagLocalizedKey.class.isInstance(key)){
-            if(OSMTagStringValue.class.isInstance(value)){
-                type = new OSMLocalizedKeyStringValueTag((OSMTagLocalizedKey)key,(OSMTagStringValue)value);
+        if(IOSMTagLocalizedKey.class.isInstance(key)){
+            if(IOSMTagStringValue.class.isInstance(value)){
+                type = new OSMLocalizedKeyStringValueTag((IOSMTagLocalizedKey)key,(IOSMTagStringValue)value);
             }
         }
-        if(OSMTagStatefulKey.class.isInstance(key)){
-            if(OSMTagStringValue.class.isInstance(value)){
-                type = new OSMStatefulCategoryTag((OSMTagStatefulKey)key,(OSMTagStringValue)value);
+        if(IOSMTagStatefulKey.class.isInstance(key)){
+            if(IOSMTagStringValue.class.isInstance(value)){
+                type = new OSMStatefulCategoryTag((IOSMTagStatefulKey)key,(IOSMTagStringValue)value);
             }
         }       
         return type;       
@@ -134,8 +146,8 @@ public class String2OF4OSMFolksoParser {
         return i != (property.length);
     }
 
-    public static OSMTagKey stringToKey(String clef, String wikiURL) {
-        OSMTagKey key;
+    public static IOSMTagKey stringToKey(String clef, String wikiURL) {
+        IOSMTagKey key;
         String[] clefs = clef.split(":");
         if (clefs.length == 1) {
             key = new OSMTagSimpleKey(clef, wikiURL);
@@ -149,9 +161,9 @@ public class String2OF4OSMFolksoParser {
         return key;
     }
 
-    public static OSMTagValue stringToValue(String valeur) throws Exception {
+    public static IOSMTagValue stringToValue(String valeur) throws Exception {
 
-        OSMTagValue value;
+        IOSMTagValue value;
         //OpeningHours?
         if (OpeningHour.isOpeningHours(valeur)) {
             value = new OSMTagTimeDomainsValue(valeur);

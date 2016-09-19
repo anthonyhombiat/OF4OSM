@@ -6,7 +6,9 @@ import java.util.Set;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
+import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *
@@ -15,10 +17,13 @@ public class OSMCategoryTagConcept extends OSMTagConcept implements IOSMCategory
 
     public IOSMSimpleCategoryTag tag;
 
-    public OSMCategoryTagConcept(OSMSimpleCategoryTag tag) {
+    public OSMCategoryTagConcept(IOSMSimpleCategoryTag tag, IOSMCategoryTagKeyConcept tagKeyConcept) {
         this.tag = tag;
-        //super.labels.add(tag.getValue().getValue()+tag.getKey().getValue());
-        // super.parents.add(tagKeyConcept);
+        String key = WordUtils.capitalize(tag.getKey().getValue());
+        String value = WordUtils.capitalize(tag.getValue().getValue());
+        System.out.println("name: "+value);
+        super.addLabel("EN", ""+value + key);
+        super.parents.add(tagKeyConcept);
     }
 
     @Override
@@ -28,8 +33,8 @@ public class OSMCategoryTagConcept extends OSMTagConcept implements IOSMCategory
 
     @Override
     public Set<? extends IOSMTagConceptParent> getParents() {
-        // TODO Auto-generated method stub
-        return null;
+        
+        return super.parents;
     }
 
     @Override
@@ -59,7 +64,7 @@ public class OSMCategoryTagConcept extends OSMTagConcept implements IOSMCategory
 
     @Override
     public String toString() {
-        return "OSMCategoryTagConcept{" + "tag=" + tag + '}';
+        return "{" + getDefaultLabel() + '}';
     }
 
 }

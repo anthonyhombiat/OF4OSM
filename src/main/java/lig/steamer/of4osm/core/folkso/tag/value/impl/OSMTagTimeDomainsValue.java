@@ -12,9 +12,9 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagTimeDomainsValue;
  *
  * @author amehiris
  */
-public class OSMTagTimeDomainsValue extends OSMTagValue implements IOSMTagTimeDomainsValue{
-    
-    public String timeDomains;
+public class OSMTagTimeDomainsValue extends OSMTagValue implements IOSMTagTimeDomainsValue {
+
+    private String timeDomains;
 
     public OSMTagTimeDomainsValue(String value) {
         this.timeDomains = value;
@@ -22,10 +22,11 @@ public class OSMTagTimeDomainsValue extends OSMTagValue implements IOSMTagTimeDo
 
     @Override
     public String toString() {
-        return  " " + timeDomains ;
+        return " " + timeDomains;
     }
 
-    public String getValue() {
+    @Override
+    public String getTimeDomains() {
         return timeDomains;
     }
 
@@ -53,6 +54,5 @@ public class OSMTagTimeDomainsValue extends OSMTagValue implements IOSMTagTimeDo
         }
         return true;
     }
-    
-    
+
 }

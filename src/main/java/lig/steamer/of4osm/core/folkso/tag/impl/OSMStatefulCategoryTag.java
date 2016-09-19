@@ -6,11 +6,9 @@
 package lig.steamer.of4osm.core.folkso.tag.impl;
 
 import java.util.Objects;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagKey;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagStatefulKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
 import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagStatefulKey;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 
 /**
  *
@@ -18,21 +16,23 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
  */
 public class OSMStatefulCategoryTag extends OSMTag implements IOSMStatefulCategoryTag {
 
-    public OSMTagStatefulKey Key; 
+    private IOSMTagStatefulKey Key; 
     
-    public OSMTagStringValue value; 
+    private IOSMTagStringValue value; 
 
-    public OSMStatefulCategoryTag(OSMTagStatefulKey Key, OSMTagStringValue value) {
+    public OSMStatefulCategoryTag(IOSMTagStatefulKey Key, IOSMTagStringValue value) {
         this.Key = Key;
         this.value = value;
     }
 
 
-    public OSMTagStatefulKey getKey() {
+    @Override
+    public IOSMTagStatefulKey getKey() {
         return Key;
     }
 
-    public OSMTagStringValue getValue() {
+    @Override
+    public IOSMTagStringValue getValue() {
         return value;
     }
 

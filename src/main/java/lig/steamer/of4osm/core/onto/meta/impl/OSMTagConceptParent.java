@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.core.folkso.tag.key;
+package lig.steamer.of4osm.core.onto.meta.impl;
+
+import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 
 /**
  *
  * @author amehiris
  */
-public interface IOSMTagLocalizedKey extends IOSMTagKey {
-
-    public String getLocale();
+public abstract class OSMTagConceptParent extends Concept implements IOSMTagConceptParent{
+    
+    
+    
 }

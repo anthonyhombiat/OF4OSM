@@ -3,23 +3,26 @@ package lig.steamer.of4osm.core.folkso.tag.value.impl;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagMultipleValue;
 
 /**
- * 
+ *
  */
 public class OSMTagMultipleValue extends OSMTagValue implements IOSMTagMultipleValue {
 
-   
-    /**
-     * 
-     */
-    public String values;
+    private String values;
 
     public OSMTagMultipleValue(String values) {
         this.values = values;
     }
 
     @Override
+    public String getValues() {
+        return values;
+    }
+    
+    
+
+    @Override
     public String toString() {
-        return "" + values ;
+        return "" + values;
     }
 
     @Override
@@ -47,12 +50,6 @@ public class OSMTagMultipleValue extends OSMTagValue implements IOSMTagMultipleV
         return true;
     }
 
-    /**
-     * @return
-     */
-    public String getValues() {
-        // TODO implement here
-        return "";
-    }
+
 
 }

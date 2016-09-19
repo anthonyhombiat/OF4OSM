@@ -5,26 +5,25 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 
 /**
- * 
+ *
  */
 public class OSMSimpleCategoryTag extends OSMTag implements IOSMSimpleCategoryTag {
 
-    public IOSMTagSimpleKey key;
+    private IOSMTagSimpleKey key;
 
-    /**
-     * 
-     */
-    public IOSMTagStringValue value;
+    private IOSMTagStringValue value;
 
     public OSMSimpleCategoryTag(IOSMTagSimpleKey key, IOSMTagStringValue value) {
         this.key = key;
         this.value = value;
     }
 
+    @Override
     public IOSMTagSimpleKey getKey() {
         return key;
     }
 
+    @Override
     public IOSMTagStringValue getValue() {
         return value;
     }
@@ -60,7 +59,7 @@ public class OSMSimpleCategoryTag extends OSMTag implements IOSMSimpleCategoryTa
 
     @Override
     public String toString() {
-        return  key + ";" + value ;
+        return key + ";" + value;
     }
 
 }

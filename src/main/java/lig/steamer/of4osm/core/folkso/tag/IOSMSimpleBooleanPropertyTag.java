@@ -4,18 +4,14 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagBooleanValue;
 
 /**
- * 
+ *
  */
 public interface IOSMSimpleBooleanPropertyTag extends IOSMBooleanSimpleValuePropertyTag {
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMTagSimpleKey getKey();
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMTagBooleanValue getValue();
 
 }

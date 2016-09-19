@@ -12,10 +12,7 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
  */
 public class OSMTagDateValue extends OSMTagValue implements IOSMTagDateValue {
 
-    /**
-     *
-     */
-    public Date value;
+    private Date value;
 
     public OSMTagDateValue(String value) {
 
@@ -46,6 +43,7 @@ public class OSMTagDateValue extends OSMTagValue implements IOSMTagDateValue {
         this.labels.add(value);
     }
 
+    @Override
     public Date getValue() {
         return value;
     }

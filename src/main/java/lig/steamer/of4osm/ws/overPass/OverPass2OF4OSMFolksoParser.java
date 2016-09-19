@@ -7,9 +7,9 @@ package lig.steamer.of4osm.ws.overPass;
 
 import java.util.Map;
 import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolkso;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMTag;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
+import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
 import static lig.steamer.of4osm.util.String2OF4OSMFolksoParser.stringToKey;
 import static lig.steamer.of4osm.util.String2OF4OSMFolksoParser.stringToValue;
 import static lig.steamer.of4osm.util.String2OF4OSMFolksoParser.typeTags;
@@ -24,15 +24,15 @@ public class OverPass2OF4OSMFolksoParser {
     }
 
     public OF4OSMFolkso parse(OverPassResponse resp) throws Exception {
-        OF4OSMFolkso typologyTags = new OF4OSMFolkso();
+        OF4OSMFolkso overPassFolkso = new OF4OSMFolkso();
 
         Map<OverPassTag, Integer> tags = resp.extractOverPassTags();
         for (Map.Entry<OverPassTag, Integer> entry : tags.entrySet()) {
-            OSMTagKey key = stringToKey(entry.getKey().getK(), "");
-            OSMTagValue value = stringToValue(entry.getKey().getV());
-            OSMTag type = typeTags(key, value);
-            typologyTags.addTag(type, entry.getValue());
+            IOSMTagKey key = stringToKey(entry.getKey().getK(), "");
+            IOSMTagValue value = stringToValue(entry.getKey().getV());
+            IOSMTag type = typeTags(key, value);
+            overPassFolkso.addTag(type, entry.getValue());
         }
-        return typologyTags;
+        return overPassFolkso;
     }
 }

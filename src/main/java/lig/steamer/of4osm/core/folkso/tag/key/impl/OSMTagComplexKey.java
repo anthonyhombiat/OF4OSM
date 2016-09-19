@@ -10,7 +10,7 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagComplexKey;
  */
 public class OSMTagComplexKey extends OSMTagKey implements IOSMTagComplexKey {
 
-    public Set<String> prefixes;
+    private Set<String> prefixes;
 
     public OSMTagComplexKey(String value, String wikiURL) {
         super(value, wikiURL);
@@ -20,6 +20,7 @@ public class OSMTagComplexKey extends OSMTagKey implements IOSMTagComplexKey {
         this.prefixes.addAll(Arrays.asList(values));
     }
 
+    @Override
     public Set<String> getPrefixes() {
         return prefixes;
     }

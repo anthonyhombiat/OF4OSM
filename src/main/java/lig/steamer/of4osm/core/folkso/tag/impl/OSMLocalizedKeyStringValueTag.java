@@ -6,9 +6,9 @@
 package lig.steamer.of4osm.core.folkso.tag.impl;
 
 import java.util.Objects;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagLocalizedKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.IOSMLocalizedKeyStringValueTag;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagLocalizedKey;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 
 /**
  *
@@ -16,19 +16,21 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMLocalizedKeyStringValueTag;
  */
 public class OSMLocalizedKeyStringValueTag extends OSMTag implements IOSMLocalizedKeyStringValueTag {
 
-    public OSMTagLocalizedKey key;
-    public OSMTagStringValue value;
+    private IOSMTagLocalizedKey key;
+    private IOSMTagStringValue value;
 
-    public OSMLocalizedKeyStringValueTag(OSMTagLocalizedKey key, OSMTagStringValue value) {
+    public OSMLocalizedKeyStringValueTag(IOSMTagLocalizedKey key, IOSMTagStringValue value) {
         this.key = key;
         this.value = value;
     }
 
-    public OSMTagLocalizedKey getKey() {
+    @Override
+    public IOSMTagLocalizedKey getKey() {
         return key;
     }
 
-    public OSMTagStringValue getValue() {
+    @Override
+    public IOSMTagStringValue getValue() {
         return value;
     }
 

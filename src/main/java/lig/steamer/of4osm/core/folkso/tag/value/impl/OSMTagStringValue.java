@@ -7,15 +7,18 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
  */
 public class OSMTagStringValue extends OSMTagValue implements IOSMTagStringValue {
 
-  
-    /**
-     * 
-     */
-    public String value;
+    private String value;
 
     public OSMTagStringValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
+    
+    
 
     @Override
     public String toString() {
@@ -47,12 +50,5 @@ public class OSMTagStringValue extends OSMTagValue implements IOSMTagStringValue
         return true;
     }
 
-    /**
-     * @return
-     */
-    public String getValue() {
-        // TODO implement here
-        return "";
-    }
 
 }

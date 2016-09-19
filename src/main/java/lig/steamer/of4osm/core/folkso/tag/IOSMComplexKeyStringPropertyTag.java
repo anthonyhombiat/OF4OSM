@@ -4,18 +4,14 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 
 /**
- * 
+ *
  */
 public interface IOSMComplexKeyStringPropertyTag extends IOSMStringValuePropertyTag {
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMTagComplexKey getKey();
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMTagStringValue getValue();
 
 }

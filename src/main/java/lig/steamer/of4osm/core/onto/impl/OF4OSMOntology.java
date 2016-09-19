@@ -6,13 +6,11 @@
 package lig.steamer.of4osm.core.onto.impl;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMTag;
-import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagConcept;
-import lig.steamer.of4osm.core.onto.meta.impl.OSMTagKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 
 /**
  *
@@ -20,34 +18,42 @@ import lig.steamer.of4osm.core.onto.meta.impl.OSMTagKeyConcept;
  */
 public class OF4OSMOntology {
 
-    Set<OSMTagKeyConcept> tagKeyConceptSet;
-    Set<OSMCategoryTagConcept> categoryTagConceptSet;
-    
+    Set<IOSMCategoryTagKeyConcept> tagKeyConceptSet;
+    Set<IOSMCategoryTagConcept> categoryTagConceptSet;
+
     public OF4OSMOntology() {
         this.tagKeyConceptSet = new HashSet();
         this.categoryTagConceptSet = new HashSet();
     }
 
-    public void addConceptSimpleCategory(Map<OSMSimpleCategoryTag, Integer> mapOSMTag) {
+    public void addConcept(IConcept concept) {
 
-        for (Map.Entry<OSMSimpleCategoryTag, Integer> entry : mapOSMTag.entrySet()) {
-            OSMTagKeyConcept tagKeyConcept = new OSMTagKeyConcept((OSMTagSimpleKey) entry.getKey().getKey());
-            //Key
-            tagKeyConceptSet.add(tagKeyConcept);
-
-            //OSMTag 
-            OSMCategoryTagConcept categoryTagConcept = new OSMCategoryTagConcept((OSMSimpleCategoryTag)entry.getKey(), (OSMTagKeyConcept)tagKeyConcept);
-            categoryTagConceptSet.add(categoryTagConcept);
-            
+        if (IOSMCategoryTagKeyConcept.class.isInstance(concept)) {
+            this.tagKeyConceptSet.add((IOSMCategoryTagKeyConcept) concept);
+        }
+        if (IOSMCategoryTagConcept.class.isInstance(concept)) {
+            this.categoryTagConceptSet.add((IOSMCategoryTagConcept) concept);
         }
     }
- 
+
     public void afficher() {
+
+        for (IOSMCategoryTagKeyConcept tagKeyConcept : tagKeyConceptSet) {
+            System.out.println(tagKeyConcept);
+
+            for (IOSMCategoryTagConcept tagConcept : categoryTagConceptSet) {
+                
+                for (IOSMTagConceptParent parent : tagConcept.getParents()) {
+                    
+                    if (tagKeyConcept.equals((IOSMCategoryTagKeyConcept)parent)) {
+                        
+                        System.out.println("\t"+tagConcept);
+                    }
+                }
+            }
+        }
         System.out.println(tagKeyConceptSet);
         System.out.println(categoryTagConceptSet);
     }
 
-    public void addConcept(Map<OSMTag, Integer> mapOSMTag) {
-
-    }
 }

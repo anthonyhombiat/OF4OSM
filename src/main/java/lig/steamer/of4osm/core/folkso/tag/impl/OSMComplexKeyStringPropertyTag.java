@@ -5,29 +5,25 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyStringPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 
 /**
- * 
+ *
  */
 public class OSMComplexKeyStringPropertyTag extends OSMTag implements IOSMComplexKeyStringPropertyTag {
 
-    /**
-     * 
-     */
-    public IOSMTagComplexKey key;
+    private IOSMTagComplexKey key;
 
-    /**
-     * 
-     */
-    public IOSMTagStringValue value;
+    private IOSMTagStringValue value;
 
     public OSMComplexKeyStringPropertyTag(IOSMTagComplexKey key, IOSMTagStringValue value) {
         this.key = key;
         this.value = value;
     }
 
+    @Override
     public IOSMTagComplexKey getKey() {
         return key;
     }
 
+    @Override
     public IOSMTagStringValue getValue() {
         return value;
     }
@@ -63,7 +59,7 @@ public class OSMComplexKeyStringPropertyTag extends OSMTag implements IOSMComple
 
     @Override
     public String toString() {
-        return key + ";" + value ;
+        return key + ";" + value;
     }
 
 }

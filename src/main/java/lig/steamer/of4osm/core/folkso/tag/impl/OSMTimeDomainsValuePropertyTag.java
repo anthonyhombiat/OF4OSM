@@ -6,37 +6,40 @@
 package lig.steamer.of4osm.core.folkso.tag.impl;
 
 import java.util.Objects;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagTimeDomainsValue;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTimeDomainsValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagTimeDomainsValue;
 
 /**
  *
  * @author amehiris
  */
-public class OSMTimeDomainsValuePropertyTag extends OSMTag implements IOSMTimeDomainsValuePropertyTag{
-    
-    public OSMTagSimpleKey key;
-    public OSMTagTimeDomainsValue value; 
+public class OSMTimeDomainsValuePropertyTag extends OSMTag implements IOSMTimeDomainsValuePropertyTag {
 
-    public OSMTimeDomainsValuePropertyTag(OSMTagSimpleKey key, OSMTagTimeDomainsValue value) {
+    private IOSMTagSimpleKey key;
+
+    private IOSMTagTimeDomainsValue value;
+
+    public OSMTimeDomainsValuePropertyTag(IOSMTagSimpleKey key, IOSMTagTimeDomainsValue value) {
         this.key = key;
         this.value = value;
     }
 
-    public OSMTagSimpleKey getKey() {
+    @Override
+    public IOSMTagSimpleKey getKey() {
         return key;
     }
 
-    public OSMTagTimeDomainsValue getValue() {
+    @Override
+    public IOSMTagTimeDomainsValue getValue() {
         return value;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.key);
-        hash = 67 * hash + Objects.hashCode(this.value);
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.key);
+        hash = 37 * hash + Objects.hashCode(this.value);
         return hash;
     }
 
@@ -61,10 +64,10 @@ public class OSMTimeDomainsValuePropertyTag extends OSMTag implements IOSMTimeDo
         return true;
     }
 
+   
     @Override
     public String toString() {
         return key + ";" + value;
     }
-    
-    
+
 }

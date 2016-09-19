@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lig.steamer.of4osm.core.folkso.tag.key.impl;
 
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagLocalizedKey;
@@ -13,7 +8,7 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagLocalizedKey;
  */
 public class OSMTagLocalizedKey extends OSMTagKey implements IOSMTagLocalizedKey {
 
-    public String locale;
+    private String locale;
 
     public OSMTagLocalizedKey(String value, String wikiURL) {
         super(value, wikiURL);
@@ -29,7 +24,7 @@ public class OSMTagLocalizedKey extends OSMTagKey implements IOSMTagLocalizedKey
 
     @Override
     public String toString() {
-        return value + ":" + locale ;
+        return value + ":" + locale;
     }
 
 }

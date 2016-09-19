@@ -8,10 +8,7 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagBooleanValue;
  */
 public class OSMTagBooleanValue extends OSMTagValue implements IOSMTagBooleanValue {
 
-    /**
-     *
-     */
-    public Boolean value;
+    private Boolean value;
 
     public OSMTagBooleanValue(String value) {    
         this.value = value.equals("yes")||value.equals("oui")||value.equals("true") ;
@@ -19,6 +16,7 @@ public class OSMTagBooleanValue extends OSMTagValue implements IOSMTagBooleanVal
         this.labels.add(value);
     }
 
+    @Override
     public Boolean getValue() {
         return value;
     }

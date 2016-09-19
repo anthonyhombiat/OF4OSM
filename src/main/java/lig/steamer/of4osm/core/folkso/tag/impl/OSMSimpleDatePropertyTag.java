@@ -9,26 +9,21 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
  */
 public class OSMSimpleDatePropertyTag extends OSMTag implements IOSMSimpleDatePropertyTag {
 
- 
-    /**
-     * 
-     */
-    public IOSMTagSimpleKey key;
+    private IOSMTagSimpleKey key;
 
-    /**
-     * 
-     */
-    public IOSMTagDateValue value;
+    private IOSMTagDateValue value;
 
     public OSMSimpleDatePropertyTag(IOSMTagSimpleKey key, IOSMTagDateValue value) {
         this.key = key;
         this.value = value;
     }
 
+    @Override
     public IOSMTagSimpleKey getKey() {
         return key;
     }
 
+    @Override
     public IOSMTagDateValue getValue() {
         return value;
     }

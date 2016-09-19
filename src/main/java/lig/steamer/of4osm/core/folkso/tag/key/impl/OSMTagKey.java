@@ -3,36 +3,32 @@ package lig.steamer.of4osm.core.folkso.tag.key.impl;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 
 /**
- * 
+ *
  */
 public abstract class OSMTagKey implements IOSMTagKey {
 
-    /**
-     * 
-     */
-    public String value;
+    protected String value;
 
-    /**
-     * 
-     */
-    public String wikiURL;
+    protected String wikiURL;
 
     public OSMTagKey(String value, String wikiURL) {
         this.value = value;
         this.wikiURL = wikiURL;
     }
 
+    @Override
     public String getValue() {
         return value;
     }
 
+    @Override
     public String getWikiURL() {
         return wikiURL;
     }
 
     @Override
     public String toString() {
-        return "" + value ;
+        return "" + value;
     }
 
     @Override
@@ -59,6 +55,5 @@ public abstract class OSMTagKey implements IOSMTagKey {
         }
         return true;
     }
-    
 
 }
