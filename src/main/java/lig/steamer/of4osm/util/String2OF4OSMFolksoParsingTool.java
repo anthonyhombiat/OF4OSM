@@ -29,7 +29,6 @@ import lig.steamer.of4osm.core.folkso.tag.value.impl.LifecycleState;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagLocalizedKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagMultipleValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
@@ -37,7 +36,6 @@ import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagStatefulKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagTimeDomainsValue;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagLocalizedKey;
@@ -56,7 +54,7 @@ import lig.steamer.of4osm.util.openinghours.OpeningHour;
  *
  * @author amehiris
  */
-public class String2OF4OSMFolksoParser {
+public class String2OF4OSMFolksoParsingTool {
 
     public static IOSMTag typeTags(IOSMTagKey key, IOSMTagValue value) {
         IOSMTag type = null;
@@ -129,7 +127,7 @@ public class String2OF4OSMFolksoParser {
             "sorting_name", "alt_name",
             "area", "bridge", "charge", "covered", "crossing", "cutting", "disused", "drive_through", "drive_in",
             "electrified", "ele", "embankment", "end_date", "est_width", "fire_object", "fire_operator", "fire_rank",
-            "frequency", "inscription", "internet_access", "layer", "leaf_cycle", "leaf_type", "location", "narrow",
+            "frequency", "from", "to", "inscription", "internet_access", "layer", "leaf_cycle", "leaf_type", "location", "narrow",
             "nudism", "opening_hours", "operator", "start_date", "service_times", "tactile_paving", "tidal", "tunnel",
             "toilets", "wheelchair", "width",
             "iata", "icao", "int_ref", "lcn_ref", "loc_ref", "nat_ref", "ncn_ref", "old_ref", "rcn_ref", "ref", "reg_ref",
@@ -221,7 +219,7 @@ public class String2OF4OSMFolksoParser {
         try {
 
             //if not valid, it will throw ParseException
-            Date date = sdf.parse(dateToValidate);
+            sdf.parse(dateToValidate);
 
         } catch (ParseException e) {
 

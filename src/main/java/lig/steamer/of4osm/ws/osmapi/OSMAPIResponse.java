@@ -5,11 +5,7 @@
  */
 package lig.steamer.of4osm.ws.osmapi;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,52 +27,6 @@ public class OSMAPIResponse {
     private String license;
     private String attribution;
     private String version;
-
-    public Map<OSMAPITag, Integer> getTags() {
-
-        Map<OSMAPITag, Integer> tags = new HashMap();
-
-        for (OSMAPINode node1 : this.node) {
-            if (node1.getTag() != null) {
-                if (tags.get(node1.getTag()) == null) {
-                    tags.put(node1.getTag(), 1);
-                } else {
-                    int nbOccur = tags.get(node1.getTag());
-                    tags.put(node1.getTag(), 1 + nbOccur);
-                }
-            }
-        }
-
-        for (OSMAPIRelation relation1 : this.relation) {
-            if (relation1.getTag() != null) {
-                List<OSMAPITag> tag = relation1.getTag();
-                for (OSMAPITag tag1 : tag) {
-                    if (tags.get(tag1) == null) {
-                        tags.put(tag1, 1);
-                    } else {
-                        int nbOccur = tags.get(tag1);
-                        tags.put(tag1, 1 + nbOccur);
-                    }
-                }
-            }
-        }
-
-        for (OSMAPIWay way1 : this.way) {
-            if (way1.getTag() != null) {
-                List<OSMAPITag> tag = way1.getTag();
-                for (OSMAPITag tag1 : tag) {
-                    if (tags.get(tag1) == null) {
-                        tags.put(tag1, 1);
-                    } else {
-                        int nbOccur = tags.get(tag1);
-                        tags.put(tag1, 1 + nbOccur);
-                    }
-                }
-            }
-        }
-
-        return tags;
-    }
 
     public OSMAPIBounds getBounds() {
         return bounds;

@@ -16,19 +16,19 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
  */
 public class OSMStatefulCategoryTag extends OSMTag implements IOSMStatefulCategoryTag {
 
-    private IOSMTagStatefulKey Key; 
+    private IOSMTagStatefulKey key; 
     
     private IOSMTagStringValue value; 
 
-    public OSMStatefulCategoryTag(IOSMTagStatefulKey Key, IOSMTagStringValue value) {
-        this.Key = Key;
+    public OSMStatefulCategoryTag(IOSMTagStatefulKey key, IOSMTagStringValue value) {
+        this.key = key;
         this.value = value;
     }
 
 
     @Override
     public IOSMTagStatefulKey getKey() {
-        return Key;
+        return key;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class OSMStatefulCategoryTag extends OSMTag implements IOSMStatefulCatego
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.Key);
+        hash = 89 * hash + Objects.hashCode(this.key);
         hash = 89 * hash + Objects.hashCode(this.value);
         return hash;
     }
@@ -56,7 +56,7 @@ public class OSMStatefulCategoryTag extends OSMTag implements IOSMStatefulCatego
             return false;
         }
         final OSMStatefulCategoryTag other = (OSMStatefulCategoryTag) obj;
-        if (!Objects.equals(this.Key, other.Key)) {
+        if (!Objects.equals(this.key, other.key)) {
             return false;
         }
         if (!Objects.equals(this.value, other.value)) {
@@ -67,7 +67,7 @@ public class OSMStatefulCategoryTag extends OSMTag implements IOSMStatefulCatego
 
     @Override
     public String toString() {
-        return  Key + ";" + value ;
+        return  key + ";" + value ;
     }
     
     

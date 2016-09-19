@@ -5,14 +5,16 @@
  */
 package lig.steamer.of4osm.ws.overPass;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolkso;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
-import static lig.steamer.of4osm.util.String2OF4OSMFolksoParser.stringToKey;
-import static lig.steamer.of4osm.util.String2OF4OSMFolksoParser.stringToValue;
-import static lig.steamer.of4osm.util.String2OF4OSMFolksoParser.typeTags;
+import static lig.steamer.of4osm.util.String2OF4OSMFolksoParsingTool.stringToKey;
+import static lig.steamer.of4osm.util.String2OF4OSMFolksoParsingTool.stringToValue;
+import static lig.steamer.of4osm.util.String2OF4OSMFolksoParsingTool.typeTags;
 
 /**
  *
@@ -26,7 +28,7 @@ public class OverPass2OF4OSMFolksoParser {
     public OF4OSMFolkso parse(OverPassResponse resp) throws Exception {
         OF4OSMFolkso overPassFolkso = new OF4OSMFolkso();
 
-        Map<OverPassTag, Integer> tags = resp.extractOverPassTags();
+        Map<OverPassTag, Integer> tags = extractOverPassTags(resp);
         for (Map.Entry<OverPassTag, Integer> entry : tags.entrySet()) {
             IOSMTagKey key = stringToKey(entry.getKey().getK(), "");
             IOSMTagValue value = stringToValue(entry.getKey().getV());
@@ -34,5 +36,29 @@ public class OverPass2OF4OSMFolksoParser {
             overPassFolkso.addTag(type, entry.getValue());
         }
         return overPassFolkso;
+    }
+    
+    private Map<OverPassTag, Integer> extractOverPassTags(OverPassResponse resp) {
+
+        Map<OverPassTag, Integer> tags = new HashMap();
+
+        List<OverPassElement> elements = resp.getElements();
+        for (OverPassElement element : elements) {
+
+            Map<String, String> mapTags = element.getTags();
+
+            for (Map.Entry<String, String> entry : mapTags.entrySet()) {
+                OverPassTag overPassTag = new OverPassTag(entry.getKey(), entry.getValue());
+
+                if (tags.get(overPassTag) == null) {
+                    tags.put(overPassTag, 1);
+                } else {
+                    int nbOccur = tags.get(overPassTag);
+                    tags.put(overPassTag, 1 + nbOccur);
+                }
+            }
+        }
+
+        return tags;
     }
 }

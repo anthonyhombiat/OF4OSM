@@ -24,30 +24,6 @@ public class OverPassResponse {
 
     private List<OverPassElement> elements;
 
-    public Map<OverPassTag, Integer> extractOverPassTags() {
-
-        Map<OverPassTag, Integer> tags = new HashMap();
-
-        List<OverPassElement> elements = this.getElements();
-        for (OverPassElement element : elements) {
-
-            Map<String, String> mapTags = element.getTags();
-
-            for (Map.Entry<String, String> entry : mapTags.entrySet()) {
-                OverPassTag overPassTag = new OverPassTag(entry.getKey(), entry.getValue());
-
-                if (tags.get(overPassTag) == null) {
-                    tags.put(overPassTag, 1);
-                } else {
-                    int nbOccur = tags.get(overPassTag);
-                    tags.put(overPassTag, 1 + nbOccur);
-                }
-            }
-        }
-
-        return tags;
-    }
-
     @Override
     public String toString() {
         return "{\"version\" : \"" + version + "\",\n \"generator\" :\" " + generator + "\", \"osm3s\" : " + osm3s + ",\n \"elements\" : \n" + elements + "}\n";

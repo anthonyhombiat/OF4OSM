@@ -22,6 +22,19 @@ public class OF4OSMFolkso2OntoParser {
 
         OF4OSMOntology onto = new OF4OSMOntology();
 
+        addMapFeaturesHierarchy(onto, folkso);
+        addKeyTagHierarchy(onto, folkso);
+        addTagCombinations(onto, folkso);
+
+        return onto;
+    }
+    
+    private OF4OSMOntology addMapFeaturesHierarchy(OF4OSMOntology onto, OF4OSMFolkso folkso){
+        return onto;
+    }
+    
+    private OF4OSMOntology addKeyTagHierarchy(OF4OSMOntology onto, OF4OSMFolkso folkso){
+
         for (Map.Entry<IOSMSimpleCategoryTag, Integer> entry : folkso.getSimpleCategoryTags().entrySet()) {
 
             IOSMCategoryTagKeyConcept tagKeyConcept = new OSMCategoryTagKeyConcept(entry.getKey().getKey());
@@ -30,6 +43,10 @@ public class OF4OSMFolkso2OntoParser {
             onto.addConcept(categoryTagConcept);
         }
 
+        return onto;
+    }
+    
+    private OF4OSMOntology addTagCombinations(OF4OSMOntology onto, OF4OSMFolkso folkso){
         return onto;
     }
 }
