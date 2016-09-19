@@ -47,7 +47,7 @@ public final class OSMAPI2OF4OSMFolksoParser {
     
     private static Map<OSMAPITag, Integer> getTags(OSMAPIResponse resp) {
 
-        Map<OSMAPITag, Integer> tags = new HashMap();
+        Map<OSMAPITag, Integer> tags = new HashMap<>();
 
         for (OSMAPINode node1 : resp.getNode()) {
             if (node1.getTag() != null) {

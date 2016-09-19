@@ -11,9 +11,8 @@ import java.util.List;
  *
  * @author amehiris
  */
-public class KeyCombinationsResponse extends HeadResultTagInfo{
+public class KeyCombinationsResponse extends TagInfoResponse{
     
-    //
     private List<KeyCombinationsData> data;
 
     public List<KeyCombinationsData> getData() {
@@ -25,8 +24,12 @@ public class KeyCombinationsResponse extends HeadResultTagInfo{
     }
     
     @Override
-    public String toString()
-    {
-        return "{\"url\" : \""+super.getUrl()+"\",\n \"data_until\" :\" "+super.getData_until()+"\", \"page\" : "+super.getPage()+", \"rp\" : "+super.getRp()+",\"total\": "+super.getTotal()+",\n \"data\" : \n"+data+"}\n";
+    public String toString() {
+        return "{\"url\" : \"" + super.getUrl() + 
+        		"\",\n \"data_until\" :\" " + super.getData_until() +
+        		"\", \"page\" : " + super.getPage() + 
+        		", \"rp\" : " + super.getRp() + 
+        		",\"total\": "+super.getTotal() + 
+        		",\n \"data\" : \n"+data+"}\n";
     }
 }

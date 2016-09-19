@@ -4,10 +4,10 @@ import java.util.Objects;
 import java.util.Set;
 
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
+
 import org.apache.commons.lang3.text.WordUtils;
 
 /**

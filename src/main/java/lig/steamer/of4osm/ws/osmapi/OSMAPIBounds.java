@@ -59,7 +59,10 @@ public class OSMAPIBounds {
 
     @Override
     public String toString() {
-        return "Bounds{" + "minlat=" + minlat + ", maxlat=" + maxlat + ", maxlon=" + maxlon + ", minlon=" + minlon + '}';
+        return "Bounds{" + "minlat=" + minlat + 
+        		", maxlat=" + maxlat + 
+        		", maxlon=" + maxlon + 
+        		", minlon=" + minlon + '}';
     }
 
 }

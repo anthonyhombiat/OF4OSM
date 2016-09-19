@@ -11,9 +11,8 @@ import java.util.List;
  *
  * @author amehiris
  */
-public class KeySimilarResponse extends HeadResultTagInfo{
+public class KeySimilarResponse extends TagInfoResponse{
     
-    //
     private List<KeySimilarData> data;
 
     public List<KeySimilarData> getData() {
@@ -25,8 +24,12 @@ public class KeySimilarResponse extends HeadResultTagInfo{
     }
     
     @Override
-    public String toString()
-    {
-        return "{\"url\" : \""+super.getUrl()+"\",\n \"data_until\" :\" "+super.getData_until()+"\", \"page\" : "+super.getPage()+", \"rp\" : "+super.getRp()+",\"total\": "+super.getTotal()+",\n \"data\" : \n"+data+"}\n";
+    public String toString() {
+        return "{\"url\" : \"" + super.getUrl() + 
+        		"\",\n \"data_until\" :\" " + super.getData_until() + 
+        		"\", \"page\" : "+super.getPage() + 
+        		", \"rp\" : " + super.getRp() + 
+        		",\"total\": "+super.getTotal() +
+        		",\n \"data\" : \n"+data+"}\n";
     }
 }

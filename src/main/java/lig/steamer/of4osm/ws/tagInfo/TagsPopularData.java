@@ -12,39 +12,29 @@ package lig.steamer.of4osm.ws.tagInfo;
  */
 public class TagsPopularData{
 
-    //Key
+    // Key
     private String key;
-    //Value
+    // Value
     private String value;
-    //In there a page in the wiki for this tag?
+    // In there a page in the wiki for this tag?
     private boolean in_wiki;
-    //	Number of objects in the OSM database with this tag.
+    // Number of objects in the OSM database with this tag.
     private int count_all;
-    //Number of objects in relation to all objects.
+    // Number of objects in relation to all objects.
     private float count_all_fraction;
-    //Number of nodes in the OSM database with this tag
+    // Number of nodes in the OSM database with this tag
     private int count_nodes;
-    //Number of nodes in relation to all tagged nodes.
+    // Number of nodes in relation to all tagged nodes.
     private float count_nodes_fraction;
-    //   Number of ways in the OSM database with this tag.
+    // Number of ways in the OSM database with this tag.
     private int count_ways;
-    //Number of ways in relation to all ways.
+    // Number of ways in relation to all ways.
     private float count_ways_fraction;
-    //Number of relations in the OSM database with this tag.
+    // Number of relations in the OSM database with this tag.
     private int count_relations;
-    //Number of relations in relation to all relations.
+    // Number of relations in relation to all relations.
     private float count_relations_fraction;
     
-    
-    @Override
-    public String toString() {
-        return "{ \"key\" : " + key + ", \"value\" : " + value + ", \"in_wiki\" : " + in_wiki + 
-                ", \"count_all\" : " + count_all + ", \"count_all_fraction\" : " + count_all_fraction +
-                ", \"count_nodes\" : " + count_nodes + ", \"count_nodes_fraction\" : " + count_nodes_fraction +
-                ", \"count_ways\" : " + count_ways + ", \"count_ways_fraction\" : " + count_ways_fraction +
-                ", \"count_relations\" : " + count_relations + ", \"count_relations_fraction\" : " + count_relations_fraction +"}\n";
-    }
-
     public String getKey() {
         return key;
     }
@@ -133,7 +123,19 @@ public class TagsPopularData{
         this.count_relations_fraction = count_relations_fraction;
     }
    
-    
-    
+    @Override
+    public String toString() {
+        return "{ \"key\" : " + key + 
+        		", \"value\" : " + value + 
+        		", \"in_wiki\" : " + in_wiki + 
+                ", \"count_all\" : " + count_all + 
+                ", \"count_all_fraction\" : " + count_all_fraction +
+                ", \"count_nodes\" : " + count_nodes + 
+                ", \"count_nodes_fraction\" : " + count_nodes_fraction +
+                ", \"count_ways\" : " + count_ways + 
+                ", \"count_ways_fraction\" : " + count_ways_fraction +
+                ", \"count_relations\" : " + count_relations + 
+                ", \"count_relations_fraction\" : " + count_relations_fraction +"}\n";
+    }
 
 }

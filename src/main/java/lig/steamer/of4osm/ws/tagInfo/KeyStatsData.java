@@ -11,20 +11,14 @@ package lig.steamer.of4osm.ws.tagInfo;
  */
 public class KeyStatsData {
 
-    //Object type ("all", "nodes", "ways", or "relations")
+    // Object type ("all", "nodes", "ways" or "relations")
     private String type;
-    //Number of objects with this type and key.
+    // Number of objects with this type and key.
     private int count;
-    //Number of objects in relation to all objects.
+    // Number of objects in relation to all objects.
     private float count_fraction;
-    //	Number of different values for this key.
+    // Number of different values for this key.
     private int values;
-    
-    @Override
-    public String toString()
-    {
-        return "{ \"type\" : "+type+ ", \"count\" : "+count+", \"count_fraction\" : "+count_fraction+", \"values\" : "+values+"}\n";
-    }
 
     public String getType() {
         return type;
@@ -58,6 +52,12 @@ public class KeyStatsData {
         this.values = values;
     }
     
-    
+    @Override
+    public String toString() {
+        return "{ \"type\" : " + type +
+        		", \"count\" : " + count +
+        		", \"count_fraction\" : " + count_fraction +
+        		", \"values\" : "+values+"}\n";
+    }
 
 }

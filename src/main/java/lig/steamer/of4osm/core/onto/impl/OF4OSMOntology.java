@@ -22,8 +22,8 @@ public class OF4OSMOntology {
     Set<IOSMCategoryTagConcept> categoryTagConceptSet;
 
     public OF4OSMOntology() {
-        this.tagKeyConceptSet = new HashSet();
-        this.categoryTagConceptSet = new HashSet();
+        this.tagKeyConceptSet = new HashSet<>();
+        this.categoryTagConceptSet = new HashSet<>();
     }
 
     public void addConcept(IConcept concept) {

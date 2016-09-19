@@ -16,7 +16,7 @@ import java.net.URL;
  */
 public class KeySimilarClient {
 
-    private KeySimilarResponse keySimilarHead;
+    private KeySimilarResponse response;
 
     public KeySimilarClient(String key, int page, int rp) throws MalformedURLException, IOException {
 
@@ -30,7 +30,7 @@ public class KeySimilarClient {
         ObjectMapper objectMapper = new ObjectMapper();
         URL url = new URL(str.toString());
 
-        this.keySimilarHead = objectMapper.readValue(url, KeySimilarResponse.class);
+        this.response = objectMapper.readValue(url, KeySimilarResponse.class);
 
     }
 
@@ -43,7 +43,7 @@ public class KeySimilarClient {
         ObjectMapper objectMapper = new ObjectMapper();
         URL url = new URL(str.toString());
 
-        this.keySimilarHead = objectMapper.readValue(url, KeySimilarResponse.class);
+        this.response = objectMapper.readValue(url, KeySimilarResponse.class);
 
     }
 

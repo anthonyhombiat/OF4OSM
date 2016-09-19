@@ -19,7 +19,7 @@ public class TagInfoClient {
     public TagsPopularResponse tagsPopular() throws MalformedURLException, IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        URL url = new URL("https://taginfo.openstreetmap.org/api/4/tags/popular?");
+        URL url = new URL("https://taginfo.openstreetmap.org/api/4/tags/popular");
         return objectMapper.readValue(url, TagsPopularResponse.class);
     }
 

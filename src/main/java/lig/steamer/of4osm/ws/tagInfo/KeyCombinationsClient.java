@@ -16,7 +16,7 @@ import java.net.URL;
  */
 public class KeyCombinationsClient {
 
-    private KeyCombinationsResponse KeyCombinationsHead;
+    private KeyCombinationsResponse response;
 
     public KeyCombinationsClient(String key) throws MalformedURLException, IOException {
 
@@ -27,7 +27,7 @@ public class KeyCombinationsClient {
         ObjectMapper objectMapper = new ObjectMapper();
         URL url = new URL(str.toString());
 
-        this.KeyCombinationsHead = objectMapper.readValue(url, KeyCombinationsResponse.class);
+        this.response = objectMapper.readValue(url, KeyCombinationsResponse.class);
     }
 
     public KeyCombinationsClient(String key, int page, int rp) throws MalformedURLException, IOException {
@@ -42,7 +42,7 @@ public class KeyCombinationsClient {
         ObjectMapper objectMapper = new ObjectMapper();
         URL url = new URL(str.toString());
 
-        this.KeyCombinationsHead = objectMapper.readValue(url, KeyCombinationsResponse.class);
+        this.response = objectMapper.readValue(url, KeyCombinationsResponse.class);
     }
 
 }

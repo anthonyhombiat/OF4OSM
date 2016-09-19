@@ -117,7 +117,16 @@ public class OSMAPINode {
 
     @Override
     public String toString() {
-        return "Node{" + "id=" + id + ", timestamp=" + timestamp + ", uid=" + uid + ", lon=" + lon + ", visible=" + visible + ", tag=" + tag + ", changeset=" + changeset + ", user=" + user + ", lat=" + lat + ", version=" + version + '}';
+        return "Node{" + "id=" + id + 
+        		", timestamp=" + timestamp + 
+        		", uid=" + uid + 
+        		", lon=" + lon + 
+        		", visible=" + visible + 
+        		", tag=" + tag + 
+        		", changeset=" + changeset + 
+        		", user=" + user + 
+        		", lat=" + lat + 
+        		", version=" + version + '}';
     }
 
 }

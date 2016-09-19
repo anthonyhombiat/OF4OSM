@@ -5,10 +5,9 @@
  */
 package lig.steamer.of4osm.util;
 
-import lig.steamer.of4osm.core.folkso.tag.key.impl.PropertyTagKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyBooleanPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyDatePropertyTag;
@@ -24,23 +23,16 @@ import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleNumericPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleStringPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMStatefulCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMTimeDomainsValuePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.LanguesCode;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.LifecycleState;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagLocalizedKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagMultipleValue;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagStatefulKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagTimeDomainsValue;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagLocalizedKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagStatefulKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagLocalizedKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagStatefulKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.PropertyTagKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagBooleanValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagMultipleValue;
@@ -48,6 +40,14 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagNumericValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagTimeDomainsValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.LanguesCode;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.LifecycleState;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagMultipleValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagTimeDomainsValue;
 import lig.steamer.of4osm.util.openinghours.OpeningHour;
 
 /**

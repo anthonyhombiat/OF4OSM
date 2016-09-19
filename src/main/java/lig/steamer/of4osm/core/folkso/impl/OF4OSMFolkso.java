@@ -52,20 +52,20 @@ public class OF4OSMFolkso {
     private Map<IOSMLocalizedKeyStringValueTag, Integer> localizedKeyStringValueTags; //OSMLocalizedKeyStringValueTag
 
     public OF4OSMFolkso() {
-        this.simpleCategoryTags = new HashMap();
-        this.multipleValueCategoryTags = new HashMap();
-        this.statefulCategoryTags = new HashMap();
-        this.multipleValuePropertyTags = new HashMap();
-        this.simpleBooleanPropertyTags = new HashMap();
-        this.complexKeyBooleanPropertyTags = new HashMap();
-        this.simpleStringPropertyTags = new HashMap();
-        this.complexKeyStringPropertyTags = new HashMap();
-        this.simpleNumericPropertyTags = new HashMap();
-        this.complexKeyNumericPropertyTags = new HashMap();
-        this.simpleDatePropertyTags = new HashMap();
-        this.complexKeyDatePropertyTags = new HashMap();
-        this.timeDomainsValuePropertyTags = new HashMap();
-        this.localizedKeyStringValueTags = new HashMap();
+        this.simpleCategoryTags = new HashMap<>();
+        this.multipleValueCategoryTags = new HashMap<>();
+        this.statefulCategoryTags = new HashMap<>();
+        this.multipleValuePropertyTags = new HashMap<>();
+        this.simpleBooleanPropertyTags = new HashMap<>();
+        this.complexKeyBooleanPropertyTags = new HashMap<>();
+        this.simpleStringPropertyTags = new HashMap<>();
+        this.complexKeyStringPropertyTags = new HashMap<>();
+        this.simpleNumericPropertyTags = new HashMap<>();
+        this.complexKeyNumericPropertyTags = new HashMap<>();
+        this.simpleDatePropertyTags = new HashMap<>();
+        this.complexKeyDatePropertyTags = new HashMap<>();
+        this.timeDomainsValuePropertyTags = new HashMap<>();
+        this.localizedKeyStringValueTags = new HashMap<>();
     }
 
     @Override

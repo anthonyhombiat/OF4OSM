@@ -31,11 +31,11 @@ public class OSMAPIClientTest {
 
         System.out.println(folkso);
 
-        FileUtils.writeStringToFile(new File("C:\\Users\\amehiris\\Documents\\test1.csv"), OF4OSMFolkso2CSV.parse(folkso));
+        FileUtils.writeStringToFile(
+        		new File("C:\\Users\\amehiris\\Documents\\test1.csv"), 
+        		OF4OSMFolkso2CSV.parse(folkso));
 
-        OF4OSMFolkso2OntoParser ontoParser = new OF4OSMFolkso2OntoParser();
-
-        OF4OSMOntology onto = ontoParser.parse(folkso);
+        OF4OSMOntology onto = OF4OSMFolkso2OntoParser.parse(folkso);
 
         onto.afficher();
 

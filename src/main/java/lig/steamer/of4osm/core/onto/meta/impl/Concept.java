@@ -16,7 +16,7 @@ public abstract class Concept implements IConcept {
     public Map<String, String> labels;
 
     public Concept() {
-        this.labels = new HashMap();
+        this.labels = new HashMap<>();
     }
     
 

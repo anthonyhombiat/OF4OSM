@@ -6,6 +6,7 @@
 package lig.steamer.of4osm.ws.osmapi;
 
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -116,7 +117,15 @@ public class OSMAPIWay {
 
     @Override
     public String toString() {
-        return "Way{" + "id=" + id + ", timestamp=" + timestamp + ", uid=" + uid + ", visible=" + visible + ", nd=" + nd + ", tag=" + tag + ", changeset=" + changeset + ", user=" + user + ", version=" + version + '}';
+        return "Way{" + "id=" + id + 
+        		", timestamp=" + timestamp + 
+        		", uid=" + uid + 
+        		", visible=" + visible + 
+        		", nd=" + nd + 
+        		", tag=" + tag + 
+        		", changeset=" + changeset + 
+        		", user=" + user + 
+        		", version=" + version + '}';
     }
 
     

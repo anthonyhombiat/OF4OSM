@@ -111,7 +111,15 @@ public class OSMAPIResponse {
 
     @Override
     public String toString() {
-        return "Osm{" + "bounds=" + bounds + ", node=" + node + ", relation=" + relation + ", generator=" + generator + ", way=" + way + ", copyright=" + copyright + ", license=" + license + ", attribution=" + attribution + ", version=" + version + '}';
+        return "Osm{" + "bounds=" + bounds + 
+        		", node=" + node + 
+        		", relation=" + relation + 
+        		", generator=" + generator + 
+        		", way=" + way + 
+        		", copyright=" + copyright + 
+        		", license=" + license + 
+        		", attribution=" + attribution + 
+        		", version=" + version + '}';
     }
 
 }

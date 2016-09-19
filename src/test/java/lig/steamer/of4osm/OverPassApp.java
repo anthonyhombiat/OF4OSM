@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
@@ -24,7 +25,6 @@ import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
-
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyBooleanPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyDatePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyNumericPropertyTag;
@@ -37,7 +37,7 @@ import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleDatePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleNumericPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleStringPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMTag;
-import lig.steamer.of4osm.ws.overPass.OverPassElement;
+import lig.steamer.of4osm.ws.overpass.OverPassElement;
 import lig.steamer.of4osm.ws.tagInfo.TagInfoClient;
 import lig.steamer.of4osm.ws.tagInfo.TagsPopularData;
 import lig.steamer.of4osm.ws.tagInfo.TagsPopularResponse;

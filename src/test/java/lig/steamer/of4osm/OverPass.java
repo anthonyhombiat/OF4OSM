@@ -6,15 +6,17 @@
 package lig.steamer.of4osm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lig.steamer.of4osm.ws.overPass.OverPassElement;
-import lig.steamer.of4osm.ws.overPass.OverPassResponse;
-import lig.steamer.of4osm.ws.overPass.OverPassTag;
+
+import lig.steamer.of4osm.ws.overpass.OverPassElement;
+import lig.steamer.of4osm.ws.overpass.OverPassResponse;
+import lig.steamer.of4osm.ws.overpass.OverPassTag;
 
 /**
  *

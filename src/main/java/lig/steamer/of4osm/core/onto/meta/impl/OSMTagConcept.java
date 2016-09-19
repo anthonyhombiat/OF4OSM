@@ -15,7 +15,7 @@ public abstract class OSMTagConcept extends Concept implements IOSMTagConcept {
     public Set<IOSMTagConceptParent> parents;
 
     public OSMTagConcept() {
-        this.parents = new HashSet();
+        this.parents = new HashSet<>();
     }
     
 

@@ -16,7 +16,7 @@ import java.net.URL;
  */
 public class KeyStatsClient {
 
-    public KeyStatsResponse keyStatsHead;
+    public KeyStatsResponse response;
 
     public KeyStatsClient(String key) throws MalformedURLException, IOException {
 
@@ -27,7 +27,7 @@ public class KeyStatsClient {
         ObjectMapper objectMapper = new ObjectMapper();
         URL url = new URL(str.toString());
 
-        this.keyStatsHead = objectMapper.readValue(url, KeyStatsResponse.class);
+        this.response = objectMapper.readValue(url, KeyStatsResponse.class);
 
     }
 }

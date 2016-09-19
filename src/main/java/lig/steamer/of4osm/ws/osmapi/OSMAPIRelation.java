@@ -116,7 +116,15 @@ public class OSMAPIRelation {
 
     @Override
     public String toString() {
-        return "Relation{" + "id=" + id + ", timestamp=" + timestamp + ", uid=" + uid + ", member=" + member + ", visible=" + visible + ", tag=" + tag + ", changeset=" + changeset + ", user=" + user + ", version=" + version + '}';
+        return "Relation{" + "id=" + id + 
+        		", timestamp=" + timestamp + 
+        		", uid=" + uid + 
+        		", member=" + member + 
+        		", visible=" + visible + 
+        		", tag=" + tag + 
+        		", changeset=" + changeset + 
+        		", user=" + user + 
+        		", version=" + version + '}';
     }
 
 }

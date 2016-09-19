@@ -11,16 +11,16 @@ package lig.steamer.of4osm.ws.tagInfo;
  */
 public class KeyCombinationsData {
 
-    //Other key
+    // Other key
     private String other_key;
 
-    //Number of objects that have both keys.
+    // Number of objects that have both keys.
     private int together_count;
 
-    //Fraction of objects with this key that also have the other key.
+    // Fraction of objects with this key that also have the other key.
     private float to_fraction;
 
-    //Fraction of objects with other key that also have this key.
+    // Fraction of objects with other key that also have this key.
     private float from_fraction;
 
     
@@ -57,8 +57,10 @@ public class KeyCombinationsData {
     }
     
      @Override
-    public String toString()
-    {
-        return "{ \"other_key\" : "+other_key+ ", \"together_count\" : "+together_count+", \"to_fraction\" : "+to_fraction+", \"from_fraction\" : "+from_fraction+"}\n";
+    public String toString() {
+        return "{ \"other_key\" : " + other_key +
+        		", \"together_count\" : " + together_count +
+        		", \"to_fraction\" : " + to_fraction + 
+        		", \"from_fraction\" : " + from_fraction+"}\n";
     }
 }

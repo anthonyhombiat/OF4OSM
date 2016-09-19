@@ -12,7 +12,8 @@ import javax.xml.bind.annotation.XmlAttribute;
  * @author amehiris
  */
 public class OSMAPIMember {
-    private String ref;
+   
+	private String ref;
 
     private String role;
 
@@ -21,7 +22,8 @@ public class OSMAPIMember {
     public String getRef() {
         return ref;
     }
-@XmlAttribute
+
+    @XmlAttribute
     public void setRef(String ref) {
         this.ref = ref;
     }
@@ -29,7 +31,8 @@ public class OSMAPIMember {
     public String getRole() {
         return role;
     }
-@XmlAttribute
+
+    @XmlAttribute
     public void setRole(String role) {
         this.role = role;
     }
@@ -37,7 +40,8 @@ public class OSMAPIMember {
     public String getType() {
         return type;
     }
-@XmlAttribute
+    
+    @XmlAttribute
     public void setType(String type) {
         this.type = type;
     }

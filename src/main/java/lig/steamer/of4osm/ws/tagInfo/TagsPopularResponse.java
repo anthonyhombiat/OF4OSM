@@ -11,9 +11,8 @@ import java.util.List;
  *
  * @author amehiris
  */
-public class TagsPopularResponse extends HeadResultTagInfo {
+public class TagsPopularResponse extends TagInfoResponse {
 
-    //
     private List<TagsPopularData> data;
     
     public List<TagsPopularData> getData() {
@@ -26,6 +25,11 @@ public class TagsPopularResponse extends HeadResultTagInfo {
 
     @Override
     public String toString() {
-        return "{\"url\" : \"" + super.getUrl() + "\",\n \"data_until\" :\" " + super.getData_until() + "\", \"page\" : " + super.getPage() + ", \"rp\" : " + super.getRp() + ",\"total\": " + super.getTotal() + ",\n \"data\" : \n" + data + "}\n";
+        return "{\"url\" : \"" + super.getUrl() + 
+        		"\",\n \"data_until\" :\" " + super.getData_until() + 
+        		"\", \"page\" : " + super.getPage() + 
+        		", \"rp\" : " + super.getRp() + 
+        		",\"total\": " + super.getTotal() + 
+        		",\n \"data\" : \n" + data + "}\n";
     }
 }

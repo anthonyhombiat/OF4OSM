@@ -12,18 +12,12 @@ package lig.steamer.of4osm.ws.tagInfo;
  */
 public class KeySimilarData {
 
-    //Other key.
+    // Other key.
     private String other_key;
-    //	Number of objects that have the other key.
+    // Number of objects that have the other key.
     private int count_all;
-    //An integer measuring the similarity of the two keys, smaller is more similar
+    // An integer measuring the similarity of the two keys, smaller is more similar
     private int similarity;
-    
-    @Override
-    public String toString()
-    {
-        return "{ \"other_key\" : "+other_key+ ", \"count_all\" : "+count_all+", \"similarity\" : "+similarity+"}\n";
-    }
 
     public String getOther_key() {
         return other_key;
@@ -49,5 +43,10 @@ public class KeySimilarData {
         this.similarity = similarity;
     }
     
-    
+    @Override
+    public String toString() {
+        return "{ \"other_key\" : " + other_key +
+        		", \"count_all\" : " + count_all +
+        		", \"similarity\" : "+similarity+"}\n";
+    }
 }

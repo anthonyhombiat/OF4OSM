@@ -9,10 +9,11 @@ import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
+import lig.steamer.of4osm.ws.overpass.OverPassElement;
+import lig.steamer.of4osm.ws.overpass.OverPassResponse;
 
-import lig.steamer.of4osm.ws.overPass.OverPassResponse;
-import lig.steamer.of4osm.ws.overPass.OverPassElement;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;

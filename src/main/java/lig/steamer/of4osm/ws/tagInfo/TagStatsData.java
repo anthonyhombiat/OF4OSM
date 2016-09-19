@@ -12,18 +12,12 @@ package lig.steamer.of4osm.ws.tagInfo;
  */
 public class TagStatsData {
 
-    //Object type ("all", "nodes", "ways", or "relations")
+    // Object type ("all", "nodes", "ways" or "relations")
     private String type;
-    //Number of objects with this type and tag.
+    // Number of objects with this type and tag.
     private int count;
-//Number of objects in relation to all objects.
+    // Number of objects in relation to all objects.
     private float count_fraction;
-
-    
-    @Override
-    public String toString() {
-        return "{ \"type\" : " + type + ", \"count\" : " + count + ", \"count_fraction\" : " + count_fraction + "}\n";
-    }
 
     public String getType() {
         return type;
@@ -49,6 +43,11 @@ public class TagStatsData {
         this.count_fraction = count_fraction;
     }
     
-    
+    @Override
+    public String toString() {
+        return "{ \"type\" : " + type + 
+        		", \"count\" : " + count + 
+        		", \"count_fraction\" : " + count_fraction + "}\n";
+    }
     
 }

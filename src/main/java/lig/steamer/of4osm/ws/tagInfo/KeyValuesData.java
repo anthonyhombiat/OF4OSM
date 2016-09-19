@@ -12,21 +12,16 @@ package lig.steamer.of4osm.ws.tagInfo;
  */
 public class KeyValuesData {
 
-    //	Value
+    // Value
     private String value;
     // Number of times this key/value is in the OSM database.
     private int count;
     // Number of times in relation to number of times this key is in the OSM database.
     private float fraction;
-    // 	Is there at least one wiki page for this tag.
+    // Is there at least one wiki page for this tag.
     private boolean in_wiki;
-    //  Description of the tag from the wiki.
+    // Description of the tag from the wiki.
     private String description;
-
-    @Override
-    public String toString() {
-        return "{ \"value\" : " + value + ", \"count\" : " + count + ", \"fraction\" : " + fraction + ", \"in_wiki\" : " + in_wiki + ", \"description\" : " + description + "}\n";
-    }
 
     public String getValue() {
         return value;
@@ -66,6 +61,15 @@ public class KeyValuesData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    @Override
+    public String toString() {
+        return "{ \"value\" : " + value + 
+        		", \"count\" : " + count + 
+        		", \"fraction\" : " + fraction + 
+        		", \"in_wiki\" : " + in_wiki + 
+        		", \"description\" : " + description + "}\n";
     }
 
 }

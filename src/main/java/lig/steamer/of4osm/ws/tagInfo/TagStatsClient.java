@@ -16,7 +16,7 @@ import java.net.URL;
  */
 public class TagStatsClient {
 
-    private TagStatsResponse tagStatsHead;
+    private TagStatsResponse response;
 
     public TagStatsClient(String key, String value) throws MalformedURLException, IOException {
         StringBuilder str = new StringBuilder();
@@ -26,7 +26,7 @@ public class TagStatsClient {
         str.append(value);
         ObjectMapper objectMapper = new ObjectMapper();
         URL url = new URL(str.toString());
-        this.tagStatsHead = objectMapper.readValue(url, TagStatsResponse.class);
+        this.response = objectMapper.readValue(url, TagStatsResponse.class);
     }
 
 }

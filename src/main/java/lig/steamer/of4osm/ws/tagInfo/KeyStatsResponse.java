@@ -11,10 +11,9 @@ import java.util.List;
  *
  * @author amehiris
  */
-public class KeyStatsResponse extends HeadResultTagInfo{
+public class KeyStatsResponse extends TagInfoResponse{
     
     
-    //
     private List<KeyStatsData> data;
 
     public List<KeyStatsData> getData() {
@@ -26,8 +25,12 @@ public class KeyStatsResponse extends HeadResultTagInfo{
     }
     
     @Override
-    public String toString()
-    {
-        return "{\"url\" : \""+super.getUrl()+"\",\n \"data_until\" :\" "+super.getData_until()+"\", \"page\" : "+super.getPage()+", \"rp\" : "+super.getRp()+",\"total\": "+super.getTotal()+",\n \"data\" : \n"+data+"}\n";
+    public String toString() {
+        return "{\"url\" : \"" + super.getUrl() +
+        		"\",\n \"data_until\" :\" " + super.getData_until() +
+        		"\", \"page\" : " + super.getPage() +
+        		", \"rp\" : " + super.getRp() + 
+        		",\"total\": " + super.getTotal() +
+        		",\n \"data\" : \n"+data+"}\n";
     }
 }

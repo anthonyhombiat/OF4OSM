@@ -13,12 +13,9 @@ import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagKeyConcept;
  *
  * @author amehiris
  */
-public class OF4OSMFolkso2OntoParser {
+public final class OF4OSMFolkso2OntoParser {
 
-    public OF4OSMFolkso2OntoParser() {
-    }
-
-    public OF4OSMOntology parse(OF4OSMFolkso folkso) {
+    public static OF4OSMOntology parse(OF4OSMFolkso folkso) {
 
         OF4OSMOntology onto = new OF4OSMOntology();
 
@@ -29,11 +26,11 @@ public class OF4OSMFolkso2OntoParser {
         return onto;
     }
     
-    private OF4OSMOntology addMapFeaturesHierarchy(OF4OSMOntology onto, OF4OSMFolkso folkso){
+    private static OF4OSMOntology addMapFeaturesHierarchy(OF4OSMOntology onto, OF4OSMFolkso folkso){
         return onto;
     }
     
-    private OF4OSMOntology addKeyTagHierarchy(OF4OSMOntology onto, OF4OSMFolkso folkso){
+    private static OF4OSMOntology addKeyTagHierarchy(OF4OSMOntology onto, OF4OSMFolkso folkso){
 
         for (Map.Entry<IOSMSimpleCategoryTag, Integer> entry : folkso.getSimpleCategoryTags().entrySet()) {
 
@@ -46,7 +43,30 @@ public class OF4OSMFolkso2OntoParser {
         return onto;
     }
     
-    private OF4OSMOntology addTagCombinations(OF4OSMOntology onto, OF4OSMFolkso folkso){
-        return onto;
+    private static OF4OSMOntology addTagCombinations(OF4OSMOntology onto, OF4OSMFolkso folkso){
+        
+    	/* Algo for finding permutations */
+    	/*
+    	String[] arr = {"A","B","C","4" };
+			for(int i=2;i<arr.length+1;i++)
+				combinations(arr, i, 0, new String[i]);
+			
+			public static void combinations(String[] arr, int len, int startPosition, String[] result){
+				if (len == 0){
+					String str = "";
+					for(String s : result){
+						str += s;
+					}
+					System.out.println(str);
+					return;
+				}       
+				for (int i = startPosition; i <= arr.length-len; i++){
+					result[result.length - len] = arr[i];
+					combinations(arr, len-1, i+1, result);
+				}
+			}
+    	*/
+    	
+    	return onto;
     }
 }

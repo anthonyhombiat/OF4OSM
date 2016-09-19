@@ -11,8 +11,8 @@ import java.util.List;
  *
  * @author amehiris
  */
-public class TagStatsResponse extends HeadResultTagInfo{
-    //
+public class TagStatsResponse extends TagInfoResponse{
+
     private List<TagStatsData> data;
 
     public List<TagStatsData> getData() {
@@ -24,8 +24,12 @@ public class TagStatsResponse extends HeadResultTagInfo{
     }
     
     @Override
-    public String toString()
-    {
-        return "{\"url\" : \""+super.getUrl()+"\",\n \"data_until\" :\" "+super.getData_until()+"\", \"page\" : "+super.getPage()+", \"rp\" : "+super.getRp()+",\"total\": "+super.getTotal()+",\n \"data\" : \n"+data+"}\n";
+    public String toString() {
+        return "{\"url\" : \"" + super.getUrl() +
+        		"\",\n \"data_until\" :\" " + super.getData_until() +
+        		"\", \"page\" : " + super.getPage() +
+        		", \"rp\" : " + super.getRp() + 
+        		",\"total\": " + super.getTotal() +
+        		",\n \"data\" : \n"+data+"}\n";
     }
 }

@@ -37,7 +37,9 @@ public class App {
 //        
 //        OF4OSMFolkso2CSV csv = new OF4OSMFolkso2CSV();
 //                
-//        FileUtils.writeStringToFile(new File("C:\\Users\\amehiris\\Documents\\overPassFolkso.csv"), csv.parse(folkso));
+//        FileUtils.writeStringToFile(
+//    			new File("C:\\Users\\amehiris\\Documents\\overPassFolkso.csv"), 
+//    			csv.parse(folkso));
 //        
         OSMAPIRequest req = new OSMAPIRequest("5.712204", "45.178649", "5.727654", "45.189538");
 
@@ -49,11 +51,11 @@ public class App {
 
         System.out.println(folkso);
 
-        FileUtils.writeStringToFile(new File("C:\\Users\\amehiris\\Documents\\osmapiFolkso.csv"), OF4OSMFolkso2CSV.parse(folkso));
+        FileUtils.writeStringToFile(
+        		new File("C:\\Users\\amehiris\\Documents\\osmapiFolkso.csv"), 
+        		OF4OSMFolkso2CSV.parse(folkso));
 
-        OF4OSMFolkso2OntoParser ontoParser = new OF4OSMFolkso2OntoParser();
-
-        OF4OSMOntology onto = ontoParser.parse(folkso);
+        OF4OSMOntology onto = OF4OSMFolkso2OntoParser.parse(folkso);
 
         onto.afficher();
 
