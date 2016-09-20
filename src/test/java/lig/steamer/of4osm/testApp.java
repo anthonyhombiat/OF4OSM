@@ -46,24 +46,23 @@ public class testApp {
         System.out.println(resultat.toString());
 
         //Key
-        Set simpleKey = new HashSet();
-        Set complexKey = new HashSet();
+        Set<OSMTagSimpleKey> simpleKeys= new HashSet<>();
+        Set<OSMTagComplexKey> complexKeys = new HashSet<>();
+        
         //Value
-        Set bolleanSimpleValue = new HashSet();
-        Set dateSimpleValue = new HashSet();
-        Set numericSimpleValue = new HashSet();
-        Set stringSimpleValue = new HashSet();
-        Set numericIntervalValue = new HashSet();
-        Set stringIntervalValue = new HashSet();
-        Set multipleValue = new HashSet();
+        Set<OSMTagBooleanValue> booleanValues = new HashSet<>();
+        Set<OSMTagDateValue> dateValues = new HashSet<>();
+        Set<OSMTagNumericValue> numericValues = new HashSet<>();
+        Set<OSMTagStringValue> stringValues = new HashSet<>();
+        Set <OSMTagMultipleValue> multipleValues = new HashSet<>();
 
         //parcourir la liste d'element 
         List<OverPassElement> elements = resultat.getElements();
         for (int i = 0; i < elements.size(); i++) {
 
             //parcourir la map tags  
-            Map tags = elements.get(i).getTags();
-            Iterator j = tags.keySet().iterator();
+            Map<String, String> tags = elements.get(i).getTags();
+            Iterator<String> j = tags.keySet().iterator();
 
             while (j.hasNext()) {
                 //traitement de type de tags
@@ -79,11 +78,11 @@ public class testApp {
                 if (clefs.length == 1) {
                     System.out.println("c'est un SimpleKey");
                     key = new OSMTagSimpleKey(clef, wikiURL);
-                    simpleKey.add(key);
+                    simpleKeys.add((OSMTagSimpleKey) key);
                 } else {
                     System.out.println("c'est un ComplexKey");
                     key = new OSMTagComplexKey(clef, wikiURL);
-                    complexKey.add(key);
+                    complexKeys.add((OSMTagComplexKey) key);
                     System.out.println(key);
                 }
                 //traitement valeur
@@ -92,14 +91,14 @@ public class testApp {
                 if (valeur.equals("yes") || valeur.equals("oui") || valeur.equals("true") || valeur.equals("no")
                         || valeur.equals("non") || valeur.equals("false")) {
                     value = new OSMTagBooleanValue(valeur);
-                    bolleanSimpleValue.add(value);
+                    booleanValues.add((OSMTagBooleanValue) value);
                 } else //DateValue ?? 
                  if (isDate(valeur)) {
 
                         System.out.println("\u001B[32m" + "c'est un DateeValue");//green --teste--> [public_transport=stop_position]
 
                         value = new OSMTagDateValue(valeur);
-                        dateSimpleValue.add(value);
+                        dateValues.add((OSMTagDateValue) value);
 
                     } else {
 
@@ -111,43 +110,45 @@ public class testApp {
                                 double d = Double.parseDouble(valeur);
                                 System.out.println("\u001B[33m" + "c'est un NumericValue");//YELLOW
                                 value = new OSMTagNumericValue(d);
-                                numericSimpleValue.add(value);
+                                numericValues.add((OSMTagNumericValue) value);
                             } catch (NumberFormatException nfe) {
 
                                 System.out.println("\u001B[35m" + "C'est un StringSimpleValue");//PURPLE 
                                 value = new OSMTagStringValue(valeur);
-                                stringSimpleValue.add(value);
+                                stringValues.add((OSMTagStringValue) value);
 
                             }
 
                         } else {
                             System.out.println("\u001B[31m" + "C'est un MultipleValue");//red 
                             value = new OSMTagMultipleValue(valeur);
-                            multipleValue.add(value);
+                            multipleValues.add((OSMTagMultipleValue) value);
                         }
                     }
 
             }
 
         }
-        System.out.println("les clefs simples sont:\n" + simpleKey);
+        
+        System.out.println("OSMTagSimpleKey:\n" + simpleKeys);
 
-        System.out.println("les clefs complexes sont:\n" + complexKey);
+        System.out.println("OSMTagComplexKey:\n" + complexKeys);
 
-        System.out.println("les bolleanSimpleValue sont:\n" + bolleanSimpleValue);
+        System.out.println("OSMTagBooleanValue:\n" + booleanValues);
 
-        System.out.println("numericSimpleValue\n" + numericSimpleValue);
+        System.out.println("OSMTagNumericValue:\n" + numericValues);
 
-        System.out.println("stringSimpleValue\n" + stringSimpleValue);
+        System.out.println("OSMTagStringValue:\n" + stringValues);
 
-        System.out.println("multipleValue\n" + multipleValue);
+        System.out.println("OSMTagMultipleValue\n" + multipleValues);
 
-        System.out.println("dateSimpleValue\n" + dateSimpleValue);
+        System.out.println("OSMTagDateValue:\n" + dateValues);
+        
     }
 
     public static String makeURL() {
         String BoundingBoxGrenoble = "(45.154005,5.678004,45.214326,5.753081)";
-        String BoundingBoxGrenobleCentre = "(45.1873363,5.7180328,45.188529,5.724524)";
+//        String BoundingBoxGrenobleCentre = "(45.1873363,5.7180328,45.188529,5.724524)";
 
         //Construir l'url
         Scanner sc = new Scanner(System.in);

@@ -9,22 +9,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagMultipleValue;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyBooleanPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyDatePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMComplexKeyNumericPropertyTag;
@@ -37,8 +27,17 @@ import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleDatePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleNumericPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleStringPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMTag;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagMultipleValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
 import lig.steamer.of4osm.ws.overpass.OverPassElement;
-import lig.steamer.of4osm.ws.tagInfo.TagInfoClient;
+import lig.steamer.of4osm.ws.tagInfo.TagsPopularClient;
 import lig.steamer.of4osm.ws.tagInfo.TagsPopularData;
 import lig.steamer.of4osm.ws.tagInfo.TagsPopularResponse;
 
@@ -51,30 +50,30 @@ public class OverPassApp {
     public static void main(String[] args) throws MalformedURLException, IOException {
 
         //Category 
-        Set simpleCategoryTag = new HashSet(); // OSMSimpleCategoryTag
-        Set multipleValueCategoryTag = new HashSet(); //OSMMultipleValueCategoryTag
+        Set<OSMSimpleCategoryTag> simpleCategoryTag = new HashSet<>(); // OSMSimpleCategoryTag
+        Set<OSMMultipleValuePropertyTag> multipleValueCategoryTag = new HashSet<>(); //OSMMultipleValueCategoryTag
 
         //Property
-        Set multipleValuePropertyTag = new HashSet();    //OSMMultipleValuePropertyTag
+        Set<OSMMultipleValuePropertyTag> multipleValuePropertyTag = new HashSet<>();    //OSMMultipleValuePropertyTag
 
-        Set simpleBooleanPropertyTag = new HashSet();    //OSMSimpleBooleanPropertyTag
-        Set complexKeyBooleanPropertyTag = new HashSet();    //OSMComplexKeyBooleanPropertyTag
+        Set<OSMSimpleBooleanPropertyTag> simpleBooleanPropertyTag = new HashSet<>();    //OSMSimpleBooleanPropertyTag
+        Set<OSMComplexKeyBooleanPropertyTag> complexKeyBooleanPropertyTag = new HashSet<>();    //OSMComplexKeyBooleanPropertyTag
 
-        Set simpleStringPropertyTag = new HashSet();    //OSMSimpleStringPropertyTag
-        Set complexKeyStringPropertyTag = new HashSet();    //OSMComplexKeyStringPropertyTag
+        Set<OSMSimpleStringPropertyTag> simpleStringPropertyTag = new HashSet<>();    //OSMSimpleStringPropertyTag
+        Set<OSMComplexKeyStringPropertyTag> complexKeyStringPropertyTag = new HashSet<>();    //OSMComplexKeyStringPropertyTag
 
-        Set simpleNumericPropertyTag = new HashSet();    //OSMSimpleNumericPropertyTag
-        Set complexKeyNumericPropertyTag = new HashSet();    //OSMComplexKeyNumericPropertyTag
+        Set<OSMSimpleNumericPropertyTag> simpleNumericPropertyTag = new HashSet<>();    //OSMSimpleNumericPropertyTag
+        Set<OSMComplexKeyNumericPropertyTag> complexKeyNumericPropertyTag = new HashSet<>();    //OSMComplexKeyNumericPropertyTag
 
-        Set simpleDatePropertyTag = new HashSet();   //OSMSimpleDatePropertyTag
-        Set complexKeyDatePropertyTag = new HashSet();   //OSMComplexKeyDatePropertyTag
+        Set<OSMSimpleDatePropertyTag> simpleDatePropertyTag = new HashSet<>();   //OSMSimpleDatePropertyTag
+        Set<OSMComplexKeyDatePropertyTag> complexKeyDatePropertyTag = new HashSet<>();   //OSMComplexKeyDatePropertyTag
 
-        String bBoxGrenoble = "(45.154005,5.678004,45.214326,5.753081)";
+//        String bBoxGrenoble = "(45.154005,5.678004,45.214326,5.753081)";
+//        String bBoxParis = "(48.658291,2.08679,49.04694,2.63791)";
         String bBoxGrenobleCentre = "(45.1873363,5.7180328,45.188529,5.724524)";
-        String bBoxParis = "(48.658291,2.08679,49.04694,2.63791)";
 
-        TagInfoClient tagInfo = new TagInfoClient();
-        TagsPopularResponse tagsPopularHead = tagInfo.tagsPopular(1,10);
+        TagsPopularClient tagInfo = new TagsPopularClient();
+        TagsPopularResponse tagsPopularHead = tagInfo.send(1,10);
         List<TagsPopularData> dataPopularTags = tagsPopularHead.getData();
         for (TagsPopularData popularTags : dataPopularTags) {
             if (popularTags.isIn_wiki()) {
@@ -86,8 +85,8 @@ public class OverPassApp {
                 for (int i = 0; i < elements.size(); i++) {
 
                     //parcourir la map tags  
-                    Map tags = elements.get(i).getTags();
-                    Iterator j = tags.keySet().iterator();
+                    Map<String, String> tags = elements.get(i).getTags();
+                    Iterator<String> j = tags.keySet().iterator();
 
                     while (j.hasNext()) {
                         //traitement de type de tags
@@ -105,38 +104,38 @@ public class OverPassApp {
                                 if (isProperty(clef)) {
 
                                     type = new OSMMultipleValuePropertyTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
-                                    multipleValuePropertyTag.add(type);
+                                    multipleValuePropertyTag.add((OSMMultipleValuePropertyTag) type);
                                 } else {
                                     type = new OSMMultipleCategoryTag((OSMTagSimpleKey) key, (OSMTagMultipleValue) value);
-                                    multipleValueCategoryTag.add(type);
+                                    multipleValueCategoryTag.add((OSMMultipleValuePropertyTag) type);
 
                                 }
                             }
                             if (OSMTagBooleanValue.class.isInstance(value)) {
                                 type = new OSMSimpleBooleanPropertyTag((OSMTagSimpleKey) key, (OSMTagBooleanValue) value);
-                                simpleBooleanPropertyTag.add(type);
+                                simpleBooleanPropertyTag.add((OSMSimpleBooleanPropertyTag) type);
                             }
 
                             if (OSMTagStringValue.class.isInstance(value)) {
                                 //attention Category or Property traiter apres inchAllah
                                 if (isProperty(clef)) {
                                     type = new OSMSimpleStringPropertyTag((OSMTagSimpleKey) key, (OSMTagStringValue) value);
-                                    simpleStringPropertyTag.add(type);
+                                    simpleStringPropertyTag.add((OSMSimpleStringPropertyTag) type);
                                 } else {
 
                                     type = new OSMSimpleCategoryTag((OSMTagSimpleKey) key, (OSMTagStringValue) value);
-                                    simpleCategoryTag.add(type);
+                                    simpleCategoryTag.add((OSMSimpleCategoryTag) type);
                                 }
                             }
 
                             if (OSMTagNumericValue.class.isInstance(value)) {
                                 type = new OSMSimpleNumericPropertyTag((OSMTagSimpleKey) key, (OSMTagNumericValue) value);
-                                simpleNumericPropertyTag.add(type);
+                                simpleNumericPropertyTag.add((OSMSimpleNumericPropertyTag) type);
                             }
 
                             if (OSMTagDateValue.class.isInstance(value)) {
                                 type = new OSMSimpleDatePropertyTag((OSMTagSimpleKey) key, (OSMTagDateValue) value);
-                                simpleDatePropertyTag.add(type);
+                                simpleDatePropertyTag.add((OSMSimpleDatePropertyTag) type);
                             }
 
                         }
@@ -144,21 +143,21 @@ public class OverPassApp {
 
                             if (OSMTagBooleanValue.class.isInstance(value)) {
                                 type = new OSMComplexKeyBooleanPropertyTag((OSMTagComplexKey) key, (OSMTagBooleanValue) value);
-                                complexKeyBooleanPropertyTag.add(type);
+                                complexKeyBooleanPropertyTag.add((OSMComplexKeyBooleanPropertyTag) type);
                             }
 
                             if (OSMTagStringValue.class.isInstance(value)) {
                                 type = new OSMComplexKeyStringPropertyTag((OSMTagComplexKey) key, (OSMTagStringValue) value);
-                                complexKeyStringPropertyTag.add(type);
+                                complexKeyStringPropertyTag.add((OSMComplexKeyStringPropertyTag) type);
                             }
                             if (OSMTagNumericValue.class.isInstance(value)) {
                                 type = new OSMComplexKeyNumericPropertyTag((OSMTagComplexKey) key, (OSMTagNumericValue) value);
-                                complexKeyNumericPropertyTag.add(type);
+                                complexKeyNumericPropertyTag.add((OSMComplexKeyNumericPropertyTag) type);
                             }
 
                             if (OSMTagDateValue.class.isInstance(value)) {
                                 type = new OSMComplexKeyDatePropertyTag((OSMTagComplexKey) key, (OSMTagDateValue) value);
-                                complexKeyDatePropertyTag.add(type);
+                                complexKeyDatePropertyTag.add((OSMComplexKeyDatePropertyTag) type);
                             }
 
                         }
@@ -212,9 +211,7 @@ public class OverPassApp {
 
         int i = 0;
         while (i < categorys.length && !categorys[i].equals(clef)) {
-            for (String category : categorys) {
-                i++;
-            }
+            i += categorys.length;
         }
         return i != (categorys.length);
     }
@@ -283,12 +280,9 @@ public class OverPassApp {
         sdf.setLenient(false);
 
         try {
-
-            //if not valid, it will throw ParseException
-            Date date = sdf.parse(dateToValidate);
-
+            // if not valid, it will throw ParseException
+            sdf.parse(dateToValidate);
         } catch (ParseException e) {
-
             return false;
         }
 

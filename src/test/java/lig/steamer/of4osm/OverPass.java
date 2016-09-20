@@ -58,7 +58,7 @@ public class OverPass {
 
     public Map<OverPassTag, Integer> getTags() {
 
-        Map<OverPassTag, Integer> tags = new HashMap();
+        Map<OverPassTag, Integer> tags = new HashMap<>();
 
         List<OverPassElement> elements = this.headResult.getElements();
         for (OverPassElement element : elements) {

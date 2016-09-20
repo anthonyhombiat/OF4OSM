@@ -5,10 +5,12 @@
  */
 package lig.steamer.of4osm.ws.tagInfo;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URISyntaxException;
+
+import org.apache.http.client.utils.URIBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
@@ -16,36 +18,31 @@ import java.net.URL;
  */
 public class KeyValueClient {
 
-    KeyValuesResponse response;
+    public final static String ENDPOINT = "key/values";
 
-    public KeyValueClient(String key) throws MalformedURLException, IOException {
+    public KeyValuesResponse send(String key, int page, int rp) {
 
-        StringBuilder str = new StringBuilder();
-        str.append("https://taginfo.openstreetmap.org/api/4/key/values?key=");
-        str.append(key);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        URL url = new URL(str.toString());
-
-        this.response = objectMapper.readValue(url, KeyValuesResponse.class);
-
+    	try{
+	    	URIBuilder uriBuilder = new URIBuilder(ENDPOINT);
+	        uriBuilder.setParameter(TagInfoAPI.PARAM_KEY, key);
+	        uriBuilder.setParameter(TagInfoAPI.PARAM_PAGE, "" + page);
+	        uriBuilder.setParameter(TagInfoAPI.PARAM_RP, "" + rp);
+	
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        return objectMapper.readValue(
+	    		   uriBuilder.build().toURL(), 
+	    		   KeyValuesResponse.class);
+    	} catch (IOException e){
+    		e.printStackTrace();
+    	} catch (URISyntaxException e){
+    		e.printStackTrace();
+    	}
+    	
+    	return null;
     }
 
-    public KeyValueClient(String key, int page, int rp) throws MalformedURLException, IOException {
-
-        StringBuilder str = new StringBuilder();
-        str.append("https://taginfo.openstreetmap.org/api/4/key/values?key=");
-        str.append(key);
-        str.append("&page=");
-        str.append(page);
-        str.append("&rp=");
-        str.append(rp);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        URL url = new URL(str.toString());
-
-        this.response = objectMapper.readValue(url, KeyValuesResponse.class);
-
+    public KeyValuesResponse send(String key) {
+    	return send(key, TagInfoAPI.DEFAULT_PAGE, TagInfoAPI.DEFAULT_RP);
     }
-
+    
 }

@@ -5,10 +5,12 @@
  */
 package lig.steamer.of4osm.ws.tagInfo;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URISyntaxException;
+
+import org.apache.http.client.utils.URIBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
@@ -16,17 +18,28 @@ import java.net.URL;
  */
 public class TagStatsClient {
 
-    private TagStatsResponse response;
+	public final static String ENDPOINT = TagInfoAPI.ENDPOINT + "tag/stats";
 
-    public TagStatsClient(String key, String value) throws MalformedURLException, IOException {
-        StringBuilder str = new StringBuilder();
-        str.append("https://taginfo.openstreetmap.org/api/4/tag/stats?key=");
-        str.append(key);
-        str.append("&value=");
-        str.append(value);
-        ObjectMapper objectMapper = new ObjectMapper();
-        URL url = new URL(str.toString());
-        this.response = objectMapper.readValue(url, TagStatsResponse.class);
+    public TagStatsResponse send(String key, String value) {
+try {
+    		
+	    	URIBuilder uriBuilder;
+			uriBuilder = new URIBuilder(ENDPOINT);
+	        uriBuilder.setParameter(TagInfoAPI.PARAM_KEY, key);
+	        uriBuilder.setParameter(TagInfoAPI.PARAM_VALUE, value);
+	
+	        ObjectMapper objectMapper = new ObjectMapper();
+
+			return objectMapper.readValue(
+					uriBuilder.build().toURL(), 
+					TagStatsResponse.class);
+		} catch (IOException e) { 
+			e.printStackTrace();
+		} catch (URISyntaxException e) { 
+			e.printStackTrace();
+		}
+    	
+    	return null;
     }
 
 }

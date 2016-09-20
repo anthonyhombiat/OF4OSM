@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lig.steamer.of4osm.ws.tagInfo;
 
 import java.io.IOException;
@@ -12,23 +7,18 @@ import org.apache.http.client.utils.URIBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- *
- * @author amehiris
- */
-public class KeyCombinationsClient {
+public class TagsPopularClient {
 
-	public final static String ENDPOINT = TagInfoAPI.ENDPOINT + "key/combinations";
+	public final static String ENDPOINT = TagInfoAPI.ENDPOINT + "tags/popular";
 	
-    public KeyCombinationsClient(){}
+    public TagsPopularClient(){}
 
-    public KeyCombinationsResponse send(String key, int page, int rp) {
+    public TagsPopularResponse send(int page, int rp) {
 
 		try {
     		
 	    	URIBuilder uriBuilder;
 			uriBuilder = new URIBuilder(ENDPOINT);
-	        uriBuilder.setParameter(TagInfoAPI.PARAM_KEY, key);
 	        uriBuilder.setParameter(TagInfoAPI.PARAM_PAGE, "" + page);
 	        uriBuilder.setParameter(TagInfoAPI.PARAM_RP, "" + rp);
 	
@@ -36,7 +26,7 @@ public class KeyCombinationsClient {
 
 			return objectMapper.readValue(
 					uriBuilder.build().toURL(), 
-					KeyCombinationsResponse.class);
+					TagsPopularResponse.class);
 		} catch (IOException e) { 
 			e.printStackTrace();
 		} catch (URISyntaxException e) { 
@@ -47,8 +37,8 @@ public class KeyCombinationsClient {
     	
     }
 
-    public KeyCombinationsResponse send(String key) {
-    	return send(key, TagInfoAPI.DEFAULT_PAGE, TagInfoAPI.DEFAULT_RP);
+    public TagsPopularResponse send() {
+    	return send(TagInfoAPI.DEFAULT_PAGE, TagInfoAPI.DEFAULT_RP);
     }
-    
+	
 }

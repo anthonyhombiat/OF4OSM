@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class OSMWikiClient {
 	
-public final static String ENDPOINT = "https://wiki.openstreetmap.org/w/api.php?";
+	public final static String ENDPOINT = "https://wiki.openstreetmap.org/w/api.php?";
 	
 	public final static String ACT = "action";
 	public final static String PAGE = "page";
