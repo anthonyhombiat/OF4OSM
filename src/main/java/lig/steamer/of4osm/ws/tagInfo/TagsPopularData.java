@@ -35,6 +35,8 @@ public class TagsPopularData{
     // Number of relations in relation to all relations.
     private float count_relations_fraction;
     
+    private int projects;
+    
     public String getKey() {
         return key;
     }
@@ -122,7 +124,15 @@ public class TagsPopularData{
     public void setCount_relations_fraction(float count_relations_fraction) {
         this.count_relations_fraction = count_relations_fraction;
     }
-   
+
+    public int getProjects() {
+        return projects;
+    }
+
+    public void setProjects(int projects) {
+        this.projects = projects;
+    }
+    
     @Override
     public String toString() {
         return "{ \"key\" : " + key + 
