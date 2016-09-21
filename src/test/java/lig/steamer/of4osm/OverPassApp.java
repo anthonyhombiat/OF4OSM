@@ -37,9 +37,10 @@ import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagValue;
 import lig.steamer.of4osm.ws.overpass.OverPassElement;
-import lig.steamer.of4osm.ws.tagInfo.TagsPopularClient;
-import lig.steamer.of4osm.ws.tagInfo.TagsPopularData;
-import lig.steamer.of4osm.ws.tagInfo.TagsPopularResponse;
+import lig.steamer.of4osm.ws.taginfo.tags.TagInfoTagsAction;
+import lig.steamer.of4osm.ws.taginfo.tags.TagInfoTagsClient;
+import lig.steamer.of4osm.ws.taginfo.tags.popular.TagInfoTagsPopularResponse;
+import lig.steamer.of4osm.ws.taginfo.tags.popular.TagInfoTagsPopularResponseData;
 
 /**
  *
@@ -72,10 +73,11 @@ public class OverPassApp {
 //        String bBoxParis = "(48.658291,2.08679,49.04694,2.63791)";
         String bBoxGrenobleCentre = "(45.1873363,5.7180328,45.188529,5.724524)";
 
-        TagsPopularClient tagInfo = new TagsPopularClient();
-        TagsPopularResponse tagsPopularHead = tagInfo.send(1,10);
-        List<TagsPopularData> dataPopularTags = tagsPopularHead.getData();
-        for (TagsPopularData popularTags : dataPopularTags) {
+        TagInfoTagsClient tagInfo = new TagInfoTagsClient();
+        TagInfoTagsPopularResponse tagsPopularHead = 
+        		(TagInfoTagsPopularResponse) tagInfo.send(TagInfoTagsAction.POPULAR, 1, 10);
+        List<TagInfoTagsPopularResponseData> dataPopularTags = tagsPopularHead.getData();
+        for (TagInfoTagsPopularResponseData popularTags : dataPopularTags) {
             if (popularTags.isIn_wiki()) {
                 OverPass overPasse = new OverPass(bBoxGrenobleCentre, "node", popularTags.getKey(), popularTags.getValue());
 

@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.ws.tagInfo;
+package lig.steamer.of4osm.ws.taginfo.key.values;
+
+import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
 
 /**
  * Get values used with a given key.
  *
  * @author amehiris
  */
-public class KeyValuesData {
+public class TagInfoKeyValuesResponseData extends TagInfoResponseData {
 
     // Value
     private String value;

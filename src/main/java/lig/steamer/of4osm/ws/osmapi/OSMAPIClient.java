@@ -5,7 +5,6 @@
  */
 package lig.steamer.of4osm.ws.osmapi;
 
-import java.net.MalformedURLException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -19,7 +18,7 @@ public class OSMAPIClient {
     public OSMAPIClient() {
     }
 
-    public OSMAPIResponse send(OSMAPIRequest req) throws MalformedURLException, Exception {
+    public OSMAPIResponse send(OSMAPIRequest req) {
 
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(OSMAPIResponse.class);

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.ws.tagInfo;
+package lig.steamer.of4osm.ws.taginfo;
 
 /**
  *
  * @author amehiris
  */
-public abstract class TagInfoResponse {
+public abstract class TagInfoResponse implements ITagInfoResponse {
 
     // URL of the request
     protected String url;
@@ -61,9 +61,18 @@ public abstract class TagInfoResponse {
     public void setRp(int rp) {
         this.rp = rp;
     }
-
     public void setTotal(int total) {
         this.total = total;
     }
 
+    @Override
+    public String toString() {
+        return "{\"url\" : \"" + this.getUrl() + 
+        		"\",\n \"data_until\" :\" " + this.getData_until() +
+        		"\", \"page\" : " + this.getPage() + 
+        		", \"rp\" : " + this.getRp() + 
+        		",\"total\": " + this.getTotal() + 
+        		",\n \"data\" : \n" + this.getData() + "}\n";
+    }
+    
 }

@@ -48,7 +48,7 @@ import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagMultipleValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagNumericValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagTimeDomainsValue;
-import lig.steamer.of4osm.util.openinghours.OpeningHour;
+import lig.steamer.of4osm.util.openinghours.OpeningHours;
 
 /**
  *
@@ -163,7 +163,7 @@ public class String2OF4OSMFolksoParsingTool {
 
         IOSMTagValue value;
         //OpeningHours?
-        if (OpeningHour.isOpeningHours(valeur)) {
+        if (OpeningHours.isOpeningHours(valeur)) {
             value = new OSMTagTimeDomainsValue(valeur);
         } else //BolleanValue??
         {
@@ -263,7 +263,7 @@ public class String2OF4OSMFolksoParsingTool {
     }
 
     public static boolean parseOpeningHours(String s) throws Exception {
-        return OpeningHour.isOpeningHours(s);
+        return OpeningHours.isOpeningHours(s);
     }
 
 }

@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.ws.tagInfo;
+package lig.steamer.of4osm.ws.taginfo.key.combinations;
+
+import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
 
 /**
  *Find keys that are used together with a given key.
  * @author amehiris
  */
-public class KeyCombinationsData {
+public class TagInfoKeyCombinationsResponseData extends TagInfoResponseData {
 
     // Other key
     private String other_key;
@@ -23,7 +25,6 @@ public class KeyCombinationsData {
     // Fraction of objects with other key that also have this key.
     private float from_fraction;
 
-    
     public String getOther_key() {
         return other_key;
     }
@@ -61,6 +62,6 @@ public class KeyCombinationsData {
         return "{ \"other_key\" : " + other_key +
         		", \"together_count\" : " + together_count +
         		", \"to_fraction\" : " + to_fraction + 
-        		", \"from_fraction\" : " + from_fraction+"}\n";
+        		", \"from_fraction\" : " + from_fraction + "}\n";
     }
 }

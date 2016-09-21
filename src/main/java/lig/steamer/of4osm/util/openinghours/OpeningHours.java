@@ -2,13 +2,10 @@ package lig.steamer.of4osm.util.openinghours;
 
 // License: GPL. See LICENSE file for details.
 
-import java.io.InputStreamReader;
 import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -16,45 +13,53 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 
-public class OpeningHour {
+public class OpeningHours {
     
     public static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("JavaScript");
     
     
-    public static boolean isOpeningHours(String str) throws Exception {
-        if (str.length() == 0) {
-            System.out.println("Please give opening_hours value as first parameter.");
-            return false;     
-        }
-        initialize();
-        
-        System.out.println("initialized");
-        
-        final Object r = ((Invocable) ENGINE).invokeFunction("oh", str, 0 /* oh_mode */);
-        
-        for (final Object i : getList(((Invocable) ENGINE).invokeMethod(r, "getErrors"))) {
-            System.err.println(i.toString().trim());
-            return false;
-        }
-        for (final Object i : getList(((Invocable) ENGINE).invokeMethod(r, "getWarnings"))) {
-            System.err.println(i.toString().trim());
-            return false;
-        }
-        System.out.print(r);
-        ScriptObjectMirror ro =  (ScriptObjectMirror) r;
-        System.out.println("r isWeekStable:  " +  ro.callMember("isWeekStable"));
-        
-        Date d = new Date();
-        System.out.println(d);
+    public static boolean isOpeningHours(String str) {
+       
+    	try{
+	    	if (str.length() == 0) {
+	            System.out.println("Please give opening_hours value as first parameter.");
+	            return false;     
+	        }
+	        initialize();
+	        
+	        System.out.println("initialized");
+	        
+	        final Object r = ((Invocable) ENGINE).invokeFunction("oh", str, 0 /* oh_mode */);
+	        
+	        for (final Object i : getList(((Invocable) ENGINE).invokeMethod(r, "getErrors"))) {
+	            System.err.println(i.toString().trim());
+	            return false;
+	        }
+	        for (final Object i : getList(((Invocable) ENGINE).invokeMethod(r, "getWarnings"))) {
+	            System.err.println(i.toString().trim());
+	            return false;
+	        }
+	        System.out.print(r);
+	        ScriptObjectMirror ro =  (ScriptObjectMirror) r;
+	        System.out.println("r isWeekStable:  " +  ro.callMember("isWeekStable"));
+	        
+	        Date d = new Date();
+	        System.out.println(d);
 //        Invocable invocable = (Invocable) ENGINE;
 //        ScriptObjectMirror result = (ScriptObjectMirror)
 //         invocable.invokeFunction("getState", d);
 //        System.out.println(result.
-       
-        System.out.println("r getState:  " +  ro.callMember("getState"));
-        return true ;
+	       
+	        System.out.println("r getState:  " +  ro.callMember("getState"));
+	        return true ;
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	
+        return false;
     }
 
     public static void initialize() throws Exception {

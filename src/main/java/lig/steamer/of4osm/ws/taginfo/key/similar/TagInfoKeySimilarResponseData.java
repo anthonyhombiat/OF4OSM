@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.ws.tagInfo;
+package lig.steamer.of4osm.ws.taginfo.key.similar;
+
+import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
 
 /**
  * Find keys that are similar to a given key.
  *
  * @author amehiris
  */
-public class KeySimilarData {
+public class TagInfoKeySimilarResponseData extends TagInfoResponseData {
 
     // Other key.
     private String other_key;

@@ -5,7 +5,10 @@
  */
 package lig.steamer.of4osm.ws.overpass;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 
 /**
@@ -17,11 +20,19 @@ public class OverPassClient {
     public OverPassClient() {
     }
     
-    public OverPassResponse send(OverPassRequest req) throws IOException{
+    public OverPassResponse send(OverPassRequest req) {
         
-        ObjectMapper objectMapper = new ObjectMapper();
-        OverPassResponse overPassResponse = objectMapper.readValue(req.getUrl(), OverPassResponse.class);
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+	        return objectMapper.readValue(req.getUrl(), OverPassResponse.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         
-        return overPassResponse;
+        return null;
     }
 }

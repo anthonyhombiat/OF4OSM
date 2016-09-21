@@ -6,16 +6,18 @@
 package lig.steamer.of4osm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
-import lig.steamer.of4osm.ws.tagInfo.KeyCombinationsResponse;
-import lig.steamer.of4osm.ws.tagInfo.KeySimilarResponse;
-import lig.steamer.of4osm.ws.tagInfo.KeyStatsResponse;
-import lig.steamer.of4osm.ws.tagInfo.KeyValuesResponse;
-import lig.steamer.of4osm.ws.tagInfo.TagStatsResponse;
-import lig.steamer.of4osm.ws.tagInfo.TagsPopularResponse;
+
+import lig.steamer.of4osm.ws.taginfo.key.similar.TagInfoKeySimilarResponse;
+import lig.steamer.of4osm.ws.taginfo.key.stats.TagInfoKeyStatsResponse;
+import lig.steamer.of4osm.ws.taginfo.key.values.TagInfoKeyValuesResponse;
+import lig.steamer.of4osm.ws.taginfo.tag.stats.TagInfoTagStatsResponse;
+import lig.steamer.of4osm.ws.taginfo.tags.popular.TagInfoTagsPopularResponse;
+import lig.steamer.of4osm.ws.taginfo.key.combinations.TagInfoKeyCombinationsResponse;
 
 /**
  *
@@ -69,8 +71,8 @@ public class TagInfoApp {
 
                 URL url = new URL(str.toString());
 
-                KeyCombinationsResponse resultat = new KeyCombinationsResponse();
-                resultat = objectMapper.readValue(url, KeyCombinationsResponse.class);
+                TagInfoKeyCombinationsResponse resultat = new TagInfoKeyCombinationsResponse();
+                resultat = objectMapper.readValue(url, TagInfoKeyCombinationsResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -92,8 +94,8 @@ public class TagInfoApp {
                 str.append(rp);
                 URL url = new URL(str.toString());
 
-                KeySimilarResponse resultat = new KeySimilarResponse();
-                resultat = objectMapper.readValue(url, KeySimilarResponse.class);
+                TagInfoKeySimilarResponse resultat = new TagInfoKeySimilarResponse();
+                resultat = objectMapper.readValue(url, TagInfoKeySimilarResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -106,8 +108,8 @@ public class TagInfoApp {
                 str.append(Key);
 
                 URL url = new URL(str.toString());
-                KeyStatsResponse resultat = new KeyStatsResponse();
-                resultat = objectMapper.readValue(url, KeyStatsResponse.class);
+                TagInfoKeyStatsResponse resultat = new TagInfoKeyStatsResponse();
+                resultat = objectMapper.readValue(url, TagInfoKeyStatsResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -128,8 +130,8 @@ public class TagInfoApp {
                 str.append("&rp=");
                 str.append(rp);
                 URL url = new URL(str.toString());
-                KeyValuesResponse resultat = new KeyValuesResponse();
-                resultat = objectMapper.readValue(url, KeyValuesResponse.class);
+                TagInfoKeyValuesResponse resultat = new TagInfoKeyValuesResponse();
+                resultat = objectMapper.readValue(url, TagInfoKeyValuesResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -145,8 +147,8 @@ public class TagInfoApp {
                 str.append(value);
 
                 URL url = new URL(str.toString());
-                TagStatsResponse resultat = new TagStatsResponse();
-                resultat = objectMapper.readValue(url, TagStatsResponse.class);
+                TagInfoTagStatsResponse resultat = new TagInfoTagStatsResponse();
+                resultat = objectMapper.readValue(url, TagInfoTagStatsResponse.class);
                 System.out.println(resultat.toString());
             }
             break;
@@ -164,8 +166,8 @@ public class TagInfoApp {
                 
                 System.out.println(str);
                 URL url = new URL(str.toString());
-                TagsPopularResponse resultat = new TagsPopularResponse();
-                resultat = objectMapper.readValue(url, TagsPopularResponse.class);
+                TagInfoTagsPopularResponse resultat = new TagInfoTagsPopularResponse();
+                resultat = objectMapper.readValue(url, TagInfoTagsPopularResponse.class);
                 System.out.println(resultat.toString());
             }
             break;

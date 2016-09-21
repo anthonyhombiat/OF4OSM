@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.ws.tagInfo;
+package lig.steamer.of4osm.ws.taginfo.tags.popular;
+
+import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
 
 /**
  * Get list of most often used tags.
  *
  * @author amehiris
  */
-public class TagsPopularData{
+public class TagInfoTagsPopularResponseData extends TagInfoResponseData {
 
     // Key
     private String key;

@@ -14,21 +14,27 @@ import java.net.URL;
  */
 public class OverPassRequest {
 
-    private final URL url;
+    private URL url;
 
-    public OverPassRequest(String bBox, String typeElement, String key, String value) throws MalformedURLException {
+    public OverPassRequest(String bBox, String typeElement, String key, String value) {
 
-        StringBuilder str = new StringBuilder();
-        str.append("http://overpass-api.de/api/interpreter?[out:json];(");
-        str.append(typeElement);
-        str.append("[");
-        str.append(key);
-        str.append("=");
-        str.append(value);
-        str.append("]");
-        str.append(bBox);
-        str.append(";);out;");
-        this.url = new URL(str.toString());
+    	try {
+    	
+	    	StringBuilder str = new StringBuilder();
+	        str.append("http://overpass-api.de/api/interpreter?[out:json];(");
+	        str.append(typeElement);
+	        str.append("[");
+	        str.append(key);
+	        str.append("=");
+	        str.append(value);
+	        str.append("]");
+	        str.append(bBox);
+	        str.append(";);out;");
+       
+			this.url = new URL(str.toString());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
     }
 
     public URL getUrl() {

@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.ws.tagInfo;
+package lig.steamer.of4osm.ws.taginfo.tag.stats;
+
+import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
 
 /**
  * Show some database statistics for given tag.
  *
  * @author amehiris
  */
-public class TagStatsData {
+public class TagInfoTagStatsResponseData extends TagInfoResponseData {
 
     // Object type ("all", "nodes", "ways" or "relations")
     private String type;
