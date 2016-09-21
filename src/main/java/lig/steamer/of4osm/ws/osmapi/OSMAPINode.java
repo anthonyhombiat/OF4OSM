@@ -5,6 +5,7 @@
  */
 package lig.steamer.of4osm.ws.osmapi;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -19,7 +20,7 @@ public class OSMAPINode {
     private String uid;
     private String lon;
     private String visible;
-    private OSMAPITag tag;
+    private List<OSMAPITag> tag;
     private String changeset;
     private String user;
     private String lat;
@@ -70,12 +71,12 @@ public class OSMAPINode {
         this.visible = visible;
     }
 
-    public OSMAPITag getTag() {
+    public List<OSMAPITag> getTag() {
         return tag;
     }
 
     @XmlElement (name="tag")
-    public void setTag(OSMAPITag tag) {
+    public void setTag(List<OSMAPITag> tag) {
         this.tag = tag;
     }
 

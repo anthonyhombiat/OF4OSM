@@ -54,7 +54,7 @@ import lig.steamer.of4osm.util.openinghours.OpeningHours;
  *
  * @author amehiris
  */
-public class String2OF4OSMFolksoParsingTool {
+public class FolksoParsingTool {
 
     public static IOSMTag typeTags(IOSMTagKey key, IOSMTagValue value) {
         IOSMTag type = null;
@@ -189,7 +189,7 @@ public class String2OF4OSMFolksoParsingTool {
 
                         }
                     } else {
-                        value = new OSMTagMultipleValue(valeur);
+                        value = new OSMTagMultipleValue(values);
                     }
                 }
             }

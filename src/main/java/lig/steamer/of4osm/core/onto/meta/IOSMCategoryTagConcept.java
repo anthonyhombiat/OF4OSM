@@ -1,6 +1,6 @@
 package lig.steamer.of4osm.core.onto.meta;
 
-import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 
 /**
  * 
@@ -10,6 +10,6 @@ public interface IOSMCategoryTagConcept extends IOSMTagConcept {
     /**
      * @return
      */
-    public IOSMSimpleCategoryTag getTag();
+    public IOSMCategoryTag getTag();
 
 }

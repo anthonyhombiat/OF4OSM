@@ -7,14 +7,14 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagMultipleValue;
  */
 public class OSMTagMultipleValue extends OSMTagValue implements IOSMTagMultipleValue {
 
-    private String values;
+    private String[] values;
 
-    public OSMTagMultipleValue(String values) {
+    public OSMTagMultipleValue(String[] values) {
         this.values = values;
     }
 
     @Override
-    public String getValues() {
+    public String[] getValues() {
         return values;
     }
     

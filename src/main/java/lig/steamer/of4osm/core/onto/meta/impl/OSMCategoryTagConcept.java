@@ -2,8 +2,8 @@ package lig.steamer.of4osm.core.onto.meta.impl;
 
 import java.util.Objects;
 import java.util.Set;
+import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 
-import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
@@ -15,19 +15,16 @@ import org.apache.commons.lang3.text.WordUtils;
  */
 public class OSMCategoryTagConcept extends OSMTagConcept implements IOSMCategoryTagConcept {
 
-    public IOSMSimpleCategoryTag tag;
+    public IOSMCategoryTag tag;
 
-    public OSMCategoryTagConcept(IOSMSimpleCategoryTag tag, IOSMCategoryTagKeyConcept tagKeyConcept) {
+    public OSMCategoryTagConcept(String label, IOSMCategoryTag tag, IOSMCategoryTagKeyConcept tagKeyConcept) {
         this.tag = tag;
-        String key = WordUtils.capitalize(tag.getKey().getValue());
-        String value = WordUtils.capitalize(tag.getValue().getValue());
-        System.out.println("name: "+value);
-        super.addLabel("EN", ""+value + key);
+        super.addLabel("EN", label);
         super.parents.add(tagKeyConcept);
     }
 
     @Override
-    public IOSMSimpleCategoryTag getTag() {
+    public IOSMCategoryTag getTag() {
         return tag;
     }
 

@@ -18,6 +18,7 @@ public class OSMTagLocalizedKey extends OSMTagKey implements IOSMTagLocalizedKey
 
     }
 
+    @Override
     public String getLocale() {
         return locale;
     }

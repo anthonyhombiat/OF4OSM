@@ -21,9 +21,9 @@ public class OSMCategoryTagKeyConcept extends OSMTagConceptParent implements IOS
     public Set<IHighLevelConcept> parents;
     public IOSMTagKey key;
 
-    public OSMCategoryTagKeyConcept(IOSMTagKey key) {
+    public OSMCategoryTagKeyConcept(String label, IOSMTagKey key) {
         this.key = key;
-        super.addLabel("EN", WordUtils.capitalize(key.getValue()));
+        super.addLabel("EN", label);
     }
 
     @Override
