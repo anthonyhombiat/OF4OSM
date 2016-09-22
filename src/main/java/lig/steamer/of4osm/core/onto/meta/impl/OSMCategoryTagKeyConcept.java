@@ -7,10 +7,10 @@ package lig.steamer.of4osm.core.onto.meta.impl;
 
 import java.util.Objects;
 import java.util.Set;
+
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
-import org.apache.commons.lang3.text.WordUtils;
 
 /**
  *

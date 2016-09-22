@@ -5,10 +5,10 @@
  */
 package lig.steamer.of4osm.util;
 
-import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
+
 import org.apache.commons.lang3.text.WordUtils;
 
 /**

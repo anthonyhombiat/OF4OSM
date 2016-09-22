@@ -58,7 +58,7 @@ public final class OSMAPI2FolksoParser {
         for (OSMAPINode node1 : resp.getNode()) {
             if (node1.getTag() != null) {
                 List<OSMAPITag> listTag = node1.getTag();
-                Set setTag = new HashSet(listTag);
+                Set<OSMAPITag> setTag = new HashSet<>(listTag);
                 tags.put(node1.getId(), setTag);
             }
         }
@@ -66,7 +66,7 @@ public final class OSMAPI2FolksoParser {
         for (OSMAPIRelation relation1 : resp.getRelation()) {
             if (relation1.getTag() != null) {
                 List<OSMAPITag> listTag = relation1.getTag();
-                Set setTag = new HashSet(listTag);
+                Set<OSMAPITag> setTag = new HashSet<>(listTag);
                 tags.put(relation1.getId(), setTag);
             }
         }
@@ -74,7 +74,7 @@ public final class OSMAPI2FolksoParser {
         for (OSMAPIWay way1 : resp.getWay()) {
             if (way1.getTag() != null) {
                 List<OSMAPITag> listTag = way1.getTag();
-                Set setTag = new HashSet(listTag);
+                Set<OSMAPITag> setTag = new HashSet<>(listTag);
                 tags.put(way1.getId(), setTag);
             }
         }

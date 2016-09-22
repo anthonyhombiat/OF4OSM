@@ -1,7 +1,6 @@
 package lig.steamer.of4osm.util;
 
 import lig.steamer.of4osm.IOF4OSMFolkso;
-import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolkso;
 import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyBooleanPropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyDatePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyNumericPropertyTag;
