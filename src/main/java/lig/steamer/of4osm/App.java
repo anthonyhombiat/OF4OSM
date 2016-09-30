@@ -52,13 +52,6 @@ public class App {
 
         IOF4OSMFolkso folkso = OSMAPI2FolksoParser.parse(resp);
 
-
-////        FileUtils.writeStringToFile(
-////                new File("C:\\Users\\amehiris\\Documents\\osmapiFolkso.csv"),
-////                Folkso2CSVParser.parse(folkso));
-//        IOF4OSMOntology onto = Folkso2OntoParser.parse(folkso);
-//        onto.afficher();
-
         FileUtils.writeStringToFile(
                 new File("C:\\Users\\amehiris\\Documents\\osmapiFolksoG.csv"),
                 Folkso2CSVParser.parse(folkso));

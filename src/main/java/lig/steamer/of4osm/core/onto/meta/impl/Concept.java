@@ -11,14 +11,11 @@ import lig.steamer.of4osm.core.onto.meta.IConcept;
  */
 public abstract class Concept implements IConcept {
 
-    
-    
     public Map<String, String> labels;
 
     public Concept() {
         this.labels = new HashMap<>();
     }
-    
 
     @Override
     public Map<String, String> getLabels() {
@@ -31,8 +28,8 @@ public abstract class Concept implements IConcept {
 
     @Override
     public abstract Set<? extends IConcept> getParents();
-    
-    public String getDefaultLabel(){
+
+    public String getDefaultLabel() {
         return labels.get("EN");
     }
 

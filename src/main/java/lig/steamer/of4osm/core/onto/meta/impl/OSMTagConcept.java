@@ -10,7 +10,7 @@ import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 /**
  *
  */
-public abstract class OSMTagConcept extends Concept implements IOSMTagConcept {
+public abstract class OSMTagConcept extends OSMTagCombinationConceptParent implements IOSMTagConcept {
 
     public Set<IOSMTagConceptParent> parents;
 
@@ -19,14 +19,9 @@ public abstract class OSMTagConcept extends Concept implements IOSMTagConcept {
     }
     
 
-    /**
-     * @return
-     */
     public abstract IOSMTag getTag();
 
-    /**
-     * @return
-     */
+    @Override
     public Set<? extends IOSMTagConceptParent> getParents() {
         return parents;
     }
