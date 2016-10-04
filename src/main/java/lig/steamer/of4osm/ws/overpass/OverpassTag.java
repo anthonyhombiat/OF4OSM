@@ -11,16 +11,16 @@ import java.util.Objects;
  *
  * @author amehiris
  */
-public class OverPassTag {
+public class OverpassTag {
     
     
     private String k;
     private String v;
 
-    public OverPassTag() {
+    public OverpassTag() {
     }
 
-    public OverPassTag(String k, String v) {
+    public OverpassTag(String k, String v) {
         this.k = k;
         this.v = v;
     }
@@ -60,7 +60,7 @@ public class OverPassTag {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final OverPassTag other = (OverPassTag) obj;
+        final OverpassTag other = (OverpassTag) obj;
         if (!Objects.equals(this.k, other.k)) {
             return false;
         }
@@ -72,7 +72,7 @@ public class OverPassTag {
 
     @Override
     public String toString() {
-        return "OverPassTag{" + "k=" + k + ", v=" + v + '}';
+        return "OverpassTag{" + "k=" + k + ", v=" + v + '}';
     }
     
     

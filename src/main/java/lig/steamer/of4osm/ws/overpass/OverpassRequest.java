@@ -12,11 +12,11 @@ import java.net.URL;
  *
  * @author amehiris
  */
-public class OverPassRequest {
+public class OverpassRequest {
 
     private URL url;
 
-    public OverPassRequest(String bBox, String typeElement, String key, String value) {
+    public OverpassRequest(String bBox, String typeElement, String key, String value) {
 
     	try {
     	

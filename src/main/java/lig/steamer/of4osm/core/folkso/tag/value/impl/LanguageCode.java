@@ -4,7 +4,7 @@ package lig.steamer.of4osm.core.folkso.tag.value.impl;
  *
  * @author amehiris
  */
-public enum LanguesCode {
+public enum LanguageCode {
 
     // Liste_des_codes_ISO_639-1  langues   
     aa, ab, ae, af, ak,

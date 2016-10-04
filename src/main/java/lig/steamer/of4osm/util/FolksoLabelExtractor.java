@@ -15,18 +15,27 @@ import org.apache.commons.lang3.text.WordUtils;
  *
  * @author amehiris
  */
-public final class OntoLabelExtractor {
+public final class FolksoLabelExtractor {
     
     public static String getLabelFromIOSMSimpleCategoryTag(IOSMSimpleCategoryTag tag){
-        return WordUtils.capitalize(tag.getValue().getValue()) + WordUtils.capitalize(tag.getKey().getValue());
+    	String label = ""; 
+    	label += WordUtils.capitalize(tag.getValue().getValue().replace(' ', '_'));
+    	label += WordUtils.capitalize(tag.getKey().getValue().replace(' ', '_'));
+        return  label;
     }
     
     public static String getLabelFromIOSMMultipleCategoryTag(IOSMMultipleCategoryTag tag, int position){
-        return  WordUtils.capitalize(tag.getValue().getValues()[position]) + WordUtils.capitalize(tag.getKey().getValue());
+    	String label = ""; 
+    	label += WordUtils.capitalize(tag.getValue().getValues()[position].replace(' ', '_'));
+    	label += WordUtils.capitalize(tag.getKey().getValue().replace(' ', '_'));
+        return  label;
     }
     
     public static String getLabelFromIOSMStatefulCategoryTag(IOSMStatefulCategoryTag tag){
-        return WordUtils.capitalize(tag.getValue().getValue()) + WordUtils.capitalize(tag.getKey().getValue());
+    	String label = ""; 
+    	label += WordUtils.capitalize(tag.getValue().getValue());
+    	label += WordUtils.capitalize(tag.getKey().getValue());
+        return  label;
     }
     
 }

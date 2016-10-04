@@ -13,15 +13,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author amehiris
  */
-public class OverPassResponse {
+public class OverpassResponse {
 
     private String version;
 
     private String generator;
 
-    private OverPassOsm3s osm3s;
+    private OverpassOsm3s osm3s;
 
-    private List<OverPassElement> elements;
+    private List<OverpassElement> elements;
 
     public String getVersion() {
         return version;
@@ -40,20 +40,20 @@ public class OverPassResponse {
     }
 
     @JsonProperty("osm3s")
-    public OverPassOsm3s getOsm3s() {
+    public OverpassOsm3s getOsm3s() {
         return osm3s;
     }
 
-    public void setOsm3s(OverPassOsm3s osm3s) {
+    public void setOsm3s(OverpassOsm3s osm3s) {
         this.osm3s = osm3s;
     }
 
     @JsonProperty("elements")
-    public List<OverPassElement> getElements() {
+    public List<OverpassElement> getElements() {
         return elements;
     }
 
-    public void setElements(List<OverPassElement> elements) {
+    public void setElements(List<OverpassElement> elements) {
         this.elements = elements;
     }
 

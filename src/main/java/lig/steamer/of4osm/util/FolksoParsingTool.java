@@ -32,7 +32,7 @@ import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagLocalizedKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagStatefulKey;
-import lig.steamer.of4osm.core.folkso.tag.key.impl.PropertyTagKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.AdditionalProperty;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagBooleanValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagMultipleValue;
@@ -40,7 +40,7 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagNumericValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagTimeDomainsValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
-import lig.steamer.of4osm.core.folkso.tag.value.impl.LanguesCode;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.LanguageCode;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.LifecycleState;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagDateValue;
@@ -135,7 +135,9 @@ public class FolksoParsingTool {
             "access", "agricultural", "atv", "bdouble", "bicycle", "boat", "emergency", "foot", "forestry", "goods",
             "hazmat", "hgv", "horse", "inline_skates", "lhv", "mofa", "moped", "motorboat", "motorcar", "motorcycle", "motor_vehicle",
             "psv", "roadtrain", "ski", "tank", "vehicle", "4wd_only", "charge", "maxheight", "maxlength", "maxspeed",
-            "maxstay", "maxweight", "maxwidth", "minspeed", "noexit", "oneway", "Relation", "toll", "traffic_sign"};
+            "maxstay", "maxweight", "maxwidth", "minspeed", "noexit", "oneway", "Relation", "toll", "traffic_sign",
+            "colour", "color"//to be changed
+        };
 
         int i = 0;
         while (i < property.length && !property[i].equals(clef)) {
@@ -149,7 +151,7 @@ public class FolksoParsingTool {
         String[] clefs = clef.split(":");
         if (clefs.length == 1) {
             key = new OSMTagSimpleKey(clef, wikiURL);
-        } else if ((clefs.length == 2) && (containslangueCode(clefs[1]))) {
+        } else if ((clefs.length == 2) && (containsLanguageCode(clefs[1]))) {
             key = new OSMTagLocalizedKey(clef, wikiURL);
         } else if ((clefs.length == 2) && (containsLifecycleState(clefs[1]))) {
             key = new OSMTagStatefulKey(clef, wikiURL);
@@ -159,34 +161,29 @@ public class FolksoParsingTool {
         return key;
     }
 
-    public static IOSMTagValue stringToValue(String valeur) throws Exception {
+    public static IOSMTagValue stringToValue(String valeur) {
 
         IOSMTagValue value;
-        //OpeningHours?
+        
+        // OpeningHours?
         if (OpeningHours.isOpeningHours(valeur)) {
             value = new OSMTagTimeDomainsValue(valeur);
-        } else //BolleanValue??
-        {
+        } else { // BooleanValue??
             if (valeur.equals("yes") || valeur.equals("no") || valeur.equals("oui") || valeur.equals("non")) {
-                value = new OSMTagBooleanValue(valeur);
-
-            } else //DateValue ?? 
-            {
+            	value = new OSMTagBooleanValue(valeur);
+            } else { // DateValue? 
                 if (isDate(valeur)) {
                     value = new OSMTagDateValue(valeur);
-
                 } else {
-                    //NumericValue ??
+                    // NumericValue?
                     String[] values = valeur.split(";");
                     if (values.length == 1) {
-                        //NumericSimpleValue ??
+                        // NumericSimpleValue?
                         try {
                             double d = Double.parseDouble(valeur);
                             value = new OSMTagNumericValue(d);
                         } catch (NumberFormatException nfe) {
-
                             value = new OSMTagStringValue(valeur);
-
                         }
                     } else {
                         value = new OSMTagMultipleValue(values);
@@ -229,9 +226,9 @@ public class FolksoParsingTool {
         return true;
     }
 
-    public static boolean containslangueCode(String langueCode) {
+    public static boolean containsLanguageCode(String langueCode) {
 
-        for (LanguesCode c : LanguesCode.values()) {
+        for (LanguageCode c : LanguageCode.values()) {
             if (c.name().equals(langueCode)) {
                 return true;
             }
@@ -251,10 +248,10 @@ public class FolksoParsingTool {
         return false;
     }
 
-    public static boolean containsProperty(String property) {
+    public static boolean containsAdditionalProperty(String additionalProperty) {
 
-        for (PropertyTagKey c : PropertyTagKey.values()) {
-            if (c.toString().equals(property)) {
+        for (AdditionalProperty c : AdditionalProperty.values()) {
+            if (c.toString().equals(additionalProperty)) {
                 return true;
             }
         }
@@ -262,7 +259,7 @@ public class FolksoParsingTool {
         return false;
     }
 
-    public static boolean parseOpeningHours(String s) throws Exception {
+    public static boolean parseOpeningHours(String s) {
         return OpeningHours.isOpeningHours(s);
     }
 

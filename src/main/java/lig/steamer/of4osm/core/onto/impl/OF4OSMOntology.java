@@ -5,10 +5,9 @@
  */
 package lig.steamer.of4osm.core.onto.impl;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
+
 import lig.steamer.of4osm.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.meta.IConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
@@ -22,60 +21,76 @@ import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
  */
 public class OF4OSMOntology implements IOF4OSMOntology {
 
-    Map<IOSMCategoryTagKeyConcept, Integer> tagKeyConceptMap;
-    Map<IOSMCategoryTagConcept, Integer> categoryTagConceptMap;
+    Set<IOSMCategoryTagKeyConcept> categoryTagKeyConcepts;
+    Set<IOSMCategoryTagConcept> categoryTagConcepts;
 
-    Set<IOSMTagCombinationConcept> tagCombinationConceptSet;
+    Set<IOSMTagCombinationConcept> tagCombinationConcepts;
 
     public OF4OSMOntology() {
-        this.tagKeyConceptMap = new HashMap<>();
-        this.categoryTagConceptMap = new HashMap<>();
-        this.tagCombinationConceptSet = new HashSet<>();
+        this.categoryTagKeyConcepts = new HashSet<>();
+        this.categoryTagConcepts = new HashSet<>();
+        this.tagCombinationConcepts = new HashSet<>();
     }
 
     @Override
-    public void addConcept(IConcept concept, int nbInstances) {
+    public void addConcept(IConcept concept) {
 
         if (IOSMCategoryTagKeyConcept.class.isInstance(concept)) {
-            this.tagKeyConceptMap.put((IOSMCategoryTagKeyConcept) concept, nbInstances);
+            this.categoryTagKeyConcepts.add((IOSMCategoryTagKeyConcept) concept);
         }
         if (IOSMCategoryTagConcept.class.isInstance(concept)) {
-            this.categoryTagConceptMap.put((IOSMCategoryTagConcept) concept, nbInstances);
+            this.categoryTagConcepts.add((IOSMCategoryTagConcept) concept);
         }
         if (IOSMTagCombinationConcept.class.isInstance(concept)) {
-            this.tagCombinationConceptSet.add((IOSMTagCombinationConcept) concept);
+            this.tagCombinationConcepts.add((IOSMTagCombinationConcept) concept);
         }
 
     }
 
-    @Override
-    public void afficher() {
+	@Override
+	public Set<IOSMTagCombinationConcept> getOSMTagCombinationConcepts() {
+		return tagCombinationConcepts;
+	}
 
-        for (Map.Entry<IOSMCategoryTagKeyConcept, Integer> entryKeyConcept : tagKeyConceptMap.entrySet()) {
+	@Override
+	public Set<IOSMCategoryTagKeyConcept> getOSMCategoryTagKeyConcepts() {
+		return categoryTagKeyConcepts;
+	}
+
+	@Override
+	public Set<IOSMCategoryTagConcept> getOSMCategoryTagConcepts() {
+		return categoryTagConcepts;
+	}
+
+	@Override
+    public String toString() {
+
+    	String result = "";
+    	
+        for (IOSMCategoryTagKeyConcept entryKeyConcept : categoryTagKeyConcepts) {
             int i = 0;
-            int nb = 0;
-            System.out.println(entryKeyConcept.getKey());
+           result += entryKeyConcept;
 
-            for (Map.Entry<IOSMCategoryTagConcept, Integer> entryTagConcept : categoryTagConceptMap.entrySet()) {
+            for (IOSMCategoryTagConcept entryTagConcept : categoryTagConcepts) {
 
-                for (IOSMTagConceptParent parent : entryTagConcept.getKey().getParents()) {
+                for (IOSMTagConceptParent parent : entryTagConcept.getParents()) {
 
                     if (entryKeyConcept.getKey().equals((IOSMCategoryTagKeyConcept) parent)) {
 
-                        System.out.println("|\t" + entryTagConcept.getValue() + " : " + entryTagConcept.getKey());
+                    	result += "|\t " + entryTagConcept;
+                        
                         i++;
-                        nb = nb + entryTagConcept.getValue();
-
                     }
                 }
             }
-            System.out.println("|--> nbr de fils  " + i);
-            System.out.println("|--> nbr d'instance  " + nb + "\n");
+            result += "|--> nbr de fils  " + i;
         }
-//        for (IOSMTagCombinationConcept tag : tagCombinationConceptSet) {
-//            System.out.println(tag);
-//        }
+        for (IOSMTagCombinationConcept tag : tagCombinationConcepts) {
+        	result += tag;
+        }
+        
+        return result;
 
     }
-
+	
 }

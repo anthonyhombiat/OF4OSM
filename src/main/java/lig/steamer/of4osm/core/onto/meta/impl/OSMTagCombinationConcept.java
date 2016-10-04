@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import lig.steamer.of4osm.core.onto.meta.IOSMTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConceptParent;
 

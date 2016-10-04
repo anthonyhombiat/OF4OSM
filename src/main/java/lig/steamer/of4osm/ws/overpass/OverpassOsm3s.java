@@ -10,7 +10,7 @@ package lig.steamer.of4osm.ws.overpass;
  * @author amehiris
  */
 
-public class OverPassOsm3s {
+public class OverpassOsm3s {
     
     private String timestamp_osm_base;
     

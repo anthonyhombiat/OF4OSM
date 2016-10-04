@@ -15,16 +15,16 @@ import java.io.IOException;
  *
  * @author amehiris
  */
-public class OverPassClient {
+public class OverpassClient {
 
-    public OverPassClient() {
+    public OverpassClient() {
     }
     
-    public OverPassResponse send(OverPassRequest req) {
+    public OverpassResponse send(OverpassRequest req) {
         
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
-	        return objectMapper.readValue(req.getUrl(), OverPassResponse.class);
+	        return objectMapper.readValue(req.getUrl(), OverpassResponse.class);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

@@ -5,7 +5,9 @@
  */
 package lig.steamer.of4osm.ws.osmapi;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,10 +21,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class OSMAPIResponse {
 
     private OSMAPIBounds bounds;
-    private List<OSMAPINode> node;
-    private List<OSMAPIRelation> relation;
+    private List<OSMAPINode> nodes;
+    private List<OSMAPIWay> ways;
+    private List<OSMAPIRelation> relations;
     private String generator;
-    private List<OSMAPIWay> way;
     private String copyright;
     private String license;
     private String attribution;
@@ -37,22 +39,22 @@ public class OSMAPIResponse {
         this.bounds = bounds;
     }
 
-    public List<OSMAPINode> getNode() {
-        return node;
+    public List<OSMAPINode> getNodes() {
+        return nodes;
     }
 
     @XmlElement (name="node")
-    public void setNode(List<OSMAPINode> node) {
-        this.node = node;
+    public void setNodes(List<OSMAPINode> nodes) {
+        this.nodes = nodes;
     }
 
-    public List<OSMAPIRelation> getRelation() {
-        return relation;
+    public List<OSMAPIRelation> getRelations() {
+        return relations;
     }
 
     @XmlElement (name="relation")
-    public void setRelation(List<OSMAPIRelation> relation) {
-        this.relation = relation;
+    public void setRelations(List<OSMAPIRelation> relations) {
+        this.relations = relations;
     }
 
     public String getGenerator() {
@@ -64,13 +66,13 @@ public class OSMAPIResponse {
         this.generator = generator;
     }
 
-    public List<OSMAPIWay> getWay() {
-        return way;
+    public List<OSMAPIWay> getWays() {
+        return ways;
     }
 
     @XmlElement (name="way")
-    public void setWay(List<OSMAPIWay> way) {
-        this.way = way;
+    public void setWays(List<OSMAPIWay> ways) {
+        this.ways = ways;
     }
 
     public String getCopyright() {
@@ -108,14 +110,22 @@ public class OSMAPIResponse {
     public void setVersion(String version) {
         this.version = version;
     }
+    
+    public List<OSMAPIElement> getElements(){
+    	List<OSMAPIElement> elements = new ArrayList<OSMAPIElement>();
+    	elements.addAll(nodes);
+    	elements.addAll(ways);
+    	elements.addAll(relations);
+    	return elements;
+    }
 
     @Override
     public String toString() {
         return "Osm{" + "bounds=" + bounds + 
-        		", node=" + node + 
-        		", relation=" + relation + 
+        		", node=" + nodes + 
+        		", relation=" + relations + 
         		", generator=" + generator + 
-        		", way=" + way + 
+        		", way=" + ways + 
         		", copyright=" + copyright + 
         		", license=" + license + 
         		", attribution=" + attribution + 

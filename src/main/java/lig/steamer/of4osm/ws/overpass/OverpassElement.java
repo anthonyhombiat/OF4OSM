@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author amehiris
  */
-public class OverPassElement {
+public class OverpassElement {
 
     private String type;
 

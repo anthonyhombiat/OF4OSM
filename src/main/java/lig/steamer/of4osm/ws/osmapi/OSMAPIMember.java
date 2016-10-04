@@ -14,9 +14,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class OSMAPIMember {
    
 	private String ref;
-
     private String role;
-
     private String type;
 
     public String getRef() {

@@ -10,18 +10,18 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import lig.steamer.of4osm.IOF4OSMFolkso;
+import lig.steamer.of4osm.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 
 /**
  *
  * @author amehiris
  */
-public class OF4OSMFolkso implements IOF4OSMFolkso {
+public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
 
     private Map<String, Set<IOSMTag>> tags;
 
-    public OF4OSMFolkso() {
+    public OF4OSMFolksonomy() {
         tags = new HashMap<>();
     }
 

@@ -14,11 +14,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class OSMAPIBounds {
 
     private String minlat;
-
     private String maxlat;
-
     private String maxlon;
-
     private String minlon;
 
     public String getMinlat() {
