@@ -8,18 +8,18 @@ import java.util.logging.Logger;
 
 import lig.steamer.of4osm.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.PropLoader;
-import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyBooleanPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyDatePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyNumericPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyStringPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyBooleanValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyDateValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyNumericValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyStringValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMLocalizedKeyStringValueTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleValuePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleBooleanPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyBooleanValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleDatePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleNumericPropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleStringPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyDateValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyNumericValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyStringValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTimeDomainsValuePropertyTag;
@@ -93,27 +93,27 @@ public final class Folkso2CSVWriter {
         }
         
         // simpleBooleanPropertyTag
-        content += "\n\n" + folkso.getTagsByType(IOSMSimpleBooleanPropertyTag.class).size() + ";simpleBooleanPropertyTag\n";
-        for (IOSMTag key : folkso.getTagsByType(IOSMSimpleBooleanPropertyTag.class).keySet()) {
-            content += "\n;;" + folkso.getTagsByType(IOSMSimpleBooleanPropertyTag.class).get(key) + ";" + key;
+        content += "\n\n" + folkso.getTagsByType(IOSMSimpleKeyBooleanValuePropertyTag.class).size() + ";simpleBooleanPropertyTag\n";
+        for (IOSMTag key : folkso.getTagsByType(IOSMSimpleKeyBooleanValuePropertyTag.class).keySet()) {
+            content += "\n;;" + folkso.getTagsByType(IOSMSimpleKeyBooleanValuePropertyTag.class).get(key) + ";" + key;
         }
         
         // simpleStringPropertyTag
-        content += "\n\n" + folkso.getTagsByType(IOSMSimpleStringPropertyTag.class).size() + ";simpleStringPropertyTag\n";
-        for (IOSMTag key : folkso.getTagsByType(IOSMSimpleStringPropertyTag.class).keySet()) {
-            content += "\n;;" + folkso.getTagsByType(IOSMSimpleStringPropertyTag.class).get(key) + ";" + key;
+        content += "\n\n" + folkso.getTagsByType(IOSMSimpleKeyStringValuePropertyTag.class).size() + ";simpleStringPropertyTag\n";
+        for (IOSMTag key : folkso.getTagsByType(IOSMSimpleKeyStringValuePropertyTag.class).keySet()) {
+            content += "\n;;" + folkso.getTagsByType(IOSMSimpleKeyStringValuePropertyTag.class).get(key) + ";" + key;
         }
         
         // simpleNumericPropertyTag
-        content += "\n\n" + folkso.getTagsByType(IOSMSimpleNumericPropertyTag.class).size() + ";simpleNumericPropertyTag\n";
-        for (IOSMTag key : folkso.getTagsByType(IOSMSimpleNumericPropertyTag.class).keySet()) {
-            content += "\n;;" + folkso.getTagsByType(IOSMSimpleNumericPropertyTag.class).get(key) + ";" + key;
+        content += "\n\n" + folkso.getTagsByType(IOSMSimpleKeyNumericValuePropertyTag.class).size() + ";simpleNumericPropertyTag\n";
+        for (IOSMTag key : folkso.getTagsByType(IOSMSimpleKeyNumericValuePropertyTag.class).keySet()) {
+            content += "\n;;" + folkso.getTagsByType(IOSMSimpleKeyNumericValuePropertyTag.class).get(key) + ";" + key;
         }
         
         // simpleDatePropertyTag
-        content += "\n\n" + folkso.getTagsByType(IOSMSimpleDatePropertyTag.class).size() + ";simpleDatePropertyTag\n";
-        for (IOSMTag key : folkso.getTagsByType(IOSMSimpleDatePropertyTag.class).keySet()) {
-            content += "\n;;" + folkso.getTagsByType(IOSMSimpleDatePropertyTag.class).get(key) + ";" + key;
+        content += "\n\n" + folkso.getTagsByType(IOSMSimpleKeyDateValuePropertyTag.class).size() + ";simpleDatePropertyTag\n";
+        for (IOSMTag key : folkso.getTagsByType(IOSMSimpleKeyDateValuePropertyTag.class).keySet()) {
+            content += "\n;;" + folkso.getTagsByType(IOSMSimpleKeyDateValuePropertyTag.class).get(key) + ";" + key;
         }
         
         // simpleDatePropertyTag
@@ -124,27 +124,27 @@ public final class Folkso2CSVWriter {
 
         // Complex Key
         // complexKeyBooleanPropertyTag
-        content += "\n\n" + folkso.getTagsByType(IOSMComplexKeyBooleanPropertyTag.class).size() + ";complexKeyBooleanPropertyTag\n";
-        for (IOSMTag key : folkso.getTagsByType(IOSMComplexKeyBooleanPropertyTag.class).keySet()) {
-            content += "\n;;" + folkso.getTagsByType(IOSMComplexKeyBooleanPropertyTag.class).get(key) + ";" + key;
+        content += "\n\n" + folkso.getTagsByType(IOSMComplexKeyBooleanValuePropertyTag.class).size() + ";complexKeyBooleanPropertyTag\n";
+        for (IOSMTag key : folkso.getTagsByType(IOSMComplexKeyBooleanValuePropertyTag.class).keySet()) {
+            content += "\n;;" + folkso.getTagsByType(IOSMComplexKeyBooleanValuePropertyTag.class).get(key) + ";" + key;
         }
         
         // complexKeyStringPropertyTag
-        content += "\n\n" + folkso.getTagsByType(IOSMComplexKeyStringPropertyTag.class).size() + ";complexKeyStringPropertyTag\n";
-        for (IOSMTag key : folkso.getTagsByType(IOSMComplexKeyStringPropertyTag.class).keySet()) {
-            content += "\n;;" + folkso.getTagsByType(IOSMComplexKeyStringPropertyTag.class).get(key) + ";" + key;
+        content += "\n\n" + folkso.getTagsByType(IOSMComplexKeyStringValuePropertyTag.class).size() + ";complexKeyStringPropertyTag\n";
+        for (IOSMTag key : folkso.getTagsByType(IOSMComplexKeyStringValuePropertyTag.class).keySet()) {
+            content += "\n;;" + folkso.getTagsByType(IOSMComplexKeyStringValuePropertyTag.class).get(key) + ";" + key;
         }
         
         // complexKeyNumericPropertyTag
-        content += "\n\n" + folkso.getTagsByType(IOSMComplexKeyNumericPropertyTag.class).size() + ";complexKeyNumericPropertyTag\n";
-        for (IOSMTag key : folkso.getTagsByType(IOSMComplexKeyNumericPropertyTag.class).keySet()) {
-            content += "\n;;" + folkso.getTagsByType(IOSMComplexKeyNumericPropertyTag.class).get(key) + ";" + key;
+        content += "\n\n" + folkso.getTagsByType(IOSMComplexKeyNumericValuePropertyTag.class).size() + ";complexKeyNumericPropertyTag\n";
+        for (IOSMTag key : folkso.getTagsByType(IOSMComplexKeyNumericValuePropertyTag.class).keySet()) {
+            content += "\n;;" + folkso.getTagsByType(IOSMComplexKeyNumericValuePropertyTag.class).get(key) + ";" + key;
         }
         
         // complexKeyDatePropertyTag
-        content += "\n\n" + folkso.getTagsByType(IOSMComplexKeyDatePropertyTag.class).size() + ";complexKeyDatePropertyTag\n";
-        for (IOSMTag key : folkso.getTagsByType(IOSMComplexKeyDatePropertyTag.class).keySet()) {
-            content += "\n;;" + folkso.getTagsByType(IOSMComplexKeyDatePropertyTag.class).get(key) + ";" + key;
+        content += "\n\n" + folkso.getTagsByType(IOSMComplexKeyDateValuePropertyTag.class).size() + ";complexKeyDatePropertyTag\n";
+        for (IOSMTag key : folkso.getTagsByType(IOSMComplexKeyDateValuePropertyTag.class).keySet()) {
+            content += "\n;;" + folkso.getTagsByType(IOSMComplexKeyDateValuePropertyTag.class).get(key) + ";" + key;
         }
 
         LOGGER.log(Level.INFO, "Parsing the OSM folksonomy to CSV is done.");

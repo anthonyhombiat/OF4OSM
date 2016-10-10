@@ -1,6 +1,6 @@
 package lig.steamer.of4osm.core.onto.meta;
 
-import lig.steamer.of4osm.core.folkso.tag.IOSMNumericPropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMNumericValuePropertyTag;
 
 /**
  * 
@@ -20,6 +20,6 @@ public interface IOSMDiscretizedOSMNumericPropertyTagConcept extends IOSMDiscret
     /**
      * @return
      */
-    public IOSMNumericPropertyTag getTag();
+    public IOSMNumericValuePropertyTag getTag();
 
 }

@@ -68,6 +68,4 @@ public class OSMCategoryTagKeyConcept extends OSMTagConceptParent implements IOS
         return "{" + getDefaultLabel() + '}';
     }
     
-    
-
 }

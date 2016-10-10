@@ -2,7 +2,7 @@ package lig.steamer.of4osm.core.onto.meta;
 
 import java.util.Date;
 
-import lig.steamer.of4osm.core.folkso.tag.IOSMDatePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMDateValuePropertyTag;
 
 /**
  * 
@@ -22,6 +22,6 @@ public interface IOSMDiscretizedOSMDatePropertyTagConcept extends IOSMDiscretize
     /**
      * @return
      */
-    public IOSMDatePropertyTag getTag();
+    public IOSMDateValuePropertyTag getTag();
 
 }

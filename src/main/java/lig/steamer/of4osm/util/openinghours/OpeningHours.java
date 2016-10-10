@@ -20,40 +20,39 @@ public class OpeningHours {
     
     public static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("JavaScript");
     
-    
     public static boolean isOpeningHours(String str) {
        
     	try{
 	    	if (str.length() == 0) {
-	            System.out.println("Please give opening_hours value as first parameter.");
+	           // System.out.println("Please give opening_hours value as first parameter.");
 	            return false;     
 	        }
 	        initialize();
 	        
-	        System.out.println("initialized");
+	        //System.out.println("initialized");
 	        
 	        final Object r = ((Invocable) ENGINE).invokeFunction("oh", str, 0 /* oh_mode */);
 	        
 	        for (final Object i : getList(((Invocable) ENGINE).invokeMethod(r, "getErrors"))) {
-	            System.err.println(i.toString().trim());
+	            //System.err.println(i.toString().trim());
 	            return false;
 	        }
 	        for (final Object i : getList(((Invocable) ENGINE).invokeMethod(r, "getWarnings"))) {
-	            System.err.println(i.toString().trim());
+	            //System.err.println(i.toString().trim());
 	            return false;
 	        }
-	        System.out.print(r);
+	        //System.out.print(r);
 	        ScriptObjectMirror ro =  (ScriptObjectMirror) r;
-	        System.out.println("r isWeekStable:  " +  ro.callMember("isWeekStable"));
+	        //System.out.println("r isWeekStable:  " +  ro.callMember("isWeekStable"));
 	        
 	        Date d = new Date();
-	        System.out.println(d);
+	        //System.out.println(d);
 //        Invocable invocable = (Invocable) ENGINE;
 //        ScriptObjectMirror result = (ScriptObjectMirror)
 //         invocable.invokeFunction("getState", d);
 //        System.out.println(result.
 	       
-	        System.out.println("r getState:  " +  ro.callMember("getState"));
+	        //System.out.println("r getState:  " +  ro.callMember("getState"));
 	        return true ;
     	}catch(Exception e){
     		e.printStackTrace();

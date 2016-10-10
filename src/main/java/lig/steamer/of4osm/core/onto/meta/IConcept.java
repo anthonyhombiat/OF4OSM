@@ -17,6 +17,11 @@ public interface IConcept {
     /**
      * @return
      */
+    public String getDefaultLabel();
+    
+    /**
+     * @return
+     */
     public Set<? extends IConcept> getParents();
 
 }

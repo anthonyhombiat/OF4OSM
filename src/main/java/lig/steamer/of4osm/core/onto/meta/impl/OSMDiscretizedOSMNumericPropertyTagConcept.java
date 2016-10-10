@@ -1,10 +1,6 @@
 package lig.steamer.of4osm.core.onto.meta.impl;
 
-import java.util.Map;
-import java.util.Set;
-import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
-import lig.steamer.of4osm.core.folkso.tag.IOSMNumericPropertyTag;
-import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
+import lig.steamer.of4osm.core.folkso.tag.IOSMNumericValuePropertyTag;
 import lig.steamer.of4osm.core.onto.meta.IOSMDiscretizedOSMNumericPropertyTagConcept;
 
 /**
@@ -12,65 +8,32 @@ import lig.steamer.of4osm.core.onto.meta.IOSMDiscretizedOSMNumericPropertyTagCon
  */
 public class OSMDiscretizedOSMNumericPropertyTagConcept extends OSMDiscretizedOSMPropertyTagConcept implements IOSMDiscretizedOSMNumericPropertyTagConcept {
 
-    /**
-     * Default constructor
-     */
+	public IOSMNumericValuePropertyTag tag;
+	public Double binf;
+	public Double bsup;
+	    
     public OSMDiscretizedOSMNumericPropertyTagConcept() {
     }
-
-    /**
-     * 
-     */
-    public IOSMNumericPropertyTag tag;
-
-    /**
-     * 
-     */
-    public Double binf;
-
-    /**
-     * 
-     */
-    public Double bsup;
 
     /**
      * @return
      */
     public Double getBinf() {
-        // TODO implement here
-        return null;
+        return binf;
     }
 
     /**
      * @return
      */
     public Double getBsup() {
-        // TODO implement here
-        return null;
+       return bsup;
     }
 
     /**
      * @return
      */
-    public IOSMNumericPropertyTag getTag() {
-        // TODO implement here
-        return null;
+    public IOSMNumericValuePropertyTag getTag() {
+        return tag;
     }
-
-    @Override
-    public IOSMTagKey getKey() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Map<String, String> getLabels() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Set<IHighLevelConcept> getParents() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
 }

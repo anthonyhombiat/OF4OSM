@@ -58,7 +58,5 @@ public class OSMTagCombinationConcept extends OSMTagCombinationConceptParent imp
         }
         return true;
     }
-
-    
     
 }

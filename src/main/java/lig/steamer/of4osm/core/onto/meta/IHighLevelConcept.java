@@ -10,7 +10,7 @@ public interface IHighLevelConcept extends IOSMTagConceptParent {
     /**
      * @return
      */
-    public Set<? extends IHighLevelConcept> getParents();
+    public Set<? extends IHighLevelConceptParent> getParents();
 
     /**
      * @return

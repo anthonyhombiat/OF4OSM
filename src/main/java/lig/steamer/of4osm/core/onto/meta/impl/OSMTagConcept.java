@@ -18,7 +18,6 @@ public abstract class OSMTagConcept extends OSMTagCombinationConceptParent imple
         this.parents = new HashSet<>();
     }
     
-
     public abstract IOSMTag getTag();
 
     @Override
@@ -26,6 +25,4 @@ public abstract class OSMTagConcept extends OSMTagCombinationConceptParent imple
         return parents;
     }
 
-
-    
 }

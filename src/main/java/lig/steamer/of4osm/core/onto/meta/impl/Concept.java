@@ -28,7 +28,8 @@ public abstract class Concept implements IConcept {
 
     @Override
     public abstract Set<? extends IConcept> getParents();
-
+ 
+    @Override
     public String getDefaultLabel() {
         return labels.get("EN");
     }

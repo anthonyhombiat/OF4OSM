@@ -3,42 +3,32 @@ package lig.steamer.of4osm.core.onto.meta.impl;
 import java.util.Set;
 
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
+import lig.steamer.of4osm.core.onto.meta.IHighLevelConceptParent;
 
 /**
  * 
+ * @author Anthony Hombiat
+ *
  */
-public class HighLevelConcept extends Concept implements IHighLevelConcept {
+public class HighLevelConcept extends Concept implements IHighLevelConcept, IHighLevelConceptParent {
 
-    /**
-     * Default constructor
-     */
-    public HighLevelConcept() {
+	public String description;
+    public Set<IHighLevelConceptParent> parents;
+	
+    public HighLevelConcept(String label) {
+    	super.addLabel("EN", label);
     }
 
-    /**
-     * 
-     */
-    public Set<IHighLevelConcept> parents;
-
-    /**
-     * 
-     */
-    public String description;
-
-    /**
-     * @return
-     */
-    public Set<? extends IHighLevelConcept> getParents() {
-      
-        return null;
+    public Set<? extends IHighLevelConceptParent> getParents() {
+        return parents;
     }
-
-    /**
-     * @return
-     */
+    
     public String getDescription() {
-        // TODO implement here
-        return "";
+        return description;
     }
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 }
