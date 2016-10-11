@@ -1,12 +1,13 @@
-package lig.steamer.of4osm.core.folkso.tag.value.impl;
+package lig.steamer.of4osm.core.folkso.tag.key.impl;
 
 /**
  *
  * @author amehiris
+ * ISO 639-1 language codes
+ * https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
  */
 public enum LanguageCode {
 
-    // Liste_des_codes_ISO_639-1  langues   
     aa, ab, ae, af, ak,
     am, an, ar, as, av, ay, az, ba, be, bg, bh, bi, bm, bn,
     bo, br, bs, ca, ce, ch, co, cr, cs, cu, cv, cy, da, de,

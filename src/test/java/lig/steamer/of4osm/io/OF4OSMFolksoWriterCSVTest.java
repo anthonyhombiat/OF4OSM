@@ -1,5 +1,7 @@
 package lig.steamer.of4osm.io;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,11 +15,11 @@ import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 
-public class Folkso2CSVWriterTest extends TestCase {
+public class OF4OSMFolksoWriterCSVTest extends TestCase {
 
 	private OF4OSMFolksonomy folkso;
 	
-	public Folkso2CSVWriterTest(String name) {
+	public OF4OSMFolksoWriterCSVTest(String name) {
 		
 		super(name);
 		
@@ -45,11 +47,12 @@ public class Folkso2CSVWriterTest extends TestCase {
 	}
 
 	public void testParse(){
-        assertNotNull(Folkso2CSVWriter.parse(folkso));
+        assertNotNull(OF4OSMFolksoWriterCSV.parse(folkso));
 	}
 	
 	public void testWrite(){
-		Folkso2CSVWriter.write(folkso);
+		String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		OF4OSMFolksoWriterCSV.write(folkso, "test" + now);
 	}
 	
 }

@@ -13,8 +13,8 @@ public class OSMTagStatefulKey extends OSMTagKey implements IOSMTagStatefulKey {
     public OSMTagStatefulKey(String value, String wikiURL) {
         super(value, wikiURL);
         String[] values = value.split(":");
-        this.value = values[0];
-        this.state = values[1];
+        this.value = values[1];
+        this.state = values[0];
     }
 
     @Override

@@ -25,7 +25,7 @@ public enum AdditionalProperty {
         if (this == fourwd_only) {
             return "4wd_only";
         }
-        return super.toString();
+        return super.name();
     }
 
 }

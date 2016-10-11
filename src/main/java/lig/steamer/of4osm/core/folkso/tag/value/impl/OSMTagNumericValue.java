@@ -3,6 +3,8 @@ package lig.steamer.of4osm.core.folkso.tag.value.impl;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagNumericValue;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public class OSMTagNumericValue extends OSMTagValue implements IOSMTagNumericValue {

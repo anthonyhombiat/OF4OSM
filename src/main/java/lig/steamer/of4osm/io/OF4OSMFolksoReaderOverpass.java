@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.parse;
+package lig.steamer.of4osm.io;
 
-import static lig.steamer.of4osm.util.FolksoParsingTool.stringToKey;
-import static lig.steamer.of4osm.util.FolksoParsingTool.stringToValue;
-import static lig.steamer.of4osm.util.FolksoParsingTool.typeTags;
+import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyKey;
+import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyValue;
+import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyTag;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,13 +29,13 @@ import lig.steamer.of4osm.ws.overpass.OverpassResponse;
  *
  * @author amehiris
  */
-public final class Overpass2FolksoParser {
+public final class OF4OSMFolksoReaderOverpass {
 	
-	private static final Logger LOGGER = Logger.getLogger(Overpass2FolksoParser.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolksoReaderOverpass.class.getName());
 
-    public static IOF4OSMFolksonomy parse(OverpassResponse resp) {
+    public static IOF4OSMFolksonomy read(OverpassResponse resp) {
 
-    	LOGGER.log(Level.INFO, "Parsing the Overpass Response...");
+    	LOGGER.log(Level.INFO, "Reading folksonomy from the Overpass API...");
     	
     	OF4OSMFolksonomy folkso = new OF4OSMFolksonomy();
     	
@@ -46,15 +46,15 @@ public final class Overpass2FolksoParser {
             Map<String, String> mapTags = element.getTags();
             Set<IOSMTag> osmTags = new HashSet<>();
             for (Entry<String, String> tag : mapTags.entrySet()) {
-            	IOSMTagKey key = stringToKey(tag.getKey(), "");
-                IOSMTagValue value = stringToValue(tag.getValue());
-                IOSMTag osmTag = typeTags(key, value);
+            	IOSMTagKey key = identifyKey(tag.getKey(), "");
+                IOSMTagValue value = identifyValue(tag.getValue());
+                IOSMTag osmTag = identifyTag(key, value);
                 osmTags.add(osmTag);
             }
             folkso.addTags(element.getId(), osmTags);
         }
         
-        LOGGER.log(Level.INFO, "Parsing the Overpass Response is done.");
+        LOGGER.log(Level.INFO, "Reading folksonomy from the Overpass API done.");
         
         return folkso;
     }

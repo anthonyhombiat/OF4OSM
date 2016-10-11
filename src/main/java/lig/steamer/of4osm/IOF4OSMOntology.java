@@ -8,6 +8,7 @@ package lig.steamer.of4osm;
 import java.util.Set;
 
 import lig.steamer.of4osm.core.onto.meta.IConcept;
+import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
@@ -23,5 +24,6 @@ public interface IOF4OSMOntology {
     public Set<IOSMTagCombinationConcept> getOSMTagCombinationConcepts();
     public Set<IOSMCategoryTagKeyConcept> getOSMCategoryTagKeyConcepts();
     public Set<IOSMCategoryTagConcept> getOSMCategoryTagConcepts();
+    public Set<IHighLevelConcept> getHighLevelConcepts();
     
 }

@@ -3,12 +3,13 @@ package lig.steamer.of4osm.core.folkso.tag.key.impl;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public abstract class OSMTagKey implements IOSMTagKey {
 
     protected String value;
-
     protected String wikiURL;
 
     public OSMTagKey(String value, String wikiURL) {
@@ -28,7 +29,7 @@ public abstract class OSMTagKey implements IOSMTagKey {
 
     @Override
     public String toString() {
-        return "" + value;
+        return value;
     }
 
     @Override

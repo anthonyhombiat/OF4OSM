@@ -1,27 +1,31 @@
 package lig.steamer.of4osm.core.folkso.tag.key.impl;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagComplexKey;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public class OSMTagComplexKey extends OSMTagKey implements IOSMTagComplexKey {
 
-    private Set<String> prefixes;
+    private List<String> prefixes;
 
     public OSMTagComplexKey(String value, String wikiURL) {
         super(value, wikiURL);
         String[] values = value.split(":");
         this.value = values[0];
-        this.prefixes = new HashSet<String>();
-        this.prefixes.addAll(Arrays.asList(values));
+        prefixes = new ArrayList<>();
+        for(int i = 1 ; i < values.length ; i++){
+        	prefixes.add(values[i]);
+        }
     }
 
     @Override
-    public Set<String> getPrefixes() {
+    public List<String> getPrefixes() {
         return prefixes;
     }
 

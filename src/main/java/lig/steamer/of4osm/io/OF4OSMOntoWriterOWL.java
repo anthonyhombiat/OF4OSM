@@ -1,5 +1,7 @@
 package lig.steamer.of4osm.io;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,9 +26,9 @@ import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.semarglproject.vocab.OWL;
 
-public class Onto2OWLWriter {
+public class OF4OSMOntoWriterOWL {
 
-	private static final Logger LOGGER = Logger.getLogger(Onto2OWLWriter.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(OF4OSMOntoWriterOWL.class.getName());
 	
 	public static final IRI OF4OSM_IRI = IRI.create("http://steamer.imag.fr/of4osm");
 	
@@ -36,37 +38,27 @@ public class Onto2OWLWriter {
 	public static final OWLDataFactory DATA_FACTORY = OWLManager.getOWLDataFactory();
 	
 	public static final OWLClass THING = DATA_FACTORY.getOWLClass(OWL.THING);
-	public IRI outputIri;
 	
-	public Onto2OWLWriter(){
-		
-		PropLoader propLoader = new PropLoader();
-		String filename = propLoader.getPath() + 
-        		propLoader.getProp("outputDirPath") + 
-        		propLoader.getProp("outputOntoFilename") + ".owl";
-		
-		outputIri = IRI.create(filename);
-		
-		SimpleIRIMapper mapper = new SimpleIRIMapper(OF4OSM_IRI, outputIri);
-		ONTO_MANAGER.getIRIMappers().add(mapper);
+	public OF4OSMOntoWriterOWL(){
+
 	}
 	
-	public void write(IOF4OSMOntology of4osm){
+	public void write(IOF4OSMOntology of4osm, IRI file){
 		
 		LOGGER.log(Level.INFO, "Writing the OF4OSM ontology to OWL file...");
 		
+		SimpleIRIMapper mapper = new SimpleIRIMapper(OF4OSM_IRI, file);
+		ONTO_MANAGER.getIRIMappers().add(mapper);
+		
 		try {
-			
 			OWLOntology onto = ONTO_MANAGER.createOntology(OF4OSM_IRI);
 			
 			onto = parse(of4osm, onto);
 			
-			ONTO_MANAGER.saveOntology(onto, outputIri);
-			
+			ONTO_MANAGER.saveOntology(onto, file);
 			ONTO_MANAGER.removeOntology(onto);
 			
 			LOGGER.log(Level.INFO, "Parsing the OF4OSM ontology to OWL file is done.");
-			
 		} catch (OWLOntologyCreationException e) {
 			LOGGER.log(Level.SEVERE, "Parsing the OF4OSM ontology to OWL file has encounter a problem:");
 			e.printStackTrace();
@@ -74,6 +66,21 @@ public class Onto2OWLWriter {
 			LOGGER.log(Level.SEVERE, "Parsing the OF4OSM ontology to OWL file has encounter a problem:");
 			e.printStackTrace();
 		}
+	}
+
+	public void write(IOF4OSMOntology of4osm, String filename){
+		PropLoader propLoader = new PropLoader();
+		String file = propLoader.getPath() + 
+        		propLoader.getProp("outputDirPath") + 
+        		filename + ".owl";
+		write(of4osm, IRI.create(file));
+	}
+	
+	public void write(IOF4OSMOntology of4osm){
+		String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		PropLoader propLoader = new PropLoader();
+		String filename = propLoader.getProp("outputOntoFilename") + now;
+		write(of4osm, filename);
 	}
 	
 	public OWLOntology parse(IOF4OSMOntology of4osm, OWLOntology onto){

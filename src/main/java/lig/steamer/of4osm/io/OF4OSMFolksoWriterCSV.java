@@ -3,6 +3,8 @@ package lig.steamer.of4osm.io;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,7 +14,7 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyBooleanValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyDateValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyNumericValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyStringValuePropertyTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMLocalizedKeyStringValueTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMLocalizedKeyStringValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyBooleanValuePropertyTag;
@@ -30,9 +32,9 @@ import org.apache.commons.io.FileUtils;
  *
  * @author amehiris
  */
-public final class Folkso2CSVWriter {
+public final class OF4OSMFolksoWriterCSV {
 	
-	private static final Logger LOGGER = Logger.getLogger(Folkso2CSVWriter.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolksoWriterCSV.class.getName());
 
 	public static void write(IOF4OSMFolksonomy folkso, File file){
 		
@@ -48,11 +50,23 @@ public final class Folkso2CSVWriter {
 	}
 	
 	public static void write(IOF4OSMFolksonomy folkso){
+		
+		String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		
 		PropLoader propLoader = new PropLoader();
-		String filename = propLoader.getPath() + 
+		String file = propLoader.getPath() + 
         		propLoader.getProp("outputDirPath") + 
-        		propLoader.getProp("outputFolksoFilename") + ".csv";
-		write(folkso, new File(URI.create(filename)));
+        		propLoader.getProp("outputFolksoFilename") + 
+        		now + ".csv";
+		write(folkso, new File(URI.create(file)));
+	}
+	
+	public static void write(IOF4OSMFolksonomy folkso, String filename){
+		PropLoader propLoader = new PropLoader();
+		String file = propLoader.getPath() + 
+        		propLoader.getProp("outputDirPath") +
+        		filename + ".csv";
+		write(folkso, new File(URI.create(file)));
 	}
 	
     public static String parse(IOF4OSMFolksonomy folkso) {
@@ -80,9 +94,9 @@ public final class Folkso2CSVWriter {
 
         // Localized Key
         // localizedKeyStringValueTag
-        content += "\n\n" + folkso.getTagsByType(IOSMLocalizedKeyStringValueTag.class).size() + ";localizedKeyStringValueTag\n";
-        for (IOSMTag key : folkso.getTagsByType(IOSMLocalizedKeyStringValueTag.class).keySet()) {
-            content += "\n;;" + folkso.getTagsByType(IOSMLocalizedKeyStringValueTag.class).get(key) + ";" + key;
+        content += "\n\n" + folkso.getTagsByType(IOSMLocalizedKeyStringValuePropertyTag.class).size() + ";localizedKeyStringValueTag\n";
+        for (IOSMTag key : folkso.getTagsByType(IOSMLocalizedKeyStringValuePropertyTag.class).keySet()) {
+            content += "\n;;" + folkso.getTagsByType(IOSMLocalizedKeyStringValuePropertyTag.class).get(key) + ";" + key;
         }
 
         // Simple Key

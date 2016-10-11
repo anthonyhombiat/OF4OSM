@@ -15,7 +15,6 @@ public class OSMTagLocalizedKey extends OSMTagKey implements IOSMTagLocalizedKey
         String[] values = value.split(":");
         this.value = values[0];
         this.locale = values[1];
-
     }
 
     @Override

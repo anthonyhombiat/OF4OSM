@@ -4,6 +4,8 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 
 /**
  * 
+ * @author Anthony Hombiat
+ *
  */
 public class OSMTagStringValue extends OSMTagValue implements IOSMTagStringValue {
 

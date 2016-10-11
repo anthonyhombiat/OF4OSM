@@ -16,16 +16,16 @@ import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.onto.impl.OF4OSMOntology;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
-import lig.steamer.of4osm.parse.Folkso2OntoParser;
-import static lig.steamer.of4osm.parse.Folkso2OntoParser.combinations;
+import lig.steamer.of4osm.parse.OF4OSMFolkso2OntoParser;
+import static lig.steamer.of4osm.parse.OF4OSMFolkso2OntoParser.combinations;
 
 /**
  *
  * @author amehiris
  */
-public class Folkso2OntoParserTest extends TestCase {
+public class OF4OSMFolkso2OntoParserTest extends TestCase {
     
-    public Folkso2OntoParserTest(String testName) {
+    public OF4OSMFolkso2OntoParserTest(String testName) {
         super(testName);
     }
 
@@ -37,20 +37,20 @@ public class Folkso2OntoParserTest extends TestCase {
         IOSMTagSimpleKey key1 = new OSMTagSimpleKey("historic", "");
         IOSMTagStringValue value1 = new OSMTagStringValue("castle");
         IOSMCategoryTag tag1 = new OSMSimpleCategoryTag(key1, value1);
-        IOSMCategoryTagKeyConcept keyConcept1 = Folkso2OntoParser.createCategoryTagKeyConcept(tag1);
-        IOSMCategoryTagConcept concept1 = Folkso2OntoParser.createCategoryTagConcept(tag1, keyConcept1);
+        IOSMCategoryTagKeyConcept keyConcept1 = OF4OSMFolkso2OntoParser.createCategoryTagKeyConcept(tag1);
+        IOSMCategoryTagConcept concept1 = OF4OSMFolkso2OntoParser.createCategoryTagConcept(tag1, keyConcept1);
 
         IOSMTagSimpleKey key2 = new OSMTagSimpleKey("amenity", "");
         IOSMTagStringValue value2 = new OSMTagStringValue("restaurant");
         IOSMCategoryTag tag2 = new OSMSimpleCategoryTag(key2, value2);
-        IOSMCategoryTagKeyConcept keyConcept2 = Folkso2OntoParser.createCategoryTagKeyConcept(tag2);
-        IOSMCategoryTagConcept concept2 = Folkso2OntoParser.createCategoryTagConcept(tag2, keyConcept2);
+        IOSMCategoryTagKeyConcept keyConcept2 = OF4OSMFolkso2OntoParser.createCategoryTagKeyConcept(tag2);
+        IOSMCategoryTagConcept concept2 = OF4OSMFolkso2OntoParser.createCategoryTagConcept(tag2, keyConcept2);
 
         IOSMTagSimpleKey key3 = new OSMTagSimpleKey("tourism", "");
         IOSMTagStringValue value3 = new OSMTagStringValue("hotel");
         IOSMCategoryTag tag3 = new OSMSimpleCategoryTag(key3, value3);
-        IOSMCategoryTagKeyConcept keyConcept3 = Folkso2OntoParser.createCategoryTagKeyConcept(tag3);
-        IOSMCategoryTagConcept concept3 = Folkso2OntoParser.createCategoryTagConcept(tag3, keyConcept3);
+        IOSMCategoryTagKeyConcept keyConcept3 = OF4OSMFolkso2OntoParser.createCategoryTagKeyConcept(tag3);
+        IOSMCategoryTagConcept concept3 = OF4OSMFolkso2OntoParser.createCategoryTagConcept(tag3, keyConcept3);
 
         IOSMCategoryTagConcept[] categoryTagConceptSet = new IOSMCategoryTagConcept[3];
         categoryTagConceptSet[0] = concept1;

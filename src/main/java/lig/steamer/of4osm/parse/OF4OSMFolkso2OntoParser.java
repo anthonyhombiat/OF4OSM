@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Set;
 
 import lig.steamer.of4osm.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.IOF4OSMOntology;
@@ -15,52 +15,45 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConceptParent;
 import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.impl.OSMTagCombinationConcept;
-import lig.steamer.of4osm.util.FolksoLabelExtractor;
-
-import org.apache.commons.lang3.text.WordUtils;
+import lig.steamer.of4osm.util.OF4OSMConceptLabelizer;
 
 /**
  *
  * @author amehiris
  */
-public final class Folkso2OntoParser {
+public final class OF4OSMFolkso2OntoParser {
 
-	private static final Logger LOGGER = Logger.getLogger(Folkso2OntoParser.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolkso2OntoParser.class.getName());
 	
     public static IOF4OSMOntology addConceptsFromFolkso(IOF4OSMOntology onto, IOF4OSMFolksonomy folkso) {
 
     	LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology...");
     	
-        onto = addKeyTagHierarchy(onto, folkso);
-        onto = addTagCombinations(onto, folkso);
-        
-        LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology is done.");
+    	/*
+    	Map<IOSMTag, Integer> catTags = folkso.getTagsByType(IOSMCategoryTag.class);
 
-        return onto;
-    }
+        for (Entry<IOSMTag, Integer> entry : catTags.entrySet()) {
+            IOSMCategoryTag tag = (IOSMCategoryTag) entry.getKey();
 
-    private static IOF4OSMOntology addKeyTagHierarchy(IOF4OSMOntology onto, IOF4OSMFolksonomy folkso) {
-
-//        Map<IOSMTag, Integer> catTags = folkso.getTagsByType(IOSMCategoryTag.class);
-//
-//        for (Entry<IOSMTag, Integer> entry : catTags.entrySet()) {
-//            IOSMCategoryTag tag = (IOSMCategoryTag) entry.getKey();
-//
-//            IOSMCategoryTagKeyConcept tagKeyConcept = CreateCategoryTagKeyConcept(tag);
-//            onto.addConcept(tagKeyConcept, entry.getValue());
-//            IOSMCategoryTagConcept categoryTagConcept = CreateCategoryTagConcept(tag, tagKeyConcept);
-//            onto.addConcept(categoryTagConcept, entry.getValue());
-//        }
-        Map< String, Set<IOSMCategoryTag>> categoryTags = getCategoryTagsByElement(folkso);
-        for (Entry< String, Set<IOSMCategoryTag>> entry : categoryTags.entrySet()) {
-            IOSMTagCombinationConceptParent[] categoryTagConceptSet = new OSMCategoryTagConcept[entry.getValue().size()] ;
+            IOSMCategoryTagKeyConcept tagKeyConcept = CreateCategoryTagKeyConcept(tag);
+            onto.addConcept(tagKeyConcept, entry.getValue());
+            IOSMCategoryTagConcept categoryTagConcept = CreateCategoryTagConcept(tag, tagKeyConcept);
+            onto.addConcept(categoryTagConcept, entry.getValue());
+        }
+        */
+    	
+        Map<String, Set<IOSMCategoryTag>> categoryTags = getCategoryTagsByElement(folkso);
+        for (Entry<String, Set<IOSMCategoryTag>> entry : categoryTags.entrySet()) {
+            IOSMTagCombinationConceptParent[] categoryTagConcepts = new OSMCategoryTagConcept[entry.getValue().size()] ;
             int j = 0;
             for (IOSMCategoryTag tag : entry.getValue()) {
                 IOSMCategoryTagKeyConcept tagKeyConcept = createCategoryTagKeyConcept(tag);
@@ -68,15 +61,51 @@ public final class Folkso2OntoParser {
                 IOSMCategoryTagConcept categoryTagConcept = createCategoryTagConcept(tag, tagKeyConcept);
                 onto.addConcept(categoryTagConcept);
 
-                categoryTagConceptSet[j] = categoryTagConcept;
+                categoryTagConcepts[j] = categoryTagConcept;
                 j++;
-
             }
-            //for (int i = 2; i < categoryTagConceptSet.length + 1; i++) {
+            
+//            for (int i = 2; i < categoryTagConceptSet.length + 1; i++) {
 //                combinations(categoryTagConceptSet, 2, 0, new IOSMTagCombinationConcept[2], onto);
-           // }
+//            }
+            
         }
+        
+        LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology is done.");
+
         return onto;
+    }
+    
+    public static IOSMCategoryTagKeyConcept createCategoryTagKeyConcept(IOSMCategoryTag tag) {
+        return new OSMCategoryTagKeyConcept(
+        		OF4OSMConceptLabelizer.getLabelFromKey(tag.getKey()), 
+        		tag.getKey());
+    }
+
+    public static IOSMCategoryTagConcept createCategoryTagConcept(IOSMCategoryTag tag, IOSMCategoryTagKeyConcept tagKeyConcept) {
+
+        if (tag instanceof IOSMSimpleCategoryTag) {
+            return new OSMCategoryTagConcept(
+            		OF4OSMConceptLabelizer.getLabelFromTag(tag), tag, tagKeyConcept);
+        }
+        
+        if (tag instanceof IOSMMultipleCategoryTag) {
+            IOSMMultipleCategoryTag multipleCatTag = (IOSMMultipleCategoryTag) tag;
+            for (String v : multipleCatTag.getValue().getValues()) {
+            	IOSMSimpleCategoryTag t = new OSMSimpleCategoryTag(
+            			(IOSMTagSimpleKey)tag.getKey(), 
+            			new OSMTagStringValue(v));
+                String tagLabel = OF4OSMConceptLabelizer.getLabelFromTag(t);
+                return new OSMCategoryTagConcept(tagLabel, tag, tagKeyConcept);
+            }
+        }
+        
+        if (tag instanceof IOSMStatefulCategoryTag) {
+            return new OSMCategoryTagConcept(
+            		OF4OSMConceptLabelizer.getLabelFromTag(tag), tag, tagKeyConcept);
+        }
+        
+        return null;
     }
 
     public static void combinations(IOSMTagCombinationConceptParent[] categoryTagConceptSet, int length, int startPosition, IOSMTagCombinationConceptParent[] result, IOF4OSMOntology onto) {
@@ -87,6 +116,7 @@ public final class Folkso2OntoParser {
             for (IOSMTagCombinationConceptParent s : result) {
                 tagCombinationConcept.addParent(s);
             }
+            
             System.out.println(tagCombinationConcept);
             onto.addConcept(tagCombinationConcept);
             return;
@@ -99,40 +129,10 @@ public final class Folkso2OntoParser {
 
     }
 
-    public static IOSMCategoryTagKeyConcept createCategoryTagKeyConcept(IOSMCategoryTag tag) {
-        String keyLabel = WordUtils.capitalize(tag.getKey().getValue());
-        return new OSMCategoryTagKeyConcept(keyLabel, tag.getKey());
-    }
-
-    public static IOSMCategoryTagConcept createCategoryTagConcept(IOSMCategoryTag tag, IOSMCategoryTagKeyConcept tagKeyConcept) {
-
-        if (IOSMSimpleCategoryTag.class.isInstance(tag)) {
-            String tagLabel = FolksoLabelExtractor.getLabelFromIOSMSimpleCategoryTag((IOSMSimpleCategoryTag) tag);
-            return new OSMCategoryTagConcept(tagLabel, tag, tagKeyConcept);
-        }
-        if (IOSMMultipleCategoryTag.class.isInstance(tag)) {
-            IOSMMultipleCategoryTag multipleCatTag = (IOSMMultipleCategoryTag) tag;
-            for (int i = 0 ; i < multipleCatTag.getValue().getValues().length ; i++) {
-                String tagLabel = FolksoLabelExtractor.getLabelFromIOSMMultipleCategoryTag((IOSMMultipleCategoryTag) tag, i);
-                return new OSMCategoryTagConcept(tagLabel, tag, tagKeyConcept);
-            }
-        }
-        if (IOSMStatefulCategoryTag.class.isInstance(tag)) {
-            String tagLabel = FolksoLabelExtractor.getLabelFromIOSMStatefulCategoryTag((IOSMStatefulCategoryTag) tag);
-            return new OSMCategoryTagConcept(tagLabel, tag, tagKeyConcept);
-        }
-        return null;
-    }
-
+    /*
+     * Algo for finding permutations
     private static IOF4OSMOntology addTagCombinations(IOF4OSMOntology onto, IOF4OSMFolksonomy folkso) {
 
-        Map< String, Set<IOSMCategoryTag>> tags = getCategoryTagsByElement(folkso);
-        for (Entry<String, Set<IOSMCategoryTag>> entry : tags.entrySet()) {
-
-        }
-
-        /* Algo for finding permutations */
- /*
     	String[] arr = {"A","B","C","D"};
 			for(int i=2;i<arr.length+1;i++)
 				combinations(arr, i, 0, new String[i]);
@@ -151,11 +151,11 @@ public final class Folkso2OntoParser {
 					combinations(arr, len-1, i+1, result);
 				}
 			}
-         */
         return onto;
     }
+    */
 
-    static Map< String, Set<IOSMCategoryTag>> getCategoryTagsByElement(IOF4OSMFolksonomy folkso) {
+    private static Map< String, Set<IOSMCategoryTag>> getCategoryTagsByElement(IOF4OSMFolksonomy folkso) {
         Map< String, Set<IOSMCategoryTag>> tags = new HashMap<>();
         // for each element
         for (Entry<String, Set<IOSMTag>> entry : folkso.getTags().entrySet()) {

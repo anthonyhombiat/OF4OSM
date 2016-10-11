@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lig.steamer.of4osm.parse;
+package lig.steamer.of4osm.io;
 
-import static lig.steamer.of4osm.util.FolksoParsingTool.stringToKey;
-import static lig.steamer.of4osm.util.FolksoParsingTool.stringToValue;
-import static lig.steamer.of4osm.util.FolksoParsingTool.typeTags;
+import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyKey;
+import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyValue;
+import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyTag;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,13 +27,13 @@ import lig.steamer.of4osm.ws.osmapi.OSMAPITag;
  *
  * @author amehiris
  */
-public final class OSMAPI2FolksoParser {
+public final class OF4OSMFolksoReaderOSMAPI {
 
-	private static final Logger LOGGER = Logger.getLogger(OSMAPI2FolksoParser.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolksoReaderOSMAPI.class.getName());
 	
-    public static IOF4OSMFolksonomy parse(OSMAPIResponse resp) {
+    public static IOF4OSMFolksonomy read(OSMAPIResponse resp) {
 
-    	LOGGER.log(Level.INFO, "Parsing the OSM API Response...");
+    	LOGGER.log(Level.INFO, "Reading folksonomy from the OSM API...");
     	
     	OF4OSMFolksonomy folkso = new OF4OSMFolksonomy();
     	
@@ -41,9 +41,9 @@ public final class OSMAPI2FolksoParser {
             if (element.getTags() != null) {
             	Set<IOSMTag> osmTags = new HashSet<>();
                 for (OSMAPITag tag : element.getTags()) {
-                    IOSMTagKey key = stringToKey(tag.getK(), "");
-                    IOSMTagValue value = stringToValue(tag.getV());
-                    IOSMTag osmTag = typeTags(key, value);
+                    IOSMTagKey key = identifyKey(tag.getK(), "");
+                    IOSMTagValue value = identifyValue(tag.getV());
+                    IOSMTag osmTag = identifyTag(key, value);
 
                     osmTags.add(osmTag);
                 }
@@ -51,7 +51,7 @@ public final class OSMAPI2FolksoParser {
             }
         }
         
-        LOGGER.log(Level.INFO, "Parsing the OSM API Response is done.");
+        LOGGER.log(Level.INFO, "Reading folksonomy from the OSM API done.");
         
         return folkso;
     }
