@@ -9,15 +9,10 @@ import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
  */
 public class TagInfoKeyValuesResponseData extends TagInfoResponseData {
 
-    // Value
     private String value;
-    // Number of times this key/value is in the OSM database.
     private int count;
-    // Number of times in relation to number of times this key is in the OSM database.
     private float fraction;
-    // Is there at least one wiki page for this tag.
     private boolean in_wiki;
-    // Description of the tag from the wiki.
     private String description;
 
     public String getValue() {

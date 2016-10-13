@@ -9,11 +9,8 @@ import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
  */
 public class TagInfoKeySimilarResponseData extends TagInfoResponseData {
 
-    // Other key.
     private String other_key;
-    // Number of objects that have the other key.
     private int count_all;
-    // An integer measuring the similarity of the two keys, smaller is more similar
     private int similarity;
 
     public String getOther_key() {

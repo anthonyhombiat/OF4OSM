@@ -6,19 +6,10 @@ package lig.steamer.of4osm.ws.taginfo;
  */
 public abstract class TagInfoResponse implements ITagInfoResponse {
 
-    // URL of the request
     protected String url;
-
-    // Date request
     private String data_until;
-
-    // Result page number (first has page number 1)
     private int page;
-
-    // Results per page.
     private int rp;
-
-    // Total number of results.
     private int total;
 
     public String getUrl() {

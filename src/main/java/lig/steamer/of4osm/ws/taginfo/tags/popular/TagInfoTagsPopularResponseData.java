@@ -9,27 +9,16 @@ import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
  */
 public class TagInfoTagsPopularResponseData extends TagInfoResponseData {
 
-    // Key
     private String key;
-    // Value
     private String value;
-    // In there a page in the wiki for this tag?
     private boolean in_wiki;
-    // Number of objects in the OSM database with this tag.
     private int count_all;
-    // Number of objects in relation to all objects.
     private float count_all_fraction;
-    // Number of nodes in the OSM database with this tag
     private int count_nodes;
-    // Number of nodes in relation to all tagged nodes.
     private float count_nodes_fraction;
-    // Number of ways in the OSM database with this tag.
     private int count_ways;
-    // Number of ways in relation to all ways.
     private float count_ways_fraction;
-    // Number of relations in the OSM database with this tag.
     private int count_relations;
-    // Number of relations in relation to all relations.
     private float count_relations_fraction;
     
     private int projects;

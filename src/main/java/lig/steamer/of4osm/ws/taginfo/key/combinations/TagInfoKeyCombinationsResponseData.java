@@ -8,16 +8,9 @@ import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
  */
 public class TagInfoKeyCombinationsResponseData extends TagInfoResponseData {
 
-    // Other key
     private String other_key;
-
-    // Number of objects that have both keys.
     private int together_count;
-
-    // Fraction of objects with this key that also have the other key.
     private float to_fraction;
-
-    // Fraction of objects with other key that also have this key.
     private float from_fraction;
 
     public String getOther_key() {

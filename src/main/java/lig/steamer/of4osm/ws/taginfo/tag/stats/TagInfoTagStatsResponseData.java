@@ -9,11 +9,8 @@ import lig.steamer.of4osm.ws.taginfo.TagInfoResponseData;
  */
 public class TagInfoTagStatsResponseData extends TagInfoResponseData {
 
-    // Object type ("all", "nodes", "ways" or "relations")
     private String type;
-    // Number of objects with this type and tag.
     private int count;
-    // Number of objects in relation to all objects.
     private float count_fraction;
 
     public String getType() {
