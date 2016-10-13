@@ -63,7 +63,7 @@ public class OF4OSMOntoWriterOWLTest extends TestCase {
 	
 	public void testWrite() {
 		String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-		writer.write(of4osm, "test" + now);
+		writer.write(of4osm, "of4osm-test" + now);
 	}
 
 }

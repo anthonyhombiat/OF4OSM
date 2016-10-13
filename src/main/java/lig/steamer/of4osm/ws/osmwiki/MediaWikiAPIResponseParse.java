@@ -2,12 +2,12 @@ package lig.steamer.of4osm.ws.osmwiki;
 
 import java.util.List;
 
-public class OSMWikiResponseParse {
+public class MediaWikiAPIResponseParse {
 	
 	private String title;
 	private int pageid;
-	private List<OSMWikiResponseParseSection> sections;
-	private OSMWikiResponseParseText text;
+	private List<MediaWikiAPIResponseParseSection> sections;
+	private MediaWikiAPIResponseParseText text;
 	
 	public String getTitle() {
 		return title;
@@ -25,19 +25,19 @@ public class OSMWikiResponseParse {
 		this.pageid = pageid;
 	}
 	
-	public List<OSMWikiResponseParseSection> getSections() {
+	public List<MediaWikiAPIResponseParseSection> getSections() {
 		return sections;
 	}
 	
-	public void setSections(List<OSMWikiResponseParseSection> sections) {
+	public void setSections(List<MediaWikiAPIResponseParseSection> sections) {
 		this.sections = sections;
 	}
 
-	public OSMWikiResponseParseText getText() {
+	public MediaWikiAPIResponseParseText getText() {
 		return text;
 	}
 
-	public void setText(OSMWikiResponseParseText text) {
+	public void setText(MediaWikiAPIResponseParseText text) {
 		this.text = text;
 	}
 

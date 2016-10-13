@@ -18,8 +18,8 @@ import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.util.OF4OSMConceptLabelizer;
 import lig.steamer.of4osm.util.OF4OSMTagIdentifier;
-import lig.steamer.of4osm.ws.osmwiki.OSMWikiResponse;
-import lig.steamer.of4osm.ws.osmwiki.OSMWikiResponseParseText;
+import lig.steamer.of4osm.ws.osmwiki.MediaWikiAPIResponse;
+import lig.steamer.of4osm.ws.osmwiki.MediaWikiAPIResponseParseText;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,11 +31,11 @@ public final class OF4OSMOntoReaderOSMWiki {
 	
 	public static final String CATEGORY_TAGS_ID = "Primary_features";
 	
-	public static IOF4OSMOntology read(OSMWikiResponse response, IOF4OSMOntology of4osm){
+	public static IOF4OSMOntology read(MediaWikiAPIResponse response, IOF4OSMOntology of4osm){
 		
 		LOGGER.log(Level.INFO, "Adding tags from the OSM Wiki Map Features Web page to OF4OSM...");
 		
-		OSMWikiResponseParseText text = response.getParse().getText();
+		MediaWikiAPIResponseParseText text = response.getParse().getText();
 		
 		Document htmlDoc = Jsoup.parse(text.getAll());
 		
@@ -107,6 +107,7 @@ public final class OF4OSMOntoReaderOSMWiki {
 		}
 		
 		LOGGER.log(Level.INFO, "Adding tags from the OSM Wiki Map Features Web page to OF4OSM done.");
+		
 		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances: " + of4osm.getOSMCategoryTagKeyConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IHighLevelConcept instances: " + of4osm.getHighLevelConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances: " + of4osm.getOSMCategoryTagConcepts().size());

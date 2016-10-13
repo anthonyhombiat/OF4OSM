@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lig.steamer.of4osm.io;
 
 import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyKey;
@@ -22,8 +17,8 @@ import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
-import lig.steamer.of4osm.ws.overpass.OverpassElement;
-import lig.steamer.of4osm.ws.overpass.OverpassResponse;
+import lig.steamer.of4osm.ws.overpass.OverpassAPIElement;
+import lig.steamer.of4osm.ws.overpass.OverpassAPIResponse;
 
 /**
  *
@@ -33,15 +28,15 @@ public final class OF4OSMFolksoReaderOverpass {
 	
 	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolksoReaderOverpass.class.getName());
 
-    public static IOF4OSMFolksonomy read(OverpassResponse resp) {
+    public static IOF4OSMFolksonomy read(OverpassAPIResponse resp) {
 
     	LOGGER.log(Level.INFO, "Reading folksonomy from the Overpass API...");
     	
     	OF4OSMFolksonomy folkso = new OF4OSMFolksonomy();
     	
-    	List<OverpassElement> elements = resp.getElements();
+    	List<OverpassAPIElement> elements = resp.getElements();
 
-        for (OverpassElement element : elements) {
+        for (OverpassAPIElement element : elements) {
 
             Map<String, String> mapTags = element.getTags();
             Set<IOSMTag> osmTags = new HashSet<>();

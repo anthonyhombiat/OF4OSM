@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lig.steamer.of4osm.ws.overpass;
 
 import java.util.List;
@@ -13,15 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author amehiris
  */
-public class OverpassResponse {
+public class OverpassAPIResponse {
 
     private String version;
-
     private String generator;
-
-    private OverpassOsm3s osm3s;
-
-    private List<OverpassElement> elements;
+    private OverpassAPIOsm3s osm3s;
+    private List<OverpassAPIElement> elements;
 
     public String getVersion() {
         return version;
@@ -40,20 +32,20 @@ public class OverpassResponse {
     }
 
     @JsonProperty("osm3s")
-    public OverpassOsm3s getOsm3s() {
+    public OverpassAPIOsm3s getOsm3s() {
         return osm3s;
     }
 
-    public void setOsm3s(OverpassOsm3s osm3s) {
+    public void setOsm3s(OverpassAPIOsm3s osm3s) {
         this.osm3s = osm3s;
     }
 
     @JsonProperty("elements")
-    public List<OverpassElement> getElements() {
+    public List<OverpassAPIElement> getElements() {
         return elements;
     }
 
-    public void setElements(List<OverpassElement> elements) {
+    public void setElements(List<OverpassAPIElement> elements) {
         this.elements = elements;
     }
 

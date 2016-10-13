@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lig.steamer.of4osm.ws.overpass;
 
 /**
@@ -10,17 +5,10 @@ package lig.steamer.of4osm.ws.overpass;
  * @author amehiris
  */
 
-public class OverpassOsm3s {
+public class OverpassAPIOsm3s {
     
     private String timestamp_osm_base;
-    
     private String copyright;
-    
-    @Override
-    public String toString()
-    {
-        return "{\"timestamp_osm_base\" : \""+timestamp_osm_base+"\",\n \"copyright\" :\" "+copyright+"}\n";
-    }
 
     public String getTimestamp_osm_base() {
         return timestamp_osm_base;
@@ -38,5 +26,9 @@ public class OverpassOsm3s {
         this.copyright = copyright;
     }
 
+    @Override
+    public String toString() {
+        return "{\"timestamp_osm_base\" : \""+timestamp_osm_base+"\",\n \"copyright\" :\" "+copyright+"}\n";
+    }
     
 }

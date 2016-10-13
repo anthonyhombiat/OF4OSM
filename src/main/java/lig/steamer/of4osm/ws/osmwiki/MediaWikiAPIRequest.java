@@ -1,13 +1,13 @@
 package lig.steamer.of4osm.ws.osmwiki;
 
-public class OSMWikiRequest {
+public class MediaWikiAPIRequest {
 	
 	private String act; 
 	private String page; 
 	private String prop; 
 	private String fmt; 
 
-	public OSMWikiRequest(String action, String page, String prop, String fmt){
+	public MediaWikiAPIRequest(String action, String page, String prop, String fmt){
 		this.act = action;
 		this.page = page;
 		this.prop = prop;

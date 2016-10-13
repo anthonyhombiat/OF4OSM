@@ -52,7 +52,7 @@ public class OF4OSMFolksoWriterCSVTest extends TestCase {
 	
 	public void testWrite(){
 		String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-		OF4OSMFolksoWriterCSV.write(folkso, "test" + now);
+		OF4OSMFolksoWriterCSV.write(folkso, "osmtags-test" + now);
 	}
 	
 }

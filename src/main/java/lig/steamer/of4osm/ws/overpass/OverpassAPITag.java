@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lig.steamer.of4osm.ws.overpass;
 
 import java.util.Objects;
@@ -11,16 +6,15 @@ import java.util.Objects;
  *
  * @author amehiris
  */
-public class OverpassTag {
-    
+public class OverpassAPITag {
     
     private String k;
     private String v;
 
-    public OverpassTag() {
+    public OverpassAPITag() {
     }
 
-    public OverpassTag(String k, String v) {
+    public OverpassAPITag(String k, String v) {
         this.k = k;
         this.v = v;
     }
@@ -60,7 +54,7 @@ public class OverpassTag {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final OverpassTag other = (OverpassTag) obj;
+        final OverpassAPITag other = (OverpassAPITag) obj;
         if (!Objects.equals(this.k, other.k)) {
             return false;
         }
@@ -74,6 +68,5 @@ public class OverpassTag {
     public String toString() {
         return "OverpassTag{" + "k=" + k + ", v=" + v + '}';
     }
-    
     
 }

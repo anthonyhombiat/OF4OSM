@@ -1,6 +1,6 @@
 package lig.steamer.of4osm.ws.osmwiki;
 
-public class OSMWikiResponseParseSection {
+public class MediaWikiAPIResponseParseSection {
 
 	private int toclevel;
 	private int level;

@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lig.steamer.of4osm.ws.osmapi;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  *
@@ -14,33 +7,48 @@ import java.net.URL;
  */
 public class OSMAPIRequest {
 
-    private URL url;
+	public String lonMin;
+	public String latMin;
+	public String lonMax;
+	public String latMax;
     
     public OSMAPIRequest(String lonMin , String latMin , String lonMax , String latMax) {
-    
-    	try {
+    	this.lonMin = lonMin;
+    	this.latMin = latMin;
+    	this.lonMax = lonMax;
+    	this.latMax = latMax;
+    }
+
+	public String getLonMin() {
+		return lonMin;
+	}
+
+	public void setLonMin(String lonMin) {
+		this.lonMin = lonMin;
+	}
+
+	public String getLatMin() {
+		return latMin;
+	}
+
+	public void setLatMin(String latMin) {
+		this.latMin = latMin;
+	}
+
+	public String getLonMax() {
+		return lonMax;
+	}
+
+	public void setLonMax(String lonMax) {
+		this.lonMax = lonMax;
+	}
+
+	public String getLatMax() {
+		return latMax;
+	}
+
+	public void setLatMax(String latMax) {
+		this.latMax = latMax;
+	}
     	
-	    	StringBuilder str = new StringBuilder();
-	        
-	        str.append("http://api.openstreetmap.org/api/0.6/map?bbox=");
-	        str.append(lonMin);
-	        str.append(",");
-	        str.append(latMin);
-	        str.append(",");
-	        str.append(lonMax);
-	        str.append(",");
-	        str.append(latMax);
-	        
-	        this.url = new URL(str.toString());
-        
-    	} catch (MalformedURLException e) {
-    		e.printStackTrace();
-    	}
-       
-    }
-    
-    public URL getUrl() {
-        return url;
-    }
-    
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lig.steamer.of4osm.ws.overpass;
 
 import java.util.List;
@@ -12,18 +7,13 @@ import java.util.Map;
  *
  * @author amehiris
  */
-public class OverpassElement {
+public class OverpassAPIElement {
 
     private String type;
-
     private String id;
-
     private String lat;
-
     private String lon;
-
     private Map<String, String> tags;
-
     private List<String> nodes;
 
     public List<String> getNodes() {

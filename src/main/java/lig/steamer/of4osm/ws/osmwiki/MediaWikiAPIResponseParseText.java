@@ -2,7 +2,7 @@ package lig.steamer.of4osm.ws.osmwiki;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class OSMWikiResponseParseText {
+public class MediaWikiAPIResponseParseText {
 
 	private String all;
 

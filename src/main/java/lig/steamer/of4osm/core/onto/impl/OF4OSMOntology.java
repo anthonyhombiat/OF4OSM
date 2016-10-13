@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lig.steamer.of4osm.core.onto.impl;
 
 import java.util.HashSet;
@@ -14,7 +9,6 @@ import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 
 /**
  *
@@ -70,37 +64,6 @@ public class OF4OSMOntology implements IOF4OSMOntology {
 	@Override
 	public Set<IHighLevelConcept> getHighLevelConcepts() {
 		return highLevelConcepts;
-	}
-
-	@Override
-    public String toString() {
-
-    	String result = "";
-    	
-        for (IOSMCategoryTagKeyConcept entryKeyConcept : categoryTagKeyConcepts) {
-           int i = 0;
-           result += entryKeyConcept;
-
-            for (IOSMCategoryTagConcept entryTagConcept : categoryTagConcepts) {
-
-                for (IOSMTagConceptParent parent : entryTagConcept.getParents()) {
-
-                    if (entryKeyConcept.getKey().equals((IOSMCategoryTagKeyConcept) parent)) {
-
-                    	result += "|\t " + entryTagConcept;
-                        
-                        i++;
-                    }
-                }
-            }
-            result += "|--> nbr de fils  " + i;
-        }
-        
-        for (IOSMTagCombinationConcept tag : tagCombinationConcepts) {
-        	result += tag;
-        }
-        
-        return result;
 	}
 	
 }

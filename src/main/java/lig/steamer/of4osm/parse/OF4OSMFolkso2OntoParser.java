@@ -34,7 +34,7 @@ public final class OF4OSMFolkso2OntoParser {
 
 	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolkso2OntoParser.class.getName());
 	
-    public static IOF4OSMOntology addConceptsFromFolkso(IOF4OSMOntology onto, IOF4OSMFolksonomy folkso) {
+    public static IOF4OSMOntology addConceptsFromFolkso(IOF4OSMOntology of4osm, IOF4OSMFolksonomy folkso) {
 
     	LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology...");
     	
@@ -57,9 +57,9 @@ public final class OF4OSMFolkso2OntoParser {
             int j = 0;
             for (IOSMCategoryTag tag : entry.getValue()) {
                 IOSMCategoryTagKeyConcept tagKeyConcept = createCategoryTagKeyConcept(tag);
-                onto.addConcept(tagKeyConcept);
+                of4osm.addConcept(tagKeyConcept);
                 IOSMCategoryTagConcept categoryTagConcept = createCategoryTagConcept(tag, tagKeyConcept);
-                onto.addConcept(categoryTagConcept);
+                of4osm.addConcept(categoryTagConcept);
 
                 categoryTagConcepts[j] = categoryTagConcept;
                 j++;
@@ -72,8 +72,13 @@ public final class OF4OSMFolkso2OntoParser {
         }
         
         LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology is done.");
+        
+        LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances: " + of4osm.getOSMCategoryTagKeyConcepts().size());
+		LOGGER.log(Level.INFO, "Nb of IHighLevelConcept instances: " + of4osm.getHighLevelConcepts().size());
+		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances: " + of4osm.getOSMCategoryTagConcepts().size());
+		LOGGER.log(Level.INFO, "Nb of IOSMTagCombinationConcept instances: " + of4osm.getOSMTagCombinationConcepts().size());
 
-        return onto;
+        return of4osm;
     }
     
     public static IOSMCategoryTagKeyConcept createCategoryTagKeyConcept(IOSMCategoryTag tag) {

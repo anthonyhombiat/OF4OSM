@@ -1,15 +1,16 @@
 package lig.steamer.of4osm.ws.osmwiki;
 
-public enum OSMWikiAction {
+public enum MediaWikiAPIProperty {
 
-	PARSE("parse");
+	SECTIONS("sections"),
+	TEXT("text");
 
     private final String text;
 
     /**
      * @param text
      */
-    private OSMWikiAction(final String text) {
+    private MediaWikiAPIProperty(final String text) {
         this.text = text;
     }
 
