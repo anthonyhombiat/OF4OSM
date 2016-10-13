@@ -1,7 +1,6 @@
 package lig.steamer.of4osm.core.folkso.tag.value.impl;
 
 import java.util.Date;
-import java.util.HashSet;
 
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
 
@@ -16,8 +15,6 @@ public class OSMTagDateValue extends OSMTagValue implements IOSMTagDateValue {
 
     public OSMTagDateValue(Date value) {
         this.value = value;
-        this.labels = new HashSet<String>();
-        this.labels.add(value.toString());
     }
 
     @Override
@@ -27,7 +24,7 @@ public class OSMTagDateValue extends OSMTagValue implements IOSMTagDateValue {
 
     @Override
     public String toString() {
-        return labels + ";" + value;
+        return value.toString();
     }
 
     @Override

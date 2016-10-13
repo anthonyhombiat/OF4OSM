@@ -20,7 +20,9 @@ public class OverpassXAPIClient {
 
 	private static final Logger LOGGER = Logger.getLogger(OverpassXAPIClient.class.getName());
 	
-	public final static String ENDPOINT = "http://www.overpass-api.de/api/xapi?";//*[bbox=7.1,51.2,7.2,51.3]";
+	public final static String ENDPOINT = "http://www.overpass-api.de/api/xapi?";
+//	public final static String ENDPOINT = "http://overpass.osm.rambler.ru/cgi/xapi?";
+	
 	public final static String BBOX = "bbox";
 	
     public OverpassXAPIClient() {
@@ -28,7 +30,7 @@ public class OverpassXAPIClient {
     
     public OSMAPIResponse send(OSMAPIRequest req) {
         
-    	LOGGER.log(Level.INFO, "Sending request to the Overpass API...");
+    	LOGGER.log(Level.INFO, "Sending request to the Overpass XAPI...");
 
     	try {
         	
@@ -53,7 +55,7 @@ public class OverpassXAPIClient {
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             OSMAPIResponse osmapiResponse = (OSMAPIResponse) jaxbUnmarshaller.unmarshal(url);
 			
-			LOGGER.log(Level.INFO, "Sending request to the Overpass API done.");
+			LOGGER.log(Level.INFO, "Sending request to the Overpass XAPI done.");
 			
 	        return osmapiResponse;
 			

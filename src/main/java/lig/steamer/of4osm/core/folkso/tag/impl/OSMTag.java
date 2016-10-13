@@ -16,5 +16,10 @@ public abstract class OSMTag implements IOSMTag {
     public String getWikiURL() {
         return wikiURL;
     }
+    
+    @Override
+    public String toString(){
+    	return getKey() + "=" + getValue();
+    }
 
 }

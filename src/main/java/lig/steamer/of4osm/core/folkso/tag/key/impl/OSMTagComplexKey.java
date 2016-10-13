@@ -29,4 +29,13 @@ public class OSMTagComplexKey extends OSMTagKey implements IOSMTagComplexKey {
         return prefixes;
     }
 
+    @Override
+    public String toString(){
+    	String s = value;
+    	for(String prefixe : prefixes){
+    		s += ":" + prefixe;
+    	}
+    	return s;
+    }
+    
 }

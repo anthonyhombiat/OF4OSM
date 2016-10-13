@@ -59,11 +59,5 @@ public class OSMStatefulCategoryTag extends OSMTag implements IOSMStatefulCatego
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return  key + ";" + value ;
-    }
-    
     
 }

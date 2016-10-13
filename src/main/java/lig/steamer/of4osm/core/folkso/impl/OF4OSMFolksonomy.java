@@ -1,11 +1,13 @@
 package lig.steamer.of4osm.core.folkso.impl;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import lig.steamer.of4osm.IOF4OSMFolksonomy;
+import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 
 /**
@@ -14,49 +16,92 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
  */
 public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
 
-    private Map<String, Set<IOSMTag>> tags;
+    private Map<String, Set<IOSMTag>> tagsByElement;
 
     public OF4OSMFolksonomy() {
-        tags = new HashMap<>();
+        tagsByElement = new HashMap<>();
     }
 
     @Override
-    public Map<String, Set<IOSMTag>> getTags() {
-        return tags;
+    public Map<String, Set<IOSMTag>> getTagsByElement() {
+        return tagsByElement;
     }
 
     @Override
-    public Map< IOSMTag, Integer> getTagsByType(Class<? extends IOSMTag> type) {
+    public Map<IOSMTag, Integer> getTagsByType(Class<? extends IOSMTag> type) {
 
         Map< IOSMTag, Integer> tags = new HashMap<>();
 
-        // for each element
-        for (Entry<String, Set<IOSMTag>> entry : this.tags.entrySet()) {
-            // for each tag of the current element
-            for (IOSMTag tag : entry.getValue()) {
+        for (Entry<String, Set<IOSMTag>> element : this.tagsByElement.entrySet()) {
+            for (IOSMTag tag : element.getValue()) {
                 if (type.isInstance(tag)) {
                     tags.put(tag, getOccurrences(tag));
                 }
             }
         }
+        
         return tags;
     }
 
     @Override
     public int getOccurrences(IOSMTag tag) {
+    	
         int nbOcc = 0;
-        for (Entry<String, Set<IOSMTag>> entry : tags.entrySet()) {
-            for (IOSMTag currTag : entry.getValue()) {
+        for (Entry<String, Set<IOSMTag>> element : tagsByElement.entrySet()) {
+            for (IOSMTag currTag : element.getValue()) {
                 if (tag.equals(currTag)) {
                     nbOcc++;
                 }
             }
         }
+        
         return nbOcc;
     }
 
-    public void addTags(String elementId, Set<IOSMTag> tags) {
-        this.tags.put(elementId, tags);
+    public void addTagsByElement(String elementId, Set<IOSMTag> tags) {
+        this.tagsByElement.put(elementId, tags);
     }
 
+    @Override
+    public Map<String, Set<IOSMCategoryTag>> getCategoryTagsByElement() {
+    	
+        Map<String, Set<IOSMCategoryTag>> categoryTagsByElement = new HashMap<>();
+
+        for (Entry<String, Set<IOSMTag>> element : tagsByElement.entrySet()) {
+        	
+            Set<IOSMCategoryTag> categoryTags = new HashSet<>();
+            for (IOSMTag tag : element.getValue()) {
+                if (tag instanceof IOSMCategoryTag) {
+                    categoryTags.add((IOSMCategoryTag) tag);
+                }
+            }
+            
+            categoryTagsByElement.put(element.getKey(), categoryTags);
+        }
+        
+        return categoryTagsByElement;
+    }
+
+	@Override
+	public int getNbOfTags() {
+		int nbOfTags = 0;
+		for(Entry<String, Set<IOSMTag>> element : tagsByElement.entrySet()){
+			nbOfTags += element.getValue().size();
+		}
+		return nbOfTags;
+	}
+
+	@Override
+	public int getNbOfTagsByType(Class<? extends IOSMTag> type) {
+		int nbOfTags = 0;
+		for(Entry<String, Set<IOSMTag>> element : tagsByElement.entrySet()){
+			for(IOSMTag tag : element.getValue()){
+				if(type.isInstance(tag)){
+					nbOfTags ++;
+				}
+			}
+		}
+		return nbOfTags;
+	}
+    
 }

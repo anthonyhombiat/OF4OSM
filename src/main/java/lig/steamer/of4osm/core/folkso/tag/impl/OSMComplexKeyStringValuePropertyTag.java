@@ -57,9 +57,4 @@ public class OSMComplexKeyStringValuePropertyTag extends OSMTag implements IOSMC
         return true;
     }
 
-    @Override
-    public String toString() {
-        return key + ";" + value;
-    }
-
 }

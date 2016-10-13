@@ -21,5 +21,10 @@ public class OSMTagStatefulKey extends OSMTagKey implements IOSMTagStatefulKey {
     public String getState() {
         return state;
     }
+    
+    @Override
+    public String toString(){
+    	return state + ":" + value;
+    }
 
 }

@@ -1,7 +1,5 @@
 package lig.steamer.of4osm.parse;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -14,7 +12,6 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
@@ -51,17 +48,32 @@ public final class OF4OSMFolkso2OntoParser {
         }
         */
     	
-        Map<String, Set<IOSMCategoryTag>> categoryTags = getCategoryTagsByElement(folkso);
-        for (Entry<String, Set<IOSMCategoryTag>> entry : categoryTags.entrySet()) {
-            IOSMTagCombinationConceptParent[] categoryTagConcepts = new OSMCategoryTagConcept[entry.getValue().size()] ;
+    	int alreadyAddedKeyConcepts = 0;
+        int alreadyAddedTagConcepts = 0;
+    	
+        Map<String, Set<IOSMCategoryTag>> categoryTags = folkso.getCategoryTagsByElement();
+        for (Entry<String, Set<IOSMCategoryTag>> element : categoryTags.entrySet()) {
+            
+        	IOSMTagCombinationConceptParent[] categoryTagConcepts = new OSMCategoryTagConcept[element.getValue().size()];
+        	
             int j = 0;
-            for (IOSMCategoryTag tag : entry.getValue()) {
-                IOSMCategoryTagKeyConcept tagKeyConcept = createCategoryTagKeyConcept(tag);
-                of4osm.addConcept(tagKeyConcept);
-                IOSMCategoryTagConcept categoryTagConcept = createCategoryTagConcept(tag, tagKeyConcept);
-                of4osm.addConcept(categoryTagConcept);
+            for (IOSMCategoryTag tag : element.getValue()) {
+               
+            	IOSMCategoryTagKeyConcept keyConcept = createCategoryTagKeyConcept(tag);
+                if(of4osm.getOSMCategoryTagKeyConcepts().contains(keyConcept)){
+                	alreadyAddedKeyConcepts++;
+                }else {
+                	of4osm.addConcept(keyConcept);
+                }
+                
+                IOSMCategoryTagConcept tagConcept = createCategoryTagConcept(tag, keyConcept);
+                if(of4osm.getOSMCategoryTagConcepts().contains(tagConcept)){
+                	alreadyAddedTagConcepts++;
+                }else {
+                	of4osm.addConcept(tagConcept);
+                }
 
-                categoryTagConcepts[j] = categoryTagConcept;
+                categoryTagConcepts[j] = tagConcept;
                 j++;
             }
             
@@ -74,8 +86,10 @@ public final class OF4OSMFolkso2OntoParser {
         LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology is done.");
         
         LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances: " + of4osm.getOSMCategoryTagKeyConcepts().size());
+        LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances already in ontology: " + alreadyAddedKeyConcepts);
 		LOGGER.log(Level.INFO, "Nb of IHighLevelConcept instances: " + of4osm.getHighLevelConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances: " + of4osm.getOSMCategoryTagConcepts().size());
+		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances already in ontology: " + alreadyAddedTagConcepts);
 		LOGGER.log(Level.INFO, "Nb of IOSMTagCombinationConcept instances: " + of4osm.getOSMTagCombinationConcepts().size());
 
         return of4osm;
@@ -159,21 +173,5 @@ public final class OF4OSMFolkso2OntoParser {
         return onto;
     }
     */
-
-    private static Map< String, Set<IOSMCategoryTag>> getCategoryTagsByElement(IOF4OSMFolksonomy folkso) {
-        Map< String, Set<IOSMCategoryTag>> tags = new HashMap<>();
-        // for each element
-        for (Entry<String, Set<IOSMTag>> entry : folkso.getTags().entrySet()) {
-            // for each tag of the current element
-            Set categoryTag = new HashSet<>();
-            for (IOSMTag tag : entry.getValue()) {
-                if (IOSMCategoryTag.class.isInstance(tag)) {
-                    categoryTag.add(tag);
-                }
-            }
-            tags.put(entry.getKey(), categoryTag);
-        }
-        return tags;
-    }
    
 }

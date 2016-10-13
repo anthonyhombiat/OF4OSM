@@ -26,12 +26,7 @@ public abstract class OSMTagKey implements IOSMTagKey {
     public String getWikiURL() {
         return wikiURL;
     }
-
-    @Override
-    public String toString() {
-        return value;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;

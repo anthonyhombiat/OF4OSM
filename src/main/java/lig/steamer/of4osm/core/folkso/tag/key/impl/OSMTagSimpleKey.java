@@ -13,4 +13,9 @@ public class OSMTagSimpleKey extends OSMTagKey implements IOSMTagSimpleKey {
         super(value, wikiURL);
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
+    
 }

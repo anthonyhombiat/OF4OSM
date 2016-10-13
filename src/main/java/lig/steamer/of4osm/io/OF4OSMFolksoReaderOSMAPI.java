@@ -1,8 +1,8 @@
 package lig.steamer.of4osm.io;
 
 import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyKey;
-import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyValue;
 import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyTag;
+import static lig.steamer.of4osm.util.OF4OSMTagIdentifier.identifyValue;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,21 @@ import java.util.logging.Logger;
 
 import lig.steamer.of4osm.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolksonomy;
+import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyBooleanValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyDateValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyNumericValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyStringValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMLocalizedKeyStringValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyBooleanValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyDateValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyNumericValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyStringValuePropertyTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMTimeDomainsValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
 import lig.steamer.of4osm.ws.osmapi.OSMAPIElement;
@@ -30,7 +44,7 @@ public final class OF4OSMFolksoReaderOSMAPI {
 
     	LOGGER.log(Level.INFO, "Reading folksonomy from the OSM API...");
     	
-    	OF4OSMFolksonomy folkso = new OF4OSMFolksonomy();
+    	IOF4OSMFolksonomy folkso = new OF4OSMFolksonomy();
     	
         for (OSMAPIElement element : resp.getElements()) {
             if (element.getTags() != null) {
@@ -41,16 +55,37 @@ public final class OF4OSMFolksoReaderOSMAPI {
                     IOSMTag osmTag = identifyTag(key, value);
 
                     osmTags.add(osmTag);
+                    
+                    LOGGER.log(Level.INFO, "Adding tag " + osmTag);
                 }
-                folkso.addTags(element.getId(), osmTags);
+                folkso.addTagsByElement(element.getId(), osmTags);
             }
         }
         
         LOGGER.log(Level.INFO, "Reading folksonomy from the OSM API done.");
+        LOGGER.log(Level.INFO, "Nb of IOSMTags read: " + folkso.getNbOfTags());
+        
+        LOGGER.log(Level.INFO, "Nb of IOSMSimpleCategoryTags read: " + folkso.getNbOfTagsByType(IOSMSimpleCategoryTag.class));
+        LOGGER.log(Level.INFO, "Nb of IOSMStatefulCategoryTags read: " + folkso.getNbOfTagsByType(IOSMStatefulCategoryTag.class));
+        LOGGER.log(Level.INFO, "Nb of IOSMMultipleCategoryTags read: " + folkso.getNbOfTagsByType(IOSMMultipleCategoryTag.class));
+        
+        LOGGER.log(Level.INFO, "Nb of IOSMSimpleKeyStringPropertyTags read: " + folkso.getNbOfTagsByType(IOSMSimpleKeyStringValuePropertyTag.class));
+        LOGGER.log(Level.INFO, "Nb of IOSMComplexKeyStringPropertyTags read: " + folkso.getNbOfTagsByType(IOSMComplexKeyStringValuePropertyTag.class));
+        LOGGER.log(Level.INFO, "Nb of IOSMLocalizedKeyStringPropertyTags read: " + folkso.getNbOfTagsByType(IOSMLocalizedKeyStringValuePropertyTag.class));
+        
+        LOGGER.log(Level.INFO, "Nb of IOSMSimpleKeyBooleanPropertyTags read: " + folkso.getNbOfTagsByType(IOSMSimpleKeyBooleanValuePropertyTag.class));
+        LOGGER.log(Level.INFO, "Nb of IOSMComplexKeyBooleanPropertyTags read: " + folkso.getNbOfTagsByType(IOSMComplexKeyBooleanValuePropertyTag.class));
+        
+        LOGGER.log(Level.INFO, "Nb of IOSMSimpleKeyNumericValuePropertyTags read: " + folkso.getNbOfTagsByType(IOSMSimpleKeyNumericValuePropertyTag.class));
+        LOGGER.log(Level.INFO, "Nb of IOSMComplexKeyNumericValuePropertyTags read: " + folkso.getNbOfTagsByType(IOSMComplexKeyNumericValuePropertyTag.class));
+        
+        LOGGER.log(Level.INFO, "Nb of IOSMSimpleKeyDateValuePropertyTags read: " + folkso.getNbOfTagsByType(IOSMSimpleKeyDateValuePropertyTag.class));
+        LOGGER.log(Level.INFO, "Nb of IOSMComplexKeyDateValuePropertyTags read: " + folkso.getNbOfTagsByType(IOSMComplexKeyDateValuePropertyTag.class));
+        
+        LOGGER.log(Level.INFO, "Nb of IOSMTimeDomainsValuePropertyTags read: " + folkso.getNbOfTagsByType(IOSMTimeDomainsValuePropertyTag.class));
+        LOGGER.log(Level.INFO, "Nb of IOSMMultipleValuePropertyTag read: " + folkso.getNbOfTagsByType(IOSMMultipleValuePropertyTag.class));
         
         return folkso;
     }
     
-    
-
 }

@@ -59,10 +59,4 @@ public class OSMTimeDomainsValuePropertyTag extends OSMTag implements IOSMTimeDo
         return true;
     }
 
-   
-    @Override
-    public String toString() {
-        return key + ";" + value;
-    }
-
 }

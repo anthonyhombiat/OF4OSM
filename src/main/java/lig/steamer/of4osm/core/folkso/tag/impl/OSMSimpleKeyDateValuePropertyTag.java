@@ -56,11 +56,5 @@ public class OSMSimpleKeyDateValuePropertyTag extends OSMTag implements IOSMSimp
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return key + ";" + value;
-    }
-
-    
+ 
 }

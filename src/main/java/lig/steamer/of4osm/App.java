@@ -1,5 +1,7 @@
 package lig.steamer.of4osm;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
+
 import lig.steamer.of4osm.core.onto.impl.OF4OSMOntology;
 import lig.steamer.of4osm.io.OF4OSMFolksoReaderOSMAPI;
 import lig.steamer.of4osm.io.OF4OSMOntoReaderOSMWiki;
@@ -28,34 +30,43 @@ public class App {
         MediaWikiAPIRequest osmWikiReq = new MediaWikiAPIRequest("parse", "Map_Features", "text", "json");
 		OSMMediaWikiAPIClient osmWikiClient = new OSMMediaWikiAPIClient();
 		MediaWikiAPIResponse osmWikiResponse = osmWikiClient.send(osmWikiReq);
+		
+		final long t0 = System.currentTimeMillis();
+		System.out.println("OSM Wiki data retrieving time: " + DurationFormatUtils.formatDurationHMS(t1 - t0));
+		
 		of4osm = OF4OSMOntoReaderOSMWiki.read(osmWikiResponse, of4osm);
 		
 		final long t2 = System.currentTimeMillis();
-		System.out.println("Initializing time: " + (t2 - t1));
+		System.out.println("Ontology initializing time: " + DurationFormatUtils.formatDurationHMS(t2 - t1));
 		
 		// Populate OF4OSM with OSM tags associated with Grenoble located objects.
-//         OSMAPIRequest osmApiReq = new OSMAPIRequest("5.677606", "45.15414", "5.753118", "45.214077"); 
+         OSMAPIRequest osmApiReq = new OSMAPIRequest("5.677606", "45.15414", "5.753118", "45.214077"); 
 		// Secteur 6
-        OSMAPIRequest osmApiReq = new OSMAPIRequest("5.720359", "45.15414", "5.741375", "45.170532"); 
+//        OSMAPIRequest osmApiReq = new OSMAPIRequest("5.720359", "45.15414", "5.741375", "45.170532"); 
         OverpassXAPIClient osmApiClient = new OverpassXAPIClient();
         OSMAPIResponse osmApiResp = osmApiClient.send(osmApiReq);
-        IOF4OSMFolksonomy folkso = OF4OSMFolksoReaderOSMAPI.read(osmApiResp);
         
         final long t3 = System.currentTimeMillis();
-		System.out.println("Folksonomy parsing time: " + (t3 - t2));
+		System.out.println("OSM API Data retrieving time: " + DurationFormatUtils.formatDurationHMS(t3 - t2));
+        
+        IOF4OSMFolksonomy folkso = OF4OSMFolksoReaderOSMAPI.read(osmApiResp);
+        
+        final long t4 = System.currentTimeMillis();
+		System.out.println("Folksonomy reading time: " + DurationFormatUtils.formatDurationHMS(t4 - t3));
         
 //        Folkso2CSVWriter.write(folkso);
         of4osm = OF4OSMFolkso2OntoParser.addConceptsFromFolkso(of4osm, folkso);
         
-        final long t4 = System.currentTimeMillis();
-		System.out.println("Folksonomy parsing time: " + (t4 - t3));
+        final long t5 = System.currentTimeMillis();
+		System.out.println("Folksonomy to Ontology parsing time: " + DurationFormatUtils.formatDurationHMS(t5 - t4));
 		
         // Write OF4OSM to file in OWL format.
         OF4OSMOntoWriterOWL ontoWriter = new OF4OSMOntoWriterOWL();
         ontoWriter.write(of4osm);
         
-        final long t5 = System.currentTimeMillis();
-		System.out.println("Execution time: " + (t5 - t4));
+        final long t6 = System.currentTimeMillis();
+		System.out.println("OWL file writing time: " + DurationFormatUtils.formatDurationHMS(t6 - t5));
+		System.out.println("Total execution time: " + DurationFormatUtils.formatDurationHMS(t6 - t0));
 
     }
 

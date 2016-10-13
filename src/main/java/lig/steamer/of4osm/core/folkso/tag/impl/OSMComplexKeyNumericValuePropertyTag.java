@@ -57,9 +57,4 @@ public class OSMComplexKeyNumericValuePropertyTag extends OSMTag implements IOSM
         return true;
     }
 
-    @Override
-    public String toString() {
-        return key + ";" + value;
-    }
-
 }

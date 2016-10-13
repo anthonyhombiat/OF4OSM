@@ -57,9 +57,4 @@ public class OSMMultipleValuePropertyTag extends OSMTag implements IOSMMultipleV
         return true;
     }
 
-    @Override
-    public String toString() {
-        return key + ";" + value;
-    }
-
 }

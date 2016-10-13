@@ -57,9 +57,4 @@ public class OSMComplexKeyBooleanValuePropertyTag extends OSMTag implements IOSM
         return true;
     }
 
-    @Override
-    public String toString() {
-        return  key + ";" + value;
-    }
-
 }

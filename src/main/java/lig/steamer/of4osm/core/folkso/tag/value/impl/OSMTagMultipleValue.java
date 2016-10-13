@@ -20,11 +20,13 @@ public class OSMTagMultipleValue extends OSMTagValue implements IOSMTagMultipleV
         return values;
     }
     
-    
-
     @Override
     public String toString() {
-        return "" + values;
+        String s = values[0];
+        for(int i=1;i<values.length;i++){
+        	s += ";" + values[i];
+        }
+    	return s;
     }
 
     @Override
@@ -51,7 +53,5 @@ public class OSMTagMultipleValue extends OSMTagValue implements IOSMTagMultipleV
         }
         return true;
     }
-
-
 
 }

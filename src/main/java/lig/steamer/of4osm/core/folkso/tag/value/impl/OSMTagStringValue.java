@@ -20,8 +20,6 @@ public class OSMTagStringValue extends OSMTagValue implements IOSMTagStringValue
         return value;
     }
     
-    
-
     @Override
     public String toString() {
         return ""  + value ;

@@ -42,7 +42,7 @@ public class OF4OSMFolksoWriterCSVTest extends TestCase {
         tags.add(tag2);
         tags.add(tag3);
         
-        folkso.addTags("test", tags);
+        folkso.addTagsByElement("test", tags);
         
 	}
 

@@ -58,9 +58,4 @@ public class OSMLocalizedKeyStringValuePropertyTag extends OSMTag implements IOS
         return true;
     }
 
-    @Override
-    public String toString() {
-        return key + ";" + value;
-    }
-
 }

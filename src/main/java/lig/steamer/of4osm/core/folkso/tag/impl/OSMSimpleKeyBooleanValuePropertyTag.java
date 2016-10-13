@@ -56,11 +56,5 @@ public class OSMSimpleKeyBooleanValuePropertyTag extends OSMTag implements IOSMS
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return  key + ";" + value ;
-    }
-
     
 }

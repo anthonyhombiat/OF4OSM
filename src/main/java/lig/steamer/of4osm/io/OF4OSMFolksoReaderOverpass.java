@@ -46,7 +46,7 @@ public final class OF4OSMFolksoReaderOverpass {
                 IOSMTag osmTag = identifyTag(key, value);
                 osmTags.add(osmTag);
             }
-            folkso.addTags(element.getId(), osmTags);
+            folkso.addTagsByElement(element.getId(), osmTags);
         }
         
         LOGGER.log(Level.INFO, "Reading folksonomy from the Overpass API done.");

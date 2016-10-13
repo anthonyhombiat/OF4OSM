@@ -57,9 +57,4 @@ public class OSMComplexKeyDateValuePropertyTag extends OSMTag implements IOSMCom
         return true;
     }
 
-    @Override
-    public String toString() {
-        return key + ";" + value;
-    }
-
 }

@@ -57,9 +57,4 @@ public class OSMMultipleCategoryTag extends OSMTag implements IOSMMultipleCatego
         return true;
     }
 
-    @Override
-    public String toString() {
-        return key + ";" + value + ':';
-    }
-
 }
