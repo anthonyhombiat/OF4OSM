@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.semanticweb.owlapi.model.IRI;
+
 import lig.steamer.of4osm.core.onto.meta.IConcept;
 
 /**
@@ -11,10 +13,14 @@ import lig.steamer.of4osm.core.onto.meta.IConcept;
  */
 public abstract class Concept implements IConcept {
 
-    public Map<String, String> labels;
+    public static final IRI OF4OSM_IRI = IRI.create("http://steamer.imag.fr/of4osm");
+	
+	public IRI iri;
+	public Map<String, String> labels;
 
-    public Concept() {
+    public Concept(String label) {
         this.labels = new HashMap<>();
+        setDefaultLabel(label);
     }
 
     @Override
@@ -25,13 +31,30 @@ public abstract class Concept implements IConcept {
     public void addLabel(String lang, String label) {
         labels.put(lang, label);
     }
-
-    @Override
-    public abstract Set<? extends IConcept> getParents();
  
     @Override
     public String getDefaultLabel() {
         return labels.get("EN");
+    }
+    
+    @Override
+    public void setDefaultLabel(String label){
+    	labels.put("EN", label);
+    }
+    
+    @Override
+    public abstract Set<? extends IConcept> getParents();
+    
+    @Override
+    public IRI getIRI(){
+    	return IRI.create(OF4OSM_IRI + "#" + getDefaultLabel());
+    }
+    
+    @Override
+    public boolean equals(Object object){
+    	if(object instanceof IConcept)
+    		return ((IConcept) object).getIRI().equals(iri);
+    	return false;
     }
 
 }

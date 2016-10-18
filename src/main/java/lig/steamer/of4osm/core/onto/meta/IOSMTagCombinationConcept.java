@@ -5,9 +5,22 @@ import java.util.Set;
 /**
  *
  */
-public interface IOSMTagCombinationConcept extends IOSMTagCombinationConceptParent {
+public interface IOSMTagCombinationConcept extends IConcept {
 
     @Override
-    public Set<? extends IOSMTagCombinationConceptParent> getParents();
+    public Set<IOSMTagCombinationConceptParent> getParents();
+    
+    /**
+     * 
+     * @param parent
+     */
+    public void addParent(IOSMTagCombinationConceptParent parent);
+    
+    /**
+     * 
+     * @param concept
+     * @return
+     */
+    public boolean isSubClassOf(IOSMTagCombinationConcept concept); 
 
 }

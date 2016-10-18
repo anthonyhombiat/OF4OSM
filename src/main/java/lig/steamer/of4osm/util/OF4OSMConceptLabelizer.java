@@ -9,6 +9,7 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagLocalizedKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagStatefulKey;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConceptParent;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -17,6 +18,14 @@ import org.apache.commons.lang3.text.WordUtils;
  * @author amehiris
  */
 public final class OF4OSMConceptLabelizer {
+	
+	public static String getIOSMTagCombinationConceptLabel(IOSMTagCombinationConceptParent[] parents){
+		String label = "";
+		for(IOSMTagCombinationConceptParent parent : parents){
+			label += parent.getDefaultLabel();
+		}
+		return label;
+	}
     
     public static String getLabelFromTag(IOSMTag tag, int position){
     	if(tag instanceof IOSMSimpleCategoryTag){

@@ -5,33 +5,30 @@ import lig.steamer.of4osm.core.onto.meta.IOSMDiscretizedOSMNumericPropertyTagCon
 
 /**
  * 
+ * @author Anthony Hombiat
+ *
  */
 public class OSMDiscretizedOSMNumericPropertyTagConcept extends OSMDiscretizedOSMPropertyTagConcept implements IOSMDiscretizedOSMNumericPropertyTagConcept {
 
 	public IOSMNumericValuePropertyTag tag;
 	public Double binf;
 	public Double bsup;
-	    
-    public OSMDiscretizedOSMNumericPropertyTagConcept() {
-    }
 
-    /**
-     * @return
-     */
+	public OSMDiscretizedOSMNumericPropertyTagConcept(String label) {
+		super(label);
+	}
+	
+    @Override
     public Double getBinf() {
         return binf;
     }
 
-    /**
-     * @return
-     */
+    @Override
     public Double getBsup() {
        return bsup;
     }
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMNumericValuePropertyTag getTag() {
         return tag;
     }

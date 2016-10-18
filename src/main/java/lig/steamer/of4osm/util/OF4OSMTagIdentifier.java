@@ -56,64 +56,60 @@ public class OF4OSMTagIdentifier {
 
     public static IOSMTag identifyTag(IOSMTagKey key, IOSMTagValue value) {
        
-    	IOSMTag type = null;
         if (key instanceof IOSMTagSimpleKey) {
-            if (value instanceof IOSMTagMultipleValue) {
-                //attention faut voir est-ce que Category ou PropertyTagKey 
-                if (isAdditionalProperty(key.getValue())) {
-                    type = new OSMMultipleValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagMultipleValue) value);
-                } else {
-                    type = new OSMMultipleCategoryTag((IOSMTagSimpleKey) key, (IOSMTagMultipleValue) value);
-                }
+        	
+        	if (value instanceof IOSMTagStringValue) {
+                if (isAdditionalProperty(key.getValue()))
+                	return new OSMSimpleKeyStringValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagStringValue) value);
+                else
+                	return new OSMSimpleCategoryTag((IOSMTagSimpleKey) key, (IOSMTagStringValue) value);
             }
-            if (value instanceof IOSMTagBooleanValue) {
-                type = new OSMSimpleKeyBooleanValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagBooleanValue) value);
+        	
+        	if (value instanceof IOSMTagMultipleValue) {
+                if (isAdditionalProperty(key.getValue()))
+                   return new OSMMultipleValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagMultipleValue) value);
+                else 
+                	return new OSMMultipleCategoryTag((IOSMTagSimpleKey) key, (IOSMTagMultipleValue) value);
             }
-            if (value instanceof IOSMTagStringValue) {
-                //attention Category or PropertyTagKey traiter apres inchAllah
-
-                if (isAdditionalProperty(key.getValue())) {
-                    type = new OSMSimpleKeyStringValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagStringValue) value);
-                } else {
-                    type = new OSMSimpleCategoryTag((IOSMTagSimpleKey) key, (IOSMTagStringValue) value);
-                }
-            }
-            if (value instanceof IOSMTagNumericValue) {
-                type = new OSMSimpleKeyNumericValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagNumericValue) value);
-            }
-            if (value instanceof IOSMTagDateValue) {
-                type = new OSMSimpleKeyDateValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagDateValue) value);
-            }
-            if (value instanceof IOSMTagTimeDomainsValue){
-                type = new OSMTimeDomainsValuePropertyTag((IOSMTagSimpleKey)key,(IOSMTagTimeDomainsValue)value);
-            }
+        	
+        	if (value instanceof IOSMTagBooleanValue) 
+              	return new OSMSimpleKeyBooleanValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagBooleanValue) value);
+         	 
+            if (value instanceof IOSMTagNumericValue) 
+              	return new OSMSimpleKeyNumericValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagNumericValue) value);
+        	
+        	if (value instanceof IOSMTagTimeDomainsValue)
+            	return new OSMTimeDomainsValuePropertyTag((IOSMTagSimpleKey)key,(IOSMTagTimeDomainsValue)value);
+        	
+        	if (value instanceof IOSMTagDateValue) 
+            	return new OSMSimpleKeyDateValuePropertyTag((IOSMTagSimpleKey) key, (IOSMTagDateValue) value);
+        	
         }
+        
         if (key instanceof IOSMTagComplexKey) {
-            if (value instanceof IOSMTagBooleanValue) {
-                type = new OSMComplexKeyBooleanValuePropertyTag((IOSMTagComplexKey) key, (IOSMTagBooleanValue) value);
-            }
-            if (value instanceof IOSMTagStringValue) {
-                type = new OSMComplexKeyStringValuePropertyTag((IOSMTagComplexKey) key, (IOSMTagStringValue) value);
-            }
-            if (value instanceof IOSMTagNumericValue) {
-                type = new OSMComplexKeyNumericValuePropertyTag((IOSMTagComplexKey) key, (IOSMTagNumericValue) value);
-            }
-            if (value instanceof IOSMTagDateValue) {
-                type = new OSMComplexKeyDateValuePropertyTag((IOSMTagComplexKey) key, (IOSMTagDateValue) value);
-            }
+         
+        	if (value instanceof IOSMTagStringValue) 
+            	return new OSMComplexKeyStringValuePropertyTag((IOSMTagComplexKey) key, (IOSMTagStringValue) value);
+        	
+        	if (value instanceof IOSMTagBooleanValue)
+            	return new OSMComplexKeyBooleanValuePropertyTag((IOSMTagComplexKey) key, (IOSMTagBooleanValue) value);
+           
+            if (value instanceof IOSMTagNumericValue)
+            	return new OSMComplexKeyNumericValuePropertyTag((IOSMTagComplexKey) key, (IOSMTagNumericValue) value);
+           
+            if (value instanceof IOSMTagDateValue) 
+            	return new OSMComplexKeyDateValuePropertyTag((IOSMTagComplexKey) key, (IOSMTagDateValue) value);
+        }
+        
+        if(key instanceof IOSMTagLocalizedKey)
+            if(value instanceof IOSMTagStringValue)
+            	return new OSMLocalizedKeyStringValuePropertyTag((IOSMTagLocalizedKey)key, (IOSMTagStringValue)value);
 
-        }
-        if(key instanceof IOSMTagLocalizedKey){
-            if(value instanceof IOSMTagStringValue){
-                type = new OSMLocalizedKeyStringValuePropertyTag((IOSMTagLocalizedKey)key,(IOSMTagStringValue)value);
-            }
-        }
-        if(key instanceof IOSMTagStatefulKey){
-            if(value instanceof IOSMTagStringValue){
-                type = new OSMStatefulCategoryTag((IOSMTagStatefulKey)key,(IOSMTagStringValue)value);
-            }
-        }       
-        return type;       
+        if(key instanceof IOSMTagStatefulKey)
+            if(value instanceof IOSMTagStringValue)
+            	return new OSMStatefulCategoryTag((IOSMTagStatefulKey)key, (IOSMTagStringValue)value);
+      
+        return null;       
     }
 
     public static IOSMTagKey identifyKey(String k, String wikiURL) {
@@ -145,11 +141,10 @@ public class OF4OSMTagIdentifier {
                 		 return new OSMTagNumericValue(decimal);
                      } else {
                     	 String[] values = v.split(";");
-                         if (values.length == 1) {
+                         if (values.length == 1)
                         	 return new OSMTagStringValue(v);
-                         } else {
+                         else 
                         	 return new OSMTagMultipleValue(values);
-                         }
                      }
                 }
             }
@@ -184,44 +179,30 @@ public class OF4OSMTagIdentifier {
 
             try {
             	return formatter.parse(date);
-            } catch (ParseException e) {
-                
-            }
+            } catch (ParseException e) {}
         }
         
         return null;
     }
 
     private static boolean isLanguageCode(String languageCode) {
-
-        for (LanguageCode c : LanguageCode.values()) {
-            if (c.name().equals(languageCode)) {
+        for (LanguageCode c : LanguageCode.values())
+            if (c.name().equals(languageCode))
                 return true;
-            }
-        }
-
         return false;
     }
 
     private static boolean isLifecycleState(String lifecycleState) {
-
-        for (LifecycleState c : LifecycleState.values()) {
-            if (c.name().equals(lifecycleState)) {
+        for (LifecycleState c : LifecycleState.values())
+            if (c.name().equals(lifecycleState))
                 return true;
-            }
-        }
-
         return false;
     }
 
     private static boolean isAdditionalProperty(String additionalProperty) {
-
-        for (AdditionalProperty c : AdditionalProperty.values()) {
-            if (c.toString().equals(additionalProperty)) {
+        for (AdditionalProperty c : AdditionalProperty.values())
+            if (c.toString().equals(additionalProperty))
                 return true;
-            }
-        }
-
         return false;
     }
 

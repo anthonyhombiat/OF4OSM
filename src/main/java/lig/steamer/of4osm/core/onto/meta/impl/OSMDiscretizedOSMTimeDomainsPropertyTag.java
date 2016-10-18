@@ -13,6 +13,10 @@ public class OSMDiscretizedOSMTimeDomainsPropertyTag  extends OSMDiscretizedOSMP
 
 	public IOSMDateValuePropertyTag tag;
 	
+	public OSMDiscretizedOSMTimeDomainsPropertyTag(String label) {
+		super(label);
+	}
+	
 	@Override
 	public Date getBinf() {
 		return null;

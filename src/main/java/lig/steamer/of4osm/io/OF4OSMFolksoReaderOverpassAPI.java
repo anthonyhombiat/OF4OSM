@@ -24,9 +24,9 @@ import lig.steamer.of4osm.ws.overpass.OverpassAPIResponse;
  *
  * @author amehiris
  */
-public final class OF4OSMFolksoReaderOverpass {
+public final class OF4OSMFolksoReaderOverpassAPI {
 	
-	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolksoReaderOverpass.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolksoReaderOverpassAPI.class.getName());
 
     public static IOF4OSMFolksonomy read(OverpassAPIResponse resp) {
 

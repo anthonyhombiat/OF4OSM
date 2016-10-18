@@ -14,6 +14,7 @@ import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.onto.impl.OF4OSMOntology;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 import lig.steamer.of4osm.io.OF4OSMOntoWriterOWL;
 import lig.steamer.of4osm.parse.OF4OSMFolkso2OntoParser;
 
@@ -32,7 +33,7 @@ public class OF4OSMOntoWriterOWLTest extends TestCase {
 		IOSMCategoryTagKeyConcept keyConcept1 = OF4OSMFolkso2OntoParser
 				.createCategoryTagKeyConcept(tag1);
 		IOSMCategoryTagConcept concept1 = OF4OSMFolkso2OntoParser
-				.createCategoryTagConcept(tag1, keyConcept1);
+				.createCategoryTagConcept(tag1, (IOSMTagConceptParent) keyConcept1);
 
 		IOSMTagSimpleKey key2 = new OSMTagSimpleKey("amenity", "");
 		IOSMTagStringValue value2 = new OSMTagStringValue("restaurant");
@@ -40,7 +41,7 @@ public class OF4OSMOntoWriterOWLTest extends TestCase {
 		IOSMCategoryTagKeyConcept keyConcept2 = OF4OSMFolkso2OntoParser
 				.createCategoryTagKeyConcept(tag2);
 		IOSMCategoryTagConcept concept2 = OF4OSMFolkso2OntoParser
-				.createCategoryTagConcept(tag2, keyConcept2);
+				.createCategoryTagConcept(tag2, (IOSMTagConceptParent) keyConcept2);
 
 		IOSMTagSimpleKey key3 = new OSMTagSimpleKey("tourism", "");
 		IOSMTagStringValue value3 = new OSMTagStringValue("hotel");
@@ -48,7 +49,7 @@ public class OF4OSMOntoWriterOWLTest extends TestCase {
 		IOSMCategoryTagKeyConcept keyConcept3 = OF4OSMFolkso2OntoParser
 				.createCategoryTagKeyConcept(tag3);
 		IOSMCategoryTagConcept concept3 = OF4OSMFolkso2OntoParser
-				.createCategoryTagConcept(tag3, keyConcept3);
+				.createCategoryTagConcept(tag3, (IOSMTagConceptParent) keyConcept3);
 
 		of4osm = new OF4OSMOntology();
 		of4osm.addConcept(keyConcept1);

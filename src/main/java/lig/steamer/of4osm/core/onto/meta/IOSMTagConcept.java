@@ -7,12 +7,18 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 /**
  * 
  */
-public interface IOSMTagConcept extends IOSMTagCombinationConceptParent {
+public interface IOSMTagConcept extends IConcept {
 
     /**
      * @return
      */
     public Set<? extends IOSMTagConceptParent> getParents();
+    
+    /**
+     * 
+     * @param parent
+     */
+    public void addParent(IOSMTagConceptParent parent);
 
     /**
      * @return

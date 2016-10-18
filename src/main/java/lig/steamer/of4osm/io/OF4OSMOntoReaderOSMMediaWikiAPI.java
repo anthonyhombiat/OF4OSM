@@ -11,8 +11,10 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
+import lig.steamer.of4osm.core.onto.meta.IHighLevelConceptParent;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 import lig.steamer.of4osm.core.onto.meta.impl.HighLevelConcept;
 import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagKeyConcept;
@@ -25,9 +27,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-public final class OF4OSMOntoReaderOSMWiki {
+public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 	
-	private static final Logger LOGGER = Logger.getLogger(OF4OSMOntoReaderOSMWiki.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(OF4OSMOntoReaderOSMMediaWikiAPI.class.getName());
 	
 	public static final String CATEGORY_TAGS_ID = "Primary_features";
 	
@@ -39,24 +41,16 @@ public final class OF4OSMOntoReaderOSMWiki {
 		
 		Document htmlDoc = Jsoup.parse(text.getAll());
 		
-		IOSMTagKey key;
-		IOSMTagValue value;
-		IOSMSimpleCategoryTag tag;
-		IOSMCategoryTagKeyConcept keyConcept;
-		IHighLevelConcept highLevelConcept;
-		IOSMCategoryTagConcept tagConcept;
+		IOSMTagKey key = null;
+		IOSMTagValue value = null;
+		IOSMSimpleCategoryTag tag = null;
+		IOSMCategoryTagKeyConcept keyConcept = null;
+		IHighLevelConcept highLevelConcept = null;
+		IOSMCategoryTagConcept tagConcept = null;
 		
 		Element primaryFeaturesHeader = htmlDoc.getElementById(CATEGORY_TAGS_ID).parent();
-		int index = primaryFeaturesHeader.siblingIndex();
-		List<Element> siblings = primaryFeaturesHeader.siblingElements();
 		
-		index++;
-		
-		key = new OSMTagSimpleKey(siblings.get(index).text(),"");
-		keyConcept = new OSMCategoryTagKeyConcept(OF4OSMConceptLabelizer.normalize(key.getValue()), key);
-		LOGGER.log(Level.INFO, "Adding IOSMCategoryTagKeyConcept \"" + keyConcept.getDefaultLabel() + "\"");
-		
-		for(Element el : siblings){
+		for(Element el : primaryFeaturesHeader.siblingElements()){
 			
 			if(el.tagName().equals("h2")) break;
 			
@@ -67,6 +61,8 @@ public final class OF4OSMOntoReaderOSMWiki {
 				of4osm.addConcept(keyConcept);
 				
 				LOGGER.log(Level.INFO, "Adding IOSMCategoryTagKeyConcept \"" + keyConcept.getDefaultLabel() + "\"");
+				
+				continue;
 			}
 			
 			if(el.hasClass("wikitable")){
@@ -81,6 +77,7 @@ public final class OF4OSMOntoReaderOSMWiki {
 					if(header != null){
 						
 						highLevelConcept = new HighLevelConcept(OF4OSMConceptLabelizer.normalize(header.text()));
+						highLevelConcept.addParent((IHighLevelConceptParent) keyConcept);
 						of4osm.addConcept(highLevelConcept);
 						
 						LOGGER.log(Level.INFO, "Adding HighLevelConcept \"" + highLevelConcept.getDefaultLabel() + "\"");			
@@ -91,14 +88,19 @@ public final class OF4OSMOntoReaderOSMWiki {
 							
 							value = OF4OSMTagIdentifier.identifyValue(valueCol.text());
 							
-							if(OF4OSMTagIdentifier.identifyTag(key, value) instanceof OSMSimpleCategoryTag){
-								tag = (OSMSimpleCategoryTag) OF4OSMTagIdentifier.identifyTag(key, value);
-								String label = OF4OSMConceptLabelizer.getLabelFromTag(tag);
-								
-								tagConcept = new OSMCategoryTagConcept(label, tag, keyConcept);
-								of4osm.addConcept(tagConcept);
-								
-								LOGGER.log(Level.INFO, "Adding IOSMCategoryTagConcept \"" + tagConcept.getDefaultLabel() + "\"");
+							if(key != null){
+								if(OF4OSMTagIdentifier.identifyTag(key, value) instanceof OSMSimpleCategoryTag){
+									tag = (OSMSimpleCategoryTag) OF4OSMTagIdentifier.identifyTag(key, value);
+									String label = OF4OSMConceptLabelizer.getLabelFromTag(tag);
+									
+									tagConcept = new OSMCategoryTagConcept(label, tag, (IOSMTagConceptParent) keyConcept);
+									if(highLevelConcept != null){
+										tagConcept.addParent((IOSMTagConceptParent) highLevelConcept);
+									}
+									of4osm.addConcept(tagConcept);
+									
+									LOGGER.log(Level.INFO, "Adding IOSMCategoryTagConcept \"" + tagConcept.getDefaultLabel() + "\"");
+								}
 							}
 						}
 					}

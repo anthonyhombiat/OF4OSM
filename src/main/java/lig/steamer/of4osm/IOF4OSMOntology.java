@@ -14,11 +14,40 @@ import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
  */
 public interface IOF4OSMOntology {
     
-    public void addConcept(IConcept concept);
+	/**
+	 * 
+	 * @return
+	 */
+	public Set<IConcept> getConcepts();
+	
+    /**
+     * 
+     * @param concept
+     */
+	public void addConcept(IConcept concept);
     
+	/**
+	 * 
+	 * @return
+	 */
     public Set<IOSMTagCombinationConcept> getOSMTagCombinationConcepts();
+    
+    /**
+     * 
+     * @return
+     */
     public Set<IOSMCategoryTagKeyConcept> getOSMCategoryTagKeyConcepts();
+    
+    /**
+     * 
+     * @return
+     */
     public Set<IOSMCategoryTagConcept> getOSMCategoryTagConcepts();
+    
+    /**
+     * 
+     * @return
+     */
     public Set<IHighLevelConcept> getHighLevelConcepts();
     
 }

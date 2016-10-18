@@ -7,13 +7,19 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 /**
  * 
  */
-public interface IOSMCategoryTagKeyConcept extends IOSMTagConceptParent {
+public interface IOSMCategoryTagKeyConcept extends IConcept {
 
     /**
      * @return
      */
     @Override
     public Set<IHighLevelConcept> getParents();
+    
+    /**
+     * 
+     * @param parent
+     */
+    public void addParent(IHighLevelConcept parent);
 
     /**
      * @return

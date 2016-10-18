@@ -65,5 +65,15 @@ public class OF4OSMOntology implements IOF4OSMOntology {
 	public Set<IHighLevelConcept> getHighLevelConcepts() {
 		return highLevelConcepts;
 	}
+
+	@Override
+	public Set<IConcept> getConcepts() {
+		Set<IConcept> concepts = new HashSet<>();
+		concepts.addAll(categoryTagKeyConcepts);
+		concepts.addAll(categoryTagConcepts);
+		concepts.addAll(tagCombinationConcepts);
+		concepts.addAll(highLevelConcepts);
+		return concepts;
+	}
 	
 }

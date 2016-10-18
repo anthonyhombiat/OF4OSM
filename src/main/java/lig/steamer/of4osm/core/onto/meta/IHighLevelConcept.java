@@ -5,16 +5,19 @@ import java.util.Set;
 /**
  * 
  */
-public interface IHighLevelConcept extends IOSMTagConceptParent {
+public interface IHighLevelConcept extends IConcept {
 
-    /**
-     * @return
-     */
+	@Override
     public Set<? extends IHighLevelConceptParent> getParents();
 
     /**
      * @return
      */
     public String getDescription();
-
+    
+    /**
+     * 
+     * @param parent
+     */
+    public void addParent(IHighLevelConceptParent parent);
 }

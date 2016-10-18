@@ -7,33 +7,30 @@ import lig.steamer.of4osm.core.onto.meta.IOSMDiscretizedOSMDatePropertyTagConcep
 
 /**
  * 
+ * @author Anthony Hombiat
+ *
  */
 public class OSMDiscretizedOSMDatePropertyTagConcept extends OSMDiscretizedOSMPropertyTagConcept implements IOSMDiscretizedOSMDatePropertyTagConcept {
 
-    public IOSMDateValuePropertyTag tag;
+	public IOSMDateValuePropertyTag tag;
     public Date binf;
     public Date bsup;
-
-    public OSMDiscretizedOSMDatePropertyTagConcept() {
-    }
     
-    /**
-     * @return
-     */
+    public OSMDiscretizedOSMDatePropertyTagConcept(String label) {
+		super(label);
+	}
+
+    @Override
     public Date getBinf() {
         return binf;
     }
 
-    /**
-     * @return
-     */
+    @Override
     public Date getBsup() {
         return bsup;
     }
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMDateValuePropertyTag getTag() {
        return tag;
     }

@@ -9,6 +9,10 @@ import lig.steamer.of4osm.core.onto.meta.IOSMPropertyTagConcept;
  */
 public abstract class OSMPropertyTagConcept extends OSMTagConcept implements IOSMPropertyTagConcept {
 	
+	public OSMPropertyTagConcept(String label) {
+		super(label);
+	}
+
 	@Override
     public abstract IOSMPropertyTag getTag();
 	

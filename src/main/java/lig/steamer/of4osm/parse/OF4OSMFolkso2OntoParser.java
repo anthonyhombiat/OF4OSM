@@ -1,5 +1,7 @@
 package lig.steamer.of4osm.parse;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -17,7 +19,9 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.impl.OSMTagCombinationConcept;
@@ -35,26 +39,13 @@ public final class OF4OSMFolkso2OntoParser {
 
     	LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology...");
     	
-    	/*
-    	Map<IOSMTag, Integer> catTags = folkso.getTagsByType(IOSMCategoryTag.class);
-
-        for (Entry<IOSMTag, Integer> entry : catTags.entrySet()) {
-            IOSMCategoryTag tag = (IOSMCategoryTag) entry.getKey();
-
-            IOSMCategoryTagKeyConcept tagKeyConcept = CreateCategoryTagKeyConcept(tag);
-            onto.addConcept(tagKeyConcept, entry.getValue());
-            IOSMCategoryTagConcept categoryTagConcept = CreateCategoryTagConcept(tag, tagKeyConcept);
-            onto.addConcept(categoryTagConcept, entry.getValue());
-        }
-        */
-    	
     	int alreadyAddedKeyConcepts = 0;
         int alreadyAddedTagConcepts = 0;
     	
         Map<String, Set<IOSMCategoryTag>> categoryTags = folkso.getCategoryTagsByElement();
         for (Entry<String, Set<IOSMCategoryTag>> element : categoryTags.entrySet()) {
             
-        	IOSMTagCombinationConceptParent[] categoryTagConcepts = new OSMCategoryTagConcept[element.getValue().size()];
+        	IOSMTagCombinationConceptParent[] tagCombinationParent = new OSMCategoryTagConcept[element.getValue().size()];
         	
             int j = 0;
             for (IOSMCategoryTag tag : element.getValue()) {
@@ -66,25 +57,24 @@ public final class OF4OSMFolkso2OntoParser {
                 	of4osm.addConcept(keyConcept);
                 }
                 
-                IOSMCategoryTagConcept tagConcept = createCategoryTagConcept(tag, keyConcept);
+                IOSMCategoryTagConcept tagConcept = createCategoryTagConcept(tag, (IOSMTagConceptParent) keyConcept);
                 if(of4osm.getOSMCategoryTagConcepts().contains(tagConcept)){
                 	alreadyAddedTagConcepts++;
                 }else {
                 	of4osm.addConcept(tagConcept);
                 }
 
-                categoryTagConcepts[j] = tagConcept;
+                tagCombinationParent[j] = (IOSMTagCombinationConceptParent) tagConcept;
                 j++;
             }
             
-//            for (int i = 2; i < categoryTagConceptSet.length + 1; i++) {
-//                combinations(categoryTagConceptSet, 2, 0, new IOSMTagCombinationConcept[2], onto);
-//            }
+            addOSMTagCombinationsConcepts(tagCombinationParent, of4osm);
             
         }
         
         LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology is done.");
         
+        LOGGER.log(Level.INFO, "Nb of IConcept instances: " + of4osm.getConcepts().size());
         LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances: " + of4osm.getOSMCategoryTagKeyConcepts().size());
         LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances already in ontology: " + alreadyAddedKeyConcepts);
 		LOGGER.log(Level.INFO, "Nb of IHighLevelConcept instances: " + of4osm.getHighLevelConcepts().size());
@@ -101,11 +91,11 @@ public final class OF4OSMFolkso2OntoParser {
         		tag.getKey());
     }
 
-    public static IOSMCategoryTagConcept createCategoryTagConcept(IOSMCategoryTag tag, IOSMCategoryTagKeyConcept tagKeyConcept) {
+    public static IOSMCategoryTagConcept createCategoryTagConcept(IOSMCategoryTag tag, IOSMTagConceptParent parent) {
 
         if (tag instanceof IOSMSimpleCategoryTag) {
             return new OSMCategoryTagConcept(
-            		OF4OSMConceptLabelizer.getLabelFromTag(tag), tag, tagKeyConcept);
+            		OF4OSMConceptLabelizer.getLabelFromTag(tag), tag, parent);
         }
         
         if (tag instanceof IOSMMultipleCategoryTag) {
@@ -115,63 +105,58 @@ public final class OF4OSMFolkso2OntoParser {
             			(IOSMTagSimpleKey)tag.getKey(), 
             			new OSMTagStringValue(v));
                 String tagLabel = OF4OSMConceptLabelizer.getLabelFromTag(t);
-                return new OSMCategoryTagConcept(tagLabel, tag, tagKeyConcept);
+                return new OSMCategoryTagConcept(tagLabel, tag, parent);
             }
         }
         
         if (tag instanceof IOSMStatefulCategoryTag) {
             return new OSMCategoryTagConcept(
-            		OF4OSMConceptLabelizer.getLabelFromTag(tag), tag, tagKeyConcept);
+            		OF4OSMConceptLabelizer.getLabelFromTag(tag), tag, parent);
         }
         
         return null;
     }
 
-    public static void combinations(IOSMTagCombinationConceptParent[] categoryTagConceptSet, int length, int startPosition, IOSMTagCombinationConceptParent[] result, IOF4OSMOntology onto) {
+    public static void addOSMTagCombinationsConcepts(IOSMTagCombinationConceptParent[] parents, IOF4OSMOntology of4osm){
+    	 
+    	Set<IOSMTagCombinationConcept> tagCombinations = new HashSet<IOSMTagCombinationConcept>();
+    	
+    	for (int i = 2 ; i <= parents.length ; i++) {
+             combinations(parents, i, 0, new IOSMTagCombinationConceptParent[i], tagCombinations);
+        }
+    	
+    	for(IOSMTagCombinationConcept tagCombination1 : tagCombinations){
+    		for(IOSMTagCombinationConcept tagCombination2 : tagCombinations){
+    			if(tagCombination1.isSubClassOf(tagCombination2)){
+    				tagCombination1.addParent((IOSMTagCombinationConceptParent) tagCombination2);
+    			}
+    		}
+    		
+    		of4osm.addConcept(tagCombination1);
+    	}
+    	
+    }
+    
+    private static void combinations(IOSMTagCombinationConceptParent[] parents, int length, int startPosition, IOSMTagCombinationConceptParent[] result, Set<IOSMTagCombinationConcept> tagCombinations) {
 
         if (length == 0) {
             
-            OSMTagCombinationConcept tagCombinationConcept = new OSMTagCombinationConcept();
-            for (IOSMTagCombinationConceptParent s : result) {
-                tagCombinationConcept.addParent(s);
-            }
+            IOSMTagCombinationConcept tagCombinationConcept = new OSMTagCombinationConcept(
+            		OF4OSMConceptLabelizer.getIOSMTagCombinationConceptLabel(result),
+            		new HashSet<IOSMTagCombinationConceptParent>(Arrays.asList(result)));
             
-            System.out.println(tagCombinationConcept);
-            onto.addConcept(tagCombinationConcept);
+            tagCombinations.add(tagCombinationConcept);
+            
+            LOGGER.log(Level.INFO, "Adding OSMTagCombination " + tagCombinationConcept.getDefaultLabel());
+            
             return;
         }
 
-        for (int j = startPosition ; j <= categoryTagConceptSet.length - length ; j++) {
-            result[result.length - length] = categoryTagConceptSet[j];
-            combinations(categoryTagConceptSet, length - 1, j + 1, result, onto);
+        for (int i = startPosition ; i <= parents.length - length ; i++) {
+            result[result.length - length] = parents[i];
+            combinations(parents, length-1, i+1, result, tagCombinations);
         }
 
     }
-
-    /*
-     * Algo for finding permutations
-    private static IOF4OSMOntology addTagCombinations(IOF4OSMOntology onto, IOF4OSMFolksonomy folkso) {
-
-    	String[] arr = {"A","B","C","D"};
-			for(int i=2;i<arr.length+1;i++)
-				combinations(arr, i, 0, new String[i]);
-			
-			public static void combinations(String[] arr, int len, int startPosition, String[] result){
-				if (len == 0){
-					String str = "";
-					for(String s : result){
-						str += s;
-					}
-					System.out.println(str);
-					return;
-				}       
-				for (int i = startPosition; i <= arr.length-len; i++){
-					result[result.length - len] = arr[i];
-					combinations(arr, len-1, i+1, result);
-				}
-			}
-        return onto;
-    }
-    */
    
 }
