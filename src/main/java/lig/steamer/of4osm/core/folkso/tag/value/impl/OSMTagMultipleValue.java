@@ -28,30 +28,36 @@ public class OSMTagMultipleValue extends OSMTagValue implements IOSMTagMultipleV
         }
     	return s;
     }
-
+    
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + (this.values != null ? this.values.hashCode() : 0);
-        return hash;
-    }
+   	public int hashCode() {
+   		final int prime = 31;
+   		int result = 1;
+   		result = prime * result + ((values == null) ? 0 : values.hashCode());
+   		return result;
+   	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final OSMTagMultipleValue other = (OSMTagMultipleValue) obj;
-        if ((this.values == null) ? (other.values != null) : !this.values.equals(other.values)) {
-            return false;
-        }
-        return true;
-    }
+   	@Override
+   	public boolean equals(Object obj) {
+   		
+   		if (this == obj)
+   			return true;
+   		
+   		if (obj == null)
+   			return false;
+   		
+   		if (getClass() != obj.getClass())
+   			return false;
+   		
+   		OSMTagMultipleValue other = (OSMTagMultipleValue) obj;
+   		
+   		if (values == null) {
+   			if (other.values != null)
+   				return false;
+   		} else if (!values.equals(other.values))
+   			return false;
+   		
+   		return true;
+   	}
 
 }

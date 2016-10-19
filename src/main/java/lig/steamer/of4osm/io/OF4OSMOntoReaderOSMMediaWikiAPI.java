@@ -76,7 +76,7 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 					Element header = firstCol.select("h4 span.mw-headline").first();
 					if(header != null){
 						
-						highLevelConcept = new HighLevelConcept(OF4OSMConceptLabelizer.normalize(header.text()));
+						highLevelConcept = new HighLevelConcept(OF4OSMConceptLabelizer.normalize(header.text()) + keyConcept.getDefaultLabel());
 						highLevelConcept.addParent((IHighLevelConceptParent) keyConcept);
 						of4osm.addConcept(highLevelConcept);
 						

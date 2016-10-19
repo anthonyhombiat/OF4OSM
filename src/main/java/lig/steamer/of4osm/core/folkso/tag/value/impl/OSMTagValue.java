@@ -8,5 +8,5 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
  *
  */
 public abstract class OSMTagValue implements IOSMTagValue {
-
+	
 }

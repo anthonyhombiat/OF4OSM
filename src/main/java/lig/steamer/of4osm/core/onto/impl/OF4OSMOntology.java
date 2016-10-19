@@ -29,20 +29,22 @@ public class OF4OSMOntology implements IOF4OSMOntology {
     }
 
     @Override
-    public void addConcept(IConcept concept) {
+    public boolean addConcept(IConcept concept) {
 
         if (concept instanceof IOSMCategoryTagKeyConcept) {
-            categoryTagKeyConcepts.add((IOSMCategoryTagKeyConcept) concept);
+           return categoryTagKeyConcepts.add((IOSMCategoryTagKeyConcept) concept);
         }
         if (concept instanceof IOSMCategoryTagConcept) {
-            categoryTagConcepts.add((IOSMCategoryTagConcept) concept);
+        	return categoryTagConcepts.add((IOSMCategoryTagConcept) concept);
         }
         if (concept instanceof IOSMTagCombinationConcept) {
-            tagCombinationConcepts.add((IOSMTagCombinationConcept) concept);
+        	return tagCombinationConcepts.add((IOSMTagCombinationConcept) concept);
         }
         if (concept instanceof IHighLevelConcept) {
-            highLevelConcepts.add((IHighLevelConcept) concept);
+        	return highLevelConcepts.add((IHighLevelConcept) concept);
         }
+        
+        return false;
 
     }
 

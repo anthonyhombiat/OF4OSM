@@ -1,6 +1,5 @@
 package lig.steamer.of4osm.core.folkso.tag.value.impl;
 
-import java.util.Objects;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagTimeDomainsValue;
 
 /**
@@ -9,45 +8,51 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagTimeDomainsValue;
  */
 public class OSMTagTimeDomainsValue extends OSMTagValue implements IOSMTagTimeDomainsValue {
 
-    private String timeDomains;
+    private String value;
 
     public OSMTagTimeDomainsValue(String value) {
-        this.timeDomains = value;
+        this.value = value;
     }
 
+    @Override
+    public String getValue() {
+        return value;
+    }
+    
     @Override
     public String toString() {
-        return " " + timeDomains;
+        return value;
     }
-
+    
     @Override
-    public String getTimeDomains() {
-        return timeDomains;
-    }
+   	public int hashCode() {
+   		final int prime = 31;
+   		int result = 1;
+   		result = prime * result + ((value == null) ? 0 : value.hashCode());
+   		return result;
+   	}
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.timeDomains);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final OSMTagTimeDomainsValue other = (OSMTagTimeDomainsValue) obj;
-        if (!Objects.equals(this.timeDomains, other.timeDomains)) {
-            return false;
-        }
-        return true;
-    }
+   	@Override
+   	public boolean equals(Object obj) {
+   		
+   		if (this == obj)
+   			return true;
+   		
+   		if (obj == null)
+   			return false;
+   		
+   		if (getClass() != obj.getClass())
+   			return false;
+   		
+   		OSMTagTimeDomainsValue other = (OSMTagTimeDomainsValue) obj;
+   		
+   		if (value == null) {
+   			if (other.value != null)
+   				return false;
+   		} else if (!value.equals(other.value))
+   			return false;
+   		
+   		return true;
+   	}
 
 }

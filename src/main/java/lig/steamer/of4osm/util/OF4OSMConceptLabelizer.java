@@ -74,9 +74,8 @@ public final class OF4OSMConceptLabelizer {
     		return getLabelFromIOSMTagLocalizedKey((IOSMTagLocalizedKey) key);
     	} else if(key instanceof IOSMTagStatefulKey){
     		return getLabelFromIOSMTagStatefulKey((IOSMTagStatefulKey) key);
-    	} else {
-    		return null;
     	}
+    	return null;
     }
     
     private static String getLabelFromIOSMTagSimpleKey(IOSMTagSimpleKey key){

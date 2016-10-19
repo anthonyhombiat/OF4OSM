@@ -15,39 +15,40 @@ import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
 public interface IOF4OSMOntology {
     
 	/**
-	 * 
-	 * @return
+	 * Returns all the concepts of the ontology
+	 * @return Set<IConcept>, the set of all the concepts of the ontology
 	 */
 	public Set<IConcept> getConcepts();
 	
     /**
-     * 
-     * @param concept
+     * Adds a concept to the ontology
+     * @return boolean, true if the insertion worked, false otherwise
+     * @param concept, the concept to add
      */
-	public void addConcept(IConcept concept);
+	public boolean addConcept(IConcept concept);
     
 	/**
-	 * 
-	 * @return
+	 * Returns all the IOSMTagCombinationConcept of the ontology
+	 * @return Set<IOSMTagCombinationConcept>, the set of all the IOSMTagCombinationConcept of the ontology
 	 */
     public Set<IOSMTagCombinationConcept> getOSMTagCombinationConcepts();
     
     /**
-     * 
-     * @return
-     */
+	 * Returns all the IOSMCategoryTagKeyConcept of the ontology
+	 * @return Set<IOSMCategoryTagKeyConcept>, the set of all the IOSMCategoryTagKeyConcept of the ontology
+	 */
     public Set<IOSMCategoryTagKeyConcept> getOSMCategoryTagKeyConcepts();
     
     /**
-     * 
-     * @return
-     */
+	 * Returns all the IOSMCategoryTagConcept of the ontology
+	 * @return Set<IOSMCategoryTagConcept>, the set of all the IOSMCategoryTagConcept of the ontology
+	 */
     public Set<IOSMCategoryTagConcept> getOSMCategoryTagConcepts();
     
     /**
-     * 
-     * @return
-     */
+	 * Returns all the IHighLevelConcept of the ontology
+	 * @return Set<IHighLevelConcept>, the set of all the IHighLevelConcept of the ontology
+	 */
     public Set<IHighLevelConcept> getHighLevelConcepts();
     
 }

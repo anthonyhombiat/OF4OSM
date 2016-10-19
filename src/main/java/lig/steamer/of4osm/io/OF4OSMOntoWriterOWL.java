@@ -46,6 +46,7 @@ public class OF4OSMOntoWriterOWL {
 
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void write(IOF4OSMOntology of4osm, IRI file){
 		
 		LOGGER.log(Level.INFO, "Writing the OF4OSM ontology to OWL file...");
@@ -59,6 +60,9 @@ public class OF4OSMOntoWriterOWL {
 			onto = parse(of4osm, onto);
 			
 			ONTO_MANAGER.saveOntology(onto, file);
+			
+			LOGGER.log(Level.INFO, "Nb of owl:class added to the OF4OSM ontology: " + onto.getClassesInSignature().size());
+			
 			ONTO_MANAGER.removeOntology(onto);
 			
 			LOGGER.log(Level.INFO, "Parsing the OF4OSM ontology to OWL file is done.");

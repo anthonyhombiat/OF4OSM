@@ -51,18 +51,12 @@ public final class OF4OSMFolkso2OntoParser {
             for (IOSMCategoryTag tag : element.getValue()) {
                
             	IOSMCategoryTagKeyConcept keyConcept = createCategoryTagKeyConcept(tag);
-                if(of4osm.getOSMCategoryTagKeyConcepts().contains(keyConcept)){
+                if(!of4osm.addConcept(keyConcept))
                 	alreadyAddedKeyConcepts++;
-                }else {
-                	of4osm.addConcept(keyConcept);
-                }
                 
                 IOSMCategoryTagConcept tagConcept = createCategoryTagConcept(tag, (IOSMTagConceptParent) keyConcept);
-                if(of4osm.getOSMCategoryTagConcepts().contains(tagConcept)){
+                if(!of4osm.addConcept(tagConcept))
                 	alreadyAddedTagConcepts++;
-                }else {
-                	of4osm.addConcept(tagConcept);
-                }
 
                 tagCombinationParent[j] = (IOSMTagCombinationConceptParent) tagConcept;
                 j++;
@@ -146,8 +140,6 @@ public final class OF4OSMFolkso2OntoParser {
             		new HashSet<IOSMTagCombinationConceptParent>(Arrays.asList(result)));
             
             tagCombinations.add(tagCombinationConcept);
-            
-            LOGGER.log(Level.INFO, "Adding OSMTagCombination " + tagCombinationConcept.getDefaultLabel());
             
             return;
         }

@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.semanticweb.owlapi.model.IRI;
-
 import lig.steamer.of4osm.core.onto.meta.IConcept;
+
+import org.semanticweb.owlapi.model.IRI;
 
 /**
  *
@@ -19,7 +19,7 @@ public abstract class Concept implements IConcept {
 	public Map<String, String> labels;
 
     public Concept(String label) {
-        this.labels = new HashMap<>();
+        labels = new HashMap<>();
         setDefaultLabel(label);
     }
 
@@ -40,6 +40,7 @@ public abstract class Concept implements IConcept {
     @Override
     public void setDefaultLabel(String label){
     	labels.put("EN", label);
+    	iri = IRI.create(OF4OSM_IRI + "#" + label);
     }
     
     @Override
@@ -47,14 +48,38 @@ public abstract class Concept implements IConcept {
     
     @Override
     public IRI getIRI(){
-    	return IRI.create(OF4OSM_IRI + "#" + getDefaultLabel());
+    	return iri;
     }
     
     @Override
-    public boolean equals(Object object){
-    	if(object instanceof IConcept)
-    		return ((IConcept) object).getIRI().equals(iri);
-    	return false;
-    }
+   	public int hashCode() {
+   		final int prime = 31;
+   		int result = 1;
+   		result = prime * result + ((iri == null) ? 0 : iri.hashCode());
+   		return result;
+   	}
+
+   	@Override
+   	public boolean equals(Object obj) {
+   		
+   		if (this == obj)
+   			return true;
+   		
+   		if (obj == null)
+   			return false;
+   		
+   		if (getClass() != obj.getClass())
+   			return false;
+   		
+   		Concept other = (Concept) obj;
+   		
+   		if (iri == null) {
+   			if (other.iri != null)
+   				return false;
+   		} else if (!iri.equals(other.iri))
+   			return false;
+   		
+   		return true;
+   	}
 
 }

@@ -27,7 +27,6 @@ public class App {
 	
     public static void main(String[] args) {
     	
-    	
     	final long t0 = System.currentTimeMillis();
     	
         IOF4OSMOntology of4osm = new OF4OSMOntology();

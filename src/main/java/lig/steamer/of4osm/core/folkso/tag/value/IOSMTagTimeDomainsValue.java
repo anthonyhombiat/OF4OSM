@@ -6,5 +6,5 @@ package lig.steamer.of4osm.core.folkso.tag.value;
  */
 public interface IOSMTagTimeDomainsValue extends IOSMTagValue {
 
-    public String getTimeDomains();
+    public String getValue();
 }
