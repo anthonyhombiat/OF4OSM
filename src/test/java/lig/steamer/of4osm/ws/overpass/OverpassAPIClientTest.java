@@ -14,13 +14,13 @@ public class OverpassAPIClientTest extends TestCase {
 
 	public void testSend() {
 		
-        OverpassAPIRequest req = new OverpassAPIRequest(
+		final OverpassAPIRequest req = new OverpassAPIRequest(
         		"45.1897415202,5.7293608785,45.1917694442,5.7322975993", // Halles St Claire, Grenoble
         		"node", // element type (node/way/relation)
         		"amenity", // key
         		"pharmacy"); // value
-        OverpassAPIClient client = new OverpassAPIClient();
-        OverpassAPIResponse resp = client.send(req);
+		final OverpassAPIClient client = new OverpassAPIClient();
+		final OverpassAPIResponse resp = client.send(req);
         
         assertNotNull(resp);
 	}

@@ -25,17 +25,17 @@ public class OF4OSMFolksoWriterCSVTest extends TestCase {
 		
 		folkso = new OF4OSMFolksonomy();
 		
-		IOSMTagSimpleKey key1 = new OSMTagSimpleKey("historic", "");
-        IOSMTagStringValue value1 = new OSMTagStringValue("castle");
-        IOSMCategoryTag tag1 = new OSMSimpleCategoryTag(key1, value1);
+		final IOSMTagSimpleKey key1 = new OSMTagSimpleKey("historic", "");
+		final IOSMTagStringValue value1 = new OSMTagStringValue("castle");
+        final IOSMCategoryTag tag1 = new OSMSimpleCategoryTag(key1, value1);
 
-        IOSMTagSimpleKey key2 = new OSMTagSimpleKey("amenity", "");
-        IOSMTagStringValue value2 = new OSMTagStringValue("restaurant");
-        IOSMCategoryTag tag2 = new OSMSimpleCategoryTag(key2, value2);
+        final IOSMTagSimpleKey key2 = new OSMTagSimpleKey("amenity", "");
+        final IOSMTagStringValue value2 = new OSMTagStringValue("restaurant");
+        final IOSMCategoryTag tag2 = new OSMSimpleCategoryTag(key2, value2);
 
-        IOSMTagSimpleKey key3 = new OSMTagSimpleKey("tourism", "");
-        IOSMTagStringValue value3 = new OSMTagStringValue("hotel");
-        IOSMCategoryTag tag3 = new OSMSimpleCategoryTag(key3, value3);
+        final IOSMTagSimpleKey key3 = new OSMTagSimpleKey("tourism", "");
+        final IOSMTagStringValue value3 = new OSMTagStringValue("hotel");
+        final IOSMCategoryTag tag3 = new OSMSimpleCategoryTag(key3, value3);
 
         Set<IOSMTag> tags = new HashSet<>();
         tags.add(tag1);

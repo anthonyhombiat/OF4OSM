@@ -8,7 +8,7 @@ import java.util.Set;
 public interface IHighLevelConcept extends IConcept {
 
 	@Override
-    public Set<? extends IHighLevelConceptParent> getParents();
+    public Set<IHighLevelConceptParent> getParents();
 
     /**
      * @return

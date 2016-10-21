@@ -45,17 +45,17 @@ public class OF4OSMTagIdentifierTest extends TestCase {
 	}
 	
 	public void testIdentifyKey(){
-		String simpleKeyString = "amenity";
-		String localizedKeyString = "name:fr";
-		String statefulKeyString = "abandoned:shop";
-		String complexKeyString1 = "climbing:grade";
-		String complexKeyString2 = "climbing:grade:french";
+		final String simpleKeyString = "amenity";
+		final String localizedKeyString = "name:fr";
+		final String statefulKeyString = "abandoned:shop";
+		final String complexKeyString1 = "climbing:grade";
+		final String complexKeyString2 = "climbing:grade:french";
 		
-		IOSMTagSimpleKey simpleKey = (IOSMTagSimpleKey) OF4OSMTagIdentifier.identifyKey(simpleKeyString, "");
-		IOSMTagLocalizedKey localizedKey = (IOSMTagLocalizedKey) OF4OSMTagIdentifier.identifyKey(localizedKeyString, "");
-		IOSMTagStatefulKey statefulKey = (IOSMTagStatefulKey) OF4OSMTagIdentifier.identifyKey(statefulKeyString, "");
-		IOSMTagComplexKey complexKey1 = (IOSMTagComplexKey) OF4OSMTagIdentifier.identifyKey(complexKeyString1, "");
-		IOSMTagComplexKey complexKey2 = (IOSMTagComplexKey) OF4OSMTagIdentifier.identifyKey(complexKeyString2, "");
+		final IOSMTagSimpleKey simpleKey = (IOSMTagSimpleKey) OF4OSMTagIdentifier.identifyKey(simpleKeyString, "");
+		final IOSMTagLocalizedKey localizedKey = (IOSMTagLocalizedKey) OF4OSMTagIdentifier.identifyKey(localizedKeyString, "");
+		final IOSMTagStatefulKey statefulKey = (IOSMTagStatefulKey) OF4OSMTagIdentifier.identifyKey(statefulKeyString, "");
+		final IOSMTagComplexKey complexKey1 = (IOSMTagComplexKey) OF4OSMTagIdentifier.identifyKey(complexKeyString1, "");
+		final IOSMTagComplexKey complexKey2 = (IOSMTagComplexKey) OF4OSMTagIdentifier.identifyKey(complexKeyString2, "");
 		
 		assertEquals("amenity", simpleKey.getValue());
 		assertEquals("name", localizedKey.getValue());
@@ -68,37 +68,37 @@ public class OF4OSMTagIdentifierTest extends TestCase {
 	}
 	
 	public void testIdentifyValue(){
-		String booleanValueString1 = "yes";
-		String booleanValueString2 = "no";
-		String booleanValueString3 = "oui";
-		String booleanValueString4 = "non";
-		String booleanValueString5 = "true";
-		String booleanValueString6 = "false";
-		String dateValueString1 = "2000/01/01";
-		String dateValueString2 = "2000-01-01";
-		String dateValueString3 = "10 Jan 2000";
-		String dateValueString4 = "2000-01-01T01:01:01";
-		String numericValueString1 = "1,234";
-		String numericValueString2 = "1.234";
-		String stringValueString = "school";
-		String timeDomainsValueString = "Sa-Su 00:00-24:00";
-		String multipleValueString = "bar;restaurant;pizzeria";
+		final String booleanValueString1 = "yes";
+		final String booleanValueString2 = "no";
+		final String booleanValueString3 = "oui";
+		final String booleanValueString4 = "non";
+		final String booleanValueString5 = "true";
+		final String booleanValueString6 = "false";
+		final String dateValueString1 = "2000/01/01";
+		final String dateValueString2 = "2000-01-01";
+		final String dateValueString3 = "10 Jan 2000";
+		final String dateValueString4 = "2000-01-01T01:01:01";
+		final String numericValueString1 = "1,234";
+		final String numericValueString2 = "1.234";
+		final String stringValueString = "school";
+		final String timeDomainsValueString = "Sa-Su 00:00-24:00";
+		final String multipleValueString = "bar;restaurant;pizzeria";
 		
-		IOSMTagBooleanValue booleanValue1 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString1);
-		IOSMTagBooleanValue booleanValue2 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString2);
-		IOSMTagBooleanValue booleanValue3 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString3);
-		IOSMTagBooleanValue booleanValue4 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString4);
-		IOSMTagBooleanValue booleanValue5 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString5);
-		IOSMTagBooleanValue booleanValue6 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString6);
-		IOSMTagDateValue dateValue1 = (IOSMTagDateValue) OF4OSMTagIdentifier.identifyValue(dateValueString1);
-		IOSMTagDateValue dateValue2 = (IOSMTagDateValue) OF4OSMTagIdentifier.identifyValue(dateValueString2);
-		IOSMTagDateValue dateValue3 = (IOSMTagDateValue) OF4OSMTagIdentifier.identifyValue(dateValueString3);
-		IOSMTagDateValue dateValue4 = (IOSMTagDateValue) OF4OSMTagIdentifier.identifyValue(dateValueString4);
-		IOSMTagNumericValue numericValue1 = (IOSMTagNumericValue) OF4OSMTagIdentifier.identifyValue(numericValueString1);
-		IOSMTagNumericValue numericValue2 = (IOSMTagNumericValue) OF4OSMTagIdentifier.identifyValue(numericValueString2);
-		IOSMTagStringValue stringValue = (IOSMTagStringValue) OF4OSMTagIdentifier.identifyValue(stringValueString);
-		IOSMTagTimeDomainsValue timeDomainsValue = (IOSMTagTimeDomainsValue) OF4OSMTagIdentifier.identifyValue(timeDomainsValueString);
-		IOSMTagMultipleValue multipleValue = (IOSMTagMultipleValue) OF4OSMTagIdentifier.identifyValue(multipleValueString);
+		final IOSMTagBooleanValue booleanValue1 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString1);
+		final IOSMTagBooleanValue booleanValue2 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString2);
+		final IOSMTagBooleanValue booleanValue3 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString3);
+		final IOSMTagBooleanValue booleanValue4 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString4);
+		final IOSMTagBooleanValue booleanValue5 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString5);
+		final IOSMTagBooleanValue booleanValue6 = (IOSMTagBooleanValue) OF4OSMTagIdentifier.identifyValue(booleanValueString6);
+		final IOSMTagDateValue dateValue1 = (IOSMTagDateValue) OF4OSMTagIdentifier.identifyValue(dateValueString1);
+		final IOSMTagDateValue dateValue2 = (IOSMTagDateValue) OF4OSMTagIdentifier.identifyValue(dateValueString2);
+		final IOSMTagDateValue dateValue3 = (IOSMTagDateValue) OF4OSMTagIdentifier.identifyValue(dateValueString3);
+		final IOSMTagDateValue dateValue4 = (IOSMTagDateValue) OF4OSMTagIdentifier.identifyValue(dateValueString4);
+		final IOSMTagNumericValue numericValue1 = (IOSMTagNumericValue) OF4OSMTagIdentifier.identifyValue(numericValueString1);
+		final IOSMTagNumericValue numericValue2 = (IOSMTagNumericValue) OF4OSMTagIdentifier.identifyValue(numericValueString2);
+		final IOSMTagStringValue stringValue = (IOSMTagStringValue) OF4OSMTagIdentifier.identifyValue(stringValueString);
+		final IOSMTagTimeDomainsValue timeDomainsValue = (IOSMTagTimeDomainsValue) OF4OSMTagIdentifier.identifyValue(timeDomainsValueString);
+		final IOSMTagMultipleValue multipleValue = (IOSMTagMultipleValue) OF4OSMTagIdentifier.identifyValue(multipleValueString);
 		
 		assertTrue(booleanValue1.getValue());
 		assertFalse(booleanValue2.getValue());
@@ -120,34 +120,34 @@ public class OF4OSMTagIdentifierTest extends TestCase {
 	}
 	
 	public void testIdentifyTag(){
-		IOSMTagSimpleKey simplePropertyKey = new OSMTagSimpleKey("name", "");
-		IOSMTagSimpleKey simpleCategoryKey = new OSMTagSimpleKey("amenity", "");
-		IOSMTagComplexKey complexKey = new OSMTagComplexKey("climbing:grade:french", "");
-		IOSMTagLocalizedKey localizedKey = new OSMTagLocalizedKey("name:fr", "");
-		IOSMTagStatefulKey statefulKey = new OSMTagStatefulKey("abandoned:shop", "");
+		final IOSMTagSimpleKey simplePropertyKey = new OSMTagSimpleKey("name", "");
+		final IOSMTagSimpleKey simpleCategoryKey = new OSMTagSimpleKey("amenity", "");
+		final IOSMTagComplexKey complexKey = new OSMTagComplexKey("climbing:grade:french", "");
+		final IOSMTagLocalizedKey localizedKey = new OSMTagLocalizedKey("name:fr", "");
+		final IOSMTagStatefulKey statefulKey = new OSMTagStatefulKey("abandoned:shop", "");
 		
-		IOSMTagBooleanValue booleanValue = new OSMTagBooleanValue(true);
-		IOSMTagNumericValue numericValue = new OSMTagNumericValue(1.0);
-		IOSMTagTimeDomainsValue timeDomains = new OSMTagTimeDomainsValue("Sa-Su 00:00-24:00");
-		IOSMTagDateValue dateValue = new OSMTagDateValue(new Date());
-		IOSMTagStringValue stringValue = new OSMTagStringValue("school");
-		IOSMTagMultipleValue multipleValue = new OSMTagMultipleValue(new String[]{"bar","restaurant","pizzeria"});
+		final IOSMTagBooleanValue booleanValue = new OSMTagBooleanValue(true);
+		final IOSMTagNumericValue numericValue = new OSMTagNumericValue(1.0);
+		final IOSMTagTimeDomainsValue timeDomains = new OSMTagTimeDomainsValue("Sa-Su 00:00-24:00");
+		final IOSMTagDateValue dateValue = new OSMTagDateValue(new Date());
+		final IOSMTagStringValue stringValue = new OSMTagStringValue("school");
+		final IOSMTagMultipleValue multipleValue = new OSMTagMultipleValue(new String[]{"bar","restaurant","pizzeria"});
 		
-		IOSMSimpleCategoryTag simpleCategoryTag = (IOSMSimpleCategoryTag) OF4OSMTagIdentifier.identifyTag(simpleCategoryKey, stringValue);
-		IOSMStatefulCategoryTag statefulCategoryTag = (IOSMStatefulCategoryTag) OF4OSMTagIdentifier.identifyTag(statefulKey, stringValue);
-		IOSMMultipleCategoryTag multipleCategoryTag = (IOSMMultipleCategoryTag) OF4OSMTagIdentifier.identifyTag(simpleCategoryKey, multipleValue);
+		final IOSMSimpleCategoryTag simpleCategoryTag = (IOSMSimpleCategoryTag) OF4OSMTagIdentifier.identifyTag(simpleCategoryKey, stringValue);
+		final IOSMStatefulCategoryTag statefulCategoryTag = (IOSMStatefulCategoryTag) OF4OSMTagIdentifier.identifyTag(statefulKey, stringValue);
+		final IOSMMultipleCategoryTag multipleCategoryTag = (IOSMMultipleCategoryTag) OF4OSMTagIdentifier.identifyTag(simpleCategoryKey, multipleValue);
 		
-		IOSMSimpleKeyStringValuePropertyTag simpleKeyStringValuePropertyTag = (IOSMSimpleKeyStringValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, stringValue);
-		IOSMComplexKeyStringValuePropertyTag complexKeyStringValuePropertyTag = (IOSMComplexKeyStringValuePropertyTag) OF4OSMTagIdentifier.identifyTag(complexKey, stringValue);
-		IOSMLocalizedKeyStringValuePropertyTag localizedKeyStringValuePropertyTag = (IOSMLocalizedKeyStringValuePropertyTag) OF4OSMTagIdentifier.identifyTag(localizedKey, stringValue);
-		IOSMSimpleKeyNumericValuePropertyTag simpleKeyNumericValuePropertyTag = (IOSMSimpleKeyNumericValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, numericValue);
-		IOSMComplexKeyNumericValuePropertyTag complexKeyNumericValuePropertyTag = (IOSMComplexKeyNumericValuePropertyTag) OF4OSMTagIdentifier.identifyTag(complexKey, numericValue);
-		IOSMSimpleKeyDateValuePropertyTag simpleKeyDateValuePropertyTag = (IOSMSimpleKeyDateValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, dateValue);
-		IOSMComplexKeyDateValuePropertyTag complexKeyDateValuePropertyTag = (IOSMComplexKeyDateValuePropertyTag) OF4OSMTagIdentifier.identifyTag(complexKey, dateValue);
-		IOSMSimpleKeyBooleanValuePropertyTag simpleKeyBooleanValuePropertyTag = (IOSMSimpleKeyBooleanValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, booleanValue);
-		IOSMComplexKeyBooleanValuePropertyTag complexKeyBooleanValuePropertyTag = (IOSMComplexKeyBooleanValuePropertyTag) OF4OSMTagIdentifier.identifyTag(complexKey, booleanValue);
-		IOSMMultipleValuePropertyTag multipleValuePropertyTag = (IOSMMultipleValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, multipleValue);
-		IOSMTimeDomainsValuePropertyTag timeDomainsValuePropertyTag = (IOSMTimeDomainsValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, timeDomains);
+		final IOSMSimpleKeyStringValuePropertyTag simpleKeyStringValuePropertyTag = (IOSMSimpleKeyStringValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, stringValue);
+		final IOSMComplexKeyStringValuePropertyTag complexKeyStringValuePropertyTag = (IOSMComplexKeyStringValuePropertyTag) OF4OSMTagIdentifier.identifyTag(complexKey, stringValue);
+		final IOSMLocalizedKeyStringValuePropertyTag localizedKeyStringValuePropertyTag = (IOSMLocalizedKeyStringValuePropertyTag) OF4OSMTagIdentifier.identifyTag(localizedKey, stringValue);
+		final IOSMSimpleKeyNumericValuePropertyTag simpleKeyNumericValuePropertyTag = (IOSMSimpleKeyNumericValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, numericValue);
+		final IOSMComplexKeyNumericValuePropertyTag complexKeyNumericValuePropertyTag = (IOSMComplexKeyNumericValuePropertyTag) OF4OSMTagIdentifier.identifyTag(complexKey, numericValue);
+		final IOSMSimpleKeyDateValuePropertyTag simpleKeyDateValuePropertyTag = (IOSMSimpleKeyDateValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, dateValue);
+		final IOSMComplexKeyDateValuePropertyTag complexKeyDateValuePropertyTag = (IOSMComplexKeyDateValuePropertyTag) OF4OSMTagIdentifier.identifyTag(complexKey, dateValue);
+		final IOSMSimpleKeyBooleanValuePropertyTag simpleKeyBooleanValuePropertyTag = (IOSMSimpleKeyBooleanValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, booleanValue);
+		final IOSMComplexKeyBooleanValuePropertyTag complexKeyBooleanValuePropertyTag = (IOSMComplexKeyBooleanValuePropertyTag) OF4OSMTagIdentifier.identifyTag(complexKey, booleanValue);
+		final IOSMMultipleValuePropertyTag multipleValuePropertyTag = (IOSMMultipleValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, multipleValue);
+		final IOSMTimeDomainsValuePropertyTag timeDomainsValuePropertyTag = (IOSMTimeDomainsValuePropertyTag) OF4OSMTagIdentifier.identifyTag(simplePropertyKey, timeDomains);
 	
 		assertNotNull(simpleCategoryTag);
 		assertNotNull(statefulCategoryTag);

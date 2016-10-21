@@ -21,9 +21,9 @@ public class TagInfoTagClientTest extends TestCase {
 		final String key = "amenity";
 		final String value = "school";
 		
-		TagInfoTagClient tagClient = new TagInfoTagClient();
+		final TagInfoTagClient tagClient = new TagInfoTagClient();
 		
-		TagInfoTagStatsResponse tagStatsResponse = 
+		final TagInfoTagStatsResponse tagStatsResponse = 
 				(TagInfoTagStatsResponse) tagClient.send(TagInfoTagAction.STATS, key, value);
 		
 		assertNotNull(tagStatsResponse);

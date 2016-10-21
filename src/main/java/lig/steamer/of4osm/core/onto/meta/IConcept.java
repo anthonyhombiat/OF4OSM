@@ -20,13 +20,12 @@ public interface IConcept {
      * @return
      */
     public Map<String, String> getLabels();
-    
+
     /**
      * 
-     * @param label
      */
-	public void setDefaultLabel(String label);
-
+    public void addLabel(String lang, String label);
+    
     /**
      * @return
      */

@@ -16,14 +16,14 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
  */
 public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
 
-    private Map<String, Set<IOSMTag>> tagsByElement;
+    private Map<String, Set<? extends IOSMTag>> tagsByElement;
 
     public OF4OSMFolksonomy() {
         tagsByElement = new HashMap<>();
     }
 
     @Override
-    public Map<String, Set<IOSMTag>> getTagsByElement() {
+    public Map<String, Set<? extends IOSMTag>> getTagsByElement() {
         return tagsByElement;
     }
 
@@ -32,7 +32,7 @@ public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
 
         Map< IOSMTag, Integer> tags = new HashMap<>();
 
-        for (Entry<String, Set<IOSMTag>> element : this.tagsByElement.entrySet()) {
+        for (Entry<String, Set<? extends IOSMTag>> element : tagsByElement.entrySet()) {
             for (IOSMTag tag : element.getValue()) {
                 if (type.isInstance(tag)) {
                     tags.put(tag, getOccurrences(tag));
@@ -47,7 +47,7 @@ public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
     public int getOccurrences(IOSMTag tag) {
     	
         int nbOcc = 0;
-        for (Entry<String, Set<IOSMTag>> element : tagsByElement.entrySet()) {
+        for (Entry<String, Set<? extends IOSMTag>> element : tagsByElement.entrySet()) {
             for (IOSMTag currTag : element.getValue()) {
                 if (tag.equals(currTag)) {
                     nbOcc++;
@@ -58,8 +58,9 @@ public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
         return nbOcc;
     }
 
-    public void addTagsByElement(String elementId, Set<IOSMTag> tags) {
-        this.tagsByElement.put(elementId, tags);
+    @Override
+    public void addTagsByElement(String elementId, Set<? extends IOSMTag> tags) {
+        tagsByElement.put(elementId, tags);
     }
 
     @Override
@@ -67,7 +68,7 @@ public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
     	
         Map<String, Set<IOSMCategoryTag>> categoryTagsByElement = new HashMap<>();
 
-        for (Entry<String, Set<IOSMTag>> element : tagsByElement.entrySet()) {
+        for (Entry<String, Set<? extends IOSMTag>> element : tagsByElement.entrySet()) {
         	
             Set<IOSMCategoryTag> categoryTags = new HashSet<>();
             for (IOSMTag tag : element.getValue()) {
@@ -85,7 +86,7 @@ public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
 	@Override
 	public int getNbOfTags() {
 		int nbOfTags = 0;
-		for(Entry<String, Set<IOSMTag>> element : tagsByElement.entrySet()){
+		for(Entry<String, Set<? extends IOSMTag>> element : tagsByElement.entrySet()){
 			nbOfTags += element.getValue().size();
 		}
 		return nbOfTags;
@@ -94,7 +95,7 @@ public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
 	@Override
 	public int getNbOfTagsByType(Class<? extends IOSMTag> type) {
 		int nbOfTags = 0;
-		for(Entry<String, Set<IOSMTag>> element : tagsByElement.entrySet()){
+		for(Entry<String, Set<? extends IOSMTag>> element : tagsByElement.entrySet()){
 			for(IOSMTag tag : element.getValue()){
 				if(type.isInstance(tag)){
 					nbOfTags ++;

@@ -1,11 +1,11 @@
 package lig.steamer.of4osm.io;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import lig.steamer.of4osm.IOF4OSMOntology;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
@@ -15,10 +15,7 @@ import lig.steamer.of4osm.core.onto.meta.IHighLevelConceptParent;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
-import lig.steamer.of4osm.core.onto.meta.impl.HighLevelConcept;
-import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagConcept;
-import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagKeyConcept;
-import lig.steamer.of4osm.util.OF4OSMConceptLabelizer;
+import lig.steamer.of4osm.util.OF4OSMConceptFactory;
 import lig.steamer.of4osm.util.OF4OSMTagIdentifier;
 import lig.steamer.of4osm.ws.osmwiki.MediaWikiAPIResponse;
 import lig.steamer.of4osm.ws.osmwiki.MediaWikiAPIResponseParseText;
@@ -32,6 +29,15 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 	private static final Logger LOGGER = Logger.getLogger(OF4OSMOntoReaderOSMMediaWikiAPI.class.getName());
 	
 	public static final String CATEGORY_TAGS_ID = "Primary_features";
+	public static final String ADDITIONAL_PROP_ID = "Additional_properties";
+	
+	public static final String CSS_SELECTOR_TABLE_CLASS = "wikitable";
+	public static final String CSS_SELECTOR_TR = "tr";
+	
+	public static final String CSS_SELECTOR_OSMTAGKEYCONCEPT = "h3";
+	public static final String CSS_SELECTOR_HIGHLEVELCONCEPT = "h4 span.mw-headline";
+	public static final String CSS_SELECTOR_KEY = "td a[title^='Key:']";
+	public static final String CSS_SELECTOR_TAG = "td a[title^='Tag:']";
 	
 	public static IOF4OSMOntology read(MediaWikiAPIResponse response, IOF4OSMOntology of4osm){
 		
@@ -44,59 +50,74 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 		IOSMTagKey key = null;
 		IOSMTagValue value = null;
 		IOSMSimpleCategoryTag tag = null;
+		IOSMCategoryTagKeyConcept firstLevelConcept = null;
+		IHighLevelConcept secondLevelConcept = null;
 		IOSMCategoryTagKeyConcept keyConcept = null;
-		IHighLevelConcept highLevelConcept = null;
 		IOSMCategoryTagConcept tagConcept = null;
 		
 		Element primaryFeaturesHeader = htmlDoc.getElementById(CATEGORY_TAGS_ID).parent();
 		
 		for(Element el : primaryFeaturesHeader.siblingElements()){
 			
-			if(el.tagName().equals("h2")) break;
+			if(el.children().first() != null && el.children().first().id().equals(ADDITIONAL_PROP_ID)) break;
 			
-			if(el.tagName().equals("h3")){
+			if(el.tagName().equals(CSS_SELECTOR_OSMTAGKEYCONCEPT)){
 			
-				key = new OSMTagSimpleKey(el.text(), "");
-				keyConcept = new OSMCategoryTagKeyConcept(OF4OSMConceptLabelizer.normalize(key.getValue()), key);
-				of4osm.addConcept(keyConcept);
+				key = new OSMTagSimpleKey(el.text().toLowerCase().replace(" ", "_"), "");
+				firstLevelConcept = OF4OSMConceptFactory.createOSMCategoryTagKeyConcept(key);
+				of4osm.addConcept(firstLevelConcept);
 				
-				LOGGER.log(Level.INFO, "Adding IOSMCategoryTagKeyConcept \"" + keyConcept.getDefaultLabel() + "\"");
+				secondLevelConcept = null;
+				
+				LOGGER.log(Level.INFO, "Adding IOSMCategoryTagKeyConcept \"" + firstLevelConcept.getDefaultLabel() + "\"");
 				
 				continue;
 			}
 			
-			if(el.hasClass("wikitable")){
+			if(el.hasClass(CSS_SELECTOR_TABLE_CLASS)){
 				
-				List<Element> rows = el.select("tr");
-				for(Element row : rows){
+				for(Element row : el.select(CSS_SELECTOR_TR)){
 					
 					Element firstCol = row.children().first();
 						
-					// is highLevelConcept row
-					Element header = firstCol.select("h4 span.mw-headline").first();
+					Element header = firstCol.select(CSS_SELECTOR_HIGHLEVELCONCEPT).first();
 					if(header != null){
 						
-						highLevelConcept = new HighLevelConcept(OF4OSMConceptLabelizer.normalize(header.text()) + keyConcept.getDefaultLabel());
-						highLevelConcept.addParent((IHighLevelConceptParent) keyConcept);
-						of4osm.addConcept(highLevelConcept);
+						if(header.text().toLowerCase().contains("additional attributes"))
+							continue;
 						
-						LOGGER.log(Level.INFO, "Adding HighLevelConcept \"" + highLevelConcept.getDefaultLabel() + "\"");			
+						secondLevelConcept = OF4OSMConceptFactory.createHighLevelConcept(header.text() + firstLevelConcept.getDefaultLabel());
+						secondLevelConcept.addParent((IHighLevelConceptParent) firstLevelConcept);
+						of4osm.addConcept(secondLevelConcept);
+						
+						LOGGER.log(Level.INFO, "Adding HighLevelConcept \"" + secondLevelConcept.getDefaultLabel() + "\"");			
+					
 					} else {
 						
-						Element valueCol = row.select("td a[title^='Tag:']").first();
-						if(valueCol != null){
+						Element keyCol = row.select(CSS_SELECTOR_KEY).first();
+						if(key.getValue().equals("Aerialway") 
+								|| (keyCol != null && keyCol.text().equals(key.getValue()))){
+						
+							Element valueCol = row.select(CSS_SELECTOR_TAG).first();
 							
+							if(valueCol != null && !valueCol.text().equals("user defined")){
+								
 							value = OF4OSMTagIdentifier.identifyValue(valueCol.text());
-							
-							if(key != null){
-								if(OF4OSMTagIdentifier.identifyTag(key, value) instanceof OSMSimpleCategoryTag){
-									tag = (OSMSimpleCategoryTag) OF4OSMTagIdentifier.identifyTag(key, value);
-									String label = OF4OSMConceptLabelizer.getLabelFromTag(tag);
+								
+								IOSMTag osmTag = OF4OSMTagIdentifier.identifyTag(key, value);
+								
+								if(osmTag instanceof OSMSimpleCategoryTag){
 									
-									tagConcept = new OSMCategoryTagConcept(label, tag, (IOSMTagConceptParent) keyConcept);
-									if(highLevelConcept != null){
-										tagConcept.addParent((IOSMTagConceptParent) highLevelConcept);
+									tag = (OSMSimpleCategoryTag) osmTag;
+									
+									keyConcept = OF4OSMConceptFactory.createOSMCategoryTagKeyConcept(key);
+									tagConcept = OF4OSMConceptFactory.createOSMCategoryTagConcept(tag, (IOSMTagConceptParent) keyConcept);
+									
+									if(secondLevelConcept != null){
+										tagConcept.addParent((IOSMTagConceptParent) secondLevelConcept);
 									}
+									
+									of4osm.addConcept(keyConcept);
 									of4osm.addConcept(tagConcept);
 									
 									LOGGER.log(Level.INFO, "Adding IOSMCategoryTagConcept \"" + tagConcept.getDefaultLabel() + "\"");

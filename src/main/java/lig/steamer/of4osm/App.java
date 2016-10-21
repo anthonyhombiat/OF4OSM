@@ -18,7 +18,8 @@ import lig.steamer.of4osm.ws.osmwiki.OSMMediaWikiAPIClient;
 import lig.steamer.of4osm.ws.xapi.OverpassXAPIClient;
 
 /**
- * Hello world!
+ * 
+ * @author Anthony Hombiat
  *
  */
 public class App {

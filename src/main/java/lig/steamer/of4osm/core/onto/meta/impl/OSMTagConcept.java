@@ -8,6 +8,8 @@ import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConceptParent;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 
+import org.semanticweb.owlapi.model.IRI;
+
 /**
  *
  */
@@ -15,8 +17,8 @@ public abstract class OSMTagConcept extends Concept implements IOSMTagConcept, I
 
     public Set<IOSMTagConceptParent> parents;
 
-    public OSMTagConcept(String label) {
-    	super(label);
+    public OSMTagConcept(IRI iri) {
+    	super(iri);
         parents = new HashSet<>();
     }
     

@@ -18,7 +18,8 @@ public enum AdditionalProperty {
     motorboat, motorcar, motorcycle, motor_vehicle, psv, roadtrain, ski, tank, vehicle,
     maxheight, maxlength, maxspeed, maxstay, maxweight, maxwidth, minspeed, noexit, 
     oneway, Relation, toll, traffic_sign, to, fourwd_only, 
-    colour, color; // TODO add OSMTagColorValue
+    colour, color,
+    type; // TODO add OSMTagColorValue
 
     @Override
     public String toString() {

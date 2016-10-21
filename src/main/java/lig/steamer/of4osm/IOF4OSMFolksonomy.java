@@ -12,13 +12,13 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
  */
 public interface IOF4OSMFolksonomy {
 
-    public Map<String, Set<IOSMTag>> getTagsByElement();
+    public Map<String, Set<? extends IOSMTag>> getTagsByElement();
 
     public Map<String, Set<IOSMCategoryTag>> getCategoryTagsByElement();
     
-    public Map<IOSMTag, Integer> getTagsByType(Class<? extends IOSMTag> type);
+    public Map<? extends IOSMTag, Integer> getTagsByType(Class<? extends IOSMTag> type);
     
-    public void addTagsByElement(String elementId, Set<IOSMTag> tags);
+    public void addTagsByElement(String elementId, Set<? extends IOSMTag> tags);
     
     public int getOccurrences(IOSMTag tag);
     

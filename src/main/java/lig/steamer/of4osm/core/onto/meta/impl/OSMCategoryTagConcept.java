@@ -6,6 +6,8 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 
+import org.semanticweb.owlapi.model.IRI;
+
 /**
  * 
  * @author Anthony Hombiat
@@ -15,8 +17,8 @@ public class OSMCategoryTagConcept extends OSMTagConcept implements IOSMCategory
 
     public IOSMCategoryTag tag;
 
-    public OSMCategoryTagConcept(String label, IOSMCategoryTag tag, IOSMTagConceptParent parent) {
-    	super(label);
+    public OSMCategoryTagConcept(IRI iri, IOSMCategoryTag tag, IOSMTagConceptParent parent) {
+    	super(iri);
     	this.tag = tag;
         parents.add(parent);
     }

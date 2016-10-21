@@ -5,6 +5,8 @@ import java.util.Date;
 import lig.steamer.of4osm.core.folkso.tag.IOSMDateValuePropertyTag;
 import lig.steamer.of4osm.core.onto.meta.IOSMDiscretizedOSMDatePropertyTagConcept;
 
+import org.semanticweb.owlapi.model.IRI;
+
 /**
  *
  * @author amehiris
@@ -13,8 +15,8 @@ public class OSMDiscretizedOSMTimeDomainsPropertyTag  extends OSMDiscretizedOSMP
 
 	public IOSMDateValuePropertyTag tag;
 	
-	public OSMDiscretizedOSMTimeDomainsPropertyTag(String label) {
-		super(label);
+	public OSMDiscretizedOSMTimeDomainsPropertyTag(IRI iri) {
+		super(iri);
 	}
 	
 	@Override

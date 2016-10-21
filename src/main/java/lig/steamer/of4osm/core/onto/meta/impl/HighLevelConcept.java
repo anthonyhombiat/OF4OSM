@@ -7,6 +7,8 @@ import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConceptParent;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 
+import org.semanticweb.owlapi.model.IRI;
+
 /**
  * 
  * @author Anthony Hombiat
@@ -17,8 +19,8 @@ public class HighLevelConcept extends Concept implements IHighLevelConcept, IHig
 	public String description;
     public Set<IHighLevelConceptParent> parents;
 	
-    public HighLevelConcept(String label) {
-    	super(label);
+    public HighLevelConcept(IRI iri) {
+    	super(iri);
     	parents = new HashSet<>();
     }
 

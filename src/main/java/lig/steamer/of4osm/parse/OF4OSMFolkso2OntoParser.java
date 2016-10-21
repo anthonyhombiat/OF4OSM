@@ -2,7 +2,6 @@ package lig.steamer.of4osm.parse;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.logging.Level;
@@ -13,7 +12,6 @@ import lig.steamer.of4osm.IOF4OSMOntology;
 import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
@@ -22,10 +20,7 @@ import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConceptParent;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
-import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagConcept;
-import lig.steamer.of4osm.core.onto.meta.impl.OSMCategoryTagKeyConcept;
-import lig.steamer.of4osm.core.onto.meta.impl.OSMTagCombinationConcept;
-import lig.steamer.of4osm.util.OF4OSMConceptLabelizer;
+import lig.steamer.of4osm.util.OF4OSMConceptFactory;
 
 /**
  *
@@ -39,84 +34,53 @@ public final class OF4OSMFolkso2OntoParser {
 
     	LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology...");
     	
-    	int alreadyAddedKeyConcepts = 0;
-        int alreadyAddedTagConcepts = 0;
-    	
-        Map<String, Set<IOSMCategoryTag>> categoryTags = folkso.getCategoryTagsByElement();
-        for (Entry<String, Set<IOSMCategoryTag>> element : categoryTags.entrySet()) {
+        for (Entry<String, Set<IOSMCategoryTag>> element : folkso.getCategoryTagsByElement().entrySet()) {
             
-        	IOSMTagCombinationConceptParent[] tagCombinationParent = new OSMCategoryTagConcept[element.getValue().size()];
-        	
-            int j = 0;
+        	Set<IOSMTagCombinationConceptParent> tagCombinationParents = new HashSet<IOSMTagCombinationConceptParent>();
+
             for (IOSMCategoryTag tag : element.getValue()) {
                
-            	IOSMCategoryTagKeyConcept keyConcept = createCategoryTagKeyConcept(tag);
-                if(!of4osm.addConcept(keyConcept))
-                	alreadyAddedKeyConcepts++;
+            	IOSMCategoryTagKeyConcept keyConcept = OF4OSMConceptFactory.createOSMCategoryTagKeyConcept(tag.getKey());
+            	of4osm.addConcept(keyConcept);
                 
-                IOSMCategoryTagConcept tagConcept = createCategoryTagConcept(tag, (IOSMTagConceptParent) keyConcept);
-                if(!of4osm.addConcept(tagConcept))
-                	alreadyAddedTagConcepts++;
-
-                tagCombinationParent[j] = (IOSMTagCombinationConceptParent) tagConcept;
-                j++;
+            	if (tag instanceof IOSMMultipleCategoryTag) {
+                    IOSMMultipleCategoryTag multipleCatTag = (IOSMMultipleCategoryTag) tag;
+                    for (String v : multipleCatTag.getValue().getValues()) {
+                    	IOSMSimpleCategoryTag t = new OSMSimpleCategoryTag(
+                    			(IOSMTagSimpleKey)tag.getKey(), 
+                    			new OSMTagStringValue(v));
+                    	IOSMCategoryTagConcept tagConcept = OF4OSMConceptFactory.createOSMCategoryTagConcept(t, (IOSMTagConceptParent) keyConcept);
+                    	of4osm.addConcept(tagConcept);
+                    	tagCombinationParents.add((IOSMTagCombinationConceptParent) tagConcept);
+                    }
+                } else {
+                	IOSMCategoryTagConcept tagConcept = OF4OSMConceptFactory.createOSMCategoryTagConcept(tag, (IOSMTagConceptParent) keyConcept);
+                	of4osm.addConcept(tagConcept);
+                	tagCombinationParents.add((IOSMTagCombinationConceptParent) tagConcept);
+                }
             }
             
-            addOSMTagCombinationsConcepts(tagCombinationParent, of4osm);
-            
+            addOSMTagCombinationsConcepts(tagCombinationParents, of4osm);
         }
         
         LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology is done.");
         
         LOGGER.log(Level.INFO, "Nb of IConcept instances: " + of4osm.getConcepts().size());
         LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances: " + of4osm.getOSMCategoryTagKeyConcepts().size());
-        LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances already in ontology: " + alreadyAddedKeyConcepts);
 		LOGGER.log(Level.INFO, "Nb of IHighLevelConcept instances: " + of4osm.getHighLevelConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances: " + of4osm.getOSMCategoryTagConcepts().size());
-		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances already in ontology: " + alreadyAddedTagConcepts);
 		LOGGER.log(Level.INFO, "Nb of IOSMTagCombinationConcept instances: " + of4osm.getOSMTagCombinationConcepts().size());
 
         return of4osm;
     }
-    
-    public static IOSMCategoryTagKeyConcept createCategoryTagKeyConcept(IOSMCategoryTag tag) {
-        return new OSMCategoryTagKeyConcept(
-        		OF4OSMConceptLabelizer.getLabelFromKey(tag.getKey()), 
-        		tag.getKey());
-    }
 
-    public static IOSMCategoryTagConcept createCategoryTagConcept(IOSMCategoryTag tag, IOSMTagConceptParent parent) {
-
-        if (tag instanceof IOSMSimpleCategoryTag) {
-            return new OSMCategoryTagConcept(
-            		OF4OSMConceptLabelizer.getLabelFromTag(tag), tag, parent);
-        }
-        
-        if (tag instanceof IOSMMultipleCategoryTag) {
-            IOSMMultipleCategoryTag multipleCatTag = (IOSMMultipleCategoryTag) tag;
-            for (String v : multipleCatTag.getValue().getValues()) {
-            	IOSMSimpleCategoryTag t = new OSMSimpleCategoryTag(
-            			(IOSMTagSimpleKey)tag.getKey(), 
-            			new OSMTagStringValue(v));
-                String tagLabel = OF4OSMConceptLabelizer.getLabelFromTag(t);
-                return new OSMCategoryTagConcept(tagLabel, tag, parent);
-            }
-        }
-        
-        if (tag instanceof IOSMStatefulCategoryTag) {
-            return new OSMCategoryTagConcept(
-            		OF4OSMConceptLabelizer.getLabelFromTag(tag), tag, parent);
-        }
-        
-        return null;
-    }
-
-    public static void addOSMTagCombinationsConcepts(IOSMTagCombinationConceptParent[] parents, IOF4OSMOntology of4osm){
+    private static void addOSMTagCombinationsConcepts(Set<IOSMTagCombinationConceptParent> parents, IOF4OSMOntology of4osm){
     	 
     	Set<IOSMTagCombinationConcept> tagCombinations = new HashSet<IOSMTagCombinationConcept>();
     	
-    	for (int i = 2 ; i <= parents.length ; i++) {
-             combinations(parents, i, 0, new IOSMTagCombinationConceptParent[i], tagCombinations);
+    	IOSMTagCombinationConceptParent[] parentsArray = parents.toArray(new IOSMTagCombinationConceptParent[parents.size()]);
+    	for (int i = 2 ; i <= parentsArray.length ; i++) {
+             combinations(parentsArray, i, 0, new IOSMTagCombinationConceptParent[i], tagCombinations);
         }
     	
     	for(IOSMTagCombinationConcept tagCombination1 : tagCombinations){
@@ -135,8 +99,7 @@ public final class OF4OSMFolkso2OntoParser {
 
         if (length == 0) {
             
-            IOSMTagCombinationConcept tagCombinationConcept = new OSMTagCombinationConcept(
-            		OF4OSMConceptLabelizer.getIOSMTagCombinationConceptLabel(result),
+            IOSMTagCombinationConcept tagCombinationConcept = OF4OSMConceptFactory.createOSMTagCombinationConcept(
             		new HashSet<IOSMTagCombinationConceptParent>(Arrays.asList(result)));
             
             tagCombinations.add(tagCombinationConcept);

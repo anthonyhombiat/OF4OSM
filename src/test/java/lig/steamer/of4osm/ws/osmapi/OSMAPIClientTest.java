@@ -15,9 +15,9 @@ public class OSMAPIClientTest extends TestCase {
 	public void testSend() {
         
 		// Halles St Claire, Grenoble
-        OSMAPIRequest req = new OSMAPIRequest("5.7293608785", "45.1897415202", "5.7322975993", "45.1917694442");
-        OSMAPIClient client = new OSMAPIClient();
-        OSMAPIResponse resp = client.send(req);
+		final OSMAPIRequest req = new OSMAPIRequest("5.7293608785", "45.1897415202", "5.7322975993", "45.1917694442");
+		final OSMAPIClient client = new OSMAPIClient();
+		final OSMAPIResponse resp = client.send(req);
         
         assertNotNull(resp);
     }

@@ -12,15 +12,13 @@ import org.semanticweb.owlapi.model.IRI;
  *
  */
 public abstract class Concept implements IConcept {
-
-    public static final IRI OF4OSM_IRI = IRI.create("http://steamer.imag.fr/of4osm");
 	
 	public IRI iri;
 	public Map<String, String> labels;
 
-    public Concept(String label) {
+    public Concept(IRI iri) {
         labels = new HashMap<>();
-        setDefaultLabel(label);
+        this.iri = iri;
     }
 
     @Override
@@ -28,6 +26,7 @@ public abstract class Concept implements IConcept {
         return labels;
     }
 
+    @Override
     public void addLabel(String lang, String label) {
         labels.put(lang, label);
     }
@@ -35,12 +34,6 @@ public abstract class Concept implements IConcept {
     @Override
     public String getDefaultLabel() {
         return labels.get("EN");
-    }
-    
-    @Override
-    public void setDefaultLabel(String label){
-    	labels.put("EN", label);
-    	iri = IRI.create(OF4OSM_IRI + "#" + label);
     }
     
     @Override

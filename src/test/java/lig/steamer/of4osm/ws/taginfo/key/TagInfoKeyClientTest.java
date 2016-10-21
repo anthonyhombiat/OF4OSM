@@ -23,24 +23,24 @@ public class TagInfoKeyClientTest extends TestCase {
 		
 		final String key = "amenity";
 		
-		TagInfoKeyClient keyClient = new TagInfoKeyClient();
+		final TagInfoKeyClient keyClient = new TagInfoKeyClient();
 		
-		TagInfoKeyValuesResponse keyValuesResponse = 
+		final TagInfoKeyValuesResponse keyValuesResponse = 
 				(TagInfoKeyValuesResponse) keyClient.send(TagInfoKeyAction.VALUES, key);
 		
 		assertNotNull(keyValuesResponse);
 		
-		TagInfoKeySimilarResponse keySimilarResponse = 
+		final TagInfoKeySimilarResponse keySimilarResponse = 
 				(TagInfoKeySimilarResponse) keyClient.send(TagInfoKeyAction.SIMILAR, key);
 		
 		assertNotNull(keySimilarResponse);
 
-		TagInfoKeyStatsResponse keyStatsResponse = 
+		final TagInfoKeyStatsResponse keyStatsResponse = 
 				(TagInfoKeyStatsResponse) keyClient.send(TagInfoKeyAction.STATS, key);
 		
 		assertNotNull(keyStatsResponse);
 		
-		TagInfoKeyCombinationsResponse keyCombinationsResponse = 
+		final TagInfoKeyCombinationsResponse keyCombinationsResponse = 
 				(TagInfoKeyCombinationsResponse) keyClient.send(TagInfoKeyAction.COMBINATIONS, key);
 		
 		assertNotNull(keyCombinationsResponse);

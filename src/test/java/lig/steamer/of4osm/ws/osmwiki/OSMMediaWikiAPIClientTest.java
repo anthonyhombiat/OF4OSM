@@ -11,9 +11,9 @@ public class OSMMediaWikiAPIClientTest extends TestCase {
 
 	public static void testSend() {
 		
-		MediaWikiAPIRequest req = new MediaWikiAPIRequest("parse", "Map_Features", "text", "json");
-		OSMMediaWikiAPIClient client = new OSMMediaWikiAPIClient();
-		MediaWikiAPIResponse response = client.send(req);
+		final MediaWikiAPIRequest req = new MediaWikiAPIRequest("parse", "Map_Features", "text", "json");
+		final OSMMediaWikiAPIClient client = new OSMMediaWikiAPIClient();
+		final MediaWikiAPIResponse response = client.send(req);
 		
 		assertNotNull(response);
 		

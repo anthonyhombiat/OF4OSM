@@ -18,9 +18,9 @@ public class TagInfoTagsClientTest extends TestCase {
 
 	public void testSend() {
 
-		TagInfoTagsClient tagsClient = new TagInfoTagsClient();
+		final TagInfoTagsClient tagsClient = new TagInfoTagsClient();
 		
-		TagInfoTagsPopularResponse tagsPopularResponse = 
+		final TagInfoTagsPopularResponse tagsPopularResponse = 
 				(TagInfoTagsPopularResponse) tagsClient.send(TagInfoTagsAction.POPULAR);
 		
 		assertNotNull(tagsPopularResponse);

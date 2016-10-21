@@ -9,6 +9,8 @@ import lig.steamer.of4osm.core.onto.meta.IHighLevelConceptParent;
 import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
 
+import org.semanticweb.owlapi.model.IRI;
+
 /**
  *
  * @author amehiris
@@ -18,8 +20,8 @@ public class OSMCategoryTagKeyConcept extends Concept implements IOSMCategoryTag
     public Set<IHighLevelConcept> parents;
     public IOSMTagKey key;
 
-    public OSMCategoryTagKeyConcept(String label, IOSMTagKey key) {
-    	super(label);
+    public OSMCategoryTagKeyConcept(IRI iri, IOSMTagKey key) {
+    	super(iri);
     	this.key = key;
     	parents = new HashSet<>();
     }

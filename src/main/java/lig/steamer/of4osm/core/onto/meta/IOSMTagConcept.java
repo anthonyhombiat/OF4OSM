@@ -12,7 +12,7 @@ public interface IOSMTagConcept extends IConcept {
     /**
      * @return
      */
-    public Set<? extends IOSMTagConceptParent> getParents();
+    public Set<IOSMTagConceptParent> getParents();
     
     /**
      * 

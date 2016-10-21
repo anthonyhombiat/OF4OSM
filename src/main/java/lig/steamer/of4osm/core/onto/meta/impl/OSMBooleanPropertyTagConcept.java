@@ -3,6 +3,8 @@ package lig.steamer.of4osm.core.onto.meta.impl;
 import lig.steamer.of4osm.core.folkso.tag.IOSMBooleanValuePropertyTag;
 import lig.steamer.of4osm.core.onto.meta.IOSMBooleanPropertyTagConcept;
 
+import org.semanticweb.owlapi.model.IRI;
+
 /**
  * 
  * @author Anthony Hombiat
@@ -12,8 +14,8 @@ public class OSMBooleanPropertyTagConcept extends OSMTagConcept implements IOSMB
 
 	public IOSMBooleanValuePropertyTag tag;
 	 
-    public OSMBooleanPropertyTagConcept(String label) {
-    	super(label);
+    public OSMBooleanPropertyTagConcept(IRI iri) {
+    	super(iri);
     }
 
     /**

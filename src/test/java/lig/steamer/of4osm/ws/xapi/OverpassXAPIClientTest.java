@@ -13,8 +13,8 @@ public class OverpassXAPIClientTest extends TestCase {
 	public void testSend(){
 		
 		// Halles St Claire, Grenoble
-        OSMAPIRequest req = new OSMAPIRequest("5.7293608785", "45.1897415202", "5.7322975993", "45.1917694442");
-		OverpassXAPIClient client = new OverpassXAPIClient();
+        final OSMAPIRequest req = new OSMAPIRequest("5.7293608785", "45.1897415202", "5.7322975993", "45.1917694442");
+		final OverpassXAPIClient client = new OverpassXAPIClient();
 		OSMAPIResponse resp = client.send(req);
 		
 		assertNotNull(resp);
