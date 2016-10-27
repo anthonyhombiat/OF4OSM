@@ -14,12 +14,13 @@ public enum AdditionalProperty {
     nudism, opening_hours, operator, start_date, service_times, tactile_paving, tidal, tunnel,
     toilets, wheelchair, width, iata, icao, int_ref, lcn_ref, loc_ref, nat_ref, ncn_ref, 
     old_ref, rcn_ref, ref, reg_ref, access, agricultural, atv, bdouble, bicycle, boat, 
-    emergency, foot, forestry, goods, hazmat, hgv, horse, inline_skates, lhv, mofa, moped, 
+    foot, forestry, goods, hazmat, hgv, horse, inline_skates, lhv, mofa, moped, 
     motorboat, motorcar, motorcycle, motor_vehicle, psv, roadtrain, ski, tank, vehicle,
     maxheight, maxlength, maxspeed, maxstay, maxweight, maxwidth, minspeed, noexit, 
     oneway, Relation, toll, traffic_sign, to, fourwd_only, 
     colour, color,
     type; // TODO add OSMTagColorValue
+    //emergency,
 
     @Override
     public String toString() {

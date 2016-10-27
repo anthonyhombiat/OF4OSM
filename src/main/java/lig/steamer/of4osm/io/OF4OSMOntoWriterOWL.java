@@ -11,6 +11,7 @@ import lig.steamer.of4osm.IOF4OSMOntology;
 import lig.steamer.of4osm.PropLoader;
 import lig.steamer.of4osm.core.onto.meta.IConcept;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
@@ -49,6 +50,7 @@ public class OF4OSMOntoWriterOWL {
 	@SuppressWarnings("deprecation")
 	public void write(IOF4OSMOntology of4osm, IRI file){
 		
+		final long t0 = System.currentTimeMillis();
 		LOGGER.log(Level.INFO, "Writing the OF4OSM ontology to OWL file...");
 		
 		SimpleIRIMapper mapper = new SimpleIRIMapper(OF4OSM_IRI, file);
@@ -65,7 +67,8 @@ public class OF4OSMOntoWriterOWL {
 			
 			ONTO_MANAGER.removeOntology(onto);
 			
-			LOGGER.log(Level.INFO, "Parsing the OF4OSM ontology to OWL file is done.");
+			final long t1 = System.currentTimeMillis();
+			LOGGER.log(Level.INFO, "Parsing the OF4OSM ontology to OWL file is done (" + DurationFormatUtils.formatDurationHMS(t1 - t0) + ").");
 		} catch (OWLOntologyCreationException e) {
 			LOGGER.log(Level.SEVERE, "Parsing the OF4OSM ontology to OWL file has encounter a problem:");
 			e.printStackTrace();

@@ -19,7 +19,8 @@ public class OF4OSMOntoReaderOSMMediaWikiAPITest extends TestCase {
 		final OSMMediaWikiAPIClient client = new OSMMediaWikiAPIClient();
 		final MediaWikiAPIResponse response = client.send(req);
 		
-		IOF4OSMOntology of4osm = OF4OSMOntoReaderOSMMediaWikiAPI.read(response, new OF4OSMOntology());
+		IOF4OSMOntology of4osm = new OF4OSMOntology();
+		OF4OSMOntoReaderOSMMediaWikiAPI.read(response, of4osm);
 		
 		assertNotNull(of4osm);
 	}

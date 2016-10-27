@@ -3,10 +3,8 @@ package lig.steamer.of4osm.util;
 import java.util.Set;
 
 import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
-import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagLocalizedKey;
@@ -28,19 +26,70 @@ import org.semanticweb.owlapi.model.IRI;
 
 
 public final class OF4OSMConceptFactory {
-	
-	public static final String OF4OSM_NAMESPACE = "http://steamer.imag.fr/of4osm";
-	
-	public static final String OF4OSM_HIGHLEVELCONCEPT_PATH = "/highlevelconcept";
-	public static final String OF4OSM_OSMTAGKEYCONCEPT_PATH = "/osmtagkeyconcept";
-	public static final String OF4OSM_OSMTAGCONCEPT_PATH = "/osmtagconcept";
-	public static final String OF4OSM_OSMTAGCONBINATION_PATH = "/osmtagcombination";
-	
-	public static final String OF4OSM_SEPARATOR = "#";
-	
-	public static final String OF4OSM_DEFAULT_LANG = "EN";
-	
-	public static IOSMTagCombinationConcept createOSMTagCombinationConcept(Set<IOSMTagCombinationConceptParent> parents){
+    
+    public static IOSMCategoryTagKeyConcept createOSMCategoryTagKeyConcept(IOSMTagKey key){
+    	
+    	IOSMCategoryTagKeyConcept concept = null;
+    	String label = "";
+    	
+    	if(key instanceof IOSMTagSimpleKey){
+    		label = normalize(key.getValue());
+    		concept = new OSMCategoryTagKeyConcept(
+        			IRI.create(OF4OSMVocabulary.OSMTAGKEYCONCEPT_IRI + OF4OSMVocabulary.IRI_SEPARATOR + label), key);
+        	concept.addLabel(OF4OSMVocabulary.DEFAULT_LANG, label);
+    	} else if(key instanceof IOSMTagComplexKey){
+    		IOSMTagComplexKey complexKey = (IOSMTagComplexKey) key;
+        	for(String prefix : complexKey.getPrefixes())
+        		label += normalize(prefix);
+        	label += normalize(key.getValue());
+    		concept = new OSMCategoryTagKeyConcept(
+        			IRI.create(OF4OSMVocabulary.OSMTAGKEYCONCEPT_IRI + OF4OSMVocabulary.IRI_SEPARATOR + label), complexKey);
+        	concept.addLabel(OF4OSMVocabulary.DEFAULT_LANG, label);
+    	} else if(key instanceof IOSMTagLocalizedKey){
+    		label = normalize(key.getValue());
+    		concept = new OSMCategoryTagKeyConcept(
+        			IRI.create(OF4OSMVocabulary.OSMTAGKEYCONCEPT_IRI + OF4OSMVocabulary.IRI_SEPARATOR + label), key);
+        	concept.addLabel(OF4OSMVocabulary.DEFAULT_LANG, label);
+    	} else if(key instanceof IOSMTagStatefulKey){
+    		IOSMTagStatefulKey statefulKey = (IOSMTagStatefulKey) key;
+    		label += normalize(statefulKey.getState());
+        	label += normalize(statefulKey.getValue());
+    		concept = new OSMCategoryTagKeyConcept(
+        			IRI.create(OF4OSMVocabulary.OSMTAGKEYCONCEPT_IRI + OF4OSMVocabulary.IRI_SEPARATOR + label), statefulKey);
+        	concept.addLabel(OF4OSMVocabulary.DEFAULT_LANG, label);
+        	IHighLevelConcept statefulConcept = OF4OSMConceptFactory.createHighLevelConcept(statefulKey.getState() + "Entity");
+        	concept.addParent(statefulConcept);
+    	}
+    	
+    	return concept;
+    }
+    
+    public static IOSMCategoryTagConcept createOSMCategoryTagConcept(IOSMCategoryTag tag, IOSMTagConceptParent parent){
+    	
+    	IOSMCategoryTagConcept concept = null;
+    	String label = "";
+    	
+    	if(tag instanceof IOSMSimpleCategoryTag){
+    		IOSMSimpleCategoryTag simpleTag = (IOSMSimpleCategoryTag) tag;
+    		label += normalize(simpleTag.getValue().getValue()); 
+        	label += normalize(simpleTag.getKey().getValue());
+    		concept = new OSMCategoryTagConcept(
+        			IRI.create(OF4OSMVocabulary.OSMTAGCONCEPT_IRI + OF4OSMVocabulary.IRI_SEPARATOR + label), simpleTag, parent);
+        	concept.addLabel(OF4OSMVocabulary.DEFAULT_LANG, label);
+    	} else if(tag instanceof IOSMStatefulCategoryTag){
+    		IOSMStatefulCategoryTag statefulTag = (IOSMStatefulCategoryTag) tag;
+    		label += normalize(statefulTag.getKey().getState());
+        	label += normalize(statefulTag.getValue().getValue());
+        	label += normalize(statefulTag.getKey().getValue());
+    		concept = new OSMCategoryTagConcept(
+        			IRI.create(OF4OSMVocabulary.OSMTAGCONCEPT_IRI + OF4OSMVocabulary.IRI_SEPARATOR + label), statefulTag, parent);
+        	concept.addLabel(OF4OSMVocabulary.DEFAULT_LANG, label);
+    	} 
+    	
+    	return concept;
+    }
+    
+public static IOSMTagCombinationConcept createOSMTagCombinationConcept(Set<IOSMTagCombinationConceptParent> parents){
 		
 		String label = "";
 		for(IOSMTagCombinationConceptParent parent : parents){
@@ -48,9 +97,9 @@ public final class OF4OSMConceptFactory {
 		}
 		
 		IOSMTagCombinationConcept concept = new OSMTagCombinationConcept(
-				IRI.create(OF4OSM_NAMESPACE + OF4OSM_OSMTAGCONBINATION_PATH + OF4OSM_SEPARATOR + label), parents);
+				IRI.create(OF4OSMVocabulary.OSMTAGCOMBINATION_IRI + OF4OSMVocabulary.IRI_SEPARATOR + label), parents);
 		
-		concept.addLabel(OF4OSM_DEFAULT_LANG, label);
+		concept.addLabel(OF4OSMVocabulary.DEFAULT_LANG, label);
 		
 		return concept;
 	
@@ -58,26 +107,10 @@ public final class OF4OSMConceptFactory {
     
 	public static IHighLevelConcept createHighLevelConcept(String label){
     	IHighLevelConcept concept = new HighLevelConcept(
-    			IRI.create(OF4OSM_NAMESPACE + OF4OSM_HIGHLEVELCONCEPT_PATH + OF4OSM_SEPARATOR + normalize(label)));
-    	concept.addLabel(OF4OSM_DEFAULT_LANG, normalize(label));
+    			IRI.create(OF4OSMVocabulary.HIGHLEVELCONCEPT_IRI + OF4OSMVocabulary.IRI_SEPARATOR + normalize(label)));
+    	concept.addLabel(OF4OSMVocabulary.DEFAULT_LANG, normalize(label));
     	return concept;
 	}
-    
-    public static IOSMCategoryTagKeyConcept createOSMCategoryTagKeyConcept(IOSMTagKey key){
-    	String label = getLabelFromKey(key);
-    	IOSMCategoryTagKeyConcept concept = new OSMCategoryTagKeyConcept(
-    			IRI.create(OF4OSM_NAMESPACE + OF4OSM_OSMTAGKEYCONCEPT_PATH + OF4OSM_SEPARATOR + label), key);
-    	concept.addLabel(OF4OSM_DEFAULT_LANG, label);
-    	return concept;
-    }
-    
-    public static IOSMCategoryTagConcept createOSMCategoryTagConcept(IOSMCategoryTag tag, IOSMTagConceptParent parent){
-    	String label = getLabelFromTag(tag);
-    	IOSMCategoryTagConcept concept = new OSMCategoryTagConcept(
-    			IRI.create(OF4OSM_NAMESPACE + OF4OSM_OSMTAGCONCEPT_PATH + OF4OSM_SEPARATOR + label), tag, parent);
-    	concept.addLabel(OF4OSM_DEFAULT_LANG, label);
-    	return concept;
-    }
     
 	private static String normalize(String s){
 		String res = WordUtils.capitalize(s);
@@ -88,80 +121,5 @@ public final class OF4OSMConceptFactory {
 		res = res.replace(",", "");
 		return res;
 	}
-	
-    public static String getLabelFromTag(IOSMTag tag, int position){
-    	if(tag instanceof IOSMSimpleCategoryTag){
-    		return getLabelFromIOSMSimpleCategoryTag((IOSMSimpleCategoryTag)tag);
-    	} else if(tag instanceof IOSMMultipleCategoryTag){
-    		return getLabelFromIOSMMultipleCategoryTag((IOSMMultipleCategoryTag)tag, position);
-    	} else if(tag instanceof IOSMStatefulCategoryTag){
-    		return getLabelFromIOSMStatefulCategoryTag((IOSMStatefulCategoryTag)tag);
-    	} else {
-    		return null;
-    	}
-    }
-    
-    public static String getLabelFromTag(IOSMTag tag){
-    	return getLabelFromTag(tag, 0);
-    }
-    
-	private static String getLabelFromIOSMSimpleCategoryTag(IOSMSimpleCategoryTag tag){
-    	String label = ""; 
-    	label += normalize(tag.getValue().getValue());
-    	label += normalize(tag.getKey().getValue());
-        return  label;
-    }
-    
-	private static String getLabelFromIOSMMultipleCategoryTag(IOSMMultipleCategoryTag tag, int position){
-    	String label = ""; 
-    	label += normalize(tag.getValue().getValues()[position]);
-    	label += normalize(tag.getKey().getValue());
-        return  label;
-    }
-    
-	private static String getLabelFromIOSMStatefulCategoryTag(IOSMStatefulCategoryTag tag){
-    	String label = "";
-    	label += normalize(tag.getKey().getState());
-    	label += normalize(tag.getValue().getValue());
-    	label += normalize(tag.getKey().getValue());
-        return  label;
-    }
-	
-	public static String getLabelFromKey(IOSMTagKey key){
-    	if(key instanceof IOSMTagSimpleKey){
-    		return getLabelFromIOSMTagSimpleKey((IOSMTagSimpleKey) key);
-    	} else if(key instanceof IOSMTagComplexKey){
-    		return getLabelFromIOSMTagComplexKey((IOSMTagComplexKey) key);
-    	} else if(key instanceof IOSMTagLocalizedKey){
-    		return getLabelFromIOSMTagLocalizedKey((IOSMTagLocalizedKey) key);
-    	} else if(key instanceof IOSMTagStatefulKey){
-    		return getLabelFromIOSMTagStatefulKey((IOSMTagStatefulKey) key);
-    	}
-    	return null;
-    }
-    
-    private static String getLabelFromIOSMTagSimpleKey(IOSMTagSimpleKey key){
-    	return normalize(key.getValue());
-    }
-    
-    private static String getLabelFromIOSMTagComplexKey(IOSMTagComplexKey key){
-    	String label = "";
-    	for(String prefix : key.getPrefixes()){
-    		label += normalize(prefix);
-    	}
-    	label += normalize(key.getValue());
-    	return label;
-    }
-    
-    private static String getLabelFromIOSMTagLocalizedKey(IOSMTagLocalizedKey key){
-    	return normalize(key.getValue());
-    }
-    
-    private static String getLabelFromIOSMTagStatefulKey(IOSMTagStatefulKey key){
-    	String label = "";
-    	label += normalize(key.getState());
-    	label += normalize(key.getValue());
-    	return label;
-    }
     
 }

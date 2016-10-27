@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
+
 import lig.steamer.of4osm.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyBooleanValuePropertyTag;
@@ -42,6 +44,7 @@ public final class OF4OSMFolksoReaderOSMAPI {
 	
     public static IOF4OSMFolksonomy read(OSMAPIResponse resp) {
 
+    	final long t0 = System.currentTimeMillis();
     	LOGGER.log(Level.INFO, "Reading folksonomy from the OSM API...");
     	
     	IOF4OSMFolksonomy folkso = new OF4OSMFolksonomy();
@@ -62,7 +65,8 @@ public final class OF4OSMFolksoReaderOSMAPI {
             }
         }
         
-        LOGGER.log(Level.INFO, "Reading folksonomy from the OSM API done.");
+        final long t1 = System.currentTimeMillis();
+        LOGGER.log(Level.INFO, "Reading folksonomy from the OSM API done (" + DurationFormatUtils.formatDurationHMS(t1 - t0) + ").");
         LOGGER.log(Level.INFO, "Nb of IOSMTags read: " + folkso.getNbOfTags());
         
         LOGGER.log(Level.INFO, "Nb of IOSMSimpleCategoryTags read: " + folkso.getNbOfTagsByType(IOSMSimpleCategoryTag.class));

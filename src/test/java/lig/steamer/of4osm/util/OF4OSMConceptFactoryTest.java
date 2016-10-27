@@ -19,9 +19,8 @@ public class OF4OSMConceptFactoryTest extends TestCase {
 		final IHighLevelConcept concept = OF4OSMConceptFactory.createHighLevelConcept("  mock  label_  ");
 		assertEquals("MockLabel", concept.getIRI().getRemainder().get());
 		assertEquals("MockLabel", concept.getDefaultLabel());
-		assertEquals(OF4OSMConceptFactory.OF4OSM_NAMESPACE + 
-				OF4OSMConceptFactory.OF4OSM_HIGHLEVELCONCEPT_PATH 
-				+ OF4OSMConceptFactory.OF4OSM_SEPARATOR + "MockLabel", concept.getIRI().toString());
+		assertEquals(OF4OSMVocabulary.HIGHLEVELCONCEPT_IRI 
+				+ OF4OSMVocabulary.IRI_SEPARATOR + "MockLabel", concept.getIRI().toString());
 	}
 	
 	public void testCreateOSMCategoryTagKeyConcept(){
@@ -33,9 +32,8 @@ public class OF4OSMConceptFactoryTest extends TestCase {
 		
 		assertEquals("MockKey", keyConcept.getIRI().getRemainder().get());
 		assertEquals("MockKey", keyConcept.getDefaultLabel());
-		assertEquals(OF4OSMConceptFactory.OF4OSM_NAMESPACE + 
-				OF4OSMConceptFactory.OF4OSM_OSMTAGKEYCONCEPT_PATH 
-				+ OF4OSMConceptFactory.OF4OSM_SEPARATOR + "MockKey", keyConcept.getIRI().toString());
+		assertEquals(OF4OSMVocabulary.OSMTAGKEYCONCEPT_IRI 
+				+ OF4OSMVocabulary.IRI_SEPARATOR + "MockKey", keyConcept.getIRI().toString());
 	}
 	
 	public void testCreateOSMCategoryTagConcept(){
@@ -53,9 +51,8 @@ public class OF4OSMConceptFactoryTest extends TestCase {
 		
 		assertEquals("MockValueMockKey", tagConcept.getIRI().getRemainder().get());
 		assertEquals("MockValueMockKey", tagConcept.getDefaultLabel());
-		assertEquals(OF4OSMConceptFactory.OF4OSM_NAMESPACE + 
-				OF4OSMConceptFactory.OF4OSM_OSMTAGCONCEPT_PATH 
-				+ OF4OSMConceptFactory.OF4OSM_SEPARATOR + "MockValueMockKey", tagConcept.getIRI().toString());
+		assertEquals(OF4OSMVocabulary.OSMTAGCONCEPT_IRI 
+				+ OF4OSMVocabulary.IRI_SEPARATOR + "MockValueMockKey", tagConcept.getIRI().toString());
 	}
 	
 }

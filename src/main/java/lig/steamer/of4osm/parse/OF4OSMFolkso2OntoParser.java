@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
+
 import lig.steamer.of4osm.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.IOF4OSMOntology;
 import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
@@ -30,8 +32,9 @@ public final class OF4OSMFolkso2OntoParser {
 
 	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolkso2OntoParser.class.getName());
 	
-    public static IOF4OSMOntology addConceptsFromFolkso(IOF4OSMOntology of4osm, IOF4OSMFolksonomy folkso) {
+    public static void addConceptsFromFolkso(IOF4OSMOntology of4osm, IOF4OSMFolksonomy folkso) {
 
+    	final long t0 = System.currentTimeMillis();
     	LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology...");
     	
         for (Entry<String, Set<IOSMCategoryTag>> element : folkso.getCategoryTagsByElement().entrySet()) {
@@ -63,7 +66,8 @@ public final class OF4OSMFolkso2OntoParser {
             addOSMTagCombinationsConcepts(tagCombinationParents, of4osm);
         }
         
-        LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology is done.");
+        final long t1 = System.currentTimeMillis();
+        LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology is done (" + DurationFormatUtils.formatDurationHMS(t1 - t0) + ").");
         
         LOGGER.log(Level.INFO, "Nb of IConcept instances: " + of4osm.getConcepts().size());
         LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances: " + of4osm.getOSMCategoryTagKeyConcepts().size());
@@ -71,7 +75,6 @@ public final class OF4OSMFolkso2OntoParser {
 		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances: " + of4osm.getOSMCategoryTagConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IOSMTagCombinationConcept instances: " + of4osm.getOSMTagCombinationConcepts().size());
 
-        return of4osm;
     }
 
     private static void addOSMTagCombinationsConcepts(Set<IOSMTagCombinationConceptParent> parents, IOF4OSMOntology of4osm){

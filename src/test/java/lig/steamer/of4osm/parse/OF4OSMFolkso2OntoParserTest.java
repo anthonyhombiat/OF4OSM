@@ -26,9 +26,8 @@ public class OF4OSMFolkso2OntoParserTest extends TestCase {
     	
     	MockData mockData = new MockData();
     	
-      IOF4OSMOntology of4osm = OF4OSMFolkso2OntoParser.addConceptsFromFolkso(
-		new OF4OSMOntology(), 
-		mockData.getFolksonomy());
+      IOF4OSMOntology of4osm = new OF4OSMOntology();
+      OF4OSMFolkso2OntoParser.addConceptsFromFolkso(of4osm, mockData.getFolksonomy());
 
       OF4OSMOntoWriterOWL writer = new OF4OSMOntoWriterOWL();
       writer.write(

@@ -20,6 +20,7 @@ import lig.steamer.of4osm.util.OF4OSMTagIdentifier;
 import lig.steamer.of4osm.ws.osmwiki.MediaWikiAPIResponse;
 import lig.steamer.of4osm.ws.osmwiki.MediaWikiAPIResponseParseText;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -39,8 +40,9 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 	public static final String CSS_SELECTOR_KEY = "td a[title^='Key:']";
 	public static final String CSS_SELECTOR_TAG = "td a[title^='Tag:']";
 	
-	public static IOF4OSMOntology read(MediaWikiAPIResponse response, IOF4OSMOntology of4osm){
+	public static void read(MediaWikiAPIResponse response, IOF4OSMOntology of4osm){
 		
+		final long t0 = System.currentTimeMillis();
 		LOGGER.log(Level.INFO, "Adding tags from the OSM Wiki Map Features Web page to OF4OSM...");
 		
 		MediaWikiAPIResponseParseText text = response.getParse().getText();
@@ -83,7 +85,7 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 					Element header = firstCol.select(CSS_SELECTOR_HIGHLEVELCONCEPT).first();
 					if(header != null){
 						
-						if(header.text().toLowerCase().contains("additional attributes"))
+						if(header.text().toLowerCase().contains("attributes"))
 							continue;
 						
 						secondLevelConcept = OF4OSMConceptFactory.createHighLevelConcept(header.text() + firstLevelConcept.getDefaultLabel());
@@ -95,7 +97,9 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 					} else {
 						
 						Element keyCol = row.select(CSS_SELECTOR_KEY).first();
+						
 						if(key.getValue().equals("Aerialway") 
+								|| (key.getValue().equals("Places") && keyCol != null && keyCol.text().equals("place"))
 								|| (keyCol != null && keyCol.text().equals(key.getValue()))){
 						
 							Element valueCol = row.select(CSS_SELECTOR_TAG).first();
@@ -129,13 +133,13 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 			}
 		}
 		
-		LOGGER.log(Level.INFO, "Adding tags from the OSM Wiki Map Features Web page to OF4OSM done.");
+		final long t1 = System.currentTimeMillis();
+		LOGGER.log(Level.INFO, "Adding tags from the OSM Wiki Map Features Web page to OF4OSM done (" + DurationFormatUtils.formatDurationHMS(t1 - t0) + ").");
 		
 		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances: " + of4osm.getOSMCategoryTagKeyConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IHighLevelConcept instances: " + of4osm.getHighLevelConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances: " + of4osm.getOSMCategoryTagConcepts().size());
 		
-		return of4osm;
 	}
 	
 }
