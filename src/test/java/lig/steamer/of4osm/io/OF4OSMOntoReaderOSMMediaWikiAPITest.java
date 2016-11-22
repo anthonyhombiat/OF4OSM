@@ -1,7 +1,7 @@
 package lig.steamer.of4osm.io;
 
 import junit.framework.TestCase;
-import lig.steamer.of4osm.IOF4OSMOntology;
+import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.impl.OF4OSMOntology;
 import lig.steamer.of4osm.ws.osmwiki.MediaWikiAPIRequest;
 import lig.steamer.of4osm.ws.osmwiki.MediaWikiAPIResponse;

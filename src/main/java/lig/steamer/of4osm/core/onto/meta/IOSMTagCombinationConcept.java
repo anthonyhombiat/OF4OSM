@@ -3,6 +3,8 @@ package lig.steamer.of4osm.core.onto.meta;
 import java.util.Set;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public interface IOSMTagCombinationConcept extends IConcept {

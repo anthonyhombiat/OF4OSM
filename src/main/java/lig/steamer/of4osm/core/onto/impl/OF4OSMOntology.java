@@ -3,11 +3,11 @@ package lig.steamer.of4osm.core.onto.impl;
 import java.util.HashSet;
 import java.util.Set;
 
-import lig.steamer.of4osm.IOF4OSMOntology;
+import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.meta.IConcept;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMSimpleCategoryTagConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagSimpleKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
 
 /**
@@ -16,8 +16,8 @@ import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
  */
 public class OF4OSMOntology implements IOF4OSMOntology {
 
-    Set<IOSMCategoryTagKeyConcept> categoryTagKeyConcepts;
-    Set<IOSMCategoryTagConcept> categoryTagConcepts;
+    Set<IOSMTagSimpleKeyConcept> categoryTagKeyConcepts;
+    Set<IOSMSimpleCategoryTagConcept> categoryTagConcepts;
     Set<IOSMTagCombinationConcept> tagCombinationConcepts;
     Set<IHighLevelConcept> highLevelConcepts;
 
@@ -31,11 +31,11 @@ public class OF4OSMOntology implements IOF4OSMOntology {
     @Override
     public boolean addConcept(IConcept concept) {
 
-        if (concept instanceof IOSMCategoryTagKeyConcept) {
-           return categoryTagKeyConcepts.add((IOSMCategoryTagKeyConcept) concept);
+        if (concept instanceof IOSMTagSimpleKeyConcept) {
+           return categoryTagKeyConcepts.add((IOSMTagSimpleKeyConcept) concept);
         }
-        if (concept instanceof IOSMCategoryTagConcept) {
-        	return categoryTagConcepts.add((IOSMCategoryTagConcept) concept);
+        if (concept instanceof IOSMSimpleCategoryTagConcept) {
+        	return categoryTagConcepts.add((IOSMSimpleCategoryTagConcept) concept);
         }
         if (concept instanceof IOSMTagCombinationConcept) {
         	return tagCombinationConcepts.add((IOSMTagCombinationConcept) concept);
@@ -54,12 +54,12 @@ public class OF4OSMOntology implements IOF4OSMOntology {
 	}
 
 	@Override
-	public Set<IOSMCategoryTagKeyConcept> getOSMCategoryTagKeyConcepts() {
+	public Set<IOSMTagSimpleKeyConcept> getOSMCategoryTagKeyConcepts() {
 		return categoryTagKeyConcepts;
 	}
 
 	@Override
-	public Set<IOSMCategoryTagConcept> getOSMCategoryTagConcepts() {
+	public Set<IOSMSimpleCategoryTagConcept> getOSMCategoryTagConcepts() {
 		return categoryTagConcepts;
 	}
 	

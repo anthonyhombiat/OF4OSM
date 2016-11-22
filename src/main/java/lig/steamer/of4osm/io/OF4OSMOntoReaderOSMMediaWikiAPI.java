@@ -3,18 +3,19 @@ package lig.steamer.of4osm.io;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import lig.steamer.of4osm.IOF4OSMOntology;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagValue;
+import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConceptParent;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMSimpleCategoryTagConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagSimpleKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMStatelessTagConceptParent;
 import lig.steamer.of4osm.util.OF4OSMConceptFactory;
 import lig.steamer.of4osm.util.OF4OSMTagIdentifier;
 import lig.steamer.of4osm.ws.osmwiki.MediaWikiAPIResponse;
@@ -52,10 +53,10 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 		IOSMTagKey key = null;
 		IOSMTagValue value = null;
 		IOSMSimpleCategoryTag tag = null;
-		IOSMCategoryTagKeyConcept firstLevelConcept = null;
+		IOSMTagSimpleKeyConcept firstLevelConcept = null;
 		IHighLevelConcept secondLevelConcept = null;
-		IOSMCategoryTagKeyConcept keyConcept = null;
-		IOSMCategoryTagConcept tagConcept = null;
+		IOSMTagSimpleKeyConcept keyConcept = null;
+		IOSMSimpleCategoryTagConcept tagConcept = null;
 		
 		Element primaryFeaturesHeader = htmlDoc.getElementById(CATEGORY_TAGS_ID).parent();
 		
@@ -66,7 +67,7 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 			if(el.tagName().equals(CSS_SELECTOR_OSMTAGKEYCONCEPT)){
 			
 				key = new OSMTagSimpleKey(el.text().toLowerCase().replace(" ", "_"), "");
-				firstLevelConcept = OF4OSMConceptFactory.createOSMCategoryTagKeyConcept(key);
+				firstLevelConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept((IOSMTagSimpleKey) key);
 				of4osm.addConcept(firstLevelConcept);
 				
 				secondLevelConcept = null;
@@ -114,11 +115,11 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 									
 									tag = (OSMSimpleCategoryTag) osmTag;
 									
-									keyConcept = OF4OSMConceptFactory.createOSMCategoryTagKeyConcept(key);
-									tagConcept = OF4OSMConceptFactory.createOSMCategoryTagConcept(tag, (IOSMTagConceptParent) keyConcept);
+									keyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept((IOSMTagSimpleKey) key);
+									tagConcept = OF4OSMConceptFactory.createOSMSimpleCategoryTagConcept(tag, (IOSMStatelessTagConceptParent) keyConcept);
 									
 									if(secondLevelConcept != null){
-										tagConcept.addParent((IOSMTagConceptParent) secondLevelConcept);
+										tagConcept.addParent((IOSMStatelessTagConceptParent) secondLevelConcept);
 									}
 									
 									of4osm.addConcept(keyConcept);

@@ -12,11 +12,11 @@ import org.semanticweb.owlapi.model.IRI;
  */
 public abstract class OSMDiscretizedOSMPropertyTagConcept extends OSMPropertyTagConcept implements IOSMDiscretizedOSMPropertyTagConcept {
 
+	public DiscretizationMethod discretizationMethod;
+	
     public OSMDiscretizedOSMPropertyTagConcept(IRI iri) {
 		super(iri);
 	}
-
-	public DiscretizationMethod discretizationMethod;
 
     /**
      * @return

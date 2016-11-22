@@ -1,4 +1,4 @@
-package lig.steamer.of4osm;
+package lig.steamer.of4osm.core.folkso;
 
 import java.util.Map;
 import java.util.Set;

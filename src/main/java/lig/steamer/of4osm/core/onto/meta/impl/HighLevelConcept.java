@@ -5,7 +5,10 @@ import java.util.Set;
 
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConceptParent;
-import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMStatefulTagConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMStatelessTagConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagStatefulKeyConceptParent;
 
 import org.semanticweb.owlapi.model.IRI;
 
@@ -14,7 +17,13 @@ import org.semanticweb.owlapi.model.IRI;
  * @author Anthony Hombiat
  *
  */
-public class HighLevelConcept extends Concept implements IHighLevelConcept, IHighLevelConceptParent, IOSMTagConceptParent {
+public class HighLevelConcept extends Concept 
+	implements IHighLevelConcept, 
+		IHighLevelConceptParent,
+		IOSMTagStatefulKeyConceptParent, 
+		IOSMStatelessTagConceptParent,
+		IOSMStatefulTagConceptParent,
+		IOSMTagCombinationConceptParent {
 
 	public String description;
     public Set<IHighLevelConceptParent> parents;

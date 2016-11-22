@@ -7,6 +7,8 @@ import org.semanticweb.owlapi.model.IRI;
 
 /**
  * 
+ * @author Anthony Hombiat
+ *
  */
 public interface IConcept {
 

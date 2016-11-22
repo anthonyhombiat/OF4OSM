@@ -7,22 +7,29 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang3.time.DurationFormatUtils;
-
-import lig.steamer.of4osm.IOF4OSMFolksonomy;
-import lig.steamer.of4osm.IOF4OSMOntology;
+import lig.steamer.of4osm.core.folkso.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
+import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
+import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
+import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMSimpleCategoryTagConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMStatefulCategoryTagConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMStatefulTagConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMStatelessTagConceptParent;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConceptParent;
-import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagSimpleKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagStatefulKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagStatefulKeyConceptParent;
 import lig.steamer.of4osm.util.OF4OSMConceptFactory;
+
+import org.apache.commons.lang3.time.DurationFormatUtils;
 
 /**
  *
@@ -43,21 +50,61 @@ public final class OF4OSMFolkso2OntoParser {
 
             for (IOSMCategoryTag tag : element.getValue()) {
                
-            	IOSMCategoryTagKeyConcept keyConcept = OF4OSMConceptFactory.createOSMCategoryTagKeyConcept(tag.getKey());
-            	of4osm.addConcept(keyConcept);
-                
             	if (tag instanceof IOSMMultipleCategoryTag) {
+            		
+            		IOSMTagSimpleKeyConcept keyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept((IOSMTagSimpleKey) tag.getKey());
+                	of4osm.addConcept(keyConcept);
+            		
                     IOSMMultipleCategoryTag multipleCatTag = (IOSMMultipleCategoryTag) tag;
                     for (String v : multipleCatTag.getValue().getValues()) {
                     	IOSMSimpleCategoryTag t = new OSMSimpleCategoryTag(
                     			(IOSMTagSimpleKey)tag.getKey(), 
                     			new OSMTagStringValue(v));
-                    	IOSMCategoryTagConcept tagConcept = OF4OSMConceptFactory.createOSMCategoryTagConcept(t, (IOSMTagConceptParent) keyConcept);
+                    	IOSMSimpleCategoryTagConcept tagConcept = OF4OSMConceptFactory.createOSMSimpleCategoryTagConcept(t, (IOSMStatelessTagConceptParent) keyConcept);
                     	of4osm.addConcept(tagConcept);
                     	tagCombinationParents.add((IOSMTagCombinationConceptParent) tagConcept);
                     }
+                    
+                } else if (tag instanceof IOSMStatefulCategoryTag){
+                	// ex.: disused:shop=bakery
+                	
+                	// disused:shop=bakery
+                	IOSMStatefulCategoryTag statefulTag = (IOSMStatefulCategoryTag) tag;
+                	
+                	// shop=bakery
+                	IOSMSimpleCategoryTag simpleTag = new OSMSimpleCategoryTag(
+                			new OSMTagSimpleKey(statefulTag.getKey().getValue(), ""),
+                			statefulTag.getValue());
+                	
+                	// Shop
+                	IOSMTagSimpleKeyConcept simpleKeyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept(simpleTag.getKey());
+                	of4osm.addConcept(simpleKeyConcept);
+                	
+                	// BakeryShop (parent: Shop)
+                	IOSMSimpleCategoryTagConcept simpleTagConcept = OF4OSMConceptFactory.createOSMSimpleCategoryTagConcept(simpleTag, (IOSMStatelessTagConceptParent) simpleKeyConcept);
+                	of4osm.addConcept(simpleTagConcept);
+                	
+                	// DisusedEntity
+                	IHighLevelConcept statefulHighLevelConcept = OF4OSMConceptFactory.createHighLevelConcept(statefulTag.getKey().getState() + "Entity");
+                	
+                	// DisusedShop (parent: DisusedEntity & Shop)
+                	IOSMTagStatefulKeyConcept statefulKeyConcept = OF4OSMConceptFactory.createOSMTagStatefulKeyConcept(statefulTag.getKey());
+                	statefulKeyConcept.addParent((IOSMTagStatefulKeyConceptParent) statefulHighLevelConcept);
+                	statefulKeyConcept.addParent((IOSMTagStatefulKeyConceptParent) simpleKeyConcept);
+                	of4osm.addConcept(statefulKeyConcept);
+          
+                	// DisusedBakeryShop (parents: DisusedShop & BakeryShop)
+                	IOSMStatefulCategoryTagConcept statefulTagConcept = OF4OSMConceptFactory.createOSMStatefulCategoryTagConcept(statefulTag, (IOSMStatefulTagConceptParent) statefulKeyConcept);
+                	statefulTagConcept.addParent((IOSMStatefulTagConceptParent) simpleTagConcept);
+                	of4osm.addConcept(statefulTagConcept);
+                	
+                	tagCombinationParents.add((IOSMTagCombinationConceptParent) statefulTagConcept);
                 } else {
-                	IOSMCategoryTagConcept tagConcept = OF4OSMConceptFactory.createOSMCategoryTagConcept(tag, (IOSMTagConceptParent) keyConcept);
+                	
+                	IOSMTagSimpleKeyConcept keyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept((IOSMTagSimpleKey) tag.getKey());
+                	of4osm.addConcept(keyConcept);
+                	
+                	IOSMSimpleCategoryTagConcept tagConcept = OF4OSMConceptFactory.createOSMSimpleCategoryTagConcept((IOSMSimpleCategoryTag) tag, (IOSMStatelessTagConceptParent) keyConcept);
                 	of4osm.addConcept(tagConcept);
                 	tagCombinationParents.add((IOSMTagCombinationConceptParent) tagConcept);
                 }

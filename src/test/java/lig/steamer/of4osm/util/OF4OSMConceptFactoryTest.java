@@ -1,13 +1,14 @@
 package lig.steamer.of4osm.util;
 
 import junit.framework.TestCase;
-import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;
+import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMTagConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMSimpleCategoryTagConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMStatelessTagConceptParent;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagSimpleKeyConcept;
 
 public class OF4OSMConceptFactoryTest extends TestCase {
 	
@@ -28,11 +29,11 @@ public class OF4OSMConceptFactoryTest extends TestCase {
 		final String keyLabel = "  mock key_  ";
 		final IOSMTagKey key = OF4OSMTagIdentifier.identifyKey(keyLabel, "");
 		
-		final IOSMCategoryTagKeyConcept keyConcept = OF4OSMConceptFactory.createOSMCategoryTagKeyConcept(key);
+		final IOSMTagSimpleKeyConcept keyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept((IOSMTagSimpleKey) key);
 		
 		assertEquals("MockKey", keyConcept.getIRI().getRemainder().get());
 		assertEquals("MockKey", keyConcept.getDefaultLabel());
-		assertEquals(OF4OSMVocabulary.OSMTAGKEYCONCEPT_IRI 
+		assertEquals(OF4OSMVocabulary.OSMTAGSIMPLEKEYCONCEPT_IRI 
 				+ OF4OSMVocabulary.IRI_SEPARATOR + "MockKey", keyConcept.getIRI().toString());
 	}
 	
@@ -44,14 +45,14 @@ public class OF4OSMConceptFactoryTest extends TestCase {
 		final String valueLabel = "  mock value_  ";
 		final IOSMTagStringValue value = (IOSMTagStringValue) OF4OSMTagIdentifier.identifyValue(valueLabel);
 		
-		final IOSMCategoryTag tag = (IOSMCategoryTag) OF4OSMTagIdentifier.identifyTag(key, value);
+		final IOSMSimpleCategoryTag tag = (IOSMSimpleCategoryTag) OF4OSMTagIdentifier.identifyTag(key, value);
 		
-		final IOSMCategoryTagKeyConcept keyConcept = OF4OSMConceptFactory.createOSMCategoryTagKeyConcept(tag.getKey());
-		final IOSMCategoryTagConcept tagConcept = OF4OSMConceptFactory.createOSMCategoryTagConcept(tag, (IOSMTagConceptParent) keyConcept);
+		final IOSMTagSimpleKeyConcept keyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept((IOSMTagSimpleKey) tag.getKey());
+		final IOSMSimpleCategoryTagConcept tagConcept = OF4OSMConceptFactory.createOSMSimpleCategoryTagConcept((IOSMSimpleCategoryTag) tag, (IOSMStatelessTagConceptParent) keyConcept);
 		
 		assertEquals("MockValueMockKey", tagConcept.getIRI().getRemainder().get());
 		assertEquals("MockValueMockKey", tagConcept.getDefaultLabel());
-		assertEquals(OF4OSMVocabulary.OSMTAGCONCEPT_IRI 
+		assertEquals(OF4OSMVocabulary.OSMSTATELESSTAGCONCEPT_IRI 
 				+ OF4OSMVocabulary.IRI_SEPARATOR + "MockValueMockKey", tagConcept.getIRI().toString());
 	}
 	

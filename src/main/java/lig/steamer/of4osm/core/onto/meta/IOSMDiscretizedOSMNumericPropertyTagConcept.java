@@ -4,6 +4,8 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMNumericValuePropertyTag;
 
 /**
  * 
+ * @author Anthony Hombiat
+ *
  */
 public interface IOSMDiscretizedOSMNumericPropertyTagConcept extends IOSMDiscretizedOSMPropertyTagConcept {
 

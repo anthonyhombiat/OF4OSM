@@ -3,7 +3,9 @@ package lig.steamer.of4osm;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import lig.steamer.of4osm.core.folkso.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.LifecycleState;
+import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.impl.OF4OSMOntology;
 import lig.steamer.of4osm.io.OF4OSMFolksoReaderOSMAPI;
 import lig.steamer.of4osm.io.OF4OSMOntoReaderLifecycleStates;

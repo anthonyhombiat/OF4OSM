@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
-import lig.steamer.of4osm.IOF4OSMFolksonomy;
+import lig.steamer.of4osm.core.folkso.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyBooleanValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyDateValuePropertyTag;

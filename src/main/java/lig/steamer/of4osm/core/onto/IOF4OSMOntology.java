@@ -1,11 +1,11 @@
-package lig.steamer.of4osm;
+package lig.steamer.of4osm.core.onto;
 
 import java.util.Set;
 
 import lig.steamer.of4osm.core.onto.meta.IConcept;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagConcept;
-import lig.steamer.of4osm.core.onto.meta.IOSMCategoryTagKeyConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMSimpleCategoryTagConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMTagSimpleKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagCombinationConcept;
 
 /**
@@ -37,13 +37,13 @@ public interface IOF4OSMOntology {
 	 * Returns all the IOSMCategoryTagKeyConcept of the ontology
 	 * @return Set<IOSMCategoryTagKeyConcept>, the set of all the IOSMCategoryTagKeyConcept of the ontology
 	 */
-    public Set<IOSMCategoryTagKeyConcept> getOSMCategoryTagKeyConcepts();
+    public Set<IOSMTagSimpleKeyConcept> getOSMCategoryTagKeyConcepts();
     
     /**
 	 * Returns all the IOSMCategoryTagConcept of the ontology
 	 * @return Set<IOSMCategoryTagConcept>, the set of all the IOSMCategoryTagConcept of the ontology
 	 */
-    public Set<IOSMCategoryTagConcept> getOSMCategoryTagConcepts();
+    public Set<IOSMSimpleCategoryTagConcept> getOSMCategoryTagConcepts();
     
     /**
 	 * Returns all the IHighLevelConcept of the ontology

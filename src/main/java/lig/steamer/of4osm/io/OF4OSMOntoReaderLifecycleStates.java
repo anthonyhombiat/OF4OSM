@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
-import lig.steamer.of4osm.IOF4OSMOntology;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.LifecycleState;
+import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConceptParent;
 import lig.steamer.of4osm.util.OF4OSMConceptFactory;

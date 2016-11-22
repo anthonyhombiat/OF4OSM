@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import lig.steamer.of4osm.IOF4OSMFolksonomy;
+import lig.steamer.of4osm.core.folkso.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 

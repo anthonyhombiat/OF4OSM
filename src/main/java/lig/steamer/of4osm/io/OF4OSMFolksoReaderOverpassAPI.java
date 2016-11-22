@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import lig.steamer.of4osm.IOF4OSMFolksonomy;
+import lig.steamer.of4osm.core.folkso.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagKey;

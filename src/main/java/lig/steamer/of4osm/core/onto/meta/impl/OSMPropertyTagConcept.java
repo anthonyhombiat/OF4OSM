@@ -9,7 +9,7 @@ import org.semanticweb.owlapi.model.IRI;
  *
  * @author amehiris
  */
-public abstract class OSMPropertyTagConcept extends OSMTagConcept implements IOSMPropertyTagConcept {
+public abstract class OSMPropertyTagConcept extends OSMStatelessTagConcept implements IOSMPropertyTagConcept {
 	
 	public OSMPropertyTagConcept(IRI iri) {
 		super(iri);

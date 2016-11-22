@@ -6,6 +6,8 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMDateValuePropertyTag;
 
 /**
  * 
+ * @author Anthony Hombiat
+ *
  */
 public interface IOSMDiscretizedOSMDatePropertyTagConcept extends IOSMDiscretizedOSMPropertyTagConcept {
 

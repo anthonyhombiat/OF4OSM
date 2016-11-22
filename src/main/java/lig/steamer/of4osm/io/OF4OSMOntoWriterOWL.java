@@ -7,8 +7,8 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import lig.steamer.of4osm.IOF4OSMOntology;
 import lig.steamer.of4osm.PropLoader;
+import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.meta.IConcept;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -18,6 +18,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLLiteral;
@@ -113,8 +114,8 @@ public class OF4OSMOntoWriterOWL {
 			LOGGER.log(Level.INFO, "Adding Concept " + concept.getIRI());
 			
 			OWLClass clazz = DATA_FACTORY.getOWLClass(concept.getIRI()); 
-			OWLSubClassOfAxiom subClassOfAxiom = DATA_FACTORY.getOWLSubClassOfAxiom(clazz, THING);
-			ONTO_MANAGER.applyChange(new AddAxiom(onto, subClassOfAxiom));
+			OWLAxiom declarationAxiom = DATA_FACTORY.getOWLDeclarationAxiom(clazz);
+			ONTO_MANAGER.applyChange(new AddAxiom(onto, declarationAxiom));
 			
 			for(Entry<String, String> entry : concept.getLabels().entrySet()){
 				OWLAnnotationProperty labelProp = DATA_FACTORY.getOWLAnnotationProperty(OWLRDFVocabulary.RDFS_LABEL.getIRI());

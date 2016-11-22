@@ -10,7 +10,7 @@ import org.semanticweb.owlapi.model.IRI;
  * @author Anthony Hombiat
  *
  */
-public class OSMBooleanPropertyTagConcept extends OSMTagConcept implements IOSMBooleanPropertyTagConcept {
+public class OSMBooleanPropertyTagConcept extends OSMStatelessTagConcept implements IOSMBooleanPropertyTagConcept {
 
 	public IOSMBooleanValuePropertyTag tag;
 	 
@@ -18,9 +18,7 @@ public class OSMBooleanPropertyTagConcept extends OSMTagConcept implements IOSMB
     	super(iri);
     }
 
-    /**
-     * @return
-     */
+    @Override
     public IOSMBooleanValuePropertyTag getTag() {
        return tag;
     }
