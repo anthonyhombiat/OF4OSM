@@ -137,9 +137,9 @@ public final class OF4OSMOntoReaderOSMMediaWikiAPI {
 		final long t1 = System.currentTimeMillis();
 		LOGGER.log(Level.INFO, "Adding tags from the OSM Wiki Map Features Web page to OF4OSM done (" + DurationFormatUtils.formatDurationHMS(t1 - t0) + ").");
 		
-		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances: " + of4osm.getOSMCategoryTagKeyConcepts().size());
+		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagKeyConcept instances: " + of4osm.getOSMTagSimpleKeyConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IHighLevelConcept instances: " + of4osm.getHighLevelConcepts().size());
-		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances: " + of4osm.getOSMCategoryTagConcepts().size());
+		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances: " + of4osm.getOSMSimpleCategoryTagConcepts().size());
 		
 	}
 	
