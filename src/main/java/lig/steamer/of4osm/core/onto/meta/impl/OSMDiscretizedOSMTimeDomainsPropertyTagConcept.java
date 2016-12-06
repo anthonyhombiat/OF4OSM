@@ -11,11 +11,11 @@ import org.semanticweb.owlapi.model.IRI;
  *
  * @author amehiris
  */
-public class OSMDiscretizedOSMTimeDomainsPropertyTag  extends OSMDiscretizedOSMPropertyTagConcept implements IOSMDiscretizedOSMDatePropertyTagConcept {
+public class OSMDiscretizedOSMTimeDomainsPropertyTagConcept  extends OSMDiscretizedOSMPropertyTagConcept implements IOSMDiscretizedOSMDatePropertyTagConcept {
 
 	public IOSMDateValuePropertyTag tag;
 	
-	public OSMDiscretizedOSMTimeDomainsPropertyTag(IRI iri) {
+	public OSMDiscretizedOSMTimeDomainsPropertyTagConcept(IRI iri) {
 		super(iri);
 	}
 	

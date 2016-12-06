@@ -72,7 +72,7 @@ public final class OF4OSMConceptFactory {
 		}
 		
 		IOSMTagCombinationConcept concept = new OSMTagCombinationConcept(
-				IRI.create(OF4OSMVocabulary.OSMTAGCOMBINATION_IRI + OF4OSMVocabulary.IRI_SEPARATOR + label), parents);
+				IRI.create(OF4OSMVocabulary.OSMTAGCOMBINATIONCONCEPT_IRI + OF4OSMVocabulary.IRI_SEPARATOR + label), parents);
 		
 		concept.addLabel(OF4OSMVocabulary.DEFAULT_LANG, label);
 		
