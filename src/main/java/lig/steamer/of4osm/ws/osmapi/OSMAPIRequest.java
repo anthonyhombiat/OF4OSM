@@ -1,53 +1,52 @@
 package lig.steamer.of4osm.ws.osmapi;
 
-
 /**
  *
  * @author amehiris
  */
 public class OSMAPIRequest {
 
-	public String lonMin;
-	public String latMin;
-	public String lonMax;
-	public String latMax;
+	public double lonMin;
+	public double latMin;
+	public double lonMax;
+	public double latMax;
     
-    public OSMAPIRequest(String lonMin , String latMin , String lonMax , String latMax) {
+    public OSMAPIRequest(double lonMin , double latMin , double lonMax , double latMax) {
     	this.lonMin = lonMin;
     	this.latMin = latMin;
     	this.lonMax = lonMax;
     	this.latMax = latMax;
     }
 
-	public String getLonMin() {
+	public double getLonMin() {
 		return lonMin;
 	}
 
-	public void setLonMin(String lonMin) {
+	public void setLonMin(double lonMin) {
 		this.lonMin = lonMin;
 	}
 
-	public String getLatMin() {
+	public double getLatMin() {
 		return latMin;
 	}
 
-	public void setLatMin(String latMin) {
+	public void setLatMin(double latMin) {
 		this.latMin = latMin;
 	}
 
-	public String getLonMax() {
+	public double getLonMax() {
 		return lonMax;
 	}
 
-	public void setLonMax(String lonMax) {
+	public void setLonMax(double lonMax) {
 		this.lonMax = lonMax;
 	}
 
-	public String getLatMax() {
+	public double getLatMax() {
 		return latMax;
 	}
 
-	public void setLatMax(String latMax) {
+	public void setLatMax(double latMax) {
 		this.latMax = latMax;
 	}
     	

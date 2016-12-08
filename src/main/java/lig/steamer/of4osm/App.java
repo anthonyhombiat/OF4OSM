@@ -24,7 +24,6 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 /**
  * 
  * @author Anthony Hombiat
- *
  */
 public class App {
 
@@ -45,9 +44,11 @@ public class App {
 		OF4OSMOntoReaderOSMMediaWikiAPI.read(osmWikiResponse, of4osm);
 		
 		// Populate OF4OSM with OSM tags associated with Grenoble located objects.
-         OSMAPIRequest osmApiReq = new OSMAPIRequest("5.677606", "45.15414", "5.753118", "45.214077"); 
+        OSMAPIRequest osmApiReq = new OSMAPIRequest(5.677606, 45.15414, 5.753118, 45.214077); 
+        // Secteur 1
+//        OSMAPIRequest osmApiReq = new OSMAPIRequest(5.715152,45.180363,5.743199,45.205143); 
 		// Secteur 6
-//        OSMAPIRequest osmApiReq = new OSMAPIRequest("5.720359", "45.15414", "5.741375", "45.170532"); 
+//        OSMAPIRequest osmApiReq = new OSMAPIRequest(5.720359, 45.15414, 5.741375, 45.170532); 
         OverpassXAPIClient osmApiClient = new OverpassXAPIClient();
         OSMAPIResponse osmApiResp = osmApiClient.send(osmApiReq);
         
