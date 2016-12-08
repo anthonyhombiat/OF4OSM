@@ -6,6 +6,8 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
 
 /**
  * 
+ * @author Anthony Hombiat
+ *
  */
 public class OSMSimpleKeyDateValuePropertyTag extends OSMTag implements IOSMSimpleKeyDateValuePropertyTag {
 

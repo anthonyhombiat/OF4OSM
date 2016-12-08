@@ -5,6 +5,8 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyStringValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public class OSMComplexKeyStringValuePropertyTag extends OSMTag implements IOSMComplexKeyStringValuePropertyTag {

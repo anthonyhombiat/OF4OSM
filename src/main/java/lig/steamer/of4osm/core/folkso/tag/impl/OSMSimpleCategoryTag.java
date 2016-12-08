@@ -5,6 +5,8 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public class OSMSimpleCategoryTag extends OSMTag implements IOSMSimpleCategoryTag {

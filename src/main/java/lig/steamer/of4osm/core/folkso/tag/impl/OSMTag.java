@@ -3,6 +3,8 @@ package lig.steamer.of4osm.core.folkso.tag.impl;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public abstract class OSMTag implements IOSMTag {

@@ -1,13 +1,11 @@
 package lig.steamer.of4osm.core.folkso.impl;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import lig.steamer.of4osm.core.folkso.IOF4OSMFolksonomy;
-import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 
 /**
@@ -61,26 +59,6 @@ public class OF4OSMFolksonomy implements IOF4OSMFolksonomy {
     @Override
     public void addTagsByElement(String elementId, Set<? extends IOSMTag> tags) {
         tagsByElement.put(elementId, tags);
-    }
-
-    @Override
-    public Map<String, Set<IOSMCategoryTag>> getCategoryTagsByElement() {
-    	
-        Map<String, Set<IOSMCategoryTag>> categoryTagsByElement = new HashMap<>();
-
-        for (Entry<String, Set<? extends IOSMTag>> element : tagsByElement.entrySet()) {
-        	
-            Set<IOSMCategoryTag> categoryTags = new HashSet<>();
-            for (IOSMTag tag : element.getValue()) {
-                if (tag instanceof IOSMCategoryTag) {
-                    categoryTags.add((IOSMCategoryTag) tag);
-                }
-            }
-            
-            categoryTagsByElement.put(element.getKey(), categoryTags);
-        }
-        
-        return categoryTagsByElement;
     }
 
 	@Override

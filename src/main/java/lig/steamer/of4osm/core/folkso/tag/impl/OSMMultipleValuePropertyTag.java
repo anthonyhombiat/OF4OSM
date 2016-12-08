@@ -5,6 +5,8 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleValuePropertyTag;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public class OSMMultipleValuePropertyTag extends OSMTag implements IOSMMultipleValuePropertyTag {

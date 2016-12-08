@@ -5,6 +5,8 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public class OSMMultipleCategoryTag extends OSMTag implements IOSMMultipleCategoryTag {

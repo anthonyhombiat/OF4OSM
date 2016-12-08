@@ -4,6 +4,8 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagMultipleValue;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public interface IOSMMultipleCategoryTag extends IOSMCategoryTag {

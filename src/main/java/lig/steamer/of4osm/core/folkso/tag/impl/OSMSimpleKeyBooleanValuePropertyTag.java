@@ -6,6 +6,8 @@ import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagBooleanValue;
 
 /**
  * 
+ * @author Anthony Hombiat
+ *
  */
 public class OSMSimpleKeyBooleanValuePropertyTag extends OSMTag implements IOSMSimpleKeyBooleanValuePropertyTag {
 

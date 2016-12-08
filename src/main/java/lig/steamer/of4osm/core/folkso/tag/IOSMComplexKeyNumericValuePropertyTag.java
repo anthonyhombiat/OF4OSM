@@ -4,6 +4,8 @@ import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagComplexKey;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagNumericValue;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public interface IOSMComplexKeyNumericValuePropertyTag extends IOSMNumericValuePropertyTag {

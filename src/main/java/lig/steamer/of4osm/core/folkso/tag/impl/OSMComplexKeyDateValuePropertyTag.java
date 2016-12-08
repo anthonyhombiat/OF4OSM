@@ -5,6 +5,8 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMComplexKeyDateValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagDateValue;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public class OSMComplexKeyDateValuePropertyTag extends OSMTag implements IOSMComplexKeyDateValuePropertyTag {

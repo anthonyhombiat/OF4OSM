@@ -5,6 +5,8 @@ import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyNumericValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagNumericValue;
 
 /**
+ * 
+ * @author Anthony Hombiat
  *
  */
 public class OSMSimpleKeyNumericValuePropertyTag extends OSMTag implements IOSMSimpleKeyNumericValuePropertyTag {
