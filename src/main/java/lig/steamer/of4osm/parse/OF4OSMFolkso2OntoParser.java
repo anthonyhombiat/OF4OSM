@@ -7,17 +7,21 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
+
 import lig.steamer.of4osm.core.folkso.IOF4OSMFolksonomy;
-import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMBooleanValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMMultipleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMBooleanPropertyTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMSimpleCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMStatefulCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMStatefulTagConceptParent;
@@ -29,32 +33,47 @@ import lig.steamer.of4osm.core.onto.meta.IOSMTagStatefulKeyConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagStatefulKeyConceptParent;
 import lig.steamer.of4osm.util.OF4OSMConceptFactory;
 
-import org.apache.commons.lang3.time.DurationFormatUtils;
-
 /**
  *
  * @author amehiris
  */
-public final class OF4OSMFolkso2OntoParser {
+public class OF4OSMFolkso2OntoParser {
 
 	private static final Logger LOGGER = Logger.getLogger(OF4OSMFolkso2OntoParser.class.getName());
 	
-    public static void addConceptsFromFolkso(IOF4OSMOntology of4osm, IOF4OSMFolksonomy folkso) {
+	private OF4OSMFolkso2OntoParserConfig config;
+	
+	public OF4OSMFolkso2OntoParser(){
+		config = new OF4OSMFolkso2OntoParserConfig();
+	}
+	
+	public OF4OSMFolkso2OntoParser(OF4OSMFolkso2OntoParserConfig config){
+		this.config = config;
+	}
+	
+    public void addConceptsFromFolkso(IOF4OSMOntology of4osm, IOF4OSMFolksonomy folkso) {
 
     	final long t0 = System.currentTimeMillis();
     	LOGGER.log(Level.INFO, "Adding tags to the OF4OSM ontology...");
     	
-        for (Entry<String, Set<IOSMCategoryTag>> element : folkso.getCategoryTagsByElement().entrySet()) {
+        for (Entry<String, Set<? extends IOSMTag>> element : folkso.getTagsByElement().entrySet()) {
             
         	Set<IOSMTagCombinationConceptParent> tagCombinationParents = new HashSet<>();
 
-            for (IOSMCategoryTag tag : element.getValue()) {
-            	if (tag instanceof IOSMMultipleCategoryTag)
-            		addIOSMMultipleCategoryTag((IOSMMultipleCategoryTag) tag, of4osm, tagCombinationParents);  
-                else if (tag instanceof IOSMStatefulCategoryTag)
-                	addIOSMStatefulCategoryTag((IOSMStatefulCategoryTag) tag, of4osm, tagCombinationParents);
-                else
-                	addIOSMSimpleCategoryTag((IOSMSimpleCategoryTag)tag, of4osm, tagCombinationParents);
+            for (IOSMTag tag : element.getValue()) {
+            	if (tag instanceof IOSMMultipleCategoryTag){
+            		if(config.isParseMultipleCategoryTags())
+            			addIOSMMultipleCategoryTag((IOSMMultipleCategoryTag) tag, of4osm, tagCombinationParents);
+            	} else if (tag instanceof IOSMStatefulCategoryTag) {
+                	if(config.isParseStatefulCategoryTags())
+                		addIOSMStatefulCategoryTag((IOSMStatefulCategoryTag) tag, of4osm, tagCombinationParents);
+            	} else if (tag instanceof IOSMBooleanValuePropertyTag) {
+                	if(config.isParseBooleanPropertyTags())
+                		addIOSMBooleanValuePropertyTag((IOSMBooleanValuePropertyTag) tag, of4osm, tagCombinationParents);
+            	} else {
+                	if(config.isParseSimpleCategoryTags())
+                		addIOSMSimpleCategoryTag((IOSMSimpleCategoryTag)tag, of4osm, tagCombinationParents);
+            	}
             }
             
             addOSMTagCombinationsConcepts(tagCombinationParents, of4osm);
@@ -68,10 +87,9 @@ public final class OF4OSMFolkso2OntoParser {
 		LOGGER.log(Level.INFO, "Nb of IHighLevelConcept instances: " + of4osm.getHighLevelConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IOSMCategoryTagConcept instances: " + of4osm.getOSMSimpleCategoryTagConcepts().size());
 		LOGGER.log(Level.INFO, "Nb of IOSMTagCombinationConcept instances: " + of4osm.getOSMTagCombinationConcepts().size());
-
     }
 
-    private static void addOSMTagCombinationsConcepts(Set<IOSMTagCombinationConceptParent> parents, IOF4OSMOntology of4osm){
+    private void addOSMTagCombinationsConcepts(Set<IOSMTagCombinationConceptParent> parents, IOF4OSMOntology of4osm){
     	 
     	Set<IOSMTagCombinationConcept> tagCombinations = new HashSet<>();
     	
@@ -89,7 +107,7 @@ public final class OF4OSMFolkso2OntoParser {
     	
     }
     
-    private static void combinations(IOSMTagCombinationConceptParent[] parents, int length, int startPosition, IOSMTagCombinationConceptParent[] result, Set<IOSMTagCombinationConcept> tagCombinations) {
+    private void combinations(IOSMTagCombinationConceptParent[] parents, int length, int startPosition, IOSMTagCombinationConceptParent[] result, Set<IOSMTagCombinationConcept> tagCombinations) {
 
         if (length == 0) {
             
@@ -108,8 +126,8 @@ public final class OF4OSMFolkso2OntoParser {
 
     }
     
-    private static void addIOSMMultipleCategoryTag(IOSMMultipleCategoryTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
-    	
+    private void addIOSMMultipleCategoryTag(IOSMMultipleCategoryTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
+    	System.out.println(tag);
     	IOSMTagSimpleKeyConcept keyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept((IOSMTagSimpleKey) tag.getKey());
     	of4osm.addConcept(keyConcept);
 		
@@ -121,7 +139,8 @@ public final class OF4OSMFolkso2OntoParser {
         }
     }
     
-    private static void addIOSMStatefulCategoryTag(IOSMStatefulCategoryTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
+    private void addIOSMStatefulCategoryTag(IOSMStatefulCategoryTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
+    	System.out.println(tag);
     	// ex.: disused:shop=bakery
     	
     	// shop=bakery
@@ -152,14 +171,23 @@ public final class OF4OSMFolkso2OntoParser {
     	tagCombinationParents.add((IOSMTagCombinationConceptParent) statefulTagConcept);
     }
     
-    private static void addIOSMSimpleCategoryTag(IOSMSimpleCategoryTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
-
+    private void addIOSMSimpleCategoryTag(IOSMSimpleCategoryTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
+    	System.out.println(tag);
     	IOSMTagSimpleKeyConcept keyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept(tag.getKey());
     	of4osm.addConcept(keyConcept);
     	
     	IOSMSimpleCategoryTagConcept tagConcept = OF4OSMConceptFactory.createOSMSimpleCategoryTagConcept(tag, (IOSMStatelessTagConceptParent) keyConcept);
     	of4osm.addConcept(tagConcept);
     	tagCombinationParents.add((IOSMTagCombinationConceptParent) tagConcept);
+    }
+    
+    public void addIOSMBooleanValuePropertyTag(IOSMBooleanValuePropertyTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
+    	System.out.println(tag);
+    	if(tag.getValue().getValue()){
+    		IOSMBooleanPropertyTagConcept concept = OF4OSMConceptFactory.createOSMBooleanPropertyTagConcept(tag);
+    		of4osm.addConcept(concept);
+    		tagCombinationParents.add((IOSMTagCombinationConceptParent)concept);
+    	}
     }
    
 }

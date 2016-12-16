@@ -55,7 +55,8 @@ public class App {
         IOF4OSMFolksonomy folkso = OF4OSMFolksoReaderOSMAPI.read(osmApiResp);
         
 //        Folkso2CSVWriter.write(folkso);
-        OF4OSMFolkso2OntoParser.addConceptsFromFolkso(of4osm, folkso);
+        OF4OSMFolkso2OntoParser parser = new OF4OSMFolkso2OntoParser();
+        parser.addConceptsFromFolkso(of4osm, folkso);
 		
         // Write OF4OSM to file in OWL format.
         OF4OSMOntoWriterOWL ontoWriter = new OF4OSMOntoWriterOWL();

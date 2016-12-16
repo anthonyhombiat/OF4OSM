@@ -4,6 +4,7 @@ import java.util.Set;
 
 import lig.steamer.of4osm.core.onto.meta.IConcept;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMBooleanPropertyTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMSimpleCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMStatefulCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagSimpleKeyConcept;
@@ -64,5 +65,11 @@ public interface IOF4OSMOntology {
 	 * @return Set<IOSMStatefulCategoryTagConcept>, the set of all the IOSMStatefulCategoryTagConcept of the ontology
 	 */
     public Set<IOSMStatefulCategoryTagConcept> getOSMStatefulCategoryTagConcepts();
+    
+    /**
+	 * Returns all the IOSMBooleanPropertyTagConcepts of the ontology
+	 * @return Set<IOSMBooleanPropertyTagConcept>, the set of all the IOSMBooleanPropertyTagConcepts of the ontology
+	 */
+    public Set<IOSMBooleanPropertyTagConcept> getOSMBooleanPropertyTagConcepts();
     
 }

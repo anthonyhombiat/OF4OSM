@@ -6,6 +6,7 @@ import java.util.Set;
 import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.meta.IConcept;
 import lig.steamer.of4osm.core.onto.meta.IHighLevelConcept;
+import lig.steamer.of4osm.core.onto.meta.IOSMBooleanPropertyTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMSimpleCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMStatefulCategoryTagConcept;
 import lig.steamer.of4osm.core.onto.meta.IOSMTagSimpleKeyConcept;
@@ -25,6 +26,7 @@ public class OF4OSMOntology implements IOF4OSMOntology {
     Set<IOSMStatefulCategoryTagConcept> statefulCategoryTagConcepts;
     Set<IOSMTagCombinationConcept> tagCombinationConcepts;
     Set<IHighLevelConcept> highLevelConcepts;
+    Set<IOSMBooleanPropertyTagConcept> booleanPropertyTagConcepts;
 
     public OF4OSMOntology() {
         tagSimpleKeyConcepts = new HashSet<>();
@@ -33,6 +35,7 @@ public class OF4OSMOntology implements IOF4OSMOntology {
         statefulCategoryTagConcepts = new HashSet<>();
         tagCombinationConcepts = new HashSet<>();
         highLevelConcepts = new HashSet<>();
+        booleanPropertyTagConcepts = new HashSet<>();
     }
 
     @Override
@@ -50,6 +53,8 @@ public class OF4OSMOntology implements IOF4OSMOntology {
         	return tagCombinationConcepts.add((IOSMTagCombinationConcept) concept);
         if (concept instanceof IHighLevelConcept)
         	return highLevelConcepts.add((IHighLevelConcept) concept);
+        if (concept instanceof IOSMBooleanPropertyTagConcept)
+        	return booleanPropertyTagConcepts.add((IOSMBooleanPropertyTagConcept) concept);
         
         return false;
     }
@@ -83,6 +88,11 @@ public class OF4OSMOntology implements IOF4OSMOntology {
 	public Set<IOSMTagCombinationConcept> getOSMTagCombinationConcepts() {
 		return tagCombinationConcepts;
 	}
+	
+	@Override
+	public Set<IOSMBooleanPropertyTagConcept> getOSMBooleanPropertyTagConcepts() {
+		return booleanPropertyTagConcepts;
+	}
 
 	@Override
 	public Set<IConcept> getConcepts() {
@@ -93,6 +103,7 @@ public class OF4OSMOntology implements IOF4OSMOntology {
 		concepts.addAll(statefulCategoryTagConcepts);
 		concepts.addAll(tagCombinationConcepts);
 		concepts.addAll(highLevelConcepts);
+		concepts.addAll(booleanPropertyTagConcepts);
 		return concepts;
 	}
 	

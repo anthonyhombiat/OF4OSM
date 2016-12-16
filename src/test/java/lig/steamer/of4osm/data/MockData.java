@@ -6,16 +6,20 @@ import java.util.Set;
 
 import lig.steamer.of4osm.core.folkso.IOF4OSMFolksonomy;
 import lig.steamer.of4osm.core.folkso.impl.OF4OSMFolksonomy;
-import lig.steamer.of4osm.core.folkso.tag.IOSMCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMSimpleKeyBooleanValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.IOSMStatefulCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.IOSMTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleCategoryTag;
+import lig.steamer.of4osm.core.folkso.tag.impl.OSMSimpleKeyBooleanValuePropertyTag;
 import lig.steamer.of4osm.core.folkso.tag.impl.OSMStatefulCategoryTag;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.key.IOSMTagStatefulKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagSimpleKey;
 import lig.steamer.of4osm.core.folkso.tag.key.impl.OSMTagStatefulKey;
+import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagBooleanValue;
 import lig.steamer.of4osm.core.folkso.tag.value.IOSMTagStringValue;
+import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagBooleanValue;
 import lig.steamer.of4osm.core.folkso.tag.value.impl.OSMTagStringValue;
 import lig.steamer.of4osm.core.onto.IOF4OSMOntology;
 import lig.steamer.of4osm.core.onto.impl.OF4OSMOntology;
@@ -50,11 +54,16 @@ public class MockData {
         final IOSMTagStringValue value4 = new OSMTagStringValue("bar");
         final IOSMSimpleCategoryTag tag4 = new OSMSimpleCategoryTag(key4, value4);
         
-        Set<IOSMCategoryTag> tags = new HashSet<>();
+        final IOSMTagSimpleKey key5 = new OSMTagSimpleKey("building", "");
+        final IOSMTagBooleanValue value5 = new OSMTagBooleanValue(true);
+        final IOSMSimpleKeyBooleanValuePropertyTag tag5 = new OSMSimpleKeyBooleanValuePropertyTag(key5, value5);
+        
+        Set<IOSMTag> tags = new HashSet<>();
         tags.add(tag1);
         tags.add(tag2);
         tags.add(tag3);
         tags.add(tag4);
+        tags.add(tag5);
         
         folkso = new OF4OSMFolksonomy();
         folkso.addTagsByElement("test", tags);
