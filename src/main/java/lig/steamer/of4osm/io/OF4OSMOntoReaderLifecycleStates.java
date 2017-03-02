@@ -26,6 +26,7 @@ public final class OF4OSMOntoReaderLifecycleStates {
 			IHighLevelConcept concept = OF4OSMConceptFactory.createHighLevelConcept(state.name() + "Entity");
 			concept.addParent((IHighLevelConceptParent) statefulConcept);
 			of4osm.addConcept(concept);
+			LOGGER.log(Level.INFO, concept.toString());
 		}
 		
 		final long t1 = System.currentTimeMillis();

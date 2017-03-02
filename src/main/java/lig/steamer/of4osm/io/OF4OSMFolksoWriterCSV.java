@@ -85,21 +85,21 @@ public final class OF4OSMFolksoWriterCSV {
             content += "\n;;" + folkso.getTagsByType(IOSMSimpleCategoryTag.class).get(key) + ";" + key;
         }
         
-        // State ful Key
+        // StatefulKey
         // statefulCategoryTag
         content += "\n\n" + folkso.getTagsByType(IOSMStatefulCategoryTag.class).size() + ";statefulCategoryTag\n";
         for (IOSMTag key : folkso.getTagsByType(IOSMStatefulCategoryTag.class).keySet()) {
             content += "\n;;" + folkso.getTagsByType(IOSMStatefulCategoryTag.class).get(key) + ";" + key;
         }
 
-        // Localized Key
+        // LocalizedKey
         // localizedKeyStringValueTag
         content += "\n\n" + folkso.getTagsByType(IOSMLocalizedKeyStringValuePropertyTag.class).size() + ";localizedKeyStringValueTag\n";
         for (IOSMTag key : folkso.getTagsByType(IOSMLocalizedKeyStringValuePropertyTag.class).keySet()) {
             content += "\n;;" + folkso.getTagsByType(IOSMLocalizedKeyStringValuePropertyTag.class).get(key) + ";" + key;
         }
 
-        // Simple Key
+        // SimpleKey
         // multipleValuePropertyTag
         content += "\n\n" + folkso.getTagsByType(IOSMMultipleValuePropertyTag.class).size() + ";multipleValuePropertyTag\n";
         for (IOSMTag key : folkso.getTagsByType(IOSMMultipleValuePropertyTag.class).keySet()) {
@@ -136,7 +136,7 @@ public final class OF4OSMFolksoWriterCSV {
             content += "\n;;" + folkso.getTagsByType(IOSMTimeDomainsValuePropertyTag.class).get(key) + ";" + key;
         }
 
-        // Complex Key
+        // ComplexKey
         // complexKeyBooleanPropertyTag
         content += "\n\n" + folkso.getTagsByType(IOSMComplexKeyBooleanValuePropertyTag.class).size() + ";complexKeyBooleanPropertyTag\n";
         for (IOSMTag key : folkso.getTagsByType(IOSMComplexKeyBooleanValuePropertyTag.class).keySet()) {

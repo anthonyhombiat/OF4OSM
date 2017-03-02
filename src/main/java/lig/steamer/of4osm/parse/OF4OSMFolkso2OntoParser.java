@@ -70,8 +70,8 @@ public class OF4OSMFolkso2OntoParser {
             	} else if (tag instanceof IOSMBooleanValuePropertyTag) {
                 	if(config.isParseBooleanPropertyTags())
                 		addIOSMBooleanValuePropertyTag((IOSMBooleanValuePropertyTag) tag, of4osm, tagCombinationParents);
-            	} else {
-                	if(config.isParseSimpleCategoryTags())
+            	} else if(tag instanceof IOSMSimpleCategoryTag){
+            		if(config.isParseSimpleCategoryTags())
                 		addIOSMSimpleCategoryTag((IOSMSimpleCategoryTag)tag, of4osm, tagCombinationParents);
             	}
             }
@@ -127,7 +127,7 @@ public class OF4OSMFolkso2OntoParser {
     }
     
     private void addIOSMMultipleCategoryTag(IOSMMultipleCategoryTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
-    	System.out.println(tag);
+    	LOGGER.log(Level.INFO, tag.toString());
     	IOSMTagSimpleKeyConcept keyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept((IOSMTagSimpleKey) tag.getKey());
     	of4osm.addConcept(keyConcept);
 		
@@ -140,7 +140,7 @@ public class OF4OSMFolkso2OntoParser {
     }
     
     private void addIOSMStatefulCategoryTag(IOSMStatefulCategoryTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
-    	System.out.println(tag);
+    	LOGGER.log(Level.INFO, tag.toString());
     	// ex.: disused:shop=bakery
     	
     	// shop=bakery
@@ -172,7 +172,7 @@ public class OF4OSMFolkso2OntoParser {
     }
     
     private void addIOSMSimpleCategoryTag(IOSMSimpleCategoryTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
-    	System.out.println(tag);
+    	LOGGER.log(Level.INFO, tag.toString());
     	IOSMTagSimpleKeyConcept keyConcept = OF4OSMConceptFactory.createOSMTagSimpleKeyConcept(tag.getKey());
     	of4osm.addConcept(keyConcept);
     	
@@ -182,7 +182,7 @@ public class OF4OSMFolkso2OntoParser {
     }
     
     public void addIOSMBooleanValuePropertyTag(IOSMBooleanValuePropertyTag tag, IOF4OSMOntology of4osm, Set<IOSMTagCombinationConceptParent> tagCombinationParents){
-    	System.out.println(tag);
+    	LOGGER.log(Level.INFO, tag.toString());
     	if(tag.getValue().getValue()){
     		IOSMBooleanPropertyTagConcept concept = OF4OSMConceptFactory.createOSMBooleanPropertyTagConcept(tag);
     		of4osm.addConcept(concept);

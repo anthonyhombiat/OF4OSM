@@ -15,7 +15,7 @@ public class OF4OSMFolkso2OntoParserConfig {
 	}
 	
 	public OF4OSMFolkso2OntoParserConfig(){
-		this(true, true, true, true);
+		this(true, true, true, false);
 	}
 
 	public boolean isParseSimpleCategoryTags() {

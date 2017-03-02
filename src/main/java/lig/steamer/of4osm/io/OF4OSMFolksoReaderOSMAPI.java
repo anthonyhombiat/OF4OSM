@@ -54,12 +54,16 @@ public final class OF4OSMFolksoReaderOSMAPI {
             	Set<IOSMTag> osmTags = new HashSet<>();
                 for (OSMAPITag tag : element.getTags()) {
                     IOSMTagKey key = identifyKey(tag.getK(), "");
-                    IOSMTagValue value = identifyValue(tag.getV());
-                    IOSMTag osmTag = identifyTag(key, value);
-
-                    osmTags.add(osmTag);
-                    
-                    LOGGER.log(Level.INFO, "Adding tag " + osmTag);
+                    if(key != null){
+	                    IOSMTagValue value = identifyValue(tag.getV());
+	                    if(value != null){
+		                    IOSMTag osmTag = identifyTag(key, value);
+		                    if(osmTag != null) {
+			                    osmTags.add(osmTag);
+			                    LOGGER.log(Level.INFO, osmTag.toString());
+		                    }
+	                    }
+                    }
                 }
                 folkso.addTagsByElement(element.getId(), osmTags);
             }

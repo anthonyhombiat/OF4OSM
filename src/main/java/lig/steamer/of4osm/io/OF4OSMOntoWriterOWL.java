@@ -1,5 +1,6 @@
 package lig.steamer.of4osm.io;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -13,6 +14,8 @@ import lig.steamer.of4osm.core.onto.meta.IConcept;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.io.FileDocumentTarget;
+import org.semanticweb.owlapi.io.OWLOntologyDocumentTarget;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -62,7 +65,9 @@ public class OF4OSMOntoWriterOWL {
 			
 			onto = parse(of4osm, onto);
 			
-			ONTO_MANAGER.saveOntology(onto, file);
+			OWLOntologyDocumentTarget document = new FileDocumentTarget(new File(file.getShortForm()));
+			
+			ONTO_MANAGER.saveOntology(onto, document);
 			
 			LOGGER.log(Level.INFO, "Nb of owl:class added to the OF4OSM ontology: " + onto.getClassesInSignature().size());
 			
@@ -70,6 +75,7 @@ public class OF4OSMOntoWriterOWL {
 			
 			final long t1 = System.currentTimeMillis();
 			LOGGER.log(Level.INFO, "Parsing the OF4OSM ontology to OWL file is done (" + DurationFormatUtils.formatDurationHMS(t1 - t0) + ").");
+			LOGGER.log(Level.INFO, "Ontology was stored in the file " + document.getDocumentIRI().get().getShortForm());
 		} catch (OWLOntologyCreationException e) {
 			LOGGER.log(Level.SEVERE, "Parsing the OF4OSM ontology to OWL file has encounter a problem:");
 			e.printStackTrace();
@@ -79,19 +85,21 @@ public class OF4OSMOntoWriterOWL {
 		}
 	}
 
-	public void write(IOF4OSMOntology of4osm, String filename){
+	public void write(IOF4OSMOntology of4osm, String outputDir, String outputFilename){
+		write(of4osm, IRI.create(outputDir + outputFilename + ".owl"));
+	}
+	
+	public void write(IOF4OSMOntology of4osm, String outputDir){
+		String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 		PropLoader propLoader = new PropLoader();
-		String file = propLoader.getPath() + 
-        		propLoader.getProp("outputDirPath") + 
-        		filename + ".owl";
-		write(of4osm, IRI.create(file));
+		String outputFilename = propLoader.getProp("outputOntoFilename") + now;
+		write(of4osm, outputDir, outputFilename);
 	}
 	
 	public void write(IOF4OSMOntology of4osm){
-		String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 		PropLoader propLoader = new PropLoader();
-		String filename = propLoader.getProp("outputOntoFilename") + now;
-		write(of4osm, filename);
+		String outputDir = propLoader.getPath() + propLoader.getProp("outputDirPath");
+		write(of4osm, outputDir);
 	}
 	
 	public OWLOntology parse(IOF4OSMOntology of4osm, OWLOntology onto){
@@ -111,7 +119,7 @@ public class OF4OSMOntoWriterOWL {
 		
 		for(IConcept concept : concepts){
 			
-			LOGGER.log(Level.INFO, "Adding Concept " + concept.getIRI());
+			LOGGER.log(Level.INFO, concept.getIRI().toString());
 			
 			OWLClass clazz = DATA_FACTORY.getOWLClass(concept.getIRI()); 
 			OWLAxiom declarationAxiom = DATA_FACTORY.getOWLDeclarationAxiom(clazz);

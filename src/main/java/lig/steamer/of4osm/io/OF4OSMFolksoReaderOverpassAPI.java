@@ -45,6 +45,7 @@ public final class OF4OSMFolksoReaderOverpassAPI {
                 IOSMTagValue value = identifyValue(tag.getValue());
                 IOSMTag osmTag = identifyTag(key, value);
                 osmTags.add(osmTag);
+                LOGGER.log(Level.INFO, osmTag.toString());
             }
             folkso.addTagsByElement(element.getId(), osmTags);
         }
