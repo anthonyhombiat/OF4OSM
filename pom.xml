@@ -6,7 +6,7 @@
 	<version>1.0</version>
 	<packaging>jar</packaging>
 	<name>of4osm</name>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/anthonyhombiat/OF4OSM</url>
 	<description>Methods and tools for semantically lifting the OSM folksonomy into an ontology: OF4OSM.</description>
 
 	<properties>
