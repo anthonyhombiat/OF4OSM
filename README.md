@@ -1,2 +1,2 @@
-# OF4OSM
-Meta-model for building an ontology from the OpenStreetMap folksonomy
+# of4osm-parent
+Model, Method and tools for building a knowledge base from the OpenStreetMap folksonomy: the OF4OSM ontology.

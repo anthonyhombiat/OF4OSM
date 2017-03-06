@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>lig.steamer</groupId>
+		<artifactId>of4osm-parent</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<artifactId>of4osm-core</artifactId>
+	<name>OF4OSM :: Core</name>
+	<url>https://github.com/anthonyhombiat/OF4OSM/core</url>
+	<description>Model and default implementation of the OF4OSM project.</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		
+		<dependency>
+			<groupId>net.sourceforge.owlapi</groupId>
+			<artifactId>owlapi-distribution</artifactId>
+		</dependency>
+		
+	</dependencies>
+
+</project>
