@@ -12,7 +12,6 @@
 
 	<artifactId>of4osm-tools</artifactId>
 	<name>OF4OSM :: Tools</name>
-	<url>https://github.com/anthonyhombiat/OF4OSM/tools</url>
 	<description>Tools for manipulating the OSM folksonomy and OF4OSM ontology.</description>
 
 	<properties>

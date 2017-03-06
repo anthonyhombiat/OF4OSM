@@ -12,7 +12,6 @@
 
 	<artifactId>of4osm-ws</artifactId>
 	<name>OF4OSM :: Web Services</name>
-	<url>https://github.com/anthonyhombiat/OF4OSM/ws</url>
 	<description>Tools for querying OpenStreetMap oriented Web Services.</description>
 
 	<properties>
