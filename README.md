@@ -56,4 +56,4 @@ OF4OSM is a multi-modules project composed of the following submodules:
 [of4osm-ws]:https://github.com/anthonyhombiat/OF4OSM/tree/master/ws
 [boundingbox.klokantech.com]:http://boundingbox.klokantech.com/
 [Protégé]:http://protege.stanford.edu/
-[of4osm.jar]:https://github.com/anthonyhombiat/OF4OSM/blob/master/distrib/target/of4osm.jar
+[of4osm.jar]:http://github.com/anthonyhombiat/OF4OSM/raw/master/distrib/target/of4osm.jar
