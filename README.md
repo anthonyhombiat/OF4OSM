@@ -11,11 +11,15 @@ What the OF4OSM project does:
 2. Retrieves OSM tags on the given bbox
 3. Outputs an ontology axtracted from the retrieved OSM tags
 
+## Download
+
+Download the Java archive from the GitHub repository: [of4osm.jar]
+
 ## Usage
 
 How to use it:
 
-1. Find the bbox of your study area. The [boundingbox.klokantech.com] Web site can help here. The bbox must be of the form *"bbox1 bbox2 bbox3 bbox4"*. For example, the bbox enclosing Grenoble is: *"5.677606 45.15414 5.753118 45.214077"*
+1. Find the bbox of your study area. The [boundingbox.klokantech.com] Web site can help here. The bbox must be of the form `bbox1 bbox2 bbox3 bbox4`. For example, the bbox enclosing Grenoble is: `5.677606 45.15414 5.753118 45.214077`
 
 2. Launch the OF4OSM jar giving the bbox from a terminal:   
 `java -jar of4osm.jar "bbox1 bbox2 bbox3 bbox4"`   
@@ -52,3 +56,4 @@ OF4OSM is a multi-modules project composed of the following submodules:
 [of4osm-ws]:https://github.com/anthonyhombiat/OF4OSM/tree/master/ws
 [boundingbox.klokantech.com]:http://boundingbox.klokantech.com/
 [Protégé]:http://protege.stanford.edu/
+[of4osm.jar]:https://github.com/anthonyhombiat/OF4OSM/blob/master/distrib/of4osm.jar
