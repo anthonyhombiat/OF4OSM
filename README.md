@@ -13,7 +13,7 @@ What the OF4OSM project does:
 
 ## Download
 
-Download all-in-one Java archive with its dependencies: [of4osm.jar]
+Download all-in-one Java archive distribution: [of4osm-distrib-1.0.jar]
 
 ## Usage
 
@@ -21,10 +21,14 @@ How to use the .jar file:
 
 1. Find the bbox of your study area. The [boundingbox.klokantech.com] Web site can help here. The bbox must be of the form `bbox1 bbox2 bbox3 bbox4`. For example, the bbox enclosing the city of Grenoble is: `5.677606 45.15414 5.753118 45.214077`
 
-2. Run the of4osm.jar file with the bbox as first argument:   
-`java -jar of4osm.jar "bbox1 bbox2 bbox3 bbox4"`   
+2. Run the of4osm-distrib-1.0.jar file with the bbox as first argument:   
+```bash
+java -jar of4osm-distrib-1.0.jar "bbox1 bbox2 bbox3 bbox4"
+```   
 For example, for Grenoble:   
-`java -jar of4osm.jar "5.677606 45.15414 5.753118 45.214077"`   
+```bash
+java -jar of4osm-distrib-1.0.jar "5.677606 45.15414 5.753118 45.214077"
+```
 
 3. Open the output ontology (.owl file) that has been  dumped to your current directory (the ontology editor [Protégé] can help here).
 
@@ -56,4 +60,4 @@ OF4OSM is a multi-module project composed of the following submodules:
 [of4osm-ws]:https://github.com/anthonyhombiat/OF4OSM/tree/master/ws
 [boundingbox.klokantech.com]:http://boundingbox.klokantech.com/
 [Protégé]:http://protege.stanford.edu/
-[of4osm.jar]:http://github.com/anthonyhombiat/OF4OSM/raw/master/distrib/target/of4osm.jar
+[of4osm-distrib-1.0.jar]:http://github.com/anthonyhombiat/OF4OSM/raw/master/distrib/target/of4osm-distrib-1.0.jar
