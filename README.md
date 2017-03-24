@@ -13,39 +13,39 @@ What the OF4OSM project does:
 
 ## Download
 
-Download the Java archive from the GitHub repository: [of4osm.jar]
+Download all-in-one Java archive with its dependencies: [of4osm.jar]
 
 ## Usage
 
-How to use it:
+How to use the .jar file:
 
-1. Find the bbox of your study area. The [boundingbox.klokantech.com] Web site can help here. The bbox must be of the form `bbox1 bbox2 bbox3 bbox4`. For example, the bbox enclosing Grenoble is: `5.677606 45.15414 5.753118 45.214077`
+1. Find the bbox of your study area. The [boundingbox.klokantech.com] Web site can help here. The bbox must be of the form `bbox1 bbox2 bbox3 bbox4`. For example, the bbox enclosing the city of Grenoble is: `5.677606 45.15414 5.753118 45.214077`
 
-2. Launch the OF4OSM jar giving the bbox from a terminal:   
+2. Run the of4osm.jar file with the bbox as first argument:   
 `java -jar of4osm.jar "bbox1 bbox2 bbox3 bbox4"`   
 For example, for Grenoble:   
 `java -jar of4osm.jar "5.677606 45.15414 5.753118 45.214077"`   
 
-3. Open the output ontology in your current directory with your favorite ontology editor ([Protégé] can help here).
+3. Open the output ontology (.owl file) that has been  dumped to your current directory (the ontology editor [Protégé] can help here).
 
 ## Modules
 
-OF4OSM is a multi-modules project composed of the following submodules:
+OF4OSM is a multi-module project composed of the following submodules:
 
 * **CORE**: Model and default implementation of the OF4OSM project   
 [of4osm-core]
 
-* **DISTRIB**: The distribution module for building a single-jar of the whole OF4OSM project   
-[of4osm-distrib]
-
 * **IMPL**: Default implementation of the of4osm-core module   
 [of4osm-impl]
+
+* **WS**: Tools for querying OpenStreetMap oriented Web Services   
+[of4osm-ws]
 
 * **TOOLS**: Tools for manipulating the OSM folksonomy and OF4OSM ontology   
 [of4osm-tools]
 
-* **WS**: Tools for querying OpenStreetMap oriented Web Services   
-[of4osm-ws]
+* **DISTRIB**: The distribution module for building a single-jar of the whole OF4OSM project   
+[of4osm-distrib]
 
 [OpenStreetMap]:https://www.openstreetmap.org/
 [of4osm-parent]:https://github.com/anthonyhombiat/OF4OSM
