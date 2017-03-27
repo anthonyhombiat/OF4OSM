@@ -51,10 +51,13 @@ OF4OSM is a multi-module project composed of the following submodules:
 * **DISTRIB**: The distribution module for building a single-jar of the whole OF4OSM project   
 [of4osm-distrib]
 
-<a href="http://www.univ-grenoble-alpes.fr/"><img src="http://membres-lig.imag.fr/hombiat/img/uga-on.png" alt="UGA" height="100" /></a>
-<a href="https://www.liglab.fr/"><img src="http://membres-lig.imag.fr/hombiat/img/lig-on.png" alt="LIG" height="100" /></a>
-<a href="http://steamer.imag.fr/"><img src="http://membres-lig.imag.fr/hombiat/img/steamer-on.png" alt="STeamer" height="100" /></a>
-<a href="http://www.ideas-laboratory.com/"><img src="http://membres-lig.imag.fr/hombiat/img/mil-on.png" alt="IdeasLab" height="100" /></a>
+---
+<p style="text-align:center">
+<a href="http://www.univ-grenoble-alpes.fr/"><img src="http://membres-lig.imag.fr/hombiat/img/uga-on.png" alt="UGA" height="80" style="margin:0em 2%" /></a>
+<a href="https://www.liglab.fr/"><img src="http://membres-lig.imag.fr/hombiat/img/lig-on.png" alt="LIG" height="80" style="margin:0em 2%" /></a>
+<a href="http://steamer.imag.fr/"><img src="http://membres-lig.imag.fr/hombiat/img/steamer-on.png" alt="STeamer" height="80" style="margin:0em 2%" /></a>
+<a href="http://www.ideas-laboratory.com/"><img src="http://membres-lig.imag.fr/hombiat/img/mil-on.png" alt="IdeasLab" height="80" style="margin:0em 2%" /></a>
+</p>
 
 [OpenStreetMap]:https://www.openstreetmap.org/
 [of4osm-parent]:https://github.com/anthonyhombiat/OF4OSM
